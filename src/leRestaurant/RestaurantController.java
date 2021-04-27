@@ -41,7 +41,7 @@ public class RestaurantController {
 			file.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("File not found or broken");
 			
 		}
 		
