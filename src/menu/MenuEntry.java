@@ -2,9 +2,11 @@ package menu;
 import java.util.LinkedHashMap;
 import java.util.Map;
 public class MenuEntry {
+	
 	private String dishName;
 	private double dishPrice;
 	private LinkedHashMap<String, Double> dishIngredients;
+	
 	public MenuEntry(String dishEntry) {
 		/** Parse input string dishEntry as format: dishName, dishPrice, 
 		 Ingredients: String ingredientName, Double quantity in HashMap <String, Double>
@@ -63,7 +65,7 @@ public class MenuEntry {
 		}
 		else
 		{
-			throw new IngredientOperationDeniedException("Non è possibile aggiungere un ingrediente alla lista, per creare una variazione del piatto creare una nuova riga di menu.");
+			throw new IngredientOperationDeniedException("It's not possible to add an ingredient: if you want to do it, please create a new MenuEntry!!!");
 		}
 		
 		

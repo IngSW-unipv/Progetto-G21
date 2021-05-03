@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.LinkedHashMap;
 import java.util.Collection;
+
 public class Menu implements MenuInterface{
 	private LinkedHashMap<Integer, MenuEntry> entries;
 	
@@ -163,7 +164,7 @@ public class Menu implements MenuInterface{
 	
 	private void checkForEntryExistence(Integer entryNumber) throws EntryDoesNotExistException {
 		/**Small private method for the overloaded method editSpecificMenuEntry,
-		 * It is needed to check if the entry asked for exists of if it would break the hashmap*/
+		 * It is needed to check if the entry asked for exists or if it would break the hashmap*/
 		
 		MenuEntry test= entries.get(entryNumber);
 		if(test == null) throw new EntryDoesNotExistException("Entry does not exist");
