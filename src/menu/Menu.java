@@ -8,6 +8,14 @@ import java.util.LinkedHashMap;
 public class Menu implements MenuInterface{
 	private LinkedHashMap<Integer, MenuEntry> entries;
 	
+	public Menu(String path) {
+		entries=new LinkedHashMap<Integer, MenuEntry>();
+		if(checkForExistence(path))
+			parseMenuFile(path);
+		else
+			System.out.println("The object has been instantiated, but it is empty due to an error parsing the file.\n To make use of this Menu, run the method rewriteMenu with the correct path.");
+	}
+	
 	public void editSpecificMenuEntry(Integer entryNumber, String ingredient, Double newQuantity){
 		/**Gateway method for 
 		 * MenuEntry.public void editEntry(String ingredient, Double newQuantity) throws IngredientOperationDeniedException
@@ -23,11 +31,7 @@ public class Menu implements MenuInterface{
 				}
 			} catch (EntryDoesNotExistException e1) {
 				System.out.println(e1.getMessage()+" - Ingredient quantity unchanged");
-			}
-			
-		
-			
-			
+			}	
 	}
 	
 	public void editSpecificMenuEntry(Integer entryNumber, Double newPrice){
@@ -68,7 +72,7 @@ public class Menu implements MenuInterface{
 		MenuEntry test= entries.get(entryNumber);
 		if(test == null) throw new EntryDoesNotExistException("Entry does not exist");
 	}
-	
+
 	public void addBatchOfMenuEntries(String path) {
 		/**Checks for file existence through the checkForExistence(String path)
 		 * method and, if true, adds the lines of the file to the menu*/
