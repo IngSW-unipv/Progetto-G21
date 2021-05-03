@@ -5,15 +5,111 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.LinkedHashMap;
+import java.util.Collection;
 public class Menu implements MenuInterface{
 	private LinkedHashMap<Integer, MenuEntry> entries;
 	
 	public Menu(String path) {
+		/** Constructor using privated methods to create itself, it will check for 
+		 *  the path's existence, then will run the parser on it, given positive response*/
 		entries=new LinkedHashMap<Integer, MenuEntry>();
 		if(checkForExistence(path))
 			parseMenuFile(path);
 		else
 			System.out.println("The object has been instantiated, but it is empty due to an error parsing the file.\n To make use of this Menu, run the method rewriteMenu with the correct path.");
+	}
+	
+	public Collection<MenuEntry>  getAllMenuEntries() { 
+		/**Simple method that returns a Collection<MenuEntry> object containing all
+		 * the values of the hashmap entries*/
+		
+		return entries.values();
+	}
+	
+	public MenuEntry getSpecificMenuEntry(Integer entryNumber) {
+		/**Simple method that returns a specific entry given it's number in 
+		 * the hashmap entries*/
+		
+		try {
+			checkForEntryExistence(entryNumber);
+			return entries.get(entryNumber);
+		} catch (EntryDoesNotExistException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+	
+	public void addMenuEntry(String dishEntry) {
+		/**Calls the current size of the entries hashmap and creates the new entry given the defined
+		 * stringed input format.*/
+		/*
+		 * 
+		 */
+		/*WARNING: same as parseMenuFile, we don't have a quality control, if the string is in the wrong format
+		 * 		   we are going to kill the program. We might be able to do something calling the parsing method with such string,
+		 * 		   but i haven't thought about it yet, and no quality controls are implemented as of yet.*/
+		
+		entries.put(entries.values().size(), new MenuEntry(dishEntry));
+	}
+	
+	public String getSpecificMenuEntryIngredientsStringed(Integer entryNumber) {
+		/**Gateway method for
+		 * public String getDishIngredientsStringed()
+		 * Checks for the existence of the entry, and if it does, calls the method
+		 * from the targeted entry*/
+		
+		try {
+			checkForEntryExistence(entryNumber);
+			return entries.get(entryNumber).getDishIngredientsStringed();
+		} catch (EntryDoesNotExistException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+	
+	public LinkedHashMap<String,Double> getSpecificMenuEntryIngredients(Integer entryNumber){
+		/**Gateway method for 
+		 * public LinkedHashMap<String,Double> getDishIngredients()
+		 * Checks for the existence of the entry, and it it does, calls the 
+		 * method from the targeted entry */
+		
+		try {
+			checkForEntryExistence(entryNumber);
+			return entries.get(entryNumber).getDishIngredients();
+		} catch (EntryDoesNotExistException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+	
+	public String getSpecificMenuEntryName(Integer entryNumber) {
+		/**Gateway method for 
+		 * public String getDishName()
+		 * Checks for the existence of the entry, and it it does, calls the 
+		 * method from the targeted entry */
+		
+		try {
+			checkForEntryExistence(entryNumber);
+			return entries.get(entryNumber).getDishName();
+		} catch (EntryDoesNotExistException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+	
+	public Double getSpecificMenuEntryPrice(Integer entryNumber){
+		/**Gateway method for 
+		 * public double getDishPrice()
+		 * Checks for the existence of the entry, and it it does, calls the 
+		 * method from the targeted entry */
+		
+		try {
+			checkForEntryExistence(entryNumber);
+			return entries.get(entryNumber).getDishPrice();
+		} catch(EntryDoesNotExistException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
 	}
 	
 	public void editSpecificMenuEntry(Integer entryNumber, String ingredient, Double newQuantity){
