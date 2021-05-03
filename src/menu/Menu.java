@@ -20,6 +20,27 @@ public class Menu implements MenuInterface{
 			System.out.println("The object has been instantiated, but it is empty due to an error parsing the file.\n To make use of this Menu, run the method rewriteMenu with the correct path.");
 	}
 	
+	public void removeSpecificMenuEntry(Integer entryNumber) {
+		/** This method enables to remove a specific MenuEntry, after 
+		 * having checked that it really exists. 
+		 * If this action succedes it is necessary to rebuild 
+		 * the HashMap to maintain the array-like structure of the HashMap*/
+		
+		try {
+			checkForEntryExistence(entryNumber);
+			
+			for (; entryNumber < (entries.values().size() - 1) ; entryNumber++)
+				entries.put(entryNumber, entries.get(entryNumber + 1));
+			
+			entries.remove(entries.values().size() - 1);
+		}
+		
+		catch (EntryDoesNotExistException e){ 
+			System.out.println(e.getMessage());
+		}
+		
+	}
+	
 	public Collection<MenuEntry>  getAllMenuEntries() { 
 		/**Simple method that returns a Collection<MenuEntry> object containing all
 		 * the values of the hashmap entries*/
