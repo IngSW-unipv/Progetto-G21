@@ -2,7 +2,6 @@ package interfaces;
 import menu.MenuEntry; 
 import java.util.LinkedHashMap;
 import java.util.Collection;
-import menu.EntryDoesNotExistException;
 public interface MenuInterface {
 	
 	/**This interface presents redundancy in the methods, due to Demeter's law,
@@ -31,4 +30,6 @@ public interface MenuInterface {
 	abstract void addMenuEntry(String dishEntry);
 	abstract void addBatchOfMenuEntries(String path);
 	abstract void rewriteMenu(String path);
+	abstract String printBackupToFile(); // Consider multithreading, or print when updating the hashmap or direct call from controller
+	abstract String getLatestBackup(); // Knowing the naming system of multiple backups using a info file, or using a single one
 }
