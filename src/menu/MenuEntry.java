@@ -21,7 +21,7 @@ public class MenuEntry {
 	}
 	
 	/** Advanced Constructor method 
-	 *  @param dishEntry specify the String to parse in "dishName, dishPrice, dishIngredients" format.
+	 *  @param dishEntry specifies the String to parse in "dishName, dishPrice, dishIngredients" format.
 	 *  dishIngredients are saved in a LinkedHashMap using the string ingredientName and the double value quantity.   
 	    Pay attention to the separator (comma) and to double entries. If you don't use comma the program is killed. */
 	
