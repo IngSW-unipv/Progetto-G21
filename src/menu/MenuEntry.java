@@ -7,68 +7,77 @@ public class MenuEntry {
 	private double dishPrice;
 	private LinkedHashMap<String, Double> dishIngredients;
 	
+	/** Constructor method 
+	 *  @param dishEntry specify the String to parse in "dishName, dishPrice, dishIngredients" format.
+	 *  dishIngredients are saved in a LinkedHashMap using the string ingredientName and the double value quantity.   
+	    Pay attention to the separator (comma) and to double entries. If you don't use comma the program is killed. */
+	
 	public MenuEntry(String dishEntry) {
-		/** Parse input string dishEntry as format: dishName, dishPrice, 
-		 Ingredients: String ingredientName, Double quantity in HashMap <String, Double>
-		 pay attention to double entries, if you don't use dot, you kill the program*/
+		
 		String[] buffer=dishEntry.split(",");
-		this.dishName=buffer[0];
+		
+		dishName=buffer[0];
 		dishPrice=Double.parseDouble(buffer[1]);
 		dishIngredients= new LinkedHashMap<String,Double>();
-		for (int i=3; i<buffer.length; i+=2) {
+		
+		for (int i=3; i<buffer.length; i+=2) {	// seems perfect
 			dishIngredients.put(buffer[i], Double.parseDouble(buffer[i+1]));
 		}
 	}
 	
+	/** Standard String return method 
+	 * @return dishName */
 	public String getDishName() {
-		/** Standard String return method*/
 		return dishName;
 	}
 	
+	/** Standard double return method
+	 *  @return dishPrice */
 	public double getDishPrice() {
-		/** Standard double return method*/
 		return dishPrice;
 	}
 	
+	/** Kinda brutal hashmap return method, gonna make a cuter one */
 	public LinkedHashMap<String,Double> getDishIngredients() {
-		/** Kinda brutal hashmap return method, gonna make a cuter one */
 		return dishIngredients;
 	}
 	
+	/** Method that returns dish ingredients in a String with the constructor's format 
+	 * @return stringed MenuEntry object */
 	public String getDishIngredientsStringed() {
-		/**The cuter method mentioned in getDishIngredients, strings
-		 * the ingredients hashmap and returns it as the format specified
-		 * in the MenuEntry constructor. This is why i use linked hashmaps */
+		
 		String buffer= "Ingredienti: ";
+		
 		for(Map.Entry<String, Double> e: dishIngredients.entrySet()) {
 			buffer+=e.getKey()+" "+e.getValue()+" ";
 		}
+		
 		return buffer;
 	}
 	
+	/** Method that edit the name of the dish represented by the MenuEntry 
+	 * @param newName is the new given name */
 	public void editEntry(String newName) {
-		/** editEntry method to edit the name of the dish represented */
 		this.dishName=newName;
 	}
 	
+	/** First overload of editEntry method, updates price of listed dish 
+	 * @param newPrice is the new given price */
 	public void editEntry(double newPrice) {
-		/**First overload of editEntry method, updates price of listed dish*/
 		this.dishPrice=newPrice;
 	}
 	
+	/** Second overload of editEntry method, updates ingredient's amount. 
+	 * It's not supposed to add or remove ingredients from the Map! If this condition is violated, throws an exception 
+	 * @param ingredient is the name of the ingredient being modified
+	 * @param newQuantity is the new given quantity */
 	public void editEntry(String ingredient, Double newQuantity) throws IngredientOperationDeniedException {
-		/** Second overload of editEntry method, updates value of existing
-		 * ingredient. It is supposed to be used to modify the ingredient amounts,
-		 * not to add other ingredients. If this condition is violated, throws exception*/
 		if((dishIngredients.get(ingredient))!=null) {
 			dishIngredients.put(ingredient, newQuantity);
+		} else {
+			throw new IngredientOperationDeniedException("It's not possible to add an ingredient: "
+					+ "if you want to do it, please create a new MenuEntry!!!");
 		}
-		else
-		{
-			throw new IngredientOperationDeniedException("It's not possible to add an ingredient: if you want to do it, please create a new MenuEntry!!!");
-		}
-		
-		
 	}
 	
 	
