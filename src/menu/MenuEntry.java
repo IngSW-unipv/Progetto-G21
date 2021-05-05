@@ -1,13 +1,26 @@
 package menu;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+/**
+ * The MenuEntry class. 
+ * A MenuEntry object represents one entry on the menu of the restaurant. 
+ * It contains dishName, dishPrice and the ingredients required. */
+
 public class MenuEntry {
 	
 	private String dishName;
 	private double dishPrice;
 	private LinkedHashMap<String, Double> dishIngredients;
 	
-	/** Constructor method 
+	/** Simple constructor method */
+	public MenuEntry(String name, double price, LinkedHashMap<String, Double> ingredients) {
+		this.dishName=name;
+		this.dishPrice=price;
+		this.dishIngredients=ingredients;
+	}
+	
+	/** Advanced Constructor method 
 	 *  @param dishEntry specify the String to parse in "dishName, dishPrice, dishIngredients" format.
 	 *  dishIngredients are saved in a LinkedHashMap using the string ingredientName and the double value quantity.   
 	    Pay attention to the separator (comma) and to double entries. If you don't use comma the program is killed. */
