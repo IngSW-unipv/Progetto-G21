@@ -22,8 +22,8 @@ public class Menu implements MenuInterface{
 				+ "To make use of this Menu, run the method rewriteMenu with the correct path.");
 	}
 	
-	/** This method removes a specific MenuEntry, after is sure of its existence. 
-	 * If this action is carried out is necessary to rebuild the HashMap to maintain its array-like structure.
+	/**This method removes a specific MenuEntry, after is sure of its existence. 
+	 * If this action is carried out is necessary to rebuild the HashMap to maintain its array-like structure. 
 	 * @param entryNumber defines the concerned entry. */
 	public void removeSpecificMenuEntry(Integer entryNumber) {
 		try {
@@ -42,14 +42,14 @@ public class Menu implements MenuInterface{
 	}
 	
 	/** Simple method that returns a Collection<MenuEntry> object containing all the values of the hashMap entries.
-	 * @return AllMenuEntries */
+	 * @return AllEntries. */
 	public Collection<MenuEntry> getAllMenuEntries() { 		
 		return entries.values();
 	}
 	
-	/** Simple method that returns a specific entry given it's number in the hashMap entries. 
+	/**Simple method that returns a specific entry given it's number in the hashMap entries. 
 	 * @param entryNumber defines the concerned entry.
-	 * @return SpecificMenuEntry */
+	 * @return SpecificMenuEntry. */
 	public MenuEntry getSpecificMenuEntry(Integer entryNumber) {
 		try {
 			checkForEntryExistence(entryNumber);
@@ -61,19 +61,20 @@ public class Menu implements MenuInterface{
 	}
 	
 	/**Method that creates a new entry. 
-	 * It calls the current size of the entries hashMap and creates the new entry given the defined stringed input format. */
-	/* WARNING: same as parseMenuFile, we don't have a quality control, if the string is in the wrong format we are going to kill the program. 
-	 * We might be able to do something calling the parsing method with such string, but i haven't thought about it yet, and no quality controls are implemented as of yet. 
+	 * It calls the current size of the entries hashMap and creates the new entry given the defined stringed input format. 
 	 * @param dishEntry specifies the entry to add. */
+	/* WARNING: same as parseMenuFile, we don't have a quality control, if the string is in the wrong format we are going to kill the program. 
+	 * We might be able to do something calling the parsing method with such string, but i haven't thought about it yet, and no quality controls are implemented as of yet. */ 
 	public void addMenuEntry(String dishEntry) {
 		
 		entries.put(entries.values().size(), new MenuEntry(dishEntry));
 	}
 	
 	/**Gateway method for
-	 * public String getDishIngredientsStringed()
+	 * public String getDishIngredientsStringed() [in class MenuEntry]
 	 * Checks for the existence of the entry, and if it does, calls the method from the targeted entry.
-	 * @param entryNumber defines the concerned entry. */
+	 * @param entryNumber defines the concerned entry. 
+	 * @return dishIngredientsStringed. */
 	public String getSpecificMenuEntryIngredientsStringed(Integer entryNumber) {		
 		try {
 			checkForEntryExistence(entryNumber);
@@ -85,9 +86,10 @@ public class Menu implements MenuInterface{
 	}
 	
 	/**Gateway method for 
-	 * public LinkedHashMap<String,Double> getDishIngredients()
+	 * public LinkedHashMap<String,Double> getDishIngredients() [in class MenuEntry]
 	 * Checks for the existence of the entry, and if it does, calls the method from the targeted entry.
-	 * @param entryNumber defines the concerned entry. */
+	 * @param entryNumber defines the concerned entry.
+	 * @return dishIngredients. */
 	public LinkedHashMap<String,Double> getSpecificMenuEntryIngredients(Integer entryNumber){	
 		try {
 			checkForEntryExistence(entryNumber);
@@ -99,9 +101,10 @@ public class Menu implements MenuInterface{
 	}
 	
 	/**Gateway method for 
-	 * public String getDishName()
+	 * public String getDishName() [in class MenuEntry]
 	 * Checks for the existence of the entry, and if it does, calls the method from the targeted entry.
-	 * @param entryNumber defines the concerned entry.*/
+	 * @param entryNumber defines the concerned entry.
+	 * @return dishName. */
 	public String getSpecificMenuEntryName(Integer entryNumber) {
 		
 		try {
@@ -114,9 +117,10 @@ public class Menu implements MenuInterface{
 	}
 	
 	/**Gateway method for 
-	 * public double getDishPrice()
+	 * public double getDishPrice() [in class MenuEntry]
 	 * Checks for the existence of the entry, and if it does, calls the method from the targeted entry.
-	 * @param entryNumber defines the concerned entry.  */
+	 * @param entryNumber defines the concerned entry. 
+	 * @return dishPrice. */
 	public Double getSpecificMenuEntryPrice(Integer entryNumber){
 		
 		try {
@@ -129,7 +133,7 @@ public class Menu implements MenuInterface{
 	}
 	
 	/**Gateway method for 
-	 * MenuEntry.public void editEntry(String ingredient, Double newQuantity) throws IngredientOperationDeniedException
+	 * public void editEntry(String ingredient, Double newQuantity) throws IngredientOperationDeniedException [in class MenuEntry]
 	 * Checks whether the entry exists or not using the private method checkForEntryExistence(entryNumber) and, 
 	 * in case of positive return, calls the gated method. 
 	 * @param entryNumber defines the concerned entry. */
@@ -148,7 +152,7 @@ public class Menu implements MenuInterface{
 	}
 	
 	/**Gateway method for 
-	 * MenuEntry.public void editEntry(double newPrice)
+	 * public void editEntry(double newPrice) [in class MenuEntry]
 	 * Checks whether the entry exists or not using the private method checkForEntryExistence(entryNumber) and, 
 	 * in case of positive return, calls the gated method. 
 	 * @param entryNumber defines the concerned entry. */
@@ -163,7 +167,7 @@ public class Menu implements MenuInterface{
 	}
 	
 	/**Gateway method for 
-	 * MenuEntry.public void editEntry(String newName)
+	 * public void editEntry(String newName) [in class MenuEntry]
 	 * Checks whether the entry exists or not using the private method checkForEntryExistence(entryNumber) and, 
 	 * in case of positive return, calls the gated method.
 	 * @param entryNumber defines the concerned entry. */
@@ -178,7 +182,7 @@ public class Menu implements MenuInterface{
 	}
 	
 	/**Small private method for the overloaded method editSpecificMenuEntry.
-	 * Is needed to check if the entry exists or if it would break the hashmap. 
+	 * Is needed to check if the entry exists or if it would break the hashMap. 
 	 * @param entryNumber defines the concerned entry. */
 	private void checkForEntryExistence(Integer entryNumber) throws EntryDoesNotExistException {
 		MenuEntry test= entries.get(entryNumber);
@@ -204,7 +208,8 @@ public class Menu implements MenuInterface{
 		else System.out.println("File was unusable - Menu unchanged");
 	}
 	
-	/**Small method needed to avoid repetitions in filechecking code, it just opens the path and returns whether the file is openable or not.
+	/**Small method needed to avoid repetitions in filechecking code, 
+	 * it just opens the path and returns whether the file is openable or not.
 	 * @param path specifies file's location. */
 	private boolean checkForExistence(String path) {
 		FileReader file;
@@ -224,7 +229,7 @@ public class Menu implements MenuInterface{
 	 *  WARNING: There isn't as of yet a check of quality on the parsing (i will add it later), if the format is not respected,
 	 * 	the program WILL crash, so don't go and purposefully mess the test file until i've finished coding the Menu package, pretty please :) 
 	 * 
-	 * @param path specifies file.txt location */
+	 * @param path specifies file.txt location. */
 	private void parseMenuFile(String path) {	
 		try {
 			BufferedReader file=new BufferedReader(new FileReader(path));
