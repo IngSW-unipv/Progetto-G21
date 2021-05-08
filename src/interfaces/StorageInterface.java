@@ -7,8 +7,10 @@ public interface StorageInterface /*Maybe it will be an observable, maybe not, g
 	abstract boolean isDoable(LinkedHashMap<String, Double> ingredients);
 	abstract boolean requestSingleIngredient(String name, Double amount);
 	abstract void rewriteManifest(String path);
-	abstract void addIngredient(String name, Double amount);
+	abstract void addIngredient(String name, Double amount, Double lowerBound, Double upperBound);
 	abstract void editIngredientAmount(String name, Double amount);
+	abstract void editIngredientLowerBound(String name, Double lowerBound);
+	abstract void editIngredientUpperBound(String name, Double upperBound);
 	abstract ArrayList<String> checkIngredientsOnLowerBound();
 	abstract ArrayList<String> checkIngredientsOnUpperBound();
 	abstract ArrayList<String> checkIngredientsOnLowerBound(String[] ingredients);
