@@ -50,7 +50,19 @@ public class StoredIngredient {
 		this.upperBound = upperBound;
 	}
 	
+	public boolean upperBoundCheck() {
+		if(amount < lowerBound) 
+			return true;
+		else
+			return false;
+	}
 	
+	public boolean lowerBoundCheck() {
+		if(amount > upperBound)
+			return true;
+		else
+			return false;
+	}
 	
 	
 }

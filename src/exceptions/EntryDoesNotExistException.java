@@ -1,4 +1,4 @@
-package menu;
+package exceptions;
 
 public class EntryDoesNotExistException extends Exception {
 	

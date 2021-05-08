@@ -5,6 +5,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.LinkedHashMap;
+
+import exceptions.EntryDoesNotExistException;
+
 import java.util.Collection;
 
 /**The Menu class.
@@ -223,7 +226,7 @@ public class Menu implements MenuInterface{
 	}
 	
 	/** This method allows for further batch insertions in the menu, it can parse a file that uses the format 
-	 * "dishName \t (at least 1) €dishPrice \n Ingredienti: ingredientName, ingredientAmount measurementUnit.
+	 * "dishName \t (at least 1) ï¿½dishPrice \n Ingredienti: ingredientName, ingredientAmount measurementUnit.
 	 * (you can put as many ingredients as you want, as long as you follow the format after Ingredienti:
 	 * 
 	 *  WARNING: There isn't as of yet a check of quality on the parsing (i will add it later), if the format is not respected,

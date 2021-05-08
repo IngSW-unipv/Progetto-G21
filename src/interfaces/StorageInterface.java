@@ -1,5 +1,6 @@
 package interfaces;
 import java.util.LinkedHashMap;
+import java.util.ArrayList;
 
 public interface StorageInterface /*Maybe it will be an observable, maybe not, gotta see */ {
 	
@@ -8,10 +9,10 @@ public interface StorageInterface /*Maybe it will be an observable, maybe not, g
 	abstract void rewriteManifest(String path);
 	abstract void addIngredient(String name, Double amount);
 	abstract void editIngredientAmount(String name, Double amount);
-	abstract String[] checkIngredientsOnLowerBound();
-	abstract String[] checkIngredientsOnUpperBound();
-	abstract String[] checkIngredientsOnLowerBound(String[] ingredients);
-	abstract String[] checkIngredientsOnUpperBound(String[] ingredients);
+	abstract ArrayList<String> checkIngredientsOnLowerBound();
+	abstract ArrayList<String> checkIngredientsOnUpperBound();
+	abstract ArrayList<String> checkIngredientsOnLowerBound(String[] ingredients);
+	abstract ArrayList<String> checkIngredientsOnUpperBound(String[] ingredients);
 	abstract void removeIngredient(String name);
 	abstract LinkedHashMap<String, Double> getManifest();
 	abstract Double getSpecificIngredientAmount(String name);
