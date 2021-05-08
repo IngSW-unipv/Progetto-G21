@@ -1,4 +1,5 @@
 package storage;
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -149,6 +150,56 @@ public class Storage {
 			return true;
 		} catch (Exception e) {
 			return false;
+		}
+	}
+	
+
+	/** This method can parse a file that uses the format:
+	 *  Prodotto: name, Quantità: amount (unitOfMeasurement), Minima: lowerBound (unitOfMeasurement), 
+	 *  Massima: upperBound (unitOfMeasurement) */
+	private void parseManifest(String path) {	
+		try {
+			BufferedReader file = new BufferedReader(new FileReader(path));
+			String toSplit;
+			boolean exit = false;
+			
+			while(!exit) {
+				toSplit=file.readLine();
+								
+				toSplit = toSplit.replace(": ", ",");
+				toSplit = toSplit.replace(", ", ",");
+				
+				String[] buffer= toSplit.split(",");
+				
+				String name = buffer[1];
+				double amount = Double.parseDouble(buffer[3]);
+				
+				
+				double lowerBound;
+				double upperBound;
+				
+				if (buffer[4].compareTo("Minima") == 0)
+				{
+					lowerBound = Double.parseDouble(buffer[5]);
+					upperBound = Double.parseDouble(buffer[7]);
+				}
+				
+				else 
+				{
+					lowerBound = Double.parseDouble(buffer[6]);
+				    upperBound = Double.parseDouble(buffer[8]);
+				}
+				
+				manifest.put(name, new StoredIngredient(name, amount, lowerBound, upperBound));
+				
+				if (file.readLine()==null) {
+					exit=true;
+				}
+				
+			}
+			file.close();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }
