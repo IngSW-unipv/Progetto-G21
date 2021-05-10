@@ -209,6 +209,17 @@ public class Storage {
 		}
 	}
 	
+	/** This method checks if the LinkedHashMap already contains an ingredient with
+	 * a certain name; if the entry doesn't exist yet, it's added. */
+	public void addIngredient(String name, Double amount, Double lowerBound, Double upperBound)
+	{
+		try {
+			checkForEntryExistence(name);
+			System.out.println("Entry already exists");
+		} catch (EntryDoesNotExistException e) {
+			manifest.put(name, new StoredIngredient(name, amount, lowerBound, upperBound));
+		}
+	}
 
 	/** This method can parse a file that uses the format:
 	 *  Prodotto: name, Quantit�: amount (unitOfMeasurement), Minima: lowerBound (unitOfMeasurement), 

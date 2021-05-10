@@ -70,6 +70,8 @@ public class Menu implements MenuInterface{
 	 * We might be able to do something calling the parsing method with such string, but i haven't thought about it yet, and no quality controls are implemented as of yet. */ 
 	public void addMenuEntry(String dishEntry) {
 		
+		// Need to add an existence check
+		
 		entries.put(entries.values().size(), new MenuEntry(dishEntry));
 	}
 	
