@@ -220,6 +220,54 @@ public class Storage {
 			manifest.put(name, new StoredIngredient(name, amount, lowerBound, upperBound));
 		}
 	}
+	
+	/**Gateway method for 
+	 * public void setAmount(double amount) [in class StoredIngredient]
+	 * Checks whether the entry exists or not using the private method checkForEntryExistence(name) and, 
+	 * in case of positive return, calls the gated method. 
+	 * @param name defines the concerned entry. */
+	public void editIngredientAmount(String name, Double amount) 
+	{
+		try {
+			checkForEntryExistence(name);
+			manifest.get(name).setAmount(amount);
+		} 
+		catch (EntryDoesNotExistException e) {
+			System.out.println(e.getMessage()+" - Amount unchanged");
+		}	
+	}
+	
+	/**Gateway method for 
+	 * public void setLowerBound(double lowerBound) [in class StoredIngredient]
+	 * Checks whether the entry exists or not using the private method checkForEntryExistence(name) and, 
+	 * in case of positive return, calls the gated method. 
+	 * @param name defines the concerned entry. */
+	public void editIngredientLowerBound(String name, Double lowerBound)
+	{
+		try {
+			checkForEntryExistence(name);
+			manifest.get(name).setLowerBound(lowerBound);
+		} 
+		catch (EntryDoesNotExistException e) {
+			System.out.println(e.getMessage()+" - Lower bound unchanged");
+		}	
+	}
+	
+	/**Gateway method for 
+	 * public void setUpperBound(double upperBound) [in class StoredIngredient]
+	 * Checks whether the entry exists or not using the private method checkForEntryExistence(name) and, 
+	 * in case of positive return, calls the gated method. 
+	 * @param name defines the concerned entry. */
+	public void editIngredientUpperBound(String name, Double upperBound)
+	{
+		try {
+			checkForEntryExistence (name);
+			manifest.get(name).setUpperBound(upperBound);
+		} 
+		catch (EntryDoesNotExistException e) {
+			System.out.println(e.getMessage()+" - Upper bound unchanged");
+		}	
+	}
 
 	/** This method can parse a file that uses the format:
 	 *  Prodotto: name, Quantit�: amount (unitOfMeasurement), Minima: lowerBound (unitOfMeasurement), 
