@@ -2,15 +2,16 @@ package interfaces;
 import java.util.LinkedHashMap;
 import java.util.ArrayList;
 
+
 public interface StorageInterface /*Maybe it will be an observable, maybe not, gotta see */ {
 	
 	abstract boolean isDoable(LinkedHashMap<String, Double> ingredients);
 	abstract boolean requestSingleIngredient(String name, Double amount);
 	abstract void rewriteManifest(String path);
-	abstract void addIngredient(String name, Double amount, Double lowerBound, Double upperBound);
-	abstract void editIngredientAmount(String name, Double amount);
-	abstract void editIngredientLowerBound(String name, Double lowerBound);
-	abstract void editIngredientUpperBound(String name, Double upperBound);
+	abstract void addIngredient(String name, Double amount, Double lowerBound, Double upperBound); // gaia
+	abstract void editIngredientAmount(String name, Double amount); // gaia
+	abstract void editIngredientLowerBound(String name, Double lowerBound); // gaia
+	abstract void editIngredientUpperBound(String name, Double upperBound); // gaia
 	abstract ArrayList<String> checkIngredientsOnLowerBound();
 	abstract ArrayList<String> checkIngredientsOnUpperBound();
 	abstract ArrayList<String> checkIngredientsOnLowerBound(String[] ingredients);

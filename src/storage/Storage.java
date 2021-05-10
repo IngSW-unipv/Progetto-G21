@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 import exceptions.EntryDoesNotExistException;
 public class Storage {
@@ -22,8 +23,63 @@ public class Storage {
 		}
 	}
 	
+	public LinkedHashMap<String, Double> getManifest(){
+		Set<String> buffer= manifest.keySet();
+		LinkedHashMap<String,Double> product= new LinkedHashMap<String,Double>();
+		for (String s: buffer) {
+			StoredIngredient si= manifest.get(s);
+			product.put(si.getName(),si.getAmount());
+		}
+		return product;
+		
+	}
+	
+	public void removeIngredient(String name) {
+		try {
+			checkForEntryExistence(name);
+			manifest.remove(name);
+		}catch(EntryDoesNotExistException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public Double getSpecificIngredientAmount(String name) {
+		try
+		{
+			checkForEntryExistence(name);
+			return manifest.get(name).getAmount();
+		}
+		catch(EntryDoesNotExistException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
 	
 	
+	
+	public Double getSpecificIngredientLowerBound(String name) {
+		try
+		{
+			checkForEntryExistence(name);
+			return manifest.get(name).getLowerBound();
+		}
+		catch(EntryDoesNotExistException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+	
+	public Double getSpecificIngredientUpperBound(String name) {
+		try
+		{
+			checkForEntryExistence(name);
+			return manifest.get(name).getUpperBound();
+		}
+		catch(EntryDoesNotExistException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
 	/**Method used to perform a global check on the manifest hashMap, returning as a string array
 	 * all the names of those ingredients whose method lowerBoundCheck returned true
 	 * @return buffer ArrayList containing the names of the detected entries*/
@@ -155,7 +211,7 @@ public class Storage {
 	
 
 	/** This method can parse a file that uses the format:
-	 *  Prodotto: name, Quantità: amount (unitOfMeasurement), Minima: lowerBound (unitOfMeasurement), 
+	 *  Prodotto: name, Quantitï¿½: amount (unitOfMeasurement), Minima: lowerBound (unitOfMeasurement), 
 	 *  Massima: upperBound (unitOfMeasurement) */
 	private void parseManifest(String path) {	
 		try {
