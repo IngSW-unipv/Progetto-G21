@@ -17,7 +17,7 @@ public interface StorageInterface /*Maybe it will be an observable, maybe not, g
 	abstract ArrayList<String> checkIngredientsOnLowerBound(String[] ingredients);
 	abstract ArrayList<String> checkIngredientsOnUpperBound(String[] ingredients);
 	abstract void removeIngredient(String name);
-	abstract LinkedHashMap<String, Double> getManifest();
+	abstract LinkedHashMap<String, Double[]> getManifest();
 	abstract Double getSpecificIngredientAmount(String name);
 	abstract Double getSpecificIngredientLowerBound(String name);
 	abstract Double getSpecificIngredientUpperBound(String name);

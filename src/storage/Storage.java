@@ -23,12 +23,13 @@ public class Storage {
 		}
 	}
 	
-	public LinkedHashMap<String, Double> getManifest(){
+	public LinkedHashMap<String, Double[]> getManifest(){
 		Set<String> buffer= manifest.keySet();
-		LinkedHashMap<String,Double> product= new LinkedHashMap<String,Double>();
+		LinkedHashMap<String,Double[]> product= new LinkedHashMap<String,Double[]>();
 		for (String s: buffer) {
 			StoredIngredient si= manifest.get(s);
-			product.put(si.getName(),si.getAmount());
+			Double[] dbv = {si.getAmount(), si.getLowerBound(), si.getUpperBound()};
+			product.put(si.getName(),dbv);
 		}
 		return product;
 		
