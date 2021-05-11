@@ -11,6 +11,10 @@ public class Storage {
 	
 	private LinkedHashMap<String, StoredIngredient> manifest;
 	
+	
+	/**Storage constructor, tries to run the path provided through the parser in order to fill the base manifest, if it can't
+	 * it will create anyway, just with an empty manifest.
+	 * @param path the path of the file to parse.*/
 	public Storage(String path) {
 		manifest= new LinkedHashMap<String, StoredIngredient>();
 		if(checkForExistence(path)) {
@@ -22,6 +26,14 @@ public class Storage {
 					+ "To make use of this Storage, run the method rewriteManifest with the correct path.");
 		}
 	}
+	
+	/** Method used to request an amount of an ingredient. First it checks for it's existence, then,
+	 * if the result is positive, tries to reduce the stored amount by the requested one, if this operation
+	 * is executed correctly too, the program returns false. An error in any step of the way results in a false
+	 * return, without any change in the data structure.
+	 * @param name the name of the requested ingredient.
+	 * @param amount the amount requested.
+	 * @return boolean: result of all the method's steps.*/
 	
 	public boolean requestSingleIngredient(String name, Double amount) {
 		try {
@@ -41,6 +53,10 @@ public class Storage {
 		}
 	}
 	
+	
+	/** This method opens the file specified with path and rewrites the storage manifest with it, calling
+	 * the parsing method.
+	 * @param path the backup file path.*/
 	public void rewriteManifest(String path) {
 		if(checkForExistence(path)) {
 			manifest.clear();
@@ -49,7 +65,9 @@ public class Storage {
 		else
 			System.out.println("Wrong path");
 	}
-	
+	/** This method returns a simplified HashMap composed by the name of the ingredient as key
+	 * and an array of double values written as follows: [0]amount, [1]lowerBound, [2]upperBound
+	 * @return LinkedHashMap<String, Double[]>: hashMap containing all the data in a convenient package*/
 	public LinkedHashMap<String, Double[]> getManifest(){
 		Set<String> buffer= manifest.keySet();
 		LinkedHashMap<String,Double[]> product= new LinkedHashMap<String,Double[]>();
@@ -62,6 +80,8 @@ public class Storage {
 		
 	}
 	
+	/** This method removes an ingredient, simple .remove method.
+	 * @param name the name of the ingredient to be removed.*/
 	public void removeIngredient(String name) {
 		try {
 			checkForEntryExistence(name);
@@ -71,6 +91,9 @@ public class Storage {
 		}
 	}
 	
+	/** This method returns the amount of a specified ingredient, if it exists.
+	 * @param name the name of the ingredient.
+	 * @return Double value representing the stored amount of the ingredient, or null if it doesn't exist.*/
 	public Double getSpecificIngredientAmount(String name) {
 		try
 		{
@@ -83,7 +106,9 @@ public class Storage {
 		}
 	}
 	
-	
+	/** This method returns the lowerBound of a specified ingredient, if it exists.
+	 * @param name the name of the ingredient.
+	 * @return Double value representing the lowerBound of the ingredient, or null if it doesn't exist.*/
 	
 	public Double getSpecificIngredientLowerBound(String name) {
 		try
@@ -96,6 +121,10 @@ public class Storage {
 			return null;
 		}
 	}
+	
+	/** This method returns the upperBound of a specified ingredient, if it exists.
+	 * @param name the name of the ingredient.
+	 * @return Double value representing the upperBound of the ingredient, or null if it doesn't exist.*/
 	
 	public Double getSpecificIngredientUpperBound(String name) {
 		try

@@ -20,7 +20,7 @@ public class MenuEntry {
 	}
 	
 	/** Advanced Constructor method. 
-	 *  @param dishEntry specifies the String to parse in "dishName, dishPrice, dishIngredients" format.
+	 *  @param dishEntry specifies the String to parse in "dishName, dishPrice, Ingredients, dishIngredients" format.
 	 *  dishIngredients are saved in a LinkedHashMap using the string ingredientName and the double value quantity.   
 	    Pay attention to the separator (comma) and to double entries. If you don't use comma the program is killed. */
 	public MenuEntry(String dishEntry) {
@@ -30,8 +30,9 @@ public class MenuEntry {
 		dishName=buffer[0];
 		dishPrice=Double.parseDouble(buffer[1]);
 		dishIngredients= new LinkedHashMap<String,Double>();
-		
-		for (int i=3; i<buffer.length; i+=2) {	// why i starts from 3????
+		// why i starts from 3???? 
+		// Because in buffer[2] there is Ingredients, my bad didn't write it in the format
+		for (int i=3; i<buffer.length; i+=2) {	
 			dishIngredients.put(buffer[i], Double.parseDouble(buffer[i+1]));
 		}
 	}
@@ -60,7 +61,8 @@ public class MenuEntry {
 		String buffer= "Ingredienti: ";
 		
 		for(Map.Entry<String, Double> e: dishIngredients.entrySet()) {
-			buffer+=e.getKey()+" "+e.getValue()+" ";
+			//Mock formatting with doublespace, i have to think about saving measurement units too for backup's sake.
+			buffer+=e.getKey()+" "+e.getValue()+"  ";
 		}
 		
 		return buffer;
