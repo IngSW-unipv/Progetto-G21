@@ -23,6 +23,33 @@ public class Storage {
 		}
 	}
 	
+	public boolean requestSingleIngredient(String name, Double amount) {
+		try {
+			checkForEntryExistence(name);
+			StoredIngredient si=manifest.get(name);
+			if(si.getAmount()< amount) {
+				return false;
+			}
+			else
+			{
+				si.setAmount(si.getAmount()-amount);
+				return true;
+			}
+				
+		} catch(EntryDoesNotExistException e) {
+			return false;
+		}
+	}
+	
+	public void rewriteManifest(String path) {
+		if(checkForExistence(path)) {
+			manifest.clear();
+			parseManifest(path);
+		}
+		else
+			System.out.println("Wrong path");
+	}
+	
 	public LinkedHashMap<String, Double[]> getManifest(){
 		Set<String> buffer= manifest.keySet();
 		LinkedHashMap<String,Double[]> product= new LinkedHashMap<String,Double[]>();
@@ -81,6 +108,7 @@ public class Storage {
 			return null;
 		}
 	}
+
 	/**Method used to perform a global check on the manifest hashMap, returning as a string array
 	 * all the names of those ingredients whose method lowerBoundCheck returned true
 	 * @return buffer ArrayList containing the names of the detected entries*/

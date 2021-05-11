@@ -5,22 +5,22 @@ import java.util.ArrayList;
 
 public interface StorageInterface /*Maybe it will be an observable, maybe not, gotta see */ {
 	
-	abstract boolean isDoable(LinkedHashMap<String, Double> ingredients);
-	abstract boolean requestSingleIngredient(String name, Double amount);
-	abstract void rewriteManifest(String path);
-	abstract void addIngredient(String name, Double amount, Double lowerBound, Double upperBound); // gaia
-	abstract void editIngredientAmount(String name, Double amount); 
-	abstract void editIngredientLowerBound(String name, Double lowerBound); 
-	abstract void editIngredientUpperBound(String name, Double upperBound); 
-	abstract ArrayList<String> checkIngredientsOnLowerBound();
-	abstract ArrayList<String> checkIngredientsOnUpperBound();
-	abstract ArrayList<String> checkIngredientsOnLowerBound(String[] ingredients);
-	abstract ArrayList<String> checkIngredientsOnUpperBound(String[] ingredients);
-	abstract void removeIngredient(String name);
-	abstract LinkedHashMap<String, Double[]> getManifest();
-	abstract Double getSpecificIngredientAmount(String name);
-	abstract Double getSpecificIngredientLowerBound(String name);
-	abstract Double getSpecificIngredientUpperBound(String name);
+	abstract boolean isDoable(LinkedHashMap<String, Double> ingredients);//done
+	abstract boolean requestSingleIngredient(String name, Double amount);//done
+	abstract void rewriteManifest(String path);//done
+	abstract void addIngredient(String name, Double amount, Double lowerBound, Double upperBound);//done
+	abstract void editIngredientAmount(String name, Double amount); //done
+	abstract void editIngredientLowerBound(String name, Double lowerBound);//done 
+	abstract void editIngredientUpperBound(String name, Double upperBound); //done
+	abstract ArrayList<String> checkIngredientsOnLowerBound();//done
+	abstract ArrayList<String> checkIngredientsOnUpperBound();//done
+	abstract ArrayList<String> checkIngredientsOnLowerBound(String[] ingredients);//done
+	abstract ArrayList<String> checkIngredientsOnUpperBound(String[] ingredients);//done
+	abstract void removeIngredient(String name);//done
+	abstract LinkedHashMap<String, Double[]> getManifest();//done
+	abstract Double getSpecificIngredientAmount(String name);//done
+	abstract Double getSpecificIngredientLowerBound(String name);//done
+	abstract Double getSpecificIngredientUpperBound(String name);//done
 	abstract void printManifest();
 	abstract void loadBackup();
 	abstract void printManifest(String path);

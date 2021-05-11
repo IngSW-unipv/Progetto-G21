@@ -32,4 +32,9 @@ public interface MenuInterface {
 	abstract void rewriteMenu(String path);
 	abstract String printBackupToFile(); // Consider multithreading, or print when updating the hashmap or direct call from controller
 	abstract String getLatestBackup(); // Knowing the naming system of multiple backups using a info file, or using a single one
+	abstract String printBackupToFile(String path);
+	abstract String getLatestBackup(String path);
+	
+	//quality check for last  is of paramount importance, we need to be sure that he isn't passing a wrongly formatted
+	//file to the program as a backup.
 }
