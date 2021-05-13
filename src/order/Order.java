@@ -60,16 +60,16 @@ public class Order implements Serializable {
 		return delivered;
 	}
 	
-	public void setSeen() {
-		seen = true;
+	public void setSeen(boolean input) {
+		seen = input;
 	}
 	
-	public void setPrepared() {
-		prepared = true;
+	public void setPrepared(boolean input) {
+		prepared = input;
 	}
 	
-	public void setDelivered() {
-		delivered = true;
+	public void setDelivered(boolean input) {
+		delivered = input;
 	}
 	
 	public int getSeatNum() {

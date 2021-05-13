@@ -1,65 +1,39 @@
 package staff;
 
-import java.io.*;
-import order.*;
-import storage.*;
-import leRestaurant.*;
+import java.util.*;
 
-public class Staff {
-	private Order currentOrder;
-	private int id;
-	private String name;
-	private Storage storage;
-	private RestaurantController restaurant;
+import leRestaurant.RestaurantController;
+import order.*;
+
+import java.io.*;
+
+public class Chef extends Staff implements Serializable {
 	
-	public Staff(String name, RestaurantController restaurant) {
-		this.name = name;
-		this.restaurant = restaurant;
-		this.storage = restaurant.getStorage();
+	private int numChefs = 0;
+	
+	public Chef(String name, RestaurantController restaurant) {
+		super(name, restaurant);
+		numChefs++;
+		setId(numChefs);
+		restaurant.getStaffSystem().addChef(this);
 	}
 	
-	public Order getCurrentOrder() {
-		return currentOrder;
+	public void seeOrder(Order order) {
+		if(getCurrentOrder() == null) {
+			order.setSeen(true);
+			takeOrder(order);
+			getRestaurant().getOrderSystem().seenOrder(order);
+			
+			// EventLogger??????
+		}
 	}
 	
-	public String getName() {
-		return name;
-	}
-	
-	public Storage getStorage() {
-		return storage;
-	}
-	
-	public int getId() {
-		return id;
-	}
-	
-	public RestaurantController getRestaurant() {
-		return restaurant;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public void setStorage(Storage storage) {
-		this.storage = storage;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	public void setRestaurant(RestaurantController restaurant) {
-		this.restaurant = restaurant;
-	}
-	
-	public void takeOrder(Order order) {
-		this.currentOrder = order;
-	}
-	
-	public void doneWithOrder() {
-		this.currentOrder = null;
+	public void confirmPrepared() {
+		getCurrentOrder().setPrepared(true);
+		getRestaurant().getOrderSystem().preparedOrder(getCurrentOrder());
+		doneWithOrder();
+		
+		// EventLogger?????
 	}
 	
 	public boolean prepareOrder() throws IOException {
@@ -67,9 +41,7 @@ public class Staff {
         Order order = getCurrentOrder();
 
         if (order == null) {
-
-            return false;
-
+        	return false;
         } else {
 
             boolean possible = true;
@@ -99,4 +71,6 @@ public class Staff {
             return possible;
         }
     }
+	
+
 }
