@@ -62,7 +62,7 @@ public class Staff {
 		this.currentOrder = null;
 	}
 	
-	public boolean prepareOrder() throws IOException {
+	/* public boolean prepareOrder() throws IOException {
 
         Order order = getCurrentOrder();
 
@@ -98,5 +98,5 @@ public class Staff {
 
             return possible;
         }
-    }
+    } */
 }
