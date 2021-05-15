@@ -1,5 +1,6 @@
 package order;
 import java.io.*;
+import dish.*;
 
 /** The Order class.
  * An Order contains a dish, its table number, its seat number, 
@@ -108,14 +109,14 @@ public class Order implements Serializable {
 	 * @ return isEquals. 
 	 * Dish class is not yet defined! (equals method doesn't work right now) */
 	public boolean equals(Order otherOrder) {
-		boolean isEquals = false;
+		boolean isEqual = false;
 		if( this.orderId == otherOrder.orderId && 
 			this.tableId == otherOrder.tableId &&
 			this.seatNum == otherOrder.seatNum &&
-			this.dish.equals(otherOrder.dish) isEquals = true;
-		else isEquals = false;
+			this.dish.equals(otherOrder.dish) isEqual = true;
+		else isEqual = false;
 		
-		return isEquals;
+		return isEqual;
 	}
 	
 }
