@@ -1,6 +1,7 @@
 package storage;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -374,5 +375,45 @@ public class Storage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	
+	/** This method prints on a backup file (StorageBackup) every StoredIngredient and returns the 
+	 * path of that file */
+	public String printManifest()
+	{
+		try {
+
+			FileWriter fileout = new FileWriter("./backup/StorageBackup.txt");
+			int i = 0;  	// number of products
+			int j;
+			String buffer;
+			
+	
+			for (String s : manifest.keySet())
+			{
+				buffer = "Prodotto: " + s + ", " + "Quantità: " + getSpecificIngredientAmount(s) +
+						  ", " + "Minimo: "	+ getSpecificIngredientLowerBound(s) + 
+						  ", " + "Massimo: " + getSpecificIngredientUpperBound(s);
+				
+				for (j = 0; j < (buffer.length()); j++)
+				{
+					fileout.write(buffer.charAt(j));
+				}
+				
+				i++;
+				
+				if (i == manifest.values().size()) 
+					fileout.close();
+				else 
+					fileout.write('\n');
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		return "./backup/StorageBackup.txt";
 	}
 }

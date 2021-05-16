@@ -4,6 +4,7 @@ import interfaces.MenuInterface;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.LinkedHashMap;
 
 import exceptions.EntryDoesNotExistException;
@@ -266,5 +267,43 @@ public class Menu implements MenuInterface{
 		}
 		
 	}
+	
+	
+	/** This method prints on a backup file (MenuBackup) every MenuEntry and returns the path of
+	 * that file */
+	public String printBackupToFile()
+	{
+		try {
+
+			FileWriter fileout = new FileWriter("./backup/MenuBackup.txt");
+			int j;
+			String buffer;
+			
+	
+			for (Integer i : entries.keySet())
+			{
+				buffer = getSpecificMenuEntryName(i) + '\t' + 
+						 getSpecificMenuEntryPrice(i) + '\n' +
+						 getSpecificMenuEntryIngredientsStringed(i);
+				
+				for (j = 0; j < (buffer.length()); j++)
+				{
+					fileout.write(buffer.charAt(j));
+				}
+				
+				if (i < entries.values().size() - 1) 
+					fileout.write('\n' + 'n');
+				else 
+					fileout.close();
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		return "./backup/MenuBackup.txt";
+	}
+	
 	
 }
