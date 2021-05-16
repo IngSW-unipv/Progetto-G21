@@ -5,9 +5,11 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.LinkedHashMap;
 
 import exceptions.EntryDoesNotExistException;
+import exceptions.FileFormatIsNotCorrectException;
 
 import java.util.Collection;
 
@@ -305,5 +307,99 @@ public class Menu implements MenuInterface{
 		return "./backup/MenuBackup.txt";
 	}
 	
+	/* TO BE CHECKED!!!!!!!! */
+	/** This method checks if the format of the file is correct and throws an exception 
+	 * (FileFormatIsNotCorrectException) in case of negative outcome*/
+	private boolean checkForMenuFormat(String path) throws FileFormatIsNotCorrectException {
+		
+		 try {
+		      try (FileReader testFile = new FileReader(path)) {
+				try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+					String s1 = "";
+					  String s2 = "";
+					  String s2WithoutIngredient = "";
+					  String s3 = "";
+					  
+					  int i;
+					  boolean exit = false;
+   
+					
+					  while (!exit)
+					  {
+						  
+						  s1 = br.readLine();
+						  
+						  String dishName = s1.substring(0, s1.indexOf('\t'));
+						  Double dishPrice = Double.parseDouble(s1.substring(s1.indexOf('€') + 1));
+						  
+						
+						  if (s1.compareTo(dishName + '\t' + '€' + dishPrice.toString()) == 0)
+						  {
+							  s2 = br.readLine();
+							  String ingredient = "Ingredienti: ";
+							  String[] ingredientName = {};
+							  Double[] ingredientQunatity = {};
+							  String[] measurementUnit = {};
+							  String ingredientsListStringed = "";
+							  
+							  s2WithoutIngredient = s2.replace("Ingredienti: ", "");
+							  
+							  String[] buffer= s2WithoutIngredient.split(",");
+					   
+							  
+							  for (i = 0; i < buffer.length; i++)
+							  {
+								  ingredientName[i] = s2WithoutIngredient.substring(0, s2WithoutIngredient.indexOf(' ') - 1);
+					    		  ingredientQunatity[i] = Double.parseDouble(s2WithoutIngredient.substring(s2WithoutIngredient.indexOf(' ') + 1, s2WithoutIngredient.indexOf(' ') - 1));
+					    		  measurementUnit[i] = s2WithoutIngredient.substring(s2WithoutIngredient.indexOf(' ') + 1, s2WithoutIngredient.indexOf(',') - 1);
+					    		  ingredientsListStringed += ingredientName[i] + " " +
+					    				  					ingredientQunatity[i].toString() + " " + 
+					    				  					measurementUnit[i];
+					    		  if (i != buffer.length - 1) 
+					    			  ingredientsListStringed += ", ";
+					    		  else 
+					    			  ingredientsListStringed += ".";	  					
+							  }
+							  		    		   
+							  if (s2.compareTo(ingredient + ingredientsListStringed) == 0) 
+							  {
+								  if ((s3 =  br.readLine()) != "")
+								  {
+									  throw new FileFormatIsNotCorrectException("Wrong format!");
+								  //  return false;
+								  }
+									  
+								  if ((s3 =  br.readLine()) == null)
+						    	  {
+						    		  exit = true;
+						    		  return true;
+						    	  }
+							  }
+							}
+						    else throw new FileFormatIsNotCorrectException("Wrong format!");
+						  		return false;
+						  }	  
+					  		      
+					  testFile.close();
+					  br.close();
+				}
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		      
+		    } catch (FileNotFoundException e) {
+		      System.out.println("An error occurred.");
+		      e.printStackTrace();
+		      return false;
+		    } catch (IOException e) {
+				e.printStackTrace();
+				return false;
+			}
+		return false;
+		  }
+	}
+
+
 	
-}
+

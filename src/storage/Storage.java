@@ -1,13 +1,16 @@
 package storage;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
 import exceptions.EntryDoesNotExistException;
+import exceptions.FileFormatIsNotCorrectException;
 public class Storage {
 	
 	private LinkedHashMap<String, StoredIngredient> manifest;
@@ -416,4 +419,60 @@ public class Storage {
 		
 		return "./backup/StorageBackup.txt";
 	}
-}
+	
+	/* TO BE CHECKED!!!!!!!! */
+	/** This method checks if the format of the file is correct and throws an exception 
+	 * (FileFormatIsNotCorrectException) in case of negative outcome*/
+	private boolean checkForManifestFormat(String path) throws FileFormatIsNotCorrectException {
+		
+		 try {
+		      try (FileReader testFile = new FileReader(path)) {
+				try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+					String s;
+					 
+					  boolean exit = false;
+   
+					  while (!exit)
+					  {
+						  
+						  s = br.readLine();
+						  
+						  String name = s.substring(s.indexOf("Prodotto: " + 1), s.indexOf(',' - 1));
+						  Double amount = Double.parseDouble(s.substring(s.indexOf("Qunatità: " + 1), s.indexOf(' ') - 1));
+					//    String measurementUnit = s.substring(s.indexOf(' ' + 1), s.indexOf(' ' - 1));
+						  Double lowerBound = Double.parseDouble(s.substring(s.indexOf("Minima: " + 1), s.indexOf(' ') - 1));
+						  Double upperBound = Double.parseDouble(s.substring(s.indexOf("Massima: " + 1), s.indexOf(' ') - 1));
+						  
+						  if ((s =  br.readLine()) == null)
+						  {
+							 exit = true;
+							 return true;
+						  }
+						  
+						  if (s != ("Prodotto: " + name + ", " + "Quantità: " + amount + ", " + "Minima: " + lowerBound
+							  + ", " + "Massima: " + upperBound))
+						  {
+						  		throw new FileFormatIsNotCorrectException("Wrong format!");
+						  }
+						  
+						  
+					  }
+					  		      
+					  testFile.close();
+					  br.close();
+				}
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		      
+		    } catch (FileNotFoundException e) {
+		      System.out.println("An error occurred.");
+		      e.printStackTrace();
+		    } catch (IOException e) {
+				e.printStackTrace();
+			}
+		return false;
+		  }
+	}
+
