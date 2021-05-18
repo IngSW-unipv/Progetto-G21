@@ -3,6 +3,7 @@ import java.util.HashMap;
 public class Controller {
 
 	private static Controller c;
+	private ListeningPost l;
 	private HashMap<String, StrategyAbstract> strategies;
 	public static Controller CreateController() { 
 		if (c==null) {
@@ -13,6 +14,20 @@ public class Controller {
 	}
 	
 	private Controller() {
+		strategies=new HashMap<String,StrategyAbstract>();
+		strategies.put(GenericTestStrategy.getStrategyName(), new GenericTestStrategy(this));
+		l=ListeningPost.invokeListeningPost();
+		l.bindController(this);
+	}
+	
+	public void strategyCall(String strategyRequired, String[] args) {
 		
 	}
+	
+	public void testMethod() {
+		System.out.println("This is a test method!");
+	}
+	
+	
+	
 }
