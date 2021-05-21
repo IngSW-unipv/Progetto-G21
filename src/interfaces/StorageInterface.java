@@ -21,9 +21,9 @@ public interface StorageInterface /*Maybe it will be an observable, maybe not, g
 	abstract Double getSpecificIngredientAmount(String name);//done
 	abstract Double getSpecificIngredientLowerBound(String name);//done
 	abstract Double getSpecificIngredientUpperBound(String name);//done
-	abstract void printManifest();
-	abstract void loadBackup();
-	abstract void printManifest(String path);
-	abstract void loadBackup(String path);
+	abstract String printManifest();
+	abstract String loadBackup();
+	abstract String printManifest(String path);
+	abstract String loadBackup(String path);
 	
 }

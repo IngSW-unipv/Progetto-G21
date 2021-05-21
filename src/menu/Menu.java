@@ -307,6 +307,57 @@ public class Menu implements MenuInterface{
 		return "./backup/MenuBackup.txt";
 	}
 	
+	
+	/** This method prints on a backup file every MenuEntry and returns the path of
+	 * that file */
+	public String printBackupToFile(String path) 
+	{
+		try {
+
+			FileWriter fileout = new FileWriter(path);
+			int j;
+			String buffer;
+			
+	
+			for (Integer i : entries.keySet())
+			{
+				buffer = getSpecificMenuEntryName(i) + '\t' + 
+						 getSpecificMenuEntryPrice(i) + '\n' +
+						 getSpecificMenuEntryIngredientsStringed(i);
+				
+				for (j = 0; j < (buffer.length()); j++)
+				{
+					fileout.write(buffer.charAt(j));
+				}
+				
+				if (i < entries.values().size() - 1) 
+					fileout.write('\n' + 'n');
+				else 
+					fileout.close();
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		return path;
+	}
+	
+	/** This method returns the path of the backup file if it has a right format */
+	public String getLatestBackup(String path)
+	{
+		try {
+			if (checkForMenuFormat(path)) 
+				return printBackupToFile(path);
+			else return "Unable to return the path because the file doesn't have a right format";
+		} catch (FileFormatIsNotCorrectException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	
 	/* TO BE CHECKED!!!!!!!! */
 	/** This method checks if the format of the file is correct and throws an exception 
 	 * (FileFormatIsNotCorrectException) in case of negative outcome*/

@@ -420,6 +420,60 @@ public class Storage {
 		return "./backup/StorageBackup.txt";
 	}
 	
+	/** This method prints on a backup file every StoredIngredient and returns the 
+	 * path of that file */
+	public String printManifest(String path)
+	{
+		try {
+
+			FileWriter fileout = new FileWriter(path);
+			int i = 0;  	// number of products
+			int j;
+			String buffer;
+			
+	
+			for (String s : manifest.keySet())
+			{
+				buffer = "Prodotto: " + s + ", " + "Quantità: " + getSpecificIngredientAmount(s) +
+						  ", " + "Minimo: "	+ getSpecificIngredientLowerBound(s) + 
+						  ", " + "Massimo: " + getSpecificIngredientUpperBound(s);
+				
+				for (j = 0; j < (buffer.length()); j++)
+				{
+					fileout.write(buffer.charAt(j));
+				}
+				
+				i++;
+				
+				if (i == manifest.values().size()) 
+					fileout.close();
+				else 
+					fileout.write('\n');
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		return path;
+	}
+	
+	
+	/** This method returns the path of the backup file if it has a right format */
+	public String loadBackup(String path)
+	{
+		try {
+			if (checkForManifestFormat(path)) 
+				return printManifest(path);
+			else return "Unable to return the path because the file doesn't have a right format";
+		} catch (FileFormatIsNotCorrectException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
 	/* TO BE CHECKED!!!!!!!! */
 	/** This method checks if the format of the file is correct and throws an exception 
 	 * (FileFormatIsNotCorrectException) in case of negative outcome*/
