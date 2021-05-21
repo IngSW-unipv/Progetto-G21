@@ -1,3 +1,5 @@
+/** Everything must be synchronized!!!!! */
+
 package stagingPackage;
 import java.util.HashMap;
 public class Controller {

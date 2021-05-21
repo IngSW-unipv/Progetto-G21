@@ -1,18 +1,17 @@
 package leRestaurant;
+
+import storage.*;
 import menu.*;
 import java.io.*;
-import java.util.LinkedHashMap;
-import java.util.Collection;
-public class RestaurantController {
+import java.util.*;
 
-	/** Using hashmap because S P E E D*/
+/** The Restaurant class, facade controller. */
+
+public class RestaurantController {
+	
+	private Storage storage;
 	private Menu restaurantMenu;
-	public RestaurantController() {
-		
-	}
-	
-	public void generateMenu(String path) {
-		restaurantMenu.rewriteMenu(path);
-	}
-	
+	private ArrayList<Table> tables;
+	private ArrayList<Table> emptyTables;
+	private RevenueSystem revenueSystem; 
 }
