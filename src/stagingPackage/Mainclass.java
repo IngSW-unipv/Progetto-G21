@@ -2,8 +2,10 @@ package stagingPackage;
 public class Mainclass {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		String[] forStrat= {"ciao", "come", "va", "io", "bene"};
+		Controller.createController();
+		Class1 c1=new Class1();
+		c1.repeatIntroduction();
 	}
 
 }

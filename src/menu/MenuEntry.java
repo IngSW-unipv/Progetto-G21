@@ -61,8 +61,8 @@ public class MenuEntry {
 		String buffer= "Ingredienti: ";
 		
 		for(Map.Entry<String, Double> e: dishIngredients.entrySet()) {
-			//Mock formatting with doublespace, i have to think about saving measurement units too for backup's sake.
-			buffer+=e.getKey()+" "+e.getValue()+"  ";
+			//Mock formatting with space and comma i have to think about saving measurement units too for backup's sake.
+			buffer+=e.getKey()+" "+e.getValue()+" ,";
 		}
 		
 		return buffer;

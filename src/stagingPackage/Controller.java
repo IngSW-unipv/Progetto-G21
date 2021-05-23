@@ -7,7 +7,7 @@ public class Controller {
 	private static Controller c;
 	private ListeningPost l;
 	private HashMap<String, StrategyAbstract> strategies;
-	public static Controller CreateController() { 
+	protected static Controller createController() { 
 		if (c==null) {
 			c=new Controller();
 			return c;
@@ -17,12 +17,17 @@ public class Controller {
 	
 	private Controller() {
 		strategies=new HashMap<String,StrategyAbstract>();
-		strategies.put(GenericTestStrategy.getStrategyName(), new GenericTestStrategy(this));
+		strategies.put(GenericTestStrategy.getStrategyName(), GenericTestStrategy.createStrategy(this));
 		l=ListeningPost.invokeListeningPost();
 		l.bindController(this);
 	}
 	
 	public void strategyCall(String strategyRequired, String[] args) {
+		StrategyAbstract s;
+		if((s=strategies.get(strategyRequired))!=null) 
+			s.execute(args);
+		else
+			System.out.println("Strategy does not exist");
 		
 	}
 	
