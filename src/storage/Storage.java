@@ -474,6 +474,19 @@ public class Storage {
 	}
 	
 	
+	/** This method returns the path of the backup file if it has a right format */
+	public String loadBackup()
+	{
+		try {
+			if (checkForManifestFormat(printManifest())) 
+				return printManifest();
+			else return "Unable to return the path because the file doesn't have a right format";
+		} catch (FileFormatIsNotCorrectException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	/* TO BE CHECKED!!!!!!!! */
 	/** This method checks if the format of the file is correct and throws an exception 
 	 * (FileFormatIsNotCorrectException) in case of negative outcome*/
