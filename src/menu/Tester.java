@@ -70,7 +70,7 @@ public class Tester {
 	
 	  menuTest.getAllMenuEntries();
 	  
-	  for (Integer i : menuTest.entries.keySet())
+	  for (Integer i : menuTest.getEntries().keySet())
 	  {
 		   System.out.println(menuTest.getSpecificMenuEntryName(i) + '\t' + 
 				   			  menuTest.getSpecificMenuEntryPrice(i) + '\n' +
@@ -83,7 +83,7 @@ public class Tester {
       
       menuTest.getAllMenuEntries();
       
-      for (Integer i : menuTest.entries.keySet())
+      for (Integer i : menuTest.getEntries().keySet())
 	  {
 		   System.out.println(menuTest.getSpecificMenuEntryName(i) + '\t' + 
 				   			  menuTest.getSpecificMenuEntryPrice(i) + '\n' +
