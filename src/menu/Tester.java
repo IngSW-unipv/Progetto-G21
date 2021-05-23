@@ -6,9 +6,11 @@ import java.util.*;
 public class Tester {
 
 	public static void main(String[] args) {
+	
+		
 //		String testing= "Spaghetti alle vongole,15.2,Ingredienti,Spaghetti,100,Vongole,50,Sale,5,Olio,10";
-//		MenuEntry entryTest= new MenuEntry(testing);
-//		System.out.println(entryTest.getDishName());
+//  	MenuEntry entryTest = new MenuEntry();
+//      System.out.println(entryTest.getDishName());
 //		System.out.println(entryTest.getDishPrice());
 //		System.out.println(entryTest.getDishIngredientsStringed());
 //		entryTest.editEntry("spaget");
@@ -45,14 +47,49 @@ public class Tester {
 //			
 //		}
 		
-		RestaurantController r= new RestaurantController();
-		r.generateMenu("/home/daniele/Progetto-G21/src/menu/MenuTest");
-		Collection<MenuEntry> c=r.getMenu();
-		for(MenuEntry me:c) {
-			System.out.println(me.getDishName()+"\t \t"+me.getDishPrice()+"\n"+me.getDishIngredientsStringed()+"\n");
-		}
-		
+//		RestaurantController r= new RestaurantController();
+//		r.generateMenu("/home/daniele/Progetto-G21/src/menu/MenuTest");
+//		Collection<MenuEntry> c=r.getMenu();
+//		for(MenuEntry me:c) {
+//			System.out.println(me.getDishName()+"\t \t"+me.getDishPrice()+"\n"+me.getDishIngredientsStringed()+"\n");
+//		}
+//		
 			
+//	}	
+		
+//		try {
+//		BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Gaia\\Progetto-G21\\src\\menu\\MenuTest"));
+//		br.close();
+//	    } catch (Exception e) {
+//		e.printStackTrace();
+//	    }	
+		
+	  Menu menuTest = new Menu("C:\\Users\\Gaia\\Progetto-G21\\src\\menu\\MenuTest");
+		
+	  menuTest.rewriteMenu("C:\\Users\\Gaia\\Progetto-G21\\src\\menu\\MenuTest");
+	
+	  menuTest.getAllMenuEntries();
+	  
+	  for (Integer i : menuTest.entries.keySet())
+	  {
+		   System.out.println(menuTest.getSpecificMenuEntryName(i) + '\t' + 
+				   			  menuTest.getSpecificMenuEntryPrice(i) + '\n' +
+				   			  menuTest.getSpecificMenuEntryIngredientsStringed(i) + '\n');
+	  }
+	  
+      menuTest.removeSpecificMenuEntry(1);
+      
+      System.out.println("MenuEntry 1 has been removed!!!\n");
+      
+      menuTest.getAllMenuEntries();
+      
+      for (Integer i : menuTest.entries.keySet())
+	  {
+		   System.out.println(menuTest.getSpecificMenuEntryName(i) + '\t' + 
+				   			  menuTest.getSpecificMenuEntryPrice(i) + '\n' +
+				   			  menuTest.getSpecificMenuEntryIngredientsStringed(i) + '\n');
+	  }
+      
 	}
-
+	
 }

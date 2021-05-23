@@ -16,7 +16,7 @@ import java.util.Collection;
 /**The Menu class.
  * The menu contains all the dishes and drinks offered by the restaurant and is saved in a menu.txt file. */
 public class Menu implements MenuInterface{
-	private LinkedHashMap<Integer, MenuEntry> entries;
+	LinkedHashMap<Integer, MenuEntry> entries;
 	
 	/**Class constructor method.
 	 * The method calls checkForExistance and parseMenuFile in order to check if menu.txt exists and to parse its content. 
@@ -247,7 +247,9 @@ public class Menu implements MenuInterface{
 			while(!exit) {
 				toSplit=file.readLine();
 				String dishName=toSplit.substring(0, toSplit.indexOf("\t"));
-				Double dishPrice=Double.parseDouble(toSplit.substring(toSplit.indexOf("â‚¬")+1));
+				
+				// Content of indexOf is EURO
+				Double dishPrice=Double.parseDouble(toSplit.substring(toSplit.indexOf("€")+1));
 				toSplit= file.readLine();
 				String[] buffer= toSplit.split(",");
 				String dishEntry=dishName+","+dishPrice+",";
