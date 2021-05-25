@@ -23,7 +23,7 @@ public class Menu implements MenuInterface{
 	 * The method calls checkForExistance and parseMenuFile in order to check if menu.txt exists and to parse its content. 
 	 * @param path specifies the location of menu.txt file. */
 	public Menu(String path) {
-		entries=new LinkedHashMap<Integer, MenuEntry>();
+		entries = new LinkedHashMap<Integer, MenuEntry>();
 		if(checkForExistence(path)) parseMenuFile(path);
 		else System.out.println("The object has been instantiated, but it is empty due to an error parsing the file.\n "
 				+ "To make use of this Menu, run the method rewriteMenu with the correct path.");
@@ -36,10 +36,10 @@ public class Menu implements MenuInterface{
 		try {
 			checkForEntryExistence(entryNumber);
 			
-			for (; entryNumber < (getEntries().values().size() - 1) ; entryNumber++)
-				getEntries().put(entryNumber, getEntries().get(entryNumber + 1));
+			for (; entryNumber < (entries.values().size() - 1) ; entryNumber++)
+				entries.put(entryNumber, entries.get(entryNumber + 1));
 			
-			getEntries().remove(getEntries().values().size() - 1);
+			entries.remove(entries.values().size() - 1);
 		}
 		
 		catch (EntryDoesNotExistException e){ 
@@ -49,14 +49,14 @@ public class Menu implements MenuInterface{
 	}
 	
 	/** Method that returns entries */
-	public LinkedHashMap<Integer, MenuEntry> getEntries() {
+	public LinkedHashMap<Integer, MenuEntry> entries {
 		return entries;
 	}
 	
 	/** Simple method that returns a Collection<MenuEntry> object containing all the values of the hashMap entries.
 	 * @return AllEntries. */
 	public Collection<MenuEntry> getAllMenuEntries() { 		
-		return getEntries().values();
+		return entries.values();
 	}
 	
 	/**Simple method that returns a specific entry given it's number in the hashMap entries. 
@@ -65,7 +65,7 @@ public class Menu implements MenuInterface{
 	public MenuEntry getSpecificMenuEntry(Integer entryNumber) {
 		try {
 			checkForEntryExistence(entryNumber);
-			return getEntries().get(entryNumber);
+			return entries.get(entryNumber);
 		} catch (EntryDoesNotExistException e) {
 			System.out.println(e.getMessage());
 			return null;
@@ -81,7 +81,7 @@ public class Menu implements MenuInterface{
 		
 		// Need to add an existence check
 		
-		getEntries().put(getEntries().values().size(), new MenuEntry(dishEntry));
+		entries.put(entries.values().size(), new MenuEntry(dishEntry));
 	}
 	
 	/**Gateway method for
@@ -92,7 +92,7 @@ public class Menu implements MenuInterface{
 	public String getSpecificMenuEntryIngredientsStringed(Integer entryNumber) {		
 		try {
 			checkForEntryExistence(entryNumber);
-			return getEntries().get(entryNumber).getDishIngredientsStringed();
+			return entries.get(entryNumber).getDishIngredientsStringed();
 		} catch (EntryDoesNotExistException e) {
 			System.out.println(e.getMessage());
 			return null;
@@ -107,7 +107,7 @@ public class Menu implements MenuInterface{
 	public LinkedHashMap<String,Double> getSpecificMenuEntryIngredients(Integer entryNumber){	
 		try {
 			checkForEntryExistence(entryNumber);
-			return getEntries().get(entryNumber).getDishIngredients();
+			return entries.get(entryNumber).getDishIngredients();
 		} catch (EntryDoesNotExistException e) {
 			System.out.println(e.getMessage());
 			return null;
@@ -123,7 +123,7 @@ public class Menu implements MenuInterface{
 		
 		try {
 			checkForEntryExistence(entryNumber);
-			return getEntries().get(entryNumber).getDishName();
+			return entries.get(entryNumber).getDishName();
 		} catch (EntryDoesNotExistException e) {
 			System.out.println(e.getMessage());
 			return null;
@@ -139,7 +139,7 @@ public class Menu implements MenuInterface{
 		
 		try {
 			checkForEntryExistence(entryNumber);
-			return getEntries().get(entryNumber).getDishPrice();
+			return entries.get(entryNumber).getDishPrice();
 		} catch(EntryDoesNotExistException e) {
 			System.out.println(e.getMessage());
 			return null;
@@ -156,7 +156,7 @@ public class Menu implements MenuInterface{
 		try {
 				checkForEntryExistence(entryNumber);
 				try {
-					getEntries().get(entryNumber).editEntry(ingredient, newQuantity);
+					entries.get(entryNumber).editEntry(ingredient, newQuantity);
 				} catch (IngredientOperationDeniedException e) {
 					System.out.println(e.getMessage());
 				}
@@ -173,7 +173,7 @@ public class Menu implements MenuInterface{
 	public void editSpecificMenuEntry(Integer entryNumber, Double newPrice){
 			try {
 				checkForEntryExistence(entryNumber);
-				getEntries().get(entryNumber).editEntry(newPrice);
+				entries.get(entryNumber).editEntry(newPrice);
 			} catch (EntryDoesNotExistException e) {
 				
 				System.out.println(e.getMessage()+" - Price unchanged");
@@ -189,7 +189,7 @@ public class Menu implements MenuInterface{
 		
 		try {
 			checkForEntryExistence(entryNumber);
-			getEntries().get(entryNumber).editEntry(newName);
+			entries.get(entryNumber).editEntry(newName);
 		 } catch(EntryDoesNotExistException e) {
 			System.out.println(e.getMessage()+" - Name unchanged");
 		 }
@@ -199,7 +199,7 @@ public class Menu implements MenuInterface{
 	 * Is needed to check if the entry exists or if it would break the hashMap. 
 	 * @param entryNumber defines the concerned entry. */
 	private void checkForEntryExistence(Integer entryNumber) throws EntryDoesNotExistException {
-		MenuEntry test= getEntries().get(entryNumber);
+		MenuEntry test= entries.get(entryNumber);
 		if(test == null) throw new EntryDoesNotExistException("Entry does not exist");
 	}
 
@@ -216,7 +216,7 @@ public class Menu implements MenuInterface{
 	 * @param path specifies file's location. */
 	public void rewriteMenu(String path) {
 		if(checkForExistence(path)) {
-			getEntries().clear();
+			entries.clear();
 			parseMenuFile(path);
 		}
 		else System.out.println("File was unusable - Menu unchanged");
@@ -249,7 +249,7 @@ public class Menu implements MenuInterface{
 			BufferedReader file=new BufferedReader(new FileReader(path));
 			String toSplit;
 			boolean exit=false;
-			Integer index=getEntries().values().size()-1;
+			Integer index=entries.values().size()-1;
 			while(!exit) {
 				toSplit=file.readLine();
 				String dishName=toSplit.substring(0, toSplit.indexOf("\t"));
@@ -265,7 +265,7 @@ public class Menu implements MenuInterface{
 					dishEntry+=s.substring(0, s.lastIndexOf(","));
 				}
 				index++;
-				getEntries().put(index, new MenuEntry(dishEntry));
+				entries.put(index, new MenuEntry(dishEntry));
 				if (file.readLine()==null) {
 					exit=true;
 				}
@@ -290,7 +290,7 @@ public class Menu implements MenuInterface{
 			String buffer;
 			
 	
-			for (Integer i : getEntries().keySet())
+			for (Integer i : entries.keySet())
 			{
 				buffer = getSpecificMenuEntryName(i) + '\t' + 
 						 getSpecificMenuEntryPrice(i) + '\n' +
@@ -301,7 +301,7 @@ public class Menu implements MenuInterface{
 					fileout.write(buffer.charAt(j));
 				}
 				
-				if (i < getEntries().values().size() - 1) 
+				if (i < entries.values().size() - 1) 
 					fileout.write('\n' + 'n');
 				else 
 					fileout.close();
@@ -327,7 +327,7 @@ public class Menu implements MenuInterface{
 			String buffer;
 			
 	
-			for (Integer i : getEntries().keySet())
+			for (Integer i : entries.keySet())
 			{
 				buffer = getSpecificMenuEntryName(i) + '\t' + 
 						 getSpecificMenuEntryPrice(i) + '\n' +
@@ -338,7 +338,7 @@ public class Menu implements MenuInterface{
 					fileout.write(buffer.charAt(j));
 				}
 				
-				if (i < getEntries().values().size() - 1) 
+				if (i < entries.values().size() - 1) 
 					fileout.write('\n' + 'n');
 				else 
 					fileout.close();
@@ -470,4 +470,5 @@ public class Menu implements MenuInterface{
 			}
 		return false;
 		  }
+}
 	
