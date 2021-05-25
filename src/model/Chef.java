@@ -1,4 +1,4 @@
-package staff;
+package model;
 
 import java.util.*;
 

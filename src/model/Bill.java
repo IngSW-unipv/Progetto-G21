@@ -1,4 +1,4 @@
-package bill;
+package model;
 
 import java.io.*;
 import java.text.*;
@@ -82,3 +82,4 @@ public class Bill implements Serializable {
     }
 	
 }
+

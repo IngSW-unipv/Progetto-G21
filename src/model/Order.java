@@ -1,4 +1,5 @@
-package order;
+package model;
+
 import java.io.*;
 import dish.*;
 
@@ -120,3 +121,4 @@ public class Order implements Serializable {
 	}
 	
 }
+

@@ -1,17 +1,18 @@
-package menu;
-import interfaces.MenuInterface;
+package model;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 
 import exceptions.EntryDoesNotExistException;
 import exceptions.FileFormatIsNotCorrectException;
-
-import java.util.Collection;
+import interfaces.MenuInterface;
+import menu.IngredientOperationDeniedException;
+import menu.MenuEntry;
 
 /**The Menu class.
  * The menu contains all the dishes and drinks offered by the restaurant and is saved in a menu.txt file. */
@@ -469,4 +470,4 @@ public class Menu implements MenuInterface{
 			}
 		return false;
 		  }
-	}
+	
