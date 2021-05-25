@@ -49,15 +49,16 @@ public class Menu implements MenuInterface{
 	}
 	
 	/** Method that returns entries */
-	public LinkedHashMap<Integer, MenuEntry> entries {
+	public LinkedHashMap<Integer, MenuEntry> getEntries() {
 		return entries;
-	}
+	}	
 	
 	/** Simple method that returns a Collection<MenuEntry> object containing all the values of the hashMap entries.
 	 * @return AllEntries. */
 	public Collection<MenuEntry> getAllMenuEntries() { 		
 		return entries.values();
 	}
+	
 	
 	/**Simple method that returns a specific entry given it's number in the hashMap entries. 
 	 * @param entryNumber defines the concerned entry.

@@ -1,6 +1,6 @@
 package testers;
 
-import menu.Menu;
+import model.Menu;
 
 public class MenuTester {
 
@@ -63,9 +63,9 @@ public class MenuTester {
 //		e.printStackTrace();
 //	    }	
 		
-	  Menu menuTest = new Menu("C:\\Users\\Gaia\\Progetto-G21\\src\\menu\\MenuTest");
+	  Menu menuTest = new Menu("C:\\Users\\Gaia\\Progetto-G21\\src\\testers\\MenuTest");
 		
-	  menuTest.rewriteMenu("C:\\Users\\Gaia\\Progetto-G21\\src\\menu\\MenuTest");
+	  menuTest.rewriteMenu("C:\\Users\\Gaia\\Progetto-G21\\src\\testers\\MenuTest");
 	
 	  menuTest.getAllMenuEntries();
 	  
@@ -76,7 +76,7 @@ public class MenuTester {
 				   			  menuTest.getSpecificMenuEntryIngredientsStringed(i) + '\n');
 	  }
 	  
-      menuTest.removeSpecificMenuEntry(1);
+      menuTest.removeSpecificMenuEntry(2);
       
       System.out.println("MenuEntry 1 has been removed!!!\n");
       
