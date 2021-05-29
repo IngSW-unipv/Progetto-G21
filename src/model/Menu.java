@@ -11,8 +11,9 @@ import java.util.LinkedHashMap;
 import exceptions.EntryDoesNotExistException;
 import exceptions.FileFormatIsNotCorrectException;
 import interfaces.MenuInterface;
-import menu.IngredientOperationDeniedException;
-import menu.MenuEntry;
+import exceptions.IngredientOperationDeniedException;
+import model.*;
+import exceptions.*;
 
 /**The Menu class.
  * The menu contains all the dishes and drinks offered by the restaurant and is saved in a menu.txt file. */

@@ -3,7 +3,7 @@ package model;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import menu.IngredientOperationDeniedException;
+import exceptions.IngredientOperationDeniedException;
 
 /**
  * The MenuEntry class. 

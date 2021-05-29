@@ -5,7 +5,7 @@ import java.text.*;
 import java.time.*;
 import java.util.*;
 
-import order.*;
+import model.*;
 
 /** The Bill class.
  * A Bill contains all seat's Orders, the total price of all Dish ordered and the time of payment. */

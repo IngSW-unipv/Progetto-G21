@@ -1,8 +1,7 @@
 package model;
 
 import java.io.*;
-import order.*;
-import storage.*;
+import model.*;
 import leRestaurant.*;
 
 public class Staff {

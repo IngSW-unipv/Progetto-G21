@@ -3,7 +3,7 @@ package model;
 import java.io.*;
 import java.util.*;
 
-import menu.*;
+import model.*;
 
 /** The Dish class.
  * A Dish object represent an item on the restaurant's menu, 

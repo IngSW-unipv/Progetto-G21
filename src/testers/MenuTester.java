@@ -1,6 +1,6 @@
 package testers;
 
-import model.Menu;
+import model.*;
 
 public class MenuTester {
 

@@ -1,7 +1,7 @@
 package model;
 
 import java.io.*;
-import dish.*;
+import model.*;
 
 /** The Order class.
  * An Order contains a dish, its table number, its seat number, 
