@@ -76,7 +76,9 @@ public class MenuTester {
 				   			  menuTest.getSpecificMenuEntryIngredientsStringed(i) + '\n');
 	  }
 	  
-      menuTest.removeSpecificMenuEntry(2);
+      menuTest.removeSpecificMenuEntry(3);    
+      
+      // se cerco di rimuovere una riga che non esiste non compare errore
       
       System.out.println("MenuEntry 1 has been removed!!!\n");
       
@@ -89,6 +91,52 @@ public class MenuTester {
 				   			  menuTest.getSpecificMenuEntryIngredientsStringed(i) + '\n');
 	  }
       
+      System.out.println("MenuEntry 1");
+      
+      menuTest.getSpecificMenuEntry(3);
+      System.out.println(menuTest.getSpecificMenuEntryName(3) + '\t' + 
+   	  menuTest.getSpecificMenuEntryPrice(3) + '\n' +
+   	  menuTest.getSpecificMenuEntryIngredientsStringed(3) + '\n');
+      
+      String testing= "Spaghetti panna e prosciutto,10.2,Ingredienti,Spaghetti,100,Panna,10, Prosciutto,25,Sale,5,Olio,10";
+      String testing2= "Spaghetti panna e prosciutto,10.2,Spaghetti,100,Panna,10, Prosciutto,25,Sale,5,Olio,10";      
+      
+      menuTest.addMenuEntry(testing);
+      
+      System.out.println("A new MenuEntry has been added!!!");
+      
+      for (Integer i : menuTest.getEntries().keySet())
+	  {
+		   System.out.println(menuTest.getSpecificMenuEntryName(i) + '\t' + 
+				   			  menuTest.getSpecificMenuEntryPrice(i) + '\n' +
+				   			  menuTest.getSpecificMenuEntryIngredientsStringed(i) + '\n');
+	  }
+      
+   //   menuTest.addMenuEntry(testing2);   // format not correct 
+      
+      
+      menuTest.editSpecificMenuEntry(0, 16.0);
+      System.out.println(menuTest.getSpecificMenuEntryName(0) + '\t' + 
+      menuTest.getSpecificMenuEntryPrice(0) + '\n' +
+      menuTest.getSpecificMenuEntryIngredientsStringed(0) + '\n');
+      
+      System.out.println("Price has been changed!!\n");
+      
+      menuTest.editSpecificMenuEntry(1, "Melanzane", 120.0);
+      System.out.println(menuTest.getSpecificMenuEntryName(1) + '\t' + 
+      menuTest.getSpecificMenuEntryPrice(1) + '\n' +
+      menuTest.getSpecificMenuEntryIngredientsStringed(1) + '\n');
+      
+      System.out.println("Qunatity has been changed!!\n");
+      
+      menuTest.editSpecificMenuEntry(1, "Melanzane alla Parmigiana Speciali");
+      System.out.println(menuTest.getSpecificMenuEntryName(1) + '\t' + 
+      menuTest.getSpecificMenuEntryPrice(1) + '\n' +
+      menuTest.getSpecificMenuEntryIngredientsStringed(1) + '\n');
+      
+      System.out.println("Name has been changed!!\n");
 	}
+	
+	
 	
 }
