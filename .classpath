@@ -6,5 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/classgraph-4.8.65.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
