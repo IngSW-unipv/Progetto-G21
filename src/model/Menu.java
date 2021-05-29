@@ -287,7 +287,7 @@ public class Menu implements MenuInterface{
 	{
 		try {
 
-			FileWriter fileout = new FileWriter("./backup/MenuBackup.txt");
+			FileWriter fileout = new FileWriter("./backups/MenuBackup.txt");
 			int j;
 			String buffer;
 			
@@ -314,7 +314,7 @@ public class Menu implements MenuInterface{
 			e.printStackTrace();
 		}
 		
-		return "./backup/MenuBackup.txt";
+		return "./backups/MenuBackup.txt";
 	}
 	
 	
@@ -358,12 +358,10 @@ public class Menu implements MenuInterface{
 	public String getLatestBackup(String path)
 	{
 		try {
-			if (checkForMenuFormat(path)) 
-				return printBackupToFile(path);
-			else return "Unable to return the path because the file doesn't have a right format";
+			checkForMenuFormat(path); 
+			return printBackupToFile(path);
 		} catch (FileFormatIsNotCorrectException e) {
-			e.printStackTrace();
-			return null;
+			return "Unable to return the path because the file doesn't have a right format";
 		}
 	}
 
@@ -372,23 +370,21 @@ public class Menu implements MenuInterface{
 	public String getLatestBackup()
 	{
 		try {
-			if (checkForMenuFormat(printBackupToFile())) 
-				return printBackupToFile();
-			else return "Unable to return the path because the file doesn't have a right format";
+			checkForMenuFormat(printBackupToFile());
+			return printBackupToFile();
 		} catch (FileFormatIsNotCorrectException e) {
-			e.printStackTrace();
-			return null;
+			 return "Unable to return the path because the file doesn't have a right format";
 		}
 	}
 	
 	/* TO BE CHECKED!!!!!!!! */
 	/** This method checks if the format of the file is correct and throws an exception 
 	 * (FileFormatIsNotCorrectException) in case of negative outcome*/
-	private boolean checkForMenuFormat(String path) throws FileFormatIsNotCorrectException {
+	private void checkForMenuFormat(String path) throws FileFormatIsNotCorrectException {
 		
 		 try {
-		      try (FileReader testFile = new FileReader(path)) {
-				try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+		     FileReader testFile = new FileReader(path);
+			 BufferedReader br = new BufferedReader(new FileReader(path));
 					String s1 = "";
 					  String s2 = "";
 					  String s2WithoutIngredient = "";
@@ -396,7 +392,6 @@ public class Menu implements MenuInterface{
 					  
 					  int i;
 					  boolean exit = false;
-   
 					
 					  while (!exit)
 					  {
@@ -440,37 +435,22 @@ public class Menu implements MenuInterface{
 								  if ((s3 =  br.readLine()) != "")
 								  {
 									  throw new FileFormatIsNotCorrectException("Wrong format!");
-								  //  return false;
 								  }
 									  
 								  if ((s3 =  br.readLine()) == null)
 						    	  {
 						    		  exit = true;
-						    		  return true;
 						    	  }
 							  }
-							}
-						    else throw new FileFormatIsNotCorrectException("Wrong format!");
-						  		return false;
+							} 
 						  }	  
 					  		      
 					  testFile.close();
 					  br.close();
-				}
-			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
+		    } catch (Exception e) {
+		    	throw new FileFormatIsNotCorrectException(e.getMessage());
 			}
-		      
-		    } catch (FileNotFoundException e) {
-		      System.out.println("An error occurred.");
-		      e.printStackTrace();
-		      return false;
-		    } catch (IOException e) {
-				e.printStackTrace();
-				return false;
-			}
-		return false;
 		  }
 }
 	

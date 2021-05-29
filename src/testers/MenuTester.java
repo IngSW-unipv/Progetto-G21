@@ -76,10 +76,8 @@ public class MenuTester {
 				   			  menuTest.getSpecificMenuEntryIngredientsStringed(i) + '\n');
 	  }
 	  
-      menuTest.removeSpecificMenuEntry(3);    
-      
-      // se cerco di rimuovere una riga che non esiste non compare errore
-      
+      menuTest.removeSpecificMenuEntry(1);  
+           
       System.out.println("MenuEntry 1 has been removed!!!\n");
       
       menuTest.getAllMenuEntries();
@@ -112,7 +110,7 @@ public class MenuTester {
 				   			  menuTest.getSpecificMenuEntryIngredientsStringed(i) + '\n');
 	  }
       
-   //   menuTest.addMenuEntry(testing2);   // format not correct 
+     menuTest.addMenuEntry(testing2);   // format not correct 
       
       
       menuTest.editSpecificMenuEntry(0, 16.0);
@@ -135,6 +133,8 @@ public class MenuTester {
       menuTest.getSpecificMenuEntryIngredientsStringed(1) + '\n');
       
       System.out.println("Name has been changed!!\n");
+      
+      menuTest.printBackupToFile();
 	}
 	
 	
