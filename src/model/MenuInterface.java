@@ -1,5 +1,4 @@
-package interfaces;
-import model.*;
+package model;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 public interface MenuInterface {
