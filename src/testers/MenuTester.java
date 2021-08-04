@@ -63,7 +63,7 @@ public class MenuTester {
 //		e.printStackTrace();
 //	    }	
 		
-	  Menu menuTest = new Menu("C:\\Users\\Gaia\\Progetto-G21\\src\\testers\\MenuTest");
+	  Menu2 menuTest = new Menu2("C:\\Users\\Gaia\\Progetto-G21\\src\\testers\\MenuTest");
 		
 	  menuTest.rewriteMenu("C:\\Users\\Gaia\\Progetto-G21\\src\\testers\\MenuTest");
 	

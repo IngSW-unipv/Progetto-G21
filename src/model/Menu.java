@@ -1,455 +1,279 @@
 package model;
 
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.Scanner;
+import java.util.StringTokenizer;
 
-import exceptions.EntryDoesNotExistException;
-import exceptions.FileFormatIsNotCorrectException;
-import exceptions.IngredientOperationDeniedException;
-import model.*;
-import exceptions.*;
+/**
+ * The Menu class. The menu contains all the dishes and drinks offered by the
+ * restaurant, is saved in a menu.txt file.
+ */
 
-/**The Menu class.
- * The menu contains all the dishes and drinks offered by the restaurant and is saved in a menu.txt file. */
-public class Menu implements MenuInterface{
+public class Menu {
+
 	private LinkedHashMap<Integer, MenuEntry> entries;
-	
-	/**Class constructor method.
-	 * The method calls checkForExistance and parseMenuFile in order to check if menu.txt exists and to parse its content. 
-	 * @param path specifies the location of menu.txt file. */
-	public Menu(String path) {
+	private static Menu instance = null;
+
+	/**
+	 * Class constructor method. The method calls checkForMenuFileExistence and
+	 * parseMenuFile in order to check if menu.txt file exists and to parse its
+	 * content.
+	 * 
+	 * @param path specifies the location of menu.txt file.
+	 */
+	private Menu(String path) {
 		entries = new LinkedHashMap<Integer, MenuEntry>();
-		if(checkForExistence(path)) parseMenuFile(path);
-		else System.out.println("The object has been instantiated, but it is empty due to an error parsing the file.\n "
-				+ "To make use of this Menu, run the method rewriteMenu with the correct path.");
-	}
-	
-	/**This method removes a specific MenuEntry, after is sure of its existence. 
-	 * If this action is carried out is necessary to rebuild the HashMap to maintain its array-like structure. 
-	 * @param entryNumber defines the concerned entry. */
-	public void removeSpecificMenuEntry(Integer entryNumber) {
 		try {
-			checkForEntryExistence(entryNumber);
-			
-			for (; entryNumber < (entries.values().size() - 1) ; entryNumber++)
-				entries.put(entryNumber, entries.get(entryNumber + 1));
-			
-			entries.remove(entries.values().size() - 1);
+			checkForMenuFileExistence(path);
+			parseMenuFile(path);
+		} catch (FileNotFoundException e) {
+			System.err.println(e.getMessage());
 		}
-		
-		catch (EntryDoesNotExistException e){ 
-			System.out.println(e.getMessage());
-		}
-		
 	}
-	
-	/** Method that returns entries */
-	public LinkedHashMap<Integer, MenuEntry> getEntries() {
+
+	/**
+	 * Static method that returns a Menu instance in order to observe the Singleton
+	 * pattern. It calls the class constructor only if this has not happened before.
+	 * 
+	 * @param path is needed in order to call the constructor.
+	 */
+	public static Menu getInstance(String path) {
+		if (instance == null) {
+			instance = new Menu(path);
+		}
+		return instance;
+	}
+
+	/**
+	 * Simple entries' hashmap getter.
+	 * 
+	 * @return the entries' linkedHashMap.
+	 */
+	public LinkedHashMap<Integer, MenuEntry> getEntriesHashMap() {
 		return entries;
-	}	
-	
-	/** Simple method that returns a Collection<MenuEntry> object containing all the values of the hashMap entries.
-	 * @return AllEntries. */
-	public Collection<MenuEntry> getAllMenuEntries() { 		
+	}
+
+	/**
+	 * Simple entries' collection getter.
+	 * 
+	 * @return a Collection that contains all MenuEntry objects.
+	 */
+	public Collection<MenuEntry> getEntriesCollection() {
 		return entries.values();
 	}
-	
-	
-	/**Simple method that returns a specific entry given it's number in the hashMap entries. 
-	 * @param entryNumber defines the concerned entry.
-	 * @return SpecificMenuEntry. */
-	public MenuEntry getSpecificMenuEntry(Integer entryNumber) {
+
+	/**
+	 * Simple MenuEntry getter.
+	 * 
+	 * @param entryKey specifies the key of the MenuEntry to return.
+	 * @return MenuEntry.
+	 */
+	public MenuEntry getSpecificMenuEntry(Integer entryKey) {
 		try {
-			checkForEntryExistence(entryNumber);
-			return entries.get(entryNumber);
+			checkForEntryExistence(entryKey);
+			return entries.get(entryKey);
 		} catch (EntryDoesNotExistException e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 			return null;
 		}
 	}
-	
-	/**Method that creates a new entry. 
-	 * It calls the current size of the entries hashMap and creates the new entry given the defined stringed input format. 
-	 * @param dishEntry specifies the entry to add. */
-	/* WARNING: same as parseMenuFile, we don't have a quality control, if the string is in the wrong format we are going to kill the program. 
-	 * We might be able to do something calling the parsing method with such string, but i haven't thought about it yet, and no quality controls are implemented as of yet. */ 
-	public void addMenuEntry(String dishEntry) {
-		
-		// Need to add an existence check
-		
+
+	/**
+	 * Simple MenuEntry's name getter.
+	 * 
+	 * @param entryKey specifies the key of the involved MenuEntry.
+	 * @return MenuEntry's name.
+	 */
+	public String getSpecificMenuEntryName(Integer entryKey) {
+		try {
+			checkForEntryExistence(entryKey);
+			return entries.get(entryKey).getDishName();
+		} catch (EntryDoesNotExistException e) {
+			System.err.println(e.getMessage());
+			return null;
+		}
+	}
+
+	/**
+	 * Simple MenuEntry's price getter.
+	 * 
+	 * @param entryKey specifies the key of the involved MenuEntry.
+	 * @return MenuEntry's price.
+	 */
+	public double getSpecificMenuEntryPrice(Integer entryKey) {
+		try {
+			checkForEntryExistence(entryKey);
+			return entries.get(entryKey).getDishPrice();
+		} catch (EntryDoesNotExistException e) {
+			System.err.println(e.getMessage());
+			return 0;
+		}
+	}
+
+	/**
+	 * Method that creates a new menu entry after checking its format with
+	 * checkForEntryFormat.
+	 * 
+	 * @param dishEntry represents the new entry to add.
+	 */
+	public void addMenuEntry(String dishEntry) throws WrongEntryFormatException {
+		try {
+			checkForEntryFormat(dishEntry);
+		} catch (WrongEntryFormatException e) {
+			System.err.println(e.getMessage());
+		}
 		entries.put(entries.values().size(), new MenuEntry(dishEntry));
 	}
-	
-	/**Gateway method for
-	 * public String getDishIngredientsStringed() [in class MenuEntry]
-	 * Checks for the existence of the entry, and if it does, calls the method from the targeted entry.
-	 * @param entryNumber defines the concerned entry. 
-	 * @return dishIngredientsStringed. */
-	public String getSpecificMenuEntryIngredientsStringed(Integer entryNumber) {		
+
+	/**
+	 * Method that removes a menu entry from entries hashMap given his key number.
+	 * 
+	 * @param entryKey represents the key of the entry to be deleted.
+	 */
+	public void removeMenuEntry(Integer entryKey) {
 		try {
-			checkForEntryExistence(entryNumber);
-			return entries.get(entryNumber).getDishIngredientsStringed();
+			checkForEntryExistence(entryKey);
+			entries.remove(entryKey);
 		} catch (EntryDoesNotExistException e) {
-			System.out.println(e.getMessage());
-			return null;
+			System.err.println(e.getMessage());
 		}
-	}
-	
-	/**Gateway method for 
-	 * public LinkedHashMap<String,Double> getDishIngredients() [in class MenuEntry]
-	 * Checks for the existence of the entry, and if it does, calls the method from the targeted entry.
-	 * @param entryNumber defines the concerned entry.
-	 * @return dishIngredients. */
-	public LinkedHashMap<String,Double> getSpecificMenuEntryIngredients(Integer entryNumber){	
-		try {
-			checkForEntryExistence(entryNumber);
-			return entries.get(entryNumber).getDishIngredients();
-		} catch (EntryDoesNotExistException e) {
-			System.out.println(e.getMessage());
-			return null;
-		}
-	}
-	
-	/**Gateway method for 
-	 * public String getDishName() [in class MenuEntry]
-	 * Checks for the existence of the entry, and if it does, calls the method from the targeted entry.
-	 * @param entryNumber defines the concerned entry.
-	 * @return dishName. */
-	public String getSpecificMenuEntryName(Integer entryNumber) {
-		
-		try {
-			checkForEntryExistence(entryNumber);
-			return entries.get(entryNumber).getDishName();
-		} catch (EntryDoesNotExistException e) {
-			System.out.println(e.getMessage());
-			return null;
-		}
-	}
-	
-	/**Gateway method for 
-	 * public double getDishPrice() [in class MenuEntry]
-	 * Checks for the existence of the entry, and if it does, calls the method from the targeted entry.
-	 * @param entryNumber defines the concerned entry. 
-	 * @return dishPrice. */
-	public Double getSpecificMenuEntryPrice(Integer entryNumber){
-		
-		try {
-			checkForEntryExistence(entryNumber);
-			return entries.get(entryNumber).getDishPrice();
-		} catch(EntryDoesNotExistException e) {
-			System.out.println(e.getMessage());
-			return null;
-		}
-	}
-	
-	/**Gateway method for 
-	 * public void editEntry(String ingredient, Double newQuantity) throws IngredientOperationDeniedException [in class MenuEntry]
-	 * Checks whether the entry exists or not using the private method checkForEntryExistence(entryNumber) and, 
-	 * in case of positive return, calls the gated method. 
-	 * @param entryNumber defines the concerned entry. */
-	public void editSpecificMenuEntry(Integer entryNumber, String ingredient, Double newQuantity){	
-		
-		try {
-				checkForEntryExistence(entryNumber);
-				try {
-					entries.get(entryNumber).editEntry(ingredient, newQuantity);
-				} catch (IngredientOperationDeniedException e) {
-					System.out.println(e.getMessage());
-				}
-			} catch (EntryDoesNotExistException e1) {
-				System.out.println(e1.getMessage()+" - Ingredient quantity unchanged");
-			}	
-	}
-	
-	/**Gateway method for 
-	 * public void editEntry(double newPrice) [in class MenuEntry]
-	 * Checks whether the entry exists or not using the private method checkForEntryExistence(entryNumber) and, 
-	 * in case of positive return, calls the gated method. 
-	 * @param entryNumber defines the concerned entry. */
-	public void editSpecificMenuEntry(Integer entryNumber, Double newPrice){
-			try {
-				checkForEntryExistence(entryNumber);
-				entries.get(entryNumber).editEntry(newPrice);
-			} catch (EntryDoesNotExistException e) {
-				
-				System.out.println(e.getMessage()+" - Price unchanged");
-			}		
-	}
-	
-	/**Gateway method for 
-	 * public void editEntry(String newName) [in class MenuEntry]
-	 * Checks whether the entry exists or not using the private method checkForEntryExistence(entryNumber) and, 
-	 * in case of positive return, calls the gated method.
-	 * @param entryNumber defines the concerned entry. */
-	public void editSpecificMenuEntry(Integer entryNumber, String newName){
-		
-		try {
-			checkForEntryExistence(entryNumber);
-			entries.get(entryNumber).editEntry(newName);
-		 } catch(EntryDoesNotExistException e) {
-			System.out.println(e.getMessage()+" - Name unchanged");
-		 }
-	}
-	
-	/**Small private method for the overloaded method editSpecificMenuEntry.
-	 * Is needed to check if the entry exists or if it would break the hashMap. 
-	 * @param entryNumber defines the concerned entry. */
-	private void checkForEntryExistence(Integer entryNumber) throws EntryDoesNotExistException {
-		MenuEntry test= entries.get(entryNumber);
-		if(test == null) throw new EntryDoesNotExistException("Entry does not exist");
 	}
 
-	/**Checks for file existence through the checkForExistence(String path) method and, if true, adds the lines of the file to the menu.
-	 * @param path specifies file's location. */
-	public void addBatchOfMenuEntries(String path) {
-		
-		if(checkForExistence(path)) parseMenuFile(path);
-		else System.out.println("File was unusable - Menu unchanged");
+	/**
+	 * Method used to modify MenuEntry's name.
+	 * 
+	 * @param entryKey     specifies the key of the involved MenuEntry.
+	 * @param newEntryName specifies the new name.
+	 * 
+	 */
+	public void EditSpecificMenuEntry(Integer entryKey, String newEntryName) {
+		try {
+			checkForEntryExistence(entryKey);
+			entries.get(entryKey).editEntry(newEntryName);
+		} catch (EntryDoesNotExistException e) {
+			System.err.println(e.getMessage());
+		}
 	}
-	
-	/**Does a quick check if it's fit to delete the menu, then deletes it and rewrites it by the file passed as argument, 
-	 * using the private method parseMenuFile.
-	 * @param path specifies file's location. */
+
+	/**
+	 * Method used to modify MenuEntry's price.
+	 * 
+	 * @param entryKey specifies the key of the involved MenuEntry.
+	 * @param newPrice specifies the new price.
+	 * 
+	 */
+	public void EditSpecificMenuEntry(Integer entryKey, double newPrice) {
+		try {
+			checkForEntryExistence(entryKey);
+			entries.get(entryKey).editEntry(newPrice);
+		} catch (EntryDoesNotExistException e) {
+			System.err.println(e.getMessage());
+		}
+
+	}
+
+	/**
+	 * Method that deletes all current menu entries and calls parseMenuFile to
+	 * recreate a new menu.
+	 * 
+	 * @param path specifies the file to parse.
+	 */
 	public void rewriteMenu(String path) {
-		if(checkForExistence(path)) {
+		try {
+			checkForMenuFileExistence(path);
 			entries.clear();
 			parseMenuFile(path);
+		} catch (FileNotFoundException e) {
+			System.err.println(e.getMessage());
 		}
-		else System.out.println("File was unusable - Menu unchanged");
+
 	}
-	
-	/**Small method needed to avoid repetitions in filechecking code, 
-	 * it just opens the path and returns whether the file is openable or not.
-	 * @param path specifies file's location. */
-	private boolean checkForExistence(String path) {
-		FileReader file;
-		try {
-			file= new FileReader(path);
-			file.close();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
-	
-	/** This method allows for further batch insertions in the menu, it can parse a file that uses the format 
-	 * "dishName \t (at least 1) ï¿½dishPrice \n Ingredienti: ingredientName, ingredientAmount measurementUnit.
-	 * (you can put as many ingredients as you want, as long as you follow the format after Ingredienti:
+
+	/**
+	 * Method used to check if menuFile.txt exists.
 	 * 
-	 *  WARNING: There isn't as of yet a check of quality on the parsing (i will add it later), if the format is not respected,
-	 * 	the program WILL crash, so don't go and purposefully mess the test file until i've finished coding the Menu package, pretty please :) 
+	 * @param path specifies the file to check.
+	 * @throws FileNotFoundException.
+	 */
+	private void checkForMenuFileExistence(String path) throws FileNotFoundException {
+		File menuFile = new File(path);
+		if (menuFile.exists() == false || menuFile.isDirectory() == true) {
+			throw new FileNotFoundException();
+		}
+	}
+
+	/**
+	 * Method used to check if a specified MenuEntry exists.
 	 * 
-	 * @param path specifies file.txt location. */
-	private void parseMenuFile(String path) {	
-		try {
-			BufferedReader file=new BufferedReader(new FileReader(path));
-			String toSplit;
-			boolean exit=false;
-			Integer index=entries.values().size()-1;
-			while(!exit) {
-				toSplit=file.readLine();
-				String dishName=toSplit.substring(0, toSplit.indexOf("\t"));
-				
-				// Content of indexOf is EURO
-				Double dishPrice=Double.parseDouble(toSplit.substring(toSplit.indexOf("€")+1));
-				toSplit= file.readLine();
-				String[] buffer= toSplit.split(",");
-				String dishEntry=dishName+","+dishPrice+",";
-				for(String s: buffer) {
-					s=s.replace(" ", ",");
-					s=s.replace(":", "");
-					dishEntry+=s.substring(0, s.lastIndexOf(","));
-				}
-				index++;
-				entries.put(index, new MenuEntry(dishEntry));
-				if (file.readLine()==null) {
-					exit=true;
-				}
-				
-			}
-			file.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
-	
-	
-	/** This method prints on a backup file (MenuBackup) every MenuEntry and returns the path of
-	 * that file */
-	public String printBackupToFile()
-	{
-		try {
-
-			FileWriter fileout = new FileWriter("./backups/MenuBackup.txt");
-			int j;
-			String buffer;
-			
-	
-			for (Integer i : entries.keySet())
-			{
-				buffer = getSpecificMenuEntryName(i) + '\t' + 
-						 getSpecificMenuEntryPrice(i) + '\n' +
-						 getSpecificMenuEntryIngredientsStringed(i);
-				
-				for (j = 0; j < (buffer.length()); j++)
-				{
-					fileout.write(buffer.charAt(j));
-				}
-				
-				if (i < entries.values().size() - 1) 
-					fileout.write('\n' + 'n');
-				else 
-					fileout.close();
-			}
-			
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-		}
-		
-		return "./backups/MenuBackup.txt";
-	}
-	
-	
-	/** This method prints on a backup file every MenuEntry and returns the path of
-	 * that file */
-	public String printBackupToFile(String path) 
-	{
-		try {
-
-			FileWriter fileout = new FileWriter(path);
-			int j;
-			String buffer;
-			
-	
-			for (Integer i : entries.keySet())
-			{
-				buffer = getSpecificMenuEntryName(i) + '\t' + 
-						 getSpecificMenuEntryPrice(i) + '\n' +
-						 getSpecificMenuEntryIngredientsStringed(i);
-				
-				for (j = 0; j < (buffer.length()); j++)
-				{
-					fileout.write(buffer.charAt(j));
-				}
-				
-				if (i < entries.values().size() - 1) 
-					fileout.write('\n' + 'n');
-				else 
-					fileout.close();
-			}
-			
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-		}
-		
-		return path;
-	}
-	
-	/** This method returns the path of the backup file if it has a right format */
-	public String getLatestBackup(String path)
-	{
-		try {
-			checkForMenuFormat(path); 
-			return printBackupToFile(path);
-		} catch (FileFormatIsNotCorrectException e) {
-			return "Unable to return the path because the file doesn't have a right format";
+	 * @param entryKey specifies the key of the involved MenuEntry.
+	 * @throws EntryDoesNotExistsException.
+	 */
+	private void checkForEntryExistence(Integer entryKey) throws EntryDoesNotExistException {
+		if (entries.containsKey(entryKey) == false) {
+			throw new EntryDoesNotExistException();
 		}
 	}
 
-	
-	/** This method returns the path of the backup file if it has a right format */
-	public String getLatestBackup()
-	{
+	/**
+	 * Method used to check if a "stringed" MenuEntry follows the "dishName,
+	 * dishPrice" pattern.
+	 * 
+	 * @param dishEntry specifies the String to check.
+	 * @throws WrongEntryFormatException.
+	 */
+	private void checkForEntryFormat(String dishEntry) throws WrongEntryFormatException {
+		StringTokenizer st = new StringTokenizer(dishEntry);
+		int counter = st.countTokens();
+
+		if (counter != 2) {
+			throw new WrongEntryFormatException();
+		}
+
+		String[] buffer = new String[2];
+		buffer[0] = st.nextToken();
+		buffer[1] = st.nextToken();
+
+		if (buffer[0].charAt(buffer[0].length()) != ',') {
+			throw new WrongEntryFormatException();
+		}
+
 		try {
-			checkForMenuFormat(printBackupToFile());
-			return printBackupToFile();
-		} catch (FileFormatIsNotCorrectException e) {
-			 return "Unable to return the path because the file doesn't have a right format";
+			Double.parseDouble(buffer[1]);
+		} catch (NumberFormatException e) {
+			throw new WrongEntryFormatException();
 		}
 	}
-	
-	/* TO BE CHECKED!!!!!!!! */
-	/** This method checks if the format of the file is correct and throws an exception 
-	 * (FileFormatIsNotCorrectException) in case of negative outcome*/
-	private void checkForMenuFormat(String path) throws FileFormatIsNotCorrectException {
-		
-		 try {
-		     FileReader testFile = new FileReader(path);
-			 BufferedReader br = new BufferedReader(new FileReader(path));
-					String s1 = "";
-					  String s2 = "";
-					  String s2WithoutIngredient = "";
-					  String s3 = "";
-					  
-					  int i;
-					  boolean exit = false;
-					
-					  while (!exit)
-					  {
-						  
-						  s1 = br.readLine();
-						  
-						  String dishName = s1.substring(0, s1.indexOf('\t'));
-						  Double dishPrice = Double.parseDouble(s1.substring(s1.indexOf('€') + 1));
-						  
-						
-						  if (s1.compareTo(dishName + '\t' + '€' + dishPrice.toString()) == 0)
-						  {
-							  s2 = br.readLine();
-							  String ingredient = "Ingredienti: ";
-							  String[] ingredientName = {};
-							  Double[] ingredientQunatity = {};
-							  String[] measurementUnit = {};
-							  String ingredientsListStringed = "";
-							  
-							  s2WithoutIngredient = s2.replace("Ingredienti: ", "");
-							  
-							  String[] buffer= s2WithoutIngredient.split(",");
-					   
-							  
-							  for (i = 0; i < buffer.length; i++)
-							  {
-								  ingredientName[i] = s2WithoutIngredient.substring(0, s2WithoutIngredient.indexOf(' ') - 1);
-					    		  ingredientQunatity[i] = Double.parseDouble(s2WithoutIngredient.substring(s2WithoutIngredient.indexOf(' ') + 1, s2WithoutIngredient.indexOf(' ') - 1));
-					    		  measurementUnit[i] = s2WithoutIngredient.substring(s2WithoutIngredient.indexOf(' ') + 1, s2WithoutIngredient.indexOf(',') - 1);
-					    		  ingredientsListStringed += ingredientName[i] + " " +
-					    				  					ingredientQunatity[i].toString() + " " + 
-					    				  					measurementUnit[i];
-					    		  if (i != buffer.length - 1) 
-					    			  ingredientsListStringed += ", ";
-					    		  else 
-					    			  ingredientsListStringed += ".";	  					
-							  }
-							  		    		   
-							  if (s2.compareTo(ingredient + ingredientsListStringed) == 0) 
-							  {
-								  if ((s3 =  br.readLine()) != "")
-								  {
-									  throw new FileFormatIsNotCorrectException("Wrong format!");
-								  }
-									  
-								  if ((s3 =  br.readLine()) == null)
-						    	  {
-						    		  exit = true;
-						    	  }
-							  }
-							} 
-						  }	  
-					  		      
-					  testFile.close();
-					  br.close();
-				
-		    } catch (Exception e) {
-		    	throw new FileFormatIsNotCorrectException(e.getMessage());
+
+	/**
+	 * This method allows for further batch insertions in the entries' hashMap,
+	 * given a menuFile.txt.
+	 * 
+	 * @param path specifies the file to parse.
+	 */
+	private void parseMenuFile(String path) {
+		try {
+			checkForMenuFileExistence(path);
+			File menuFile = new File(path);
+			Scanner scanner = new Scanner(menuFile);
+			int index = 0;
+
+			while (scanner.hasNextLine()) {
+				String line = scanner.nextLine();
+				checkForEntryFormat(line);
+				MenuEntry entry = new MenuEntry(line);
+				index = entries.values().size();
+				entries.put(index, entry);
 			}
-		  }
+
+			scanner.close();
+
+		} catch (FileNotFoundException e) {
+			System.err.println(e.getMessage());
+		} catch (WrongEntryFormatException e) {
+			System.err.println("The file specified by " + path + "has wrong format!");
+		}
+	}
 }
-	

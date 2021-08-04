@@ -9,7 +9,12 @@ public class MenuEntry {
 	private String dishName;
 	private double dishPrice;
 
-	/** Simple constructor method. */
+	/**
+	 * Simple constructor method.
+	 * 
+	 * @param name  specifies MenuEntry's name.
+	 * @param price specifies MenuEntry's price.
+	 */
 	public MenuEntry(String name, double price) {
 		this.dishName = name;
 		this.dishPrice = price;
@@ -29,7 +34,7 @@ public class MenuEntry {
 	}
 
 	/**
-	 * Standard String return method.
+	 * Simple dishName getter.
 	 * 
 	 * @return dishName.
 	 */
@@ -38,7 +43,7 @@ public class MenuEntry {
 	}
 
 	/**
-	 * Standard double return method.
+	 * Simple dishPrice getter.
 	 * 
 	 * @return dishPrice.
 	 */
@@ -47,7 +52,7 @@ public class MenuEntry {
 	}
 
 	/**
-	 * Method that edit the name of the dish represented by the MenuEntry.
+	 * Method that edit MenuEntry's name.
 	 * 
 	 * @param newName is the new given name.
 	 */
@@ -56,7 +61,7 @@ public class MenuEntry {
 	}
 
 	/**
-	 * Method that edit the price of the dish represented by the MenuEntry.
+	 * Method that edit MenuEntry's price.
 	 * 
 	 * @param newPrice is the new given price.
 	 */
