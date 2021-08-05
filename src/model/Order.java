@@ -7,7 +7,7 @@ package model;
 
 public class Order {
 
-	private int orderNum; // Numerical Order's identifier.
+	private int orderNum; // Numerical order's identifier.
 	private int tableNum; // Table's identifier.
 	private MenuEntry orderedEntry; // Ordered dish specified by a MenuEntry.
 

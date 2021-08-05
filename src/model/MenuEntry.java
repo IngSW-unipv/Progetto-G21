@@ -76,7 +76,7 @@ public class MenuEntry {
 	 */
 	@Override
 	public String toString() {
-		return "MenuEntry [dishName=" + dishName + ", dishPrice=" + dishPrice + "]";
+		return dishName + ", " + dishPrice;
 	}
 
 }
