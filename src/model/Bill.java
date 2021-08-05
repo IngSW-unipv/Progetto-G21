@@ -1,5 +1,6 @@
 package model;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -105,7 +106,7 @@ public class Bill {
 		path = path + "\"" + "billTable" + this.tableNum + ".txt";
 		try {
 			File file = new File(path);
-			FileWriter stream = new FileWriter(file, false);
+			BufferedWriter stream = new BufferedWriter(new FileWriter(file, false));
 			stream.write(this.toString());
 			stream.flush();
 			stream.close();
