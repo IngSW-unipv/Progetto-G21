@@ -24,8 +24,7 @@ public class MenuEntry {
 	 * Advanced Constructor method.
 	 * 
 	 * @param dishEntry specifies the String to parse in "dishName, dishPrice
-	 *                  format. Pay attention to the separator (comma) and to double
-	 *                  entries. If you don't use comma the program is killed.
+	 *                  format. dishEntry format check is delegated to Menu.java.
 	 */
 	public MenuEntry(String dishEntry) {
 		String[] buffer = dishEntry.split(",");

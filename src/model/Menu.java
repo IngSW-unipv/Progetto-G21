@@ -1,10 +1,14 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedHashMap;
-import java.util.Scanner;
 import java.util.StringTokenizer;
 
 /**
@@ -16,6 +20,7 @@ public class Menu {
 
 	private LinkedHashMap<Integer, MenuEntry> entries;
 	private static Menu instance = null;
+	private String menuFilePath;
 
 	/**
 	 * Class constructor method. The method calls checkForMenuFileExistence and
@@ -27,9 +32,11 @@ public class Menu {
 	private Menu(String path) {
 		entries = new LinkedHashMap<Integer, MenuEntry>();
 		try {
-			checkForMenuFileExistence(path);
-			parseMenuFile(path);
+			menuFilePath = path;
+			checkForMenuFileExistence();
+			parseMenuFile();
 		} catch (FileNotFoundException e) {
+			menuFilePath = null;
 			System.err.println(e.getMessage());
 		}
 	}
@@ -113,34 +120,90 @@ public class Menu {
 		}
 	}
 
+	/** Simple menuFilePath getter. */
+	public String getMenuFilePath() {
+		return menuFilePath;
+	}
+
+	/** Simple menuFilePath setter. */
+	public void setMenuFilePath(String menuFilePath) {
+		this.menuFilePath = menuFilePath;
+	}
+
 	/**
 	 * Method that creates a new menu entry after checking its format with
 	 * checkForEntryFormat.
 	 * 
-	 * Not finished yet! We must add some code in order to change menuFile.txt!
-	 * 
 	 * @param dishEntry represents the new entry to add.
 	 */
-	public void addMenuEntry(String dishEntry) throws WrongEntryFormatException {
+	public void addMenuEntry(String dishEntry) {
 		try {
 			checkForEntryFormat(dishEntry);
 		} catch (WrongEntryFormatException e) {
 			System.err.println(e.getMessage());
 		}
-		entries.put(entries.values().size(), new MenuEntry(dishEntry));
+
+		File menuFile = new File(menuFilePath);
+
+		try {
+			BufferedWriter stream = new BufferedWriter(new FileWriter(menuFile, true));
+			stream.append(dishEntry);
+			stream.flush();
+			stream.close();
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+		}
+
+		rewriteMenu();
+	}
+
+	/**
+	 * Method that removes a menu entry from menuFile.txt given his "stringed"
+	 * representation and calls rewriteMenu() in order to recreate entries
+	 * LinkedHashMap.
+	 * 
+	 * @param dishEntry specifies the entry to be removed in dishName, dishPrice
+	 *                  format.
+	 * 
+	 */
+	public void removeMenuEntry(String dishEntry) {
+		File inputFile = new File(menuFilePath);
+		File tempFile = new File("tempMenuFile.txt");
+		String line;
+
+		try {
+			BufferedReader readBuffer = new BufferedReader(new FileReader(inputFile));
+			BufferedWriter writeStream = new BufferedWriter(new FileWriter(tempFile));
+			while ((line = readBuffer.readLine()) != null) {
+				if (dishEntry.equals(line) == false) {
+					writeStream.write(dishEntry);
+				}
+			}
+
+			readBuffer.close();
+			writeStream.close();
+
+			tempFile.renameTo(inputFile);
+			rewriteMenu();
+
+		} catch (FileNotFoundException e) {
+			System.err.println(e.getMessage());
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+		}
 	}
 
 	/**
 	 * Method that removes a menu entry from entries hashMap given his key number.
-	 * 
-	 * Not finished yet! We must add some code in order to change menuFile.txt!
+	 * The method calls removeMenuEntry(String dishEntry).
 	 * 
 	 * @param entryKey represents the key of the entry to be deleted.
 	 */
 	public void removeMenuEntry(Integer entryKey) {
 		try {
 			checkForEntryExistence(entryKey);
-			entries.remove(entryKey);
+			MenuEntry entryToBeRemoved = entries.get(entryKey);
+			removeMenuEntry(entryToBeRemoved.toString());
 		} catch (EntryDoesNotExistException e) {
 			System.err.println(e.getMessage());
 		}
@@ -184,11 +247,11 @@ public class Menu {
 	 * 
 	 * @param path specifies the file to parse.
 	 */
-	public void rewriteMenu(String path) {
+	public void rewriteMenu() {
 		try {
-			checkForMenuFileExistence(path);
+			checkForMenuFileExistence();
 			entries.clear();
-			parseMenuFile(path);
+			parseMenuFile();
 		} catch (FileNotFoundException e) {
 			System.err.println(e.getMessage());
 		}
@@ -200,8 +263,8 @@ public class Menu {
 	 * @param path specifies the file to check.
 	 * @throws FileNotFoundException.
 	 */
-	private void checkForMenuFileExistence(String path) throws FileNotFoundException {
-		File menuFile = new File(path);
+	private void checkForMenuFileExistence() throws FileNotFoundException {
+		File menuFile = new File(menuFilePath);
 		if (menuFile.exists() == false || menuFile.isDirectory() == true) {
 			throw new FileNotFoundException();
 		}
@@ -255,27 +318,30 @@ public class Menu {
 	 * 
 	 * @param path specifies the file to parse.
 	 */
-	private void parseMenuFile(String path) {
+	private void parseMenuFile() {
 		try {
-			checkForMenuFileExistence(path);
-			File menuFile = new File(path);
-			Scanner scanner = new Scanner(menuFile);
+			checkForMenuFileExistence();
+			BufferedReader stream = new BufferedReader(new FileReader(menuFilePath));
 			int index = 0;
+			String line = null;
 
-			while (scanner.hasNextLine()) {
-				String line = scanner.nextLine();
-				checkForEntryFormat(line);
-				MenuEntry entry = new MenuEntry(line);
-				index = entries.values().size();
-				entries.put(index, entry);
+			try {
+				while ((line = stream.readLine()) != null) {
+					checkForEntryFormat(line);
+					MenuEntry entry = new MenuEntry(line);
+					index = entries.values().size();
+					entries.put(index, entry);
+				}
+
+				stream.close();
+			} catch (IOException e) {
+				System.err.println(e.getMessage());
 			}
-
-			scanner.close();
 
 		} catch (FileNotFoundException e) {
 			System.err.println(e.getMessage());
 		} catch (WrongEntryFormatException e) {
-			System.err.println("The file specified by " + path + "has wrong format!");
+			System.err.println("The file specified by " + menuFilePath + "has wrong format!");
 		}
 	}
 }
