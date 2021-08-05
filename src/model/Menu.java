@@ -117,6 +117,8 @@ public class Menu {
 	 * Method that creates a new menu entry after checking its format with
 	 * checkForEntryFormat.
 	 * 
+	 * Not finished yet! We must add some code in order to change menuFile.txt!
+	 * 
 	 * @param dishEntry represents the new entry to add.
 	 */
 	public void addMenuEntry(String dishEntry) throws WrongEntryFormatException {
@@ -130,6 +132,8 @@ public class Menu {
 
 	/**
 	 * Method that removes a menu entry from entries hashMap given his key number.
+	 * 
+	 * Not finished yet! We must add some code in order to change menuFile.txt!
 	 * 
 	 * @param entryKey represents the key of the entry to be deleted.
 	 */
@@ -149,7 +153,7 @@ public class Menu {
 	 * @param newEntryName specifies the new name.
 	 * 
 	 */
-	public void EditSpecificMenuEntry(Integer entryKey, String newEntryName) {
+	public void editSpecificMenuEntry(Integer entryKey, String newEntryName) {
 		try {
 			checkForEntryExistence(entryKey);
 			entries.get(entryKey).editEntry(newEntryName);
@@ -165,14 +169,13 @@ public class Menu {
 	 * @param newPrice specifies the new price.
 	 * 
 	 */
-	public void EditSpecificMenuEntry(Integer entryKey, double newPrice) {
+	public void editSpecificMenuEntry(Integer entryKey, double newPrice) {
 		try {
 			checkForEntryExistence(entryKey);
 			entries.get(entryKey).editEntry(newPrice);
 		} catch (EntryDoesNotExistException e) {
 			System.err.println(e.getMessage());
 		}
-
 	}
 
 	/**
@@ -189,7 +192,6 @@ public class Menu {
 		} catch (FileNotFoundException e) {
 			System.err.println(e.getMessage());
 		}
-
 	}
 
 	/**
