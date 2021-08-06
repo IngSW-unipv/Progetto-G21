@@ -29,17 +29,23 @@ public class Bill {
 		amount = 0;
 	}
 
-	/** Simple orders' ArrayList getter. */
+	/**
+	 * @return bill orders' ArrayList.
+	 */
 	public ArrayList<Order> getOrders() {
 		return orders;
 	}
 
-	/** Simple bill's table number getter. */
+	/**
+	 * @return bills' tableNum.
+	 */
 	public int getTableNum() {
 		return tableNum;
 	}
 
-	/** Simple bill's amount getter. */
+	/**
+	 * @return bills' total amount.
+	 */
 	public double getAmount() {
 		setAmount();
 		return amount;
@@ -100,7 +106,7 @@ public class Bill {
 	 * Method used to generate the bill file via toString() method.
 	 * 
 	 * @param path specifies the directory absolute path in which the bill file has
-	 *             to be saved. path has to be in UNIX format!
+	 *             to be saved. Path has to be in UNIX format!
 	 */
 	public void generateBillFile(String path) {
 		path = path + "\"" + "billTable" + this.tableNum + ".txt";

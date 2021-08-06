@@ -1,8 +1,10 @@
 package model;
 
 /**
- * The MenuEntry class. A MenuEntry object represents one entry on the menu of
- * the restaurant. It contains dishName, dishPrice.
+ * The MenuEntry class.
+ * 
+ * A MenuEntry object represents one entry on the menu of the restaurant (both
+ * food and drinks).
  */
 public class MenuEntry {
 
@@ -23,27 +25,23 @@ public class MenuEntry {
 	/**
 	 * Advanced Constructor method.
 	 * 
-	 * @param dishEntry specifies the String to parse in "dishName, dishPrice
+	 * @param dishEntry specifies the String to parse in "dishName, dishPrice"
 	 *                  format. dishEntry format check is delegated to Menu.java.
 	 */
 	public MenuEntry(String dishEntry) {
 		String[] buffer = dishEntry.split(",");
 		dishName = buffer[0];
-		dishPrice = Double.parseDouble(buffer[1]);
+		dishPrice = Double.parseDouble(buffer[1].trim());
 	}
 
 	/**
-	 * Simple dishName getter.
-	 * 
-	 * @return dishName.
+	 * @return dishName String.
 	 */
 	public String getDishName() {
 		return dishName;
 	}
 
 	/**
-	 * Simple dishPrice getter.
-	 * 
 	 * @return dishPrice.
 	 */
 	public double getDishPrice() {
@@ -51,8 +49,6 @@ public class MenuEntry {
 	}
 
 	/**
-	 * Method that edit MenuEntry's name.
-	 * 
 	 * @param newName is the new given name.
 	 */
 	public void editEntry(String newName) {
@@ -60,8 +56,6 @@ public class MenuEntry {
 	}
 
 	/**
-	 * Method that edit MenuEntry's price.
-	 * 
 	 * @param newPrice is the new given price.
 	 */
 	public void editEntry(double newPrice) {
@@ -69,9 +63,7 @@ public class MenuEntry {
 	}
 
 	/**
-	 * Simple toString method.
-	 * 
-	 * @return MenuEntry in a specified format.
+	 * @return MenuEntry in "dishName, dishPrice" format.
 	 */
 	@Override
 	public String toString() {

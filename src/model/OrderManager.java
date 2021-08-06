@@ -7,8 +7,9 @@ import java.util.Iterator;
  * The OrderManager class.
  * 
  * This class is created in order to efficiently manage every order processed by
- * the restaurant system. Each order is stored in a specific arraylist according
- * to its status.
+ * the restaurant system. Each order is stored in a specific ArrayList (a stack)
+ * according to its status. The class provides some methods that move orders
+ * from a stack to another and change their status.
  */
 
 public class OrderManager {
@@ -33,6 +34,8 @@ public class OrderManager {
 	 * Static method that returns an OrderManager instance in order to observe the
 	 * Singleton pattern. It calls the class constructor only if this has not
 	 * happened before.
+	 * 
+	 * @return OrderManager's instance.
 	 */
 	public static OrderManager getInstance() {
 		if (instance == null) {
@@ -42,27 +45,37 @@ public class OrderManager {
 		}
 	}
 
-	/** Simple notSeen order's ArrayList getter method. */
+	/**
+	 * @return notSeen orders' ArrayList.
+	 */
 	public ArrayList<Order> getNotSeenOrders() {
 		return notSeen;
 	}
 
-	/** Simple notPrepared order's ArrayList getter method. */
+	/**
+	 * @return notPrepared orders' ArrayList.
+	 */
 	public ArrayList<Order> getNotPrepared() {
 		return notPrepared;
 	}
 
-	/** Simple notPreparable order's ArrayList getter method. */
+	/**
+	 * @return notPreparable orders' ArrayList.
+	 */
 	public ArrayList<Order> getNotPreparable() {
 		return notPreparable;
 	}
 
-	/** Simple notDelivered order's ArrayList getter method. */
+	/**
+	 * @return notDelivered orders' ArrayList.
+	 */
 	public ArrayList<Order> getNotDelivered() {
 		return notDelivered;
 	}
 
-	/** Simple delivered order's ArrayList getter method. */
+	/**
+	 * @return delivered orders' ArrayList.
+	 */
 	public ArrayList<Order> getDelivered() {
 		return delivered;
 	}
@@ -136,7 +149,6 @@ public class OrderManager {
 	 * 
 	 * @param tableNum specifies the involved table.
 	 */
-
 	public void removeTablesAllOrders(int tableNum) {
 		Iterator<Order> i1 = notSeen.iterator();
 		Iterator<Order> i2 = notPrepared.iterator();

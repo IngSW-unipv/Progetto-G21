@@ -13,8 +13,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * The Menu class. The menu contains all the dishes and drinks offered by the
- * restaurant, is saved in a menu.txt file.
+ * The Menu class.
+ * 
+ * The menu contains all the dishes and drinks offered by the restaurant. The
+ * items are both stored in a LinkedHashMap (during program runtime), and in a
+ * .txt file in order to ensure persistance.
+ * 
+ * Each line of menuFile.txt must respect "dishName, dishPrice format. The
+ * methods for adding and removing an item update both the LinkedHashMap and the
+ * .txt file."
  */
 
 public class Menu {
@@ -47,6 +54,7 @@ public class Menu {
 	 * pattern. It calls the class constructor only if this has not happened before.
 	 * 
 	 * @param path is needed in order to call the constructor.
+	 * @return menu instance.
 	 */
 	public static Menu getInstance(String path) {
 		if (instance == null) {
@@ -56,28 +64,22 @@ public class Menu {
 	}
 
 	/**
-	 * Simple entries' hashmap getter.
-	 * 
-	 * @return the entries' linkedHashMap.
+	 * @return entries LinkedHashMap.
 	 */
 	public LinkedHashMap<Integer, MenuEntry> getEntriesHashMap() {
 		return entries;
 	}
 
 	/**
-	 * Simple entries' collection getter.
-	 * 
-	 * @return a Collection that contains all MenuEntry objects.
+	 * @return entries Collection.
 	 */
 	public Collection<MenuEntry> getEntriesCollection() {
 		return entries.values();
 	}
 
 	/**
-	 * Simple MenuEntry getter.
-	 * 
 	 * @param entryKey specifies the key of the MenuEntry to return.
-	 * @return MenuEntry.
+	 * @return MenuEntry object.
 	 */
 	public MenuEntry getSpecificMenuEntry(Integer entryKey) {
 		try {
@@ -90,10 +92,8 @@ public class Menu {
 	}
 
 	/**
-	 * Simple MenuEntry's name getter.
-	 * 
 	 * @param entryKey specifies the key of the involved MenuEntry.
-	 * @return MenuEntry's name.
+	 * @return entry name String.
 	 */
 	public String getSpecificMenuEntryName(Integer entryKey) {
 		try {
@@ -106,10 +106,8 @@ public class Menu {
 	}
 
 	/**
-	 * Simple MenuEntry's price getter.
-	 * 
 	 * @param entryKey specifies the key of the involved MenuEntry.
-	 * @return MenuEntry's price.
+	 * @return entry price.
 	 */
 	public double getSpecificMenuEntryPrice(Integer entryKey) {
 		try {
@@ -121,19 +119,24 @@ public class Menu {
 		}
 	}
 
-	/** Simple menuFilePath getter. */
+	/**
+	 * @return menuFilePath String.
+	 */
 	public String getMenuFilePath() {
 		return menuFilePath;
 	}
 
-	/** Simple menuFilePath setter. */
+	/**
+	 * @param menuFilePath String.
+	 */
 	public void setMenuFilePath(String menuFilePath) {
 		this.menuFilePath = menuFilePath;
 	}
 
 	/**
 	 * Method that creates a new menu entry after checking its format with
-	 * checkForEntryFormat.
+	 * checkForEntryFormat. The method adds the entry both to entries LinkedHashMap
+	 * and to menuFile.txt.
 	 * 
 	 * @param dishEntry represents the new entry to add.
 	 */
@@ -160,7 +163,7 @@ public class Menu {
 	}
 
 	/**
-	 * Method that removes a menu entry from menuFile.txt given his "stringed"
+	 * Method that removes a MenuEntry from menuFile.txt given his "stringed"
 	 * representation and calls rewriteMenu() in order to recreate entries
 	 * LinkedHashMap.
 	 * 
@@ -199,8 +202,8 @@ public class Menu {
 	}
 
 	/**
-	 * Method that removes a menu entry from entries hashMap given his key number.
-	 * The method calls removeMenuEntry(String dishEntry).
+	 * Method that removes a MenuEntry from entries LinkedHashMap given his key
+	 * number. The method calls removeMenuEntry.
 	 * 
 	 * @param entryKey represents the key of the entry to be deleted.
 	 */
@@ -247,10 +250,8 @@ public class Menu {
 	}
 
 	/**
-	 * Method that deletes all current menu entries and calls parseMenuFile to
-	 * recreate a new menu.
-	 * 
-	 * @param path specifies the file to parse.
+	 * Method that clears all the content of entries LinkedHashMap and calls
+	 * parseMenuFile to recreate a new menu.
 	 */
 	public void rewriteMenu() {
 		try {
@@ -265,7 +266,6 @@ public class Menu {
 	/**
 	 * Method used to check if menuFile.txt exists.
 	 * 
-	 * @param path specifies the file to check.
 	 * @throws FileNotFoundException.
 	 */
 	private void checkForMenuFileExistence() throws FileNotFoundException {
@@ -305,10 +305,8 @@ public class Menu {
 	}
 
 	/**
-	 * This method allows for further batch insertions in the entries' hashMap,
-	 * given a menuFile.txt.
-	 * 
-	 * @param path specifies the file to parse.
+	 * This method allows for further batch insertions in the entries'
+	 * LinkedHashMap, given a menuFile.txt.
 	 */
 	private void parseMenuFile() {
 		BufferedReader stream = null;

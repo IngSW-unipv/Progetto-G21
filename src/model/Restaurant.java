@@ -39,6 +39,8 @@ public class Restaurant {
 	 * Static method that returns a Restaurant instance in order to observe
 	 * Singleton pattern. It calls the class constructor only if this has not
 	 * happened before.
+	 * 
+	 * @return Restaurant instance.
 	 */
 	public static Restaurant getInstance() {
 		if (instance == null) {
@@ -47,17 +49,23 @@ public class Restaurant {
 		return instance;
 	}
 
-	/** Simple restaurantMenu getter. */
+	/**
+	 * @return Menu instance.
+	 */
 	public Menu getRestaurantMenu() {
 		return restaurantMenu;
 	}
 
-	/** Simple orderManager getter. */
+	/**
+	 * @return orderManager instance.
+	 */
 	public OrderManager getOrderManager() {
 		return orderManager;
 	}
 
-	/** Simple tables' id HashSet getter. */
+	/**
+	 * @return tables' HashSet.
+	 */
 	public HashSet<Integer> getTables() {
 		return tables;
 	}
@@ -120,8 +128,7 @@ public class Restaurant {
 
 	/**
 	 * Method used to check if tablesFile.txt exists.
-	 * 
-	 * @param path specifies the file to check.
+	 *
 	 * @throws FileNotFoundException.
 	 */
 	private void checkForTablesFileExistance() throws FileNotFoundException {
@@ -150,8 +157,6 @@ public class Restaurant {
 	/**
 	 * This method allows for further batch insertions in the tables' HashSet, given
 	 * a tablesFile.txt.
-	 * 
-	 * @param path specifies the file to parse.
 	 */
 	public void parseTablesFile() {
 		BufferedReader stream = null;
