@@ -9,7 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedHashMap;
-import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * The Menu class. The menu contains all the dishes and drinks offered by the
@@ -168,7 +169,7 @@ public class Menu {
 	 */
 	public void removeMenuEntry(String dishEntry) {
 		File inputFile = new File(menuFilePath);
-		File tempFile = new File("tempMenuFile.txt");
+		File tempFile = new File("./tempMenuFile.txt");
 		String line;
 
 		try {
@@ -290,24 +291,11 @@ public class Menu {
 	 * @throws WrongEntryFormatException.
 	 */
 	private void checkForEntryFormat(String dishEntry) throws WrongEntryFormatException {
-		StringTokenizer st = new StringTokenizer(dishEntry);
-		int counter = st.countTokens();
+		Pattern p = Pattern.compile("^[a-zA-Z]+, \\\\d{1,5}.{0,1}\\\\d{0,2}");
+		Matcher m = p.matcher(dishEntry);
+		boolean b = m.matches();
 
-		if (counter != 2) {
-			throw new WrongEntryFormatException();
-		}
-
-		String[] buffer = new String[2];
-		buffer[0] = st.nextToken();
-		buffer[1] = st.nextToken();
-
-		if (buffer[0].charAt(buffer[0].length()) != ',') {
-			throw new WrongEntryFormatException();
-		}
-
-		try {
-			Double.parseDouble(buffer[1]);
-		} catch (NumberFormatException e) {
+		if (b == false) {
 			throw new WrongEntryFormatException();
 		}
 	}
