@@ -140,14 +140,15 @@ public class Menu {
 	public void addMenuEntry(String dishEntry) {
 		try {
 			checkForEntryFormat(dishEntry);
-		} catch (WrongEntryFormatException e) {
+		} catch (WrongMenuEntryFormatException e) {
 			System.err.println(e.getMessage());
 		}
 
 		File menuFile = new File(menuFilePath);
+		BufferedWriter stream = null;
 
 		try {
-			BufferedWriter stream = new BufferedWriter(new FileWriter(menuFile, true));
+			stream = new BufferedWriter(new FileWriter(menuFile, true));
 			stream.append(dishEntry);
 			stream.flush();
 			stream.close();
@@ -170,12 +171,15 @@ public class Menu {
 	public void removeMenuEntry(String dishEntry) {
 		File inputFile = new File(menuFilePath);
 		File tempFile = new File("./tempMenuFile.txt");
-		String line;
+		String line = null;
+		BufferedReader readBuffer;
+		BufferedWriter writeStream;
 
 		try {
-			BufferedReader readBuffer = new BufferedReader(new FileReader(inputFile));
-			BufferedWriter writeStream = new BufferedWriter(new FileWriter(tempFile));
-			while ((line = readBuffer.readLine()) != null) {
+			readBuffer = new BufferedReader(new FileReader(inputFile));
+			writeStream = new BufferedWriter(new FileWriter(tempFile));
+			line = readBuffer.readLine();
+			while (line != null) {
 				if (dishEntry.equals(line) == false) {
 					writeStream.write(dishEntry);
 				}
@@ -290,13 +294,13 @@ public class Menu {
 	 * @param dishEntry specifies the String to check.
 	 * @throws WrongEntryFormatException.
 	 */
-	private void checkForEntryFormat(String dishEntry) throws WrongEntryFormatException {
+	private void checkForEntryFormat(String dishEntry) throws WrongMenuEntryFormatException {
 		Pattern p = Pattern.compile("^[a-zA-Z]+, \\\\d{1,5}.{0,1}\\\\d{0,2}");
 		Matcher m = p.matcher(dishEntry);
 		boolean b = m.matches();
 
 		if (b == false) {
-			throw new WrongEntryFormatException();
+			throw new WrongMenuEntryFormatException();
 		}
 	}
 
@@ -307,29 +311,30 @@ public class Menu {
 	 * @param path specifies the file to parse.
 	 */
 	private void parseMenuFile() {
+		BufferedReader stream = null;
+		String line = null;
+		int index = 0;
+
 		try {
 			checkForMenuFileExistence();
-			BufferedReader stream = new BufferedReader(new FileReader(menuFilePath));
-			int index = 0;
-			String line = null;
-
-			try {
-				while ((line = stream.readLine()) != null) {
-					checkForEntryFormat(line);
-					MenuEntry entry = new MenuEntry(line);
-					index = entries.values().size();
-					entries.put(index, entry);
-				}
-
-				stream.close();
-			} catch (IOException e) {
-				System.err.println(e.getMessage());
-			}
-
+			stream = new BufferedReader(new FileReader(menuFilePath));
 		} catch (FileNotFoundException e) {
 			System.err.println(e.getMessage());
-		} catch (WrongEntryFormatException e) {
-			System.err.println("The file specified by " + menuFilePath + "has wrong format!");
+		}
+
+		try {
+			line = stream.readLine();
+			while (line != null) {
+				checkForEntryFormat(line);
+				MenuEntry entry = new MenuEntry(line);
+				index = entries.values().size();
+				entries.put(index, entry);
+			}
+			stream.close();
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+		} catch (WrongMenuEntryFormatException e) {
+			System.err.println("The file specified by " + menuFilePath + " has wrong format!");
 		}
 	}
 }
