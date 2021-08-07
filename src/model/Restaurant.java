@@ -8,19 +8,21 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * The Restaurant class. Is used to unify all the other model classes in order
- * to represent a real restaurant.
+ * to represent a real restaurant. The class contains methods for managing
+ * restaurant tables.
  */
 public class Restaurant {
 
 	private static Restaurant instance = null;
 	private Menu restaurantMenu;
 	private OrderManager orderManager;
-	private HashSet<Integer> tables;
+	private HashSet<Integer> tables; // HashSet because duplicates are not allowed!
 
 	String menuFilePath = "./menuFile.txt";
 	String tablesFilePath = "./tablesFile.txt";
@@ -71,33 +73,46 @@ public class Restaurant {
 	}
 
 	/**
-	 * Method that allows the addition of a new table in the tables' ArrayList and
-	 * in tablesFile.txt.
+	 * Method that allows the addition of a new table in tables' HashSet and to
+	 * tablesFile.txt via the addTableWithoutCheck method. addTable checks if the
+	 * specified tableNum already exists calling checkForTableExistance method. If
+	 * true, it creates a new table with tableNum just next the maximum tableNum
+	 * contained in the HashSet.
+	 * 
+	 * @param tableNum specifies the involved tableNum.
 	 */
-	public void addTable() {
-		int initialSize = tables.size();
-		tables.add(initialSize + 1);
-
-		File tablesFile = new File(tablesFilePath);
-		BufferedWriter stream = null;
-
+	public void addTable(int tableNum) {
 		try {
-			stream = new BufferedWriter(new FileWriter(tablesFile, true));
-			stream.append(((Integer) (initialSize + 1)).toString());
-			stream.flush();
-			stream.close();
-		} catch (IOException e) {
-			System.err.println(e.getMessage());
+			checkForTableExistance(tableNum);
+		} catch (TableDoesNotExistsException e) {
+			Iterator<Integer> i = tables.iterator();
+			int max = 0;
+
+			while (i.hasNext()) {
+				int currentTableNum = i.next();
+				if (currentTableNum > max) {
+					max = currentTableNum;
+				}
+			}
+
+			addTableWithoutCheck(max + 1);
 		}
+		addTableWithoutCheck(tableNum);
 	}
 
 	/**
-	 * Method that allows the removal of a table in the tables' ArrayList and from
+	 * Method that allows the removal of a table in the tables' HashSet and from
 	 * tablesFile.txt.
 	 * 
 	 * @param specifies the involved table.
 	 */
 	public void removeTable(int tableNum) {
+		try {
+			checkForTableExistance(tableNum);
+		} catch (TableDoesNotExistsException e) {
+			System.err.println(e.getMessage());
+		}
+
 		tables.remove(tableNum);
 		File inputFile = new File(tablesFilePath);
 		File tempFile = new File("./tempTablesFile.txt");
@@ -127,6 +142,30 @@ public class Restaurant {
 	}
 
 	/**
+	 * Method used to add a new table to tables' HashSet and to tablesFile.txt
+	 * without checking if the specified table already exists. Used in addTable
+	 * method.
+	 * 
+	 * @param tableNum specifies the involved tableNum.
+	 */
+	private void addTableWithoutCheck(int tableNum) {
+
+		File tablesFile = new File(tablesFilePath);
+		BufferedWriter stream = null;
+
+		try {
+			stream = new BufferedWriter(new FileWriter(tablesFile, true));
+			stream.append(((Integer) (tableNum)).toString());
+			stream.flush();
+			stream.close();
+			tables.add(tableNum);
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+		}
+
+	}
+
+	/**
 	 * Method used to check if tablesFile.txt exists.
 	 *
 	 * @throws FileNotFoundException.
@@ -135,6 +174,18 @@ public class Restaurant {
 		File tablesFile = new File(tablesFilePath);
 		if (tablesFile.exists() == false || tablesFile.isDirectory() == true) {
 			throw new FileNotFoundException();
+		}
+	}
+
+	/**
+	 * Method that is used to check if a specified table exists.
+	 * 
+	 * @param tableNum specifies the involved table.
+	 * @throws TableDoesNotExistsException.
+	 */
+	private void checkForTableExistance(int tableNum) throws TableDoesNotExistsException {
+		if (tables.contains(tableNum) == false) {
+			throw new TableDoesNotExistsException();
 		}
 	}
 
