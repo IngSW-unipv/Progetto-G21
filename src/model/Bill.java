@@ -15,18 +15,65 @@ public class Bill {
 
 	private ArrayList<Order> orders;
 	private int tableNum;
-	private double amount;
+	private double amount = 0;
 
 	/**
-	 * Class constructor. A Bill, when initialized, has no Orders added to it yet.
-	 * Its total amount is 0.
+	 * Class constructor. It allocates memory space for orders ArrayList, specifies
+	 * the bill's tableNum, looks for its orders via lookForTableOrders, calculates
+	 * bill's amount via setAmount and finally generates bill's file
+	 * representation.1
 	 *
 	 * @param tableNum represents bill's table number.
 	 */
 	public Bill(int tableNum) {
-		this.tableNum = tableNum;
 		orders = new ArrayList<Order>(0);
-		amount = 0;
+		this.tableNum = tableNum;
+		lookForTableOrders();
+		setAmount();
+		generateBillFile("./");
+	}
+
+	/**
+	 * Method that looks for all orders taken over by the system simply calling an
+	 * instance of OrderSystem (Singleton). The method fills the orders ArrayList
+	 * and removes all the involved orders from OrderSystem's stacks.
+	 */
+	private void lookForTableOrders() {
+		OrderManager manager = OrderManager.getInstance();
+		Iterator<Order> iNotSeen = manager.getNotSeen().iterator();
+		Iterator<Order> iNotPrepared = manager.getNotPrepared().iterator();
+		Iterator<Order> iNotDelivered = manager.getNotDelivered().iterator();
+		Iterator<Order> iDelivered = manager.getDelivered().iterator();
+
+		while (iNotSeen.hasNext()) {
+			Order currentOrder = iNotSeen.next();
+			if (currentOrder.getTableNum() == tableNum) {
+				orders.add(currentOrder);
+			}
+		}
+
+		while (iNotPrepared.hasNext()) {
+			Order currentOrder = iNotPrepared.next();
+			if (currentOrder.getTableNum() == tableNum) {
+				orders.add(currentOrder);
+			}
+		}
+
+		while (iNotDelivered.hasNext()) {
+			Order currentOrder = iNotDelivered.next();
+			if (currentOrder.getTableNum() == tableNum) {
+				orders.add(currentOrder);
+			}
+		}
+
+		while (iDelivered.hasNext()) {
+			Order currentOrder = iDelivered.next();
+			if (currentOrder.getTableNum() == tableNum) {
+				orders.add(currentOrder);
+			}
+		}
+
+		manager.removeTableAllOrders(tableNum);
 	}
 
 	/**
@@ -58,28 +105,6 @@ public class Bill {
 			MenuEntry entry = i.next().getOrderedEntry();
 			amount += entry.getDishPrice();
 		}
-	}
-
-	/**
-	 * Method used to add an order to the bill's ArrayList.
-	 * 
-	 * @param order specifies the involved order.
-	 */
-	public void addOrder(Order order) {
-		if (order.getTableNum() == this.tableNum && orders.contains(order) == false) {
-			orders.add(order);
-			amount += order.getOrderedEntry().getDishPrice();
-		}
-	}
-
-	/**
-	 * Method used to remove an order from the bill's ArrayList.
-	 * 
-	 * @param order specifies the involved order.
-	 */
-	public void removeOrder(Order order) {
-		orders.remove(order);
-		amount -= order.getOrderedEntry().getDishPrice();
 	}
 
 	/**
