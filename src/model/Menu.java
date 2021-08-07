@@ -44,7 +44,6 @@ public class Menu {
 			checkForMenuFileExistence();
 			parseMenuFile();
 		} catch (FileNotFoundException e) {
-			menuFilePath = null;
 			System.err.println(e.getMessage());
 		}
 	}
@@ -227,7 +226,10 @@ public class Menu {
 	public void editSpecificMenuEntry(Integer entryKey, String newEntryName) {
 		try {
 			checkForEntryExistence(entryKey);
-			entries.get(entryKey).editEntry(newEntryName);
+			MenuEntry entry = entries.get(entryKey);
+			String entryPrice = Double.toString(entry.getDishPrice());
+			removeMenuEntry(entryKey);
+			addMenuEntry(newEntryName + ", " + entryPrice);
 		} catch (EntryDoesNotExistException e) {
 			System.err.println(e.getMessage());
 		}
@@ -243,7 +245,10 @@ public class Menu {
 	public void editSpecificMenuEntry(Integer entryKey, double newPrice) {
 		try {
 			checkForEntryExistence(entryKey);
-			entries.get(entryKey).editEntry(newPrice);
+			MenuEntry entry = entries.get(entryKey);
+			String entryName = entry.getDishName();
+			removeMenuEntry(entryKey);
+			addMenuEntry(entryName + ", " + Double.toString(newPrice));
 		} catch (EntryDoesNotExistException e) {
 			System.err.println(e.getMessage());
 		}
@@ -295,7 +300,7 @@ public class Menu {
 	 * @throws WrongEntryFormatException.
 	 */
 	private void checkForEntryFormat(String dishEntry) throws WrongMenuEntryFormatException {
-		Pattern p = Pattern.compile("^[a-zA-Z]+, \\\\d{1,5}.{0,1}\\\\d{0,2}");
+		Pattern p = Pattern.compile("^[a-zA-Z]+, \\\\d{1,5}\\.{0,1}\\\\d{0,2}");
 		Matcher m = p.matcher(dishEntry);
 		boolean b = m.matches();
 
