@@ -51,14 +51,14 @@ public class MenuEntry {
 	/**
 	 * @param newName is the new given name.
 	 */
-	public void editEntry(String newName) {
+	public void editEntryName(String newName) {
 		this.dishName = newName;
 	}
 
 	/**
 	 * @param newPrice is the new given price.
 	 */
-	public void editEntry(double newPrice) {
+	public void editEntryPrice(double newPrice) {
 		this.dishPrice = newPrice;
 	}
 

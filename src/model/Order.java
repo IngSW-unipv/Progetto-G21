@@ -29,7 +29,6 @@ public class Order {
 	 * @param orderedEntry specifies the ordered item.
 	 */
 	public Order(int tableNum, MenuEntry orderedEntry) {
-
 		ordersCounter++;
 		this.orderNum = ordersCounter;
 		this.tableNum = tableNum;
@@ -130,7 +129,7 @@ public class Order {
 	 */
 	@Override
 	public String toString() {
-		return "Order: " + orderNum + ", isSeen:" + isSeen + ", isPreparable:" + isPreparable + ", isPrepared:"
-				+ isPrepared + ", isDelivered:" + isDelivered;
+		return "Order: " + orderNum + ", isSeen: " + isSeen + ", isPreparable: " + isPreparable + ", isPrepared: "
+				+ isPrepared + ", isDelivered: " + isDelivered;
 	}
 }

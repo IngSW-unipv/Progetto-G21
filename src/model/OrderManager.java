@@ -48,7 +48,7 @@ public class OrderManager {
 	/**
 	 * @return notSeen orders' ArrayList.
 	 */
-	public ArrayList<Order> getNotSeenOrders() {
+	public ArrayList<Order> getNotSeen() {
 		return notSeen;
 	}
 
@@ -103,7 +103,7 @@ public class OrderManager {
 	 * 
 	 * @param order specifies the involved order.
 	 */
-	public void seeOrderToPreparable(Order order) {
+	public void seeOrderToNotPrepared(Order order) {
 		order.setSeen(true);
 		notSeen.remove(order);
 		notPrepared.add(order);
@@ -149,7 +149,7 @@ public class OrderManager {
 	 * 
 	 * @param tableNum specifies the involved table.
 	 */
-	public void removeTablesAllOrders(int tableNum) {
+	public void removeTableAllOrders(int tableNum) {
 		Iterator<Order> i1 = notSeen.iterator();
 		Iterator<Order> i2 = notPrepared.iterator();
 		Iterator<Order> i3 = notPreparable.iterator();
