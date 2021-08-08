@@ -24,8 +24,8 @@ public class Restaurant {
 	private OrderManager orderManager;
 	private HashSet<Integer> tables; // HashSet because duplicates are not allowed!
 
-	String menuFilePath = "menuFile.txt";
-	String tablesFilePath = "tablesFile.txt";
+	String menuFilePath = "Files/menuFile.txt";
+	String tablesFilePath = "Files/tablesFile.txt";
 
 	/**
 	 * Class constructor method.
@@ -140,7 +140,16 @@ public class Restaurant {
 		tables.remove(tableNum);
 
 		File inputFile = new File(tablesFilePath);
-		File tempFile = new File("tempTablesFile.txt");
+		File tempFile = new File("Files/tempTablesFile.txt");
+
+		if (tempFile.exists() == false) {
+			try {
+				tempFile.createNewFile();
+			} catch (IOException e) {
+				System.err.println(e.getMessage());
+			}
+		}
+
 		BufferedReader readStream;
 		BufferedWriter writeStream;
 		String line = null;

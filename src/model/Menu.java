@@ -181,7 +181,16 @@ public class Menu implements MenuInterface {
 	@Override
 	public void removeMenuEntry(String dishEntry) {
 		File inputFile = new File(menuFilePath);
-		File tempFile = new File("tempMenuFile.txt");
+		File tempFile = new File("Files/tempMenuFile.txt");
+
+		if (tempFile.exists() == false) {
+			try {
+				tempFile.createNewFile();
+			} catch (IOException e) {
+				System.err.println(e.getMessage());
+			}
+		}
+
 		BufferedReader readStream = null;
 		BufferedWriter writeStream = null;
 		String line = null;
