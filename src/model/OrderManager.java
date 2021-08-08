@@ -12,7 +12,7 @@ import java.util.Iterator;
  * from a stack to another and change their status.
  */
 
-public class OrderManager {
+public class OrderManager implements OrderManegerInterface {
 
 	private ArrayList<Order> notSeen;
 	private ArrayList<Order> notPrepared; // unPrepared = seen.
@@ -48,6 +48,7 @@ public class OrderManager {
 	/**
 	 * @return notSeen orders' ArrayList.
 	 */
+	@Override
 	public ArrayList<Order> getNotSeen() {
 		return notSeen;
 	}
@@ -55,6 +56,7 @@ public class OrderManager {
 	/**
 	 * @return notPrepared orders' ArrayList.
 	 */
+	@Override
 	public ArrayList<Order> getNotPrepared() {
 		return notPrepared;
 	}
@@ -62,6 +64,7 @@ public class OrderManager {
 	/**
 	 * @return notPreparable orders' ArrayList.
 	 */
+	@Override
 	public ArrayList<Order> getNotPreparable() {
 		return notPreparable;
 	}
@@ -69,6 +72,7 @@ public class OrderManager {
 	/**
 	 * @return notDelivered orders' ArrayList.
 	 */
+	@Override
 	public ArrayList<Order> getNotDelivered() {
 		return notDelivered;
 	}
@@ -76,6 +80,7 @@ public class OrderManager {
 	/**
 	 * @return delivered orders' ArrayList.
 	 */
+	@Override
 	public ArrayList<Order> getDelivered() {
 		return delivered;
 	}
@@ -85,6 +90,7 @@ public class OrderManager {
 	 * 
 	 * @param order specifies the involved order.
 	 */
+	@Override
 	public void addOrder(Order order) {
 		notSeen.add(order);
 	}
@@ -94,6 +100,7 @@ public class OrderManager {
 	 * 
 	 * @param order specifies the involved order.
 	 */
+	@Override
 	public void removeOrder(Order order) {
 		notSeen.remove(order);
 	}
@@ -103,6 +110,7 @@ public class OrderManager {
 	 * 
 	 * @param order specifies the involved order.
 	 */
+	@Override
 	public void seeOrderToNotPrepared(Order order) {
 		order.setSeen(true);
 		notSeen.remove(order);
@@ -115,6 +123,7 @@ public class OrderManager {
 	 * 
 	 * @param order specifies the involved order.
 	 */
+	@Override
 	public void seeOrderToNotPreparable(Order order) {
 		order.setSeen(true);
 		order.setPreparable(false);
@@ -127,6 +136,7 @@ public class OrderManager {
 	 * 
 	 * @param order specifies the involved order.
 	 */
+	@Override
 	public void prepareOrder(Order order) {
 		order.setPrepared(true);
 		notPrepared.remove(order);
@@ -138,6 +148,7 @@ public class OrderManager {
 	 * 
 	 * @param order specifies the involved order.
 	 */
+	@Override
 	public void deliverOrder(Order order) {
 		order.setDelivered(true);
 		notDelivered.remove(order);
@@ -149,6 +160,7 @@ public class OrderManager {
 	 * 
 	 * @param tableNum specifies the involved table.
 	 */
+	@Override
 	public void removeTableAllOrders(int tableNum) {
 		Iterator<Order> i1 = notSeen.iterator();
 		Iterator<Order> i2 = notPrepared.iterator();
