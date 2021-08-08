@@ -67,7 +67,12 @@ public class MenuEntry {
 	 */
 	@Override
 	public String toString() {
-		return dishName + ", " + dishPrice;
+		if (dishPrice == (long) dishPrice) {
+			return dishName + ", " + String.format("%d", (long) dishPrice);
+		} else {
+			return dishName + ", " + String.format("%s", dishPrice);
+		}
+
 	}
 
 }

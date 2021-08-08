@@ -39,7 +39,7 @@ public class Bill {
 	 * and removes all the involved orders from OrderSystem's stacks.
 	 */
 	private void lookForTableOrders() {
-		OrderManager manager = OrderManager.getInstance();
+		OrderManegerInterface manager = OrderManager.getInstance();
 		Iterator<Order> iNotSeen = manager.getNotSeen().iterator();
 		Iterator<Order> iNotPrepared = manager.getNotPrepared().iterator();
 		Iterator<Order> iNotDelivered = manager.getNotDelivered().iterator();

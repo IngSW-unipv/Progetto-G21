@@ -9,7 +9,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedHashMap;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -160,7 +159,7 @@ public class Menu implements MenuInterface {
 
 		try {
 			stream = new BufferedWriter(new FileWriter(menuFile, true));
-			stream.append(dishEntry);
+			stream.append(dishEntry + "\n");
 			stream.flush();
 			stream.close();
 		} catch (IOException e) {
@@ -182,27 +181,27 @@ public class Menu implements MenuInterface {
 	@Override
 	public void removeMenuEntry(String dishEntry) {
 		File inputFile = new File(menuFilePath);
-		File tempFile = new File("./tempMenuFile.txt");
+		File tempFile = new File("tempMenuFile.txt");
+		BufferedReader readStream = null;
+		BufferedWriter writeStream = null;
 		String line = null;
-		BufferedReader readBuffer;
-		BufferedWriter writeStream;
 
 		try {
-			readBuffer = new BufferedReader(new FileReader(inputFile));
+			readStream = new BufferedReader(new FileReader(inputFile));
 			writeStream = new BufferedWriter(new FileWriter(tempFile));
-			line = readBuffer.readLine();
-			while (line != null) {
-				if (dishEntry.equals(line) == false) {
-					writeStream.write(dishEntry);
+
+			while ((line = readStream.readLine()) != null) {
+				if ((dishEntry.trim()).equals(line.trim()) == false) {
+					writeStream.write(line + "\n");
 				}
 			}
 
-			readBuffer.close();
+			readStream.close();
 			writeStream.close();
+			inputFile.delete();
 
-			tempFile.renameTo(inputFile);
+			tempFile.renameTo(new File(menuFilePath));
 			rewriteMenu();
-
 		} catch (FileNotFoundException e) {
 			System.err.println(e.getMessage());
 		} catch (IOException e) {
@@ -221,7 +220,8 @@ public class Menu implements MenuInterface {
 		try {
 			checkForEntryExistence(entryKey);
 			MenuEntry entryToBeRemoved = entries.get(entryKey);
-			removeMenuEntry(entryToBeRemoved.toString());
+			String toBeRemoved = entryToBeRemoved.toString();
+			removeMenuEntry(toBeRemoved);
 		} catch (EntryDoesNotExistException e) {
 			System.err.println(e.getMessage());
 		}
@@ -327,20 +327,22 @@ public class Menu implements MenuInterface {
 	 * LinkedHashMap, given a menuFile.txt.
 	 */
 	public void parseMenuFile() {
-		Scanner scanner = null;
+		BufferedReader stream = null;
 		try {
-			scanner = new Scanner(new File(menuFilePath));
+			checkForMenuFileExistence();
+			stream = new BufferedReader(new FileReader(menuFilePath));
 			int index = 0;
 			String line = null;
-			while (scanner.hasNextLine()) {
-				line = scanner.nextLine();
+			while ((line = stream.readLine()) != null) {
 				checkForEntryFormat(line);
 				MenuEntry entry = new MenuEntry(line);
 				index = entries.values().size();
 				entries.put(index, entry);
 			}
-			scanner.close();
+			stream.close();
 		} catch (FileNotFoundException e) {
+			System.err.println(e.getMessage());
+		} catch (IOException e) {
 			System.err.println(e.getMessage());
 		} catch (WrongMenuEntryFormatException e) {
 			System.err.println("The file specified by " + menuFilePath + " has wrong format!");

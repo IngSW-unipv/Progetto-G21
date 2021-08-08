@@ -24,8 +24,8 @@ public class Restaurant {
 	private OrderManager orderManager;
 	private HashSet<Integer> tables; // HashSet because duplicates are not allowed!
 
-	String menuFilePath = "./menuFile.txt";
-	String tablesFilePath = "./tablesFile.txt";
+	String menuFilePath = "menuFile.txt";
+	String tablesFilePath = "tablesFile.txt";
 
 	/**
 	 * Class constructor method.
@@ -101,47 +101,6 @@ public class Restaurant {
 	}
 
 	/**
-	 * Method that allows the removal of a table in the tables' HashSet and from
-	 * tablesFile.txt.
-	 * 
-	 * @param specifies the involved table.
-	 */
-	public void removeTable(int tableNum) {
-		try {
-			checkForTableExistance(tableNum);
-		} catch (TableDoesNotExistsException e) {
-			System.err.println(e.getMessage());
-		}
-
-		tables.remove(tableNum);
-		File inputFile = new File(tablesFilePath);
-		File tempFile = new File("./tempTablesFile.txt");
-		String line = null;
-		BufferedReader readBuffer;
-		BufferedWriter writeStream;
-
-		try {
-			readBuffer = new BufferedReader(new FileReader(inputFile));
-			writeStream = new BufferedWriter(new FileWriter(tempFile));
-			line = readBuffer.readLine();
-			while (line != null) {
-				if (tableNum != Integer.parseInt(line)) {
-					writeStream.write(line);
-				}
-			}
-
-			readBuffer.close();
-			writeStream.close();
-			tempFile.renameTo(inputFile);
-
-		} catch (FileNotFoundException e) {
-			System.err.println(e.getMessage());
-		} catch (IOException e) {
-			System.err.println(e.getMessage());
-		}
-	}
-
-	/**
 	 * Method used to add a new table to tables' HashSet and to tablesFile.txt
 	 * without checking if the specified table already exists. Used in addTable
 	 * method.
@@ -163,6 +122,50 @@ public class Restaurant {
 			System.err.println(e.getMessage());
 		}
 
+	}
+
+	/**
+	 * Method that allows the removal of a table in the tables' HashSet and from
+	 * tablesFile.txt.
+	 * 
+	 * @param specifies the involved table.
+	 */
+	public void removeTable(int tableNum) {
+		try {
+			checkForTableExistance(tableNum);
+		} catch (TableDoesNotExistsException e) {
+			System.err.println(e.getMessage());
+		}
+
+		tables.remove(tableNum);
+
+		File inputFile = new File(tablesFilePath);
+		File tempFile = new File("tempTablesFile.txt");
+		BufferedReader readStream;
+		BufferedWriter writeStream;
+		String line = null;
+
+		try {
+			readStream = new BufferedReader(new FileReader(inputFile));
+			writeStream = new BufferedWriter(new FileWriter(tempFile));
+
+			while ((line = readStream.readLine()) != null) {
+				if (tableNum != Integer.parseInt(line)) {
+					writeStream.write(line + "\n");
+				}
+			}
+
+			readStream.close();
+			writeStream.close();
+			inputFile.delete();
+
+			tempFile.renameTo(new File(tablesFilePath));
+
+		} catch (FileNotFoundException e) {
+			System.err.println(e.getMessage());
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+		}
 	}
 
 	/**
@@ -211,22 +214,17 @@ public class Restaurant {
 	 */
 	public void parseTablesFile() {
 		BufferedReader stream = null;
-		String line = null;
-
 		try {
 			checkForTablesFileExistance();
 			stream = new BufferedReader(new FileReader(tablesFilePath));
-		} catch (FileNotFoundException e) {
-			System.err.println(e.getMessage());
-		}
-
-		try {
-			line = stream.readLine();
-			while (line != null) {
+			String line = null;
+			while ((line = stream.readLine()) != null) {
 				checkForTableFormat(line);
 				tables.add(Integer.parseInt(line));
 			}
 			stream.close();
+		} catch (FileNotFoundException e) {
+			System.err.println(e.getMessage());
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 		} catch (WrongTableEntryFormatException e) {
