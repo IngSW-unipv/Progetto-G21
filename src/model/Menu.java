@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
  * .txt file."
  */
 
-public class Menu {
+public class Menu implements MenuInterface {
 
 	private LinkedHashMap<Integer, MenuEntry> entries;
 	private static Menu instance = null;
@@ -65,6 +65,7 @@ public class Menu {
 	/**
 	 * @return entries LinkedHashMap.
 	 */
+	@Override
 	public LinkedHashMap<Integer, MenuEntry> getEntriesHashMap() {
 		return entries;
 	}
@@ -72,6 +73,7 @@ public class Menu {
 	/**
 	 * @return entries Collection.
 	 */
+	@Override
 	public Collection<MenuEntry> getEntriesCollection() {
 		return entries.values();
 	}
@@ -80,6 +82,7 @@ public class Menu {
 	 * @param entryKey specifies the key of the MenuEntry to return.
 	 * @return MenuEntry object.
 	 */
+	@Override
 	public MenuEntry getSpecificMenuEntry(Integer entryKey) {
 		try {
 			checkForEntryExistence(entryKey);
@@ -94,6 +97,7 @@ public class Menu {
 	 * @param entryKey specifies the key of the involved MenuEntry.
 	 * @return entry name String.
 	 */
+	@Override
 	public String getSpecificMenuEntryName(Integer entryKey) {
 		try {
 			checkForEntryExistence(entryKey);
@@ -108,6 +112,7 @@ public class Menu {
 	 * @param entryKey specifies the key of the involved MenuEntry.
 	 * @return entry price.
 	 */
+	@Override
 	public double getSpecificMenuEntryPrice(Integer entryKey) {
 		try {
 			checkForEntryExistence(entryKey);
@@ -121,6 +126,7 @@ public class Menu {
 	/**
 	 * @return menuFilePath String.
 	 */
+	@Override
 	public String getMenuFilePath() {
 		return menuFilePath;
 	}
@@ -128,6 +134,7 @@ public class Menu {
 	/**
 	 * @param menuFilePath String.
 	 */
+	@Override
 	public void setMenuFilePath(String menuFilePath) {
 		this.menuFilePath = menuFilePath;
 	}
@@ -139,6 +146,7 @@ public class Menu {
 	 * 
 	 * @param dishEntry represents the new entry to add.
 	 */
+	@Override
 	public void addMenuEntry(String dishEntry) {
 		try {
 			checkForEntryFormat(dishEntry);
@@ -170,6 +178,7 @@ public class Menu {
 	 *                  format.
 	 * 
 	 */
+	@Override
 	public void removeMenuEntry(String dishEntry) {
 		File inputFile = new File(menuFilePath);
 		File tempFile = new File("./tempMenuFile.txt");
@@ -206,6 +215,7 @@ public class Menu {
 	 * 
 	 * @param entryKey represents the key of the entry to be deleted.
 	 */
+	@Override
 	public void removeMenuEntry(Integer entryKey) {
 		try {
 			checkForEntryExistence(entryKey);
@@ -223,6 +233,7 @@ public class Menu {
 	 * @param newEntryName specifies the new name.
 	 * 
 	 */
+	@Override
 	public void editSpecificMenuEntry(Integer entryKey, String newEntryName) {
 		try {
 			checkForEntryExistence(entryKey);
@@ -242,6 +253,7 @@ public class Menu {
 	 * @param newPrice specifies the new price.
 	 * 
 	 */
+	@Override
 	public void editSpecificMenuEntry(Integer entryKey, double newPrice) {
 		try {
 			checkForEntryExistence(entryKey);
@@ -258,7 +270,7 @@ public class Menu {
 	 * Method that clears all the content of entries LinkedHashMap and calls
 	 * parseMenuFile to recreate a new menu.
 	 */
-	public void rewriteMenu() {
+	private void rewriteMenu() {
 		try {
 			checkForMenuFileExistence();
 			entries.clear();
