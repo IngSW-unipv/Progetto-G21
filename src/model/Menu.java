@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -312,7 +313,7 @@ public class Menu implements MenuInterface {
 	 * @throws WrongEntryFormatException.
 	 */
 	private void checkForEntryFormat(String dishEntry) throws WrongMenuEntryFormatException {
-		Pattern p = Pattern.compile("^[a-zA-Z0-9 ]*, \\\\d{1,5}\\.{0,1}\\\\d{0,2}");
+		Pattern p = Pattern.compile("^[A-Za-z0-9 ]*, \\d{1,5}\\.{0,1}\\d{0,2}$");
 		Matcher m = p.matcher(dishEntry);
 		boolean b = m.matches();
 
@@ -325,28 +326,21 @@ public class Menu implements MenuInterface {
 	 * This method allows for further batch insertions in the entries'
 	 * LinkedHashMap, given a menuFile.txt.
 	 */
-	private void parseMenuFile() {
-		BufferedReader stream = null;
-		String line = null;
-		int index = 0;
-
+	public void parseMenuFile() {
+		Scanner scanner = null;
 		try {
-			checkForMenuFileExistence();
-			stream = new BufferedReader(new FileReader(menuFilePath));
-		} catch (FileNotFoundException e) {
-			System.err.println(e.getMessage());
-		}
-
-		try {
-			line = stream.readLine();
-			while (line != null) {
+			scanner = new Scanner(new File(menuFilePath));
+			int index = 0;
+			String line = null;
+			while (scanner.hasNextLine()) {
+				line = scanner.nextLine();
 				checkForEntryFormat(line);
 				MenuEntry entry = new MenuEntry(line);
 				index = entries.values().size();
 				entries.put(index, entry);
 			}
-			stream.close();
-		} catch (IOException e) {
+			scanner.close();
+		} catch (FileNotFoundException e) {
 			System.err.println(e.getMessage());
 		} catch (WrongMenuEntryFormatException e) {
 			System.err.println("The file specified by " + menuFilePath + " has wrong format!");
