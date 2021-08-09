@@ -30,7 +30,7 @@ public class Bill {
 		this.tableNum = tableNum;
 		lookForTableOrders();
 		setAmount();
-		generateBillFile("./");
+		generateBillFile("Files");
 	}
 
 	/**
@@ -134,10 +134,14 @@ public class Bill {
 	 *             to be saved. Path has to be in UNIX format!
 	 */
 	public void generateBillFile(String path) {
-		path = path + "\"" + "billTable" + this.tableNum + ".txt";
+		path = path + "/" + "billTable" + this.tableNum + ".txt";
 		try {
 			File file = new File(path);
-			BufferedWriter stream = new BufferedWriter(new FileWriter(file, false));
+			if (file.exists() == true) {
+				file.delete();
+			}
+			file.createNewFile();
+			BufferedWriter stream = new BufferedWriter(new FileWriter(file));
 			stream.write(this.toString());
 			stream.flush();
 			stream.close();
