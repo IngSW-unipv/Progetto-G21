@@ -322,7 +322,7 @@ public class Menu implements MenuInterface {
 	 * @throws WrongEntryFormatException.
 	 */
 	private void checkForEntryFormat(String dishEntry) throws WrongMenuEntryFormatException {
-		Pattern p = Pattern.compile("^[A-Za-z0-9 ]*, \\d{1,5}\\.{0,1}\\d{0,2}$");
+		Pattern p = Pattern.compile("^[A-Za-z0-9אטלעשביםףתגךמפûדסץהכןצüÿ ]*, \\d{1,5}\\.{0,1}\\d{0,2}$");
 		Matcher m = p.matcher(dishEntry);
 		boolean b = m.matches();
 
