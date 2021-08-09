@@ -1,4 +1,4 @@
-package stagingPackage;
+package strategies;
 
 public interface StrategyInterface {
 	/** The interface does not apply any restrictions on strategy access method, but it is

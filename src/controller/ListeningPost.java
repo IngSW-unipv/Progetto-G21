@@ -1,13 +1,17 @@
-package stagingPackage;
+package controller;
 
 public class ListeningPost {
 
+	/**ListeningPost class, once instantiated, it can dynamically change the bound controller in order to
+	 * forward messages to different parts of the program.*/
 	private static ListeningPost l;
 	private Controller c;
 	private ListeningPost() {
 	}
 	
 	public static ListeningPost invokeListeningPost() {
+		/**This method creates, through the singleton pattern, the listening post, and 
+		 * allows it to be invoked by different parts of the program*/
 		if (l==null){
 			l=new ListeningPost();
 			return l;
@@ -17,9 +21,14 @@ public class ListeningPost {
 	}
 	
 	public void bindController(Controller c) {
+		/** this method can be invoked when needed to change the bound controllers, and though it the strategies*/
+		
 		this.c=c;
 	}
 	public void NotifyListeningPost(String strategyRequired, String[] args) {
+		/**This method allows an object to communicate a message composed by the name of the strategy,
+		 * which can be interpreted as a service provided by the bound controller, and a vector of strings as arguments
+		 * to be passed to said strategy, which will be executed by the bound controller*/
 		if (c== null) {
 			System.out.println("Controller not bound. Bind controller to run this method.");
 		}

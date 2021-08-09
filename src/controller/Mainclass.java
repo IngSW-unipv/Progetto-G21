@@ -1,4 +1,4 @@
-package stagingPackage;
+package controller;
 public class Mainclass {
 
 	public static void main(String[] args) {

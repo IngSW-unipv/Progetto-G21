@@ -1,6 +1,12 @@
-package stagingPackage;
+package strategies;
+
+import controller.Controller;
 
 public class GenericTestStrategy extends StrategyAbstract{
+	/** This is a strategy example. Every strategy must be constructed
+	 * via the singleton pattern, otherwise it will cause problems. I can't force
+	 * such creation as far as i know from the abstract, unless i restructure the methods, so 
+	 * follow this comment when creating, at least for now, eventually i will find a way to force it.*/
 	private static GenericTestStrategy t;
 	public static GenericTestStrategy createStrategy(Controller c) {
 		if (t==null)
