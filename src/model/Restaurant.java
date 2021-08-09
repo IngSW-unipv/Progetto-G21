@@ -34,6 +34,15 @@ public class Restaurant {
 		restaurantMenu = Menu.getInstance(menuFilePath);
 		orderManager = OrderManager.getInstance();
 		tables = new HashSet<Integer>(0);
+
+		File tablesFile = new File(tablesFilePath);
+		if (tablesFile.exists() == false || tablesFile.isDirectory()) {
+			try {
+				tablesFile.createNewFile();
+			} catch (IOException e) {
+				System.err.println(e.getMessage());
+			}
+		}
 		parseTablesFile();
 	}
 
@@ -178,18 +187,6 @@ public class Restaurant {
 	}
 
 	/**
-	 * Method used to check if tablesFile.txt exists.
-	 *
-	 * @throws FileNotFoundException.
-	 */
-	private void checkForTablesFileExistance() throws FileNotFoundException {
-		File tablesFile = new File(tablesFilePath);
-		if (tablesFile.exists() == false || tablesFile.isDirectory() == true) {
-			throw new FileNotFoundException();
-		}
-	}
-
-	/**
 	 * Method that is used to check if a specified table exists.
 	 * 
 	 * @param tableNum specifies the involved table.
@@ -224,7 +221,6 @@ public class Restaurant {
 	public void parseTablesFile() {
 		BufferedReader stream = null;
 		try {
-			checkForTablesFileExistance();
 			stream = new BufferedReader(new FileReader(tablesFilePath));
 			String line = null;
 			while ((line = stream.readLine()) != null) {
@@ -232,8 +228,6 @@ public class Restaurant {
 				tables.add(Integer.parseInt(line));
 			}
 			stream.close();
-		} catch (FileNotFoundException e) {
-			System.err.println(e.getMessage());
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 		} catch (WrongTableEntryFormatException e) {
