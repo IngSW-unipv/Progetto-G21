@@ -39,13 +39,16 @@ public class Menu implements MenuInterface {
 	 */
 	private Menu(String path) {
 		entries = new LinkedHashMap<Integer, MenuEntry>();
-		try {
-			menuFilePath = path;
-			checkForMenuFileExistence();
-			parseMenuFile();
-		} catch (FileNotFoundException e) {
-			System.err.println(e.getMessage());
+		menuFilePath = path;
+		File menuFile = new File(menuFilePath);
+		if (menuFile.exists() == false || menuFile.isDirectory()) {
+			try {
+				menuFile.createNewFile();
+			} catch (IOException e) {
+				System.err.println(e.getMessage());
+			}
 		}
+		parseMenuFile();
 	}
 
 	/**
@@ -281,25 +284,8 @@ public class Menu implements MenuInterface {
 	 * parseMenuFile to recreate a new menu.
 	 */
 	private void rewriteMenu() {
-		try {
-			checkForMenuFileExistence();
-			entries.clear();
-			parseMenuFile();
-		} catch (FileNotFoundException e) {
-			System.err.println(e.getMessage());
-		}
-	}
-
-	/**
-	 * Method used to check if menuFile.txt exists.
-	 * 
-	 * @throws FileNotFoundException.
-	 */
-	private void checkForMenuFileExistence() throws FileNotFoundException {
-		File menuFile = new File(menuFilePath);
-		if (menuFile.exists() == false || menuFile.isDirectory() == true) {
-			throw new FileNotFoundException();
-		}
+		entries.clear();
+		parseMenuFile();
 	}
 
 	/**
@@ -338,7 +324,6 @@ public class Menu implements MenuInterface {
 	public void parseMenuFile() {
 		BufferedReader stream = null;
 		try {
-			checkForMenuFileExistence();
 			stream = new BufferedReader(new FileReader(menuFilePath));
 			int index = 0;
 			String line = null;
@@ -349,8 +334,6 @@ public class Menu implements MenuInterface {
 				entries.put(index, entry);
 			}
 			stream.close();
-		} catch (FileNotFoundException e) {
-			System.err.println(e.getMessage());
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 		} catch (WrongMenuEntryFormatException e) {
