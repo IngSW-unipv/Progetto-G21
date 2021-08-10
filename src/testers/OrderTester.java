@@ -12,11 +12,30 @@ import model.Order;
  * https://junit.org/junit5/docs/5.0.1/api/org/junit/jupiter/api/Assertions.html */
 
 class OrderTester {
+	MenuEntry orderedEntry = new MenuEntry("Pasta al pomodoro, 3");
+	Order order = new Order(1, orderedEntry);
+	Order orderNumTwo = new Order(1, new MenuEntry("Pane, 1"));
 
-	Order order = new Order(1, new MenuEntry("Pasta al pomodoro, 3"));
+	@Test
+	void getOrdersCounterTester() {
+		System.out.println(Order.getOrdersCounter());
+		assertEquals(2, Order.getOrdersCounter());
+
+	}
 
 	@Test
 	void getOrderNumTester() {
 		assertEquals(1, order.getTableNum());
 	}
+
+	@Test
+	void getTableNumTester() {
+		assertEquals(1, order.getTableNum());
+	}
+
+	@Test
+	void getOrderedEntryTester() {
+		assertEquals(orderedEntry, order.getOrderedEntry());
+	}
+
 }

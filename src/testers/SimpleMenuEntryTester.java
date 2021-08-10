@@ -2,7 +2,7 @@ package testers;
 
 import model.MenuEntry;
 
-public class MenuEntryTester {
+public class SimpleMenuEntryTester {
 
 	public static void main(String[] args) {
 		MenuEntry entry = new MenuEntry("Pasta alla carbonara", 7.50);

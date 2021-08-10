@@ -7,16 +7,16 @@ import java.util.Iterator;
 import model.Menu;
 import model.MenuEntry;
 
-public class MenuTester {
+public class SimpleMenuTester {
 
 	public static void main(String[] args) {
 
 		File menuFile = new File("Files/menuFile.txt");
-		
-		if(menuFile.exists()) {
+
+		if (menuFile.exists()) {
 			menuFile.delete();
 		}
-		
+
 		Menu menu = Menu.getInstance(menuFile.getAbsolutePath());
 
 		showMenu(menu);
