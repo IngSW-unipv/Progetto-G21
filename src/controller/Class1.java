@@ -12,11 +12,11 @@ public class Class1 {
 		 * the exact name of the strategy and you'll be sure that the invocation goes correctly*/
 		this.str= new String[1];
 		str[0]="La classe 1 è stata creata";
-		ListeningPost.invokeListeningPost().NotifyListeningPost(GenericTestStrategy.getStrategyName(), str);
+		ListeningPost.invokeListeningPost().notifyListeningPost(GenericTestStrategy.getStrategyName(), str);
 	}
 	
 	public void repeatIntroduction() {
-		ListeningPost.invokeListeningPost().NotifyListeningPost(GenericTestStrategy.getStrategyName(), str);
+		ListeningPost.invokeListeningPost().notifyListeningPost(GenericTestStrategy.getStrategyName(), str);
 	}
 	
 	

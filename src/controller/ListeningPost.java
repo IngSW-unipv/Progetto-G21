@@ -1,12 +1,14 @@
 package controller;
+import java.net.*;
 
-public class ListeningPost {
+public class ListeningPost{
 
 	/**ListeningPost class, once instantiated, it can dynamically change the bound controller in order to
 	 * forward messages to different parts of the program.*/
 	private static ListeningPost l;
 	private Controller c;
 	private ListeningPost() {
+		ThreadedServerSocket.callServer();
 	}
 	
 	public static ListeningPost invokeListeningPost() {
@@ -18,6 +20,7 @@ public class ListeningPost {
 		}
 		else
 			return l;
+		
 	}
 	
 	public void bindController(Controller c) {
@@ -25,7 +28,7 @@ public class ListeningPost {
 		
 		this.c=c;
 	}
-	public void NotifyListeningPost(String strategyRequired, String[] args) {
+	public synchronized void notifyListeningPost(String strategyRequired, String[] args) {
 		/**This method allows an object to communicate a message composed by the name of the strategy,
 		 * which can be interpreted as a service provided by the bound controller, and a vector of strings as arguments
 		 * to be passed to said strategy, which will be executed by the bound controller*/
@@ -36,5 +39,10 @@ public class ListeningPost {
 		{
 			c.strategyCall(strategyRequired, args);
 		}
+	}
+	
+	public void notifyServer(String msg) {
+		/** Simple method to notify the server of an outbound message*/
+		ThreadedServerSocket.callServer().sendMessage(msg);
 	}
 }
