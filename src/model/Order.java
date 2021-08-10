@@ -23,7 +23,7 @@ public class Order {
 	private static int ordersCounter = 0;
 
 	/**
-	 * Simple class contructor.
+	 * Simple class constructor.
 	 * 
 	 * @param tableNum     specifies order's table.
 	 * @param orderedEntry specifies the ordered item.
