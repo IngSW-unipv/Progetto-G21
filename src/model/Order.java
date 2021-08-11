@@ -95,6 +95,13 @@ public class Order {
 	public static int getOrdersCounter() {
 		return ordersCounter;
 	}
+	
+	/**
+	 * @param ordersCounter.
+	 */
+	public static void setOrdersCounter(int ordersCounter) {
+		Order.ordersCounter = ordersCounter;
+	}
 
 	/**
 	 * @param isSeen flag.
