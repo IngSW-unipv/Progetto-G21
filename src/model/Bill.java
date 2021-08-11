@@ -94,7 +94,6 @@ public class Bill {
 	 * @return bills' total amount.
 	 */
 	public double getAmount() {
-		setAmount();
 		return amount;
 	}
 
@@ -114,7 +113,6 @@ public class Bill {
 	 */
 	@Override
 	public String toString() {
-		setAmount();
 		String output = "Table: " + Integer.toString(tableNum) + "\n";
 		Iterator<Order> i = orders.iterator();
 		while (i.hasNext()) {
