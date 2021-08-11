@@ -1,5 +1,3 @@
-
-
 package controller;
 import java.util.HashMap;
 import strategies.*;
@@ -7,6 +5,7 @@ import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassGraphClassLoader;
 import io.github.classgraph.ClassInfoList;
 import io.github.classgraph.ScanResult;
+import model.Restaurant;
 
 public class Controller {
 	
@@ -16,6 +15,7 @@ public class Controller {
 	private static Controller c;
 	private ListeningPost post;
 	private HashMap<String, StrategyAbstract> strategies;
+	private Restaurant rst;
 	protected static Controller createController() { 
 		if (c==null) {
 			c=new Controller();
@@ -25,10 +25,16 @@ public class Controller {
 	}
 	
 	private Controller() {
+		rst=Restaurant.getInstance();
 		strategies=new HashMap<String,StrategyAbstract>();
 		post=ListeningPost.invokeListeningPost();
 		post.bindController(this);
 		createStrategies();
+		
+	}
+	
+	public Restaurant getRestaurant() {
+		return rst;
 	}
 	
 	private void createStrategies() {
