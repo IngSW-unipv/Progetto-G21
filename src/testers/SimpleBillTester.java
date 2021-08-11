@@ -19,6 +19,7 @@ public class SimpleBillTester {
 
 		ArrayList<Order> orders = null;
 		OrderManager orderManager = OrderManager.getInstance();
+
 		orderManager.addOrder(o1);
 		orderManager.addOrder(o2);
 		orderManager.seeOrderToNotPrepared(o1);
@@ -28,9 +29,6 @@ public class SimpleBillTester {
 		orderManager.deliverOrder(o1);
 		orderManager.deliverOrder(o2);
 
-		// orders.add(o1);
-		// orders.add(o2);
-
 		Bill bill = new Bill(1);
 		orders = bill.getOrders();
 
@@ -39,12 +37,31 @@ public class SimpleBillTester {
 			System.out.println(i.next().toString());
 		}
 
-		/*
-		 * System.out.println(orders); System.out.println(bill.getOrders());
-		 * 
-		 * if (orders.equals(bill.getOrders())) { System.out.println("OK"); } else {
-		 * System.out.println("TEST FAILED"); }
-		 */
+		// Method getOrders() tester
+		if (orders.equals(bill.getOrders())) {
+			System.out.println("OK");
+		} else {
+			System.out.println("TEST FAILED");
+		}
+
+		// Method getTableNum() tester
+		if (bill.getTableNum() == 1) {
+			System.out.println("OK");
+		} else {
+			System.out.println("TEST FAILED");
+		}
+
+		// Method getAmount() tester
+		System.out.println(bill.getAmount());
+		if (bill.getAmount() == 13.0) {
+			System.out.println("OK");
+		} else {
+			System.out.println("TEST FAILED");
+		}
+
+		bill.toString();
+		bill.generateBillFile("C:\\Users\\didyk\\Progetto-G21");
+
 	}
 
 }
