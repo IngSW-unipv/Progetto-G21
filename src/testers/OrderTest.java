@@ -51,9 +51,16 @@ public class OrderTest {
 	
 	@Test 
 	 public void testGetOrdersCounter() {
-		System.out.println(order2.getOrdersCounter());
 		assertEquals(3, order1.getOrdersCounter());
 		assertEquals(3, order2.getOrdersCounter());
 		assertEquals(3, order3.getOrdersCounter());
+	 }
+	
+	
+	@Test 
+	 public void testToString() {
+		assertEquals("Order: 1, isSeen: false, isPreparable: true, isPrepared: false, isDelivered: false", order1.toString());
+		assertEquals("Order: 2, isSeen: false, isPreparable: true, isPrepared: false, isDelivered: false", order2.toString());
+		assertEquals("Order: 3, isSeen: false, isPreparable: true, isPrepared: false, isDelivered: false", order3.toString());
 	 }
 }

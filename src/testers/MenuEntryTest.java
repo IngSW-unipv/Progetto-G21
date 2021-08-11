@@ -8,7 +8,6 @@ import model.MenuEntry;
 
 public class MenuEntryTest {
 
-	
 	MenuEntry entry1 = new MenuEntry ("Risotto al pesce persico", 18);
 	MenuEntry entry2 = new MenuEntry ("Risotto alla milanese, 14");
 	
@@ -18,11 +17,13 @@ public class MenuEntryTest {
 		assertEquals ("Risotto alla milanese", entry2.getDishName());
 	}
 
+	
 	@Test
 	public void testGetDishPrice() {
 		assertEquals (18, entry1.getDishPrice());
 		assertEquals (14, entry2.getDishPrice());
 	}
+	
 	
 	@Test
 	public void testEditEntryName() {
@@ -33,6 +34,7 @@ public class MenuEntryTest {
 		assertEquals ("Risotto alla milanese con funghi", entry2.getDishName());
 	}
 	
+	
 	@Test
 	public void testEditEntryPrice() {
 		entry1.editEntryPrice(17);
@@ -41,6 +43,7 @@ public class MenuEntryTest {
 		entry2.editEntryPrice(15);
 		assertEquals (15, entry2.getDishPrice());
 	}
+	
 	
 	@Test
 	public void testToString() {
