@@ -53,7 +53,7 @@ public class ThreadedServerSocket extends Thread {
 		/** The thread in this server is used to keep a constant, unhindered, eye on the input buffer,
 		 * so as to immediately perform the required services when the message arrives, through invocation of the ListeningPost*/
 		while(true) {
-			Pattern p=Pattern.compile("^[.+, ]+.+$");
+			Pattern p=Pattern.compile("^([a-zA-Z0-9]+, )+[a-zA-Z0-9]+$");
 			String[] unpackedMessage;
 			try {
 				String message;
