@@ -16,9 +16,9 @@ public class OrderManagerTest {
 	OrderManager orderManager = OrderManager.getInstance();
 	
 	ArrayList<Order> notSeen = new ArrayList<Order> ();
-	ArrayList<Order> notPrepared = new ArrayList<Order> (); // unPrepared = seen.
+	ArrayList<Order> notPrepared = new ArrayList<Order> (); 
 	ArrayList<Order> notPreparable = new ArrayList<Order> ();
-	ArrayList<Order> notDelivered = new ArrayList<Order> (); // unDelivered = prepared.
+	ArrayList<Order> notDelivered = new ArrayList<Order> (); 
 	ArrayList<Order> delivered = new ArrayList<Order> ();
 	
 	MenuEntry entry1 = new MenuEntry("Lasagne", 11);
@@ -42,6 +42,13 @@ public class OrderManagerTest {
     	orderManager.removeOrder(order1);
     	notSeen.remove(order1);
 		assertEquals(notSeen, orderManager.getNotSeen());
+		
+		orderManager.removeOrder(order1);
+		orderManager.removeOrder(order2);
+		orderManager.removeOrder(order3);
+		notSeen.remove(order1);
+		notSeen.remove(order2);
+		notSeen.remove(order3);
 	}
 	
 	
@@ -51,6 +58,9 @@ public class OrderManagerTest {
     	orderManager.seeOrderToNotPrepared(order1);
     	notPrepared.add(order1);
 		assertEquals(notPrepared, orderManager.getNotPrepared());
+		
+		notPrepared.remove(order1);
+		orderManager.getNotPrepared().remove(order1);
 	}
   
 	
@@ -60,6 +70,9 @@ public class OrderManagerTest {
     	orderManager.seeOrderToNotPreparable(order2);
     	notPreparable.add(order2);
 		assertEquals(notPreparable, orderManager.getNotPreparable());
+		
+    	notPreparable.remove(order2);
+		orderManager.getNotPreparable().remove(order2);
 	}
 	
 	
@@ -69,6 +82,9 @@ public class OrderManagerTest {
     	orderManager.prepareOrder(order3);
     	notDelivered.add(order3);
 		assertEquals(notDelivered, orderManager.getNotDelivered());
+		
+    	notDelivered.remove(order3);
+		orderManager.getNotDelivered().remove(order3);
 	}
 	
 	
@@ -78,6 +94,35 @@ public class OrderManagerTest {
     	orderManager.deliverOrder(order3);
     	delivered.add(order3);
 		assertEquals(delivered, orderManager.getDelivered());
+		
+    	delivered.remove(order3);
+		orderManager.getDelivered().remove(order3);
 	}
 	
+	
+	@Test
+	public void generalTest()
+	{
+		orderManager.addOrder(order1);
+		notSeen.add(order1);
+		assertEquals(notSeen, orderManager.getNotSeen());
+		
+		orderManager.seeOrderToNotPrepared(order1);
+		notPrepared.add(order1);
+		notSeen.remove(order1);
+		assertEquals(notPrepared, orderManager.getNotPrepared());
+		assertEquals(notSeen, orderManager.getNotSeen());
+		
+		orderManager.prepareOrder(order1);
+		notDelivered.add(order1);
+		notPrepared.remove(order1);
+		assertEquals(notDelivered, orderManager.getNotDelivered());
+		assertEquals(notPrepared, orderManager.getNotPrepared());
+		
+		orderManager.deliverOrder(order1);
+		delivered.add(order1);
+		notDelivered.remove(order1);
+		assertEquals(delivered, orderManager.getDelivered());
+		assertEquals(notDelivered, orderManager.getNotDelivered());
+	}
 }
