@@ -2,22 +2,27 @@ package controller;
 
 import strategies.GenericTestStrategy;
 
+/**
+ * Simple test class, this behaviour represents the standard invocation approach
+ * for the listening post.
+ */
+
 public class Class1 {
-	
-	/** Simple test class, this behaviour represents the standard invocation approach
-	 * for the listening post*/
-	private String[] str;
-	public Class1(){
-		/**Very important, always use the method [name of the strategy class].getStrategyName, it will return
-		 * the exact name of the strategy and you'll be sure that the invocation goes correctly*/
-		this.str= new String[1];
-		str[0]="La classe 1 Ã¨ stata creata";
-		ListeningPost.invokeListeningPost().notifyListeningPost(GenericTestStrategy.getStrategyName(), str);
+	private String[] string;
+
+	/**
+	 * Very important, always use the method [name of the strategy
+	 * class].getStrategyName, it will return the exact name of the strategy and
+	 * you'll be sure that the invocation goes correctly.
+	 */
+	public Class1() {
+		this.string = new String[1];
+		string[0] = "La classe 1 è stata creata";
+		ListeningPost.getInstance().notifyListeningPost(GenericTestStrategy.getStrategyName(), string);
 	}
-	
+
 	public void repeatIntroduction() {
-		ListeningPost.invokeListeningPost().notifyListeningPost(GenericTestStrategy.getStrategyName(), str);
+		ListeningPost.getInstance().notifyListeningPost(GenericTestStrategy.getStrategyName(), string);
 	}
-	
-	
+
 }

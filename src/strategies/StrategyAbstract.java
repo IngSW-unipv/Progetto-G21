@@ -1,24 +1,28 @@
 package strategies;
 
-import controller.Controller;
+import controller.SystemController;
+
+/**
+ * Strategy abstract, each strategy has a execute method in common, this is the
+ * gateway to every other method you put in your strategy, since it's the only
+ * method that is invoked by the controller.
+ */
 
 public abstract class StrategyAbstract implements StrategyInterface {
+	private SystemController controller;
 
-	/**Strategy abstract, each strategy has a execute method in common, this is the gateway
-	 * to every other method you put in your strategy, since it's the only method that is invoked by
-	 * the controller.*/
-	private Controller c;
 	public static String getStrategyName() {
 		return System.class.getSimpleName();
 	}
-	
-	protected StrategyAbstract(Controller c){
-		this.c=c;
+
+	protected StrategyAbstract(SystemController controller) {
+		this.controller = controller;
 	}
-	
-	
-	public Controller getController() {
-		return c;
+
+	public SystemController getController() {
+		return controller;
 	}
+
+	@Override
 	public abstract void execute(String[] args);
 }
