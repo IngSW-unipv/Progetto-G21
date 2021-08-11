@@ -15,30 +15,30 @@
    <children>
       <TabPane layoutY="67.0" prefHeight="530.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Order manager">
+          <Tab fx:id="orderManagerTab" text="Order manager">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Pane prefHeight="300.0" prefWidth="350.0">
+                        <Pane fx:id="createOrderPane" prefHeight="300.0" prefWidth="350.0">
                            <children>
-                              <Label layoutX="14.0" layoutY="14.0" text="Create a new order:">
+                              <Label fx:id="createOrderLabel" layoutX="14.0" layoutY="14.0" text="Create a new order:">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="63.0" layoutY="60.0" text="Table">
+                              <Label fx:id="tableLabel1" layoutX="63.0" layoutY="60.0" text="Table">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="17.0" layoutY="100.0" text="Menu entry">
+                              <Label fx:id="entryLabel1" layoutX="17.0" layoutY="100.0" text="Menu entry">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="118.0" layoutY="61.0" />
-                              <TextField layoutX="118.0" layoutY="101.0" />
-                              <Button layoutX="163.0" layoutY="141.0" mnemonicParsing="false" text="Create">
+                              <TextField fx:id="orderTableField" layoutX="118.0" layoutY="61.0" />
+                              <TextField fx:id="orderEntryField" layoutX="118.0" layoutY="101.0" />
+                              <Button fx:id="createOrderButton" layoutX="163.0" layoutY="141.0" mnemonicParsing="false" text="Create">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -47,97 +47,97 @@
                         </Pane>
                         <ScrollPane layoutX="400.0" prefHeight="505.0" prefWidth="400.0">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="400.0" />
+                            <AnchorPane fx:id="ordersScrollPane" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="400.0" />
                           </content>
                         </ScrollPane>
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Bill creator">
+          <Tab fx:id="billCreatorTab" text="Bill creator">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Pane prefHeight="300.0" prefWidth="350.0">
+                        <Pane fx:id="printBillPane" prefHeight="300.0" prefWidth="350.0">
                            <children>
-                              <Label layoutX="14.0" layoutY="14.0" text="Print a new bill:">
+                              <Label fx:id="printBillLabel" layoutX="14.0" layoutY="14.0" text="Print a new bill:">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="63.0" layoutY="60.0" text="Table">
+                              <Label fx:id="tableLabel2" layoutX="63.0" layoutY="60.0" text="Table">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="118.0" layoutY="61.0" />
-                              <Button layoutX="169.0" layoutY="98.0" mnemonicParsing="false" text="Print">
+                              <TextField fx:id="billTableField" layoutX="118.0" layoutY="61.0" />
+                              <Button fx:id="printBillButton" layoutX="169.0" layoutY="98.0" mnemonicParsing="false" text="Print">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Button>
                            </children>
                         </Pane>
-                        <TextArea layoutX="400.0" prefHeight="500.0" prefWidth="400.0" />
+                        <TextArea fx:id="printBillField" layoutX="400.0" prefHeight="500.0" prefWidth="400.0" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="Menu modifier">
+            <Tab fx:id="menuModifierTab" text="Menu modifier">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Pane prefHeight="190.0" prefWidth="350.0">
+                        <Pane fx:id="addEntryPane" prefHeight="190.0" prefWidth="350.0">
                            <children>
-                              <Label layoutX="14.0" layoutY="14.0" text="Add a new entry:">
+                              <Label fx:id="addEntryLabel" layoutX="14.0" layoutY="14.0" text="Add a new entry:">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="63.0" layoutY="60.0" text="Name">
+                              <Label fx:id="nameLabel1" layoutX="63.0" layoutY="60.0" text="Name">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="72.0" layoutY="100.0" text="Price">
+                              <Label fx:id="priceLabel1" layoutX="72.0" layoutY="100.0" text="Price">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="118.0" layoutY="61.0" />
-                              <TextField layoutX="118.0" layoutY="101.0" />
-                              <Button layoutX="170.0" layoutY="140.0" mnemonicParsing="false" text="Add">
+                              <TextField fx:id="addEntryNameField" layoutX="118.0" layoutY="61.0" />
+                              <TextField fx:id="addEntryNamePrice" layoutX="118.0" layoutY="101.0" />
+                              <Button fx:id="AddMenuEntryButton" layoutX="170.0" layoutY="140.0" mnemonicParsing="false" text="Add">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Button>
                            </children>
                         </Pane>
-                        <Pane layoutY="190.0" prefHeight="228.0" prefWidth="350.0">
+                        <Pane fx:id="removeEntryPane" layoutY="190.0" prefHeight="228.0" prefWidth="350.0">
                            <children>
-                              <Label layoutX="14.0" layoutY="14.0" text="Remove an entry:">
+                              <Label fx:id="removeEntryLabel" layoutX="14.0" layoutY="14.0" text="Remove an entry:">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="63.0" layoutY="60.0" text="Name">
+                              <Label fx:id="nameLabel2" layoutX="63.0" layoutY="60.0" text="Name">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="72.0" layoutY="100.0" text="Price">
+                              <Label fx:id="priceLabel2" layoutX="72.0" layoutY="100.0" text="Price">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="118.0" layoutY="61.0" />
-                              <TextField layoutX="118.0" layoutY="101.0" />
-                              <Button layoutX="158.0" layoutY="139.0" mnemonicParsing="false" text="Remove">
+                              <TextField fx:id="removeEntryNameField" layoutX="118.0" layoutY="61.0" />
+                              <TextField fx:id="removeEntryPriceField" layoutX="118.0" layoutY="101.0" />
+                              <Button fx:id="removeMenuEntryButton" layoutX="158.0" layoutY="139.0" mnemonicParsing="false" text="Remove">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Button>
-                              <Label layoutX="175.0" layoutY="187.0" text="Label">
+                              <Label fx:id="addRemovePromptLabel" layoutX="175.0" layoutY="187.0" text="Label">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -146,7 +146,7 @@
                         </Pane>
                         <ScrollPane layoutX="400.0" prefHeight="505.0" prefWidth="400.0">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="400.0" />
+                              <AnchorPane fx:id="menuScrollPane" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="400.0" />
                            </content>
                         </ScrollPane>
                      </children></AnchorPane>
@@ -154,7 +154,7 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Label layoutX="226.0" layoutY="14.0" text="Waiter's control panel">
+      <Label fx:id="titleLabel" layoutX="226.0" layoutY="14.0" text="Waiter's control panel">
          <font>
             <Font size="36.0" />
          </font>
