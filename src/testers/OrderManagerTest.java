@@ -124,5 +124,29 @@ public class OrderManagerTest {
 		notDelivered.remove(order1);
 		assertEquals(delivered, orderManager.getDelivered());
 		assertEquals(notDelivered, orderManager.getNotDelivered());
+		
+		delivered.remove(order1);
+		orderManager.getDelivered().remove(order1);
+	}
+	
+	
+	@Test
+	public void testRemoveTableAllOrders()
+	{
+		
+		orderManager.addOrder(order1);
+		notSeen.add(order1);
+		
+		orderManager.prepareOrder(order2);
+		notDelivered.add(order2);
+		
+		orderManager.removeTableAllOrders(1);
+		System.out.println(orderManager.getNotDelivered().size());
+
+		notSeen.remove(order1);
+		notDelivered.remove(order2);
+		
+		assertEquals(notSeen, orderManager.getNotSeen());
+		assertEquals(notDelivered, orderManager.getNotDelivered());
 	}
 }
