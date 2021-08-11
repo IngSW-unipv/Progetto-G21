@@ -129,11 +129,10 @@ public class OrderManagerTest {
 		orderManager.getDelivered().remove(order1);
 	}
 	
-	
+
 	@Test
 	public void testRemoveTableAllOrders()
 	{
-		
 		orderManager.addOrder(order1);
 		notSeen.add(order1);
 		
@@ -141,8 +140,6 @@ public class OrderManagerTest {
 		notDelivered.add(order2);
 		
 		orderManager.removeTableAllOrders(1);
-		System.out.println(orderManager.getNotDelivered().size());
-
 		notSeen.remove(order1);
 		notDelivered.remove(order2);
 		

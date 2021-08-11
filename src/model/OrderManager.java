@@ -162,12 +162,13 @@ public class OrderManager implements OrderManegerInterface {
 	 */
 	@Override
 	public void removeTableAllOrders(int tableNum) {
-		Iterator<Order> i1 = notSeen.iterator();
-		Iterator<Order> i2 = notPrepared.iterator();
-		Iterator<Order> i3 = notPreparable.iterator();
-		Iterator<Order> i4 = notDelivered.iterator();
-		Iterator<Order> i5 = delivered.iterator();
-
+		
+		Iterator<Order> i1 = new ArrayList<>(notSeen).iterator();
+		Iterator<Order> i2 = new ArrayList<>(notPrepared).iterator();
+		Iterator<Order> i3 = new ArrayList<>(notPreparable).iterator();
+		Iterator<Order> i4 = new ArrayList<>(notDelivered).iterator();
+		Iterator<Order> i5 = new ArrayList<>(delivered).iterator();
+	
 		while (i1.hasNext()) {
 			Order order = i1.next();
 			if (order.getTableNum() == tableNum) {

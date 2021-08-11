@@ -20,13 +20,10 @@ public class SimpleOrderManagerTest {
 		
 		
 		orderManager.addOrder(order1);
-//		orderManager.addOrder(order2);
-//		orderManager.prepareOrder(order2);
+		orderManager.addOrder(order2);
+		orderManager.prepareOrder(order2);
 			
-	   //orderManager.getNotSeen();
-		
-	   // System.out.println(orderManager.getNotSeen());
-	    
+	    	    
 	    orderManager.removeTableAllOrders(1);
 
 
