@@ -12,16 +12,15 @@ import model.Order;
  * https://junit.org/junit5/docs/5.0.1/api/org/junit/jupiter/api/Assertions.html */
 
 public class OrderTest {
-	
+
 	MenuEntry orderedEntry1 = new MenuEntry("Pasta al pomodoro, 7");
 	MenuEntry orderedEntry2 = new MenuEntry("Cotoletta alla milanese, 8");
-	MenuEntry orderedEntry3 = new MenuEntry("Antipasto misto", 7);
-	
+	MenuEntry orderedEntry3 = new MenuEntry("Antipasto misto, 7");
+
 	Order order1 = new Order(1, orderedEntry1);
 	Order order2 = new Order(1, orderedEntry2);
 	Order order3 = new Order(2, orderedEntry3);
-	
-	
+
 	@Test
 	public void testGetOrderNum() {
 		assertEquals(1, order1.getOrderNum());
@@ -30,7 +29,6 @@ public class OrderTest {
 		Order.setOrdersCounter(0);
 	}
 
-	
 	@Test
 	public void testGetTableNum() {
 		assertEquals(1, order1.getTableNum());
@@ -39,7 +37,6 @@ public class OrderTest {
 		Order.setOrdersCounter(0);
 	}
 
-	
 	@Test
 	public void testGetOrderedEntry() {
 		assertEquals(orderedEntry1, order1.getOrderedEntry());
@@ -47,20 +44,21 @@ public class OrderTest {
 		assertEquals(orderedEntry3, order3.getOrderedEntry());
 		Order.setOrdersCounter(0);
 	}
-	
-	
-	@Test 
-	 public void testGetOrdersCounter() {
+
+	@Test
+	public void testGetOrdersCounter() {
 		assertEquals(3, order1.getOrdersCounter());
 		assertEquals(3, order2.getOrdersCounter());
 		assertEquals(3, order3.getOrdersCounter());
-	 }
-	
-	
-	@Test 
-	 public void testToString() {
-		assertEquals("Order: 1, isSeen: false, isPreparable: true, isPrepared: false, isDelivered: false", order1.toString());
-		assertEquals("Order: 2, isSeen: false, isPreparable: true, isPrepared: false, isDelivered: false", order2.toString());
-		assertEquals("Order: 3, isSeen: false, isPreparable: true, isPrepared: false, isDelivered: false", order3.toString());
-	 }
+	}
+
+	@Test
+	public void testToString() {
+		assertEquals("Order: 1, isSeen: false, isPreparable: true, isPrepared: false, isDelivered: false",
+				order1.toString());
+		assertEquals("Order: 2, isSeen: false, isPreparable: true, isPrepared: false, isDelivered: false",
+				order2.toString());
+		assertEquals("Order: 3, isSeen: false, isPreparable: true, isPrepared: false, isDelivered: false",
+				order3.toString());
+	}
 }
