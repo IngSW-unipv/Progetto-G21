@@ -18,10 +18,10 @@ class BillTest {
 
 	ArrayList<Order> orders = null;
 	OrderManager orderManager = OrderManager.getInstance();
-	Bill bill = new Bill(1);
 
-	@Test
-	void testGetOrders() {
+	Bill bill = null;
+
+	void addOrders() {
 		orderManager.addOrder(o1);
 		orderManager.addOrder(o2);
 		orderManager.seeOrderToNotPrepared(o1);
@@ -31,26 +31,37 @@ class BillTest {
 		orderManager.deliverOrder(o1);
 		orderManager.deliverOrder(o2);
 
+		bill = new Bill(1);
 		orders = bill.getOrders();
-
 		Iterator<Order> i = orders.iterator();
 		while (i.hasNext()) {
 			System.out.println(i.next().toString());
 		}
 
+	}
+
+	@Test
+	void testGetOrders() {
+		addOrders();
 		assertEquals(orders, bill.getOrders());
 	}
 
+	@Test
 	void testGetTableNum() {
+		addOrders();
 		assertEquals(1, bill.getTableNum());
 	}
 
+	@Test
 	void testGetAmount() {
+		addOrders();
 		assertEquals(13.0, bill.getAmount());
 	}
 
+	@Test
 	void testToString() {
-		String string = "Table: 1\r\n" + "Pasta al pomodoro, 5\r\n" + "Tiramisù, 8\r\n" + "Total: 13,00 €";
+		addOrders();
+		String string = "Table: 1\n" + "Pasta al pomodoro, 5\n" + "Tiramisù, 8\n" + "Total: 13,00 €";
 		assertEquals(string, bill.toString());
 
 	}
