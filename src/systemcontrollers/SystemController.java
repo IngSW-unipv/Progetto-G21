@@ -1,4 +1,4 @@
-package controller;
+package systemcontrollers;
 
 import java.util.HashMap;
 
@@ -17,14 +17,10 @@ public class SystemController {
 	private HashMap<String, StrategyAbstract> strategies;
 	private Restaurant restaurant;
 
-	public static SystemController getInstance() {
-		if (controller == null) {
-			controller = new SystemController();
-			return controller;
-		} else
-			return controller;
-	}
-
+	/**
+	 * SystemController default constructor (private in order to respect Singleton
+	 * pattern).
+	 */
 	private SystemController() {
 		restaurant = Restaurant.getInstance();
 		strategies = new HashMap<String, StrategyAbstract>();
@@ -33,6 +29,23 @@ public class SystemController {
 		createStrategies();
 	}
 
+	/**
+	 * This method returns a SystemController object following the Singleton
+	 * pattern.
+	 * 
+	 * @return SystemController instance.
+	 *
+	 */
+	public static SystemController getInstance() {
+		if (controller == null) {
+			controller = new SystemController();
+		}
+		return controller;
+	}
+
+	/**
+	 * @return Restaurant instance.
+	 */
 	public Restaurant getRestaurant() {
 		return restaurant;
 	}
@@ -50,6 +63,9 @@ public class SystemController {
 	/**
 	 * This method checks if the strategy exists and, if it does, invokes it with
 	 * the argument string vector passed in.
+	 * 
+	 * @param strategyRequired specifies the involved strategy.
+	 * @param args             specifies strategies' arguments.
 	 */
 	public void strategyCall(String strategyRequired, String[] args) {
 		StrategyAbstract s;

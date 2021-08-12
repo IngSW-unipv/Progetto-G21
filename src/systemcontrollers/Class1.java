@@ -1,4 +1,4 @@
-package controller;
+package systemcontrollers;
 
 import strategies.GenericTestStrategy;
 

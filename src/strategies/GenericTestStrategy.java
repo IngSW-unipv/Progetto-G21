@@ -1,6 +1,6 @@
 package strategies;
 
-import controller.SystemController;
+import systemcontrollers.SystemController;
 
 /**
  * This is a strategy example. Every strategy must be constructed via the

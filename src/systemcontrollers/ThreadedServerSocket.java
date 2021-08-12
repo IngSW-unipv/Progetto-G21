@@ -1,4 +1,4 @@
-package controller;
+package systemcontrollers;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -87,9 +87,9 @@ public class ThreadedServerSocket extends Thread {
 	}
 
 	/** Small method that writes a message to the socket. */
-	protected synchronized void sendMessage(String msg) {
+	protected synchronized void sendMessage(String message) {
 		try {
-			bufferWrite.write(msg + "\n");
+			bufferWrite.write(message + "\n");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
