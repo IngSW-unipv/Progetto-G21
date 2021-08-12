@@ -162,7 +162,7 @@ public class Menu implements MenuInterface {
 
 		try {
 			stream = new BufferedWriter(new FileWriter(menuFile, true));
-			stream.append("\n" + dishEntry);
+			stream.append(dishEntry + "\n");
 			stream.flush();
 			stream.close();
 		} catch (IOException e) {

@@ -51,17 +51,17 @@ public class MenuTest {
 		assertEquals(dishEntry.toString(), menu.getSpecificMenuEntry(6).toString());
 	}
 	
-//	/* ERROR */
-//	@Test
-//	public void testRemoveMenuEntry()
-//	{
-//		menu.removeMenuEntry(5);
-//	//	System.out.println(menu.getSpecificMenuEntryPrice(5));
-//		String dishEntry = "Pollo con patatine, 10";
-//		menu.addMenuEntry(dishEntry);
-//	}
+
+	@Test
+	public void testRemoveMenuEntry()
+	{
+		menu.removeMenuEntry(5);
+	//	System.out.println(menu.getSpecificMenuEntryPrice(5));
+		String dishEntry = "Pollo con patatine, 10";
+		menu.addMenuEntry(dishEntry);
+	}
 	
-//	/*ERROR*/
+
 //	@Test
 //	public void testEditSpecificMenuEntryName()
 //	{
@@ -70,7 +70,7 @@ public class MenuTest {
 //		assertEquals(newName.toString(), menu.getSpecificMenuEntryName(2).toString());
 //	}
 //	
-//	/* ERROR */
+//	
 //	@Test
 //	public void testEditSpecificMenuEntryPrice()
 //	{
