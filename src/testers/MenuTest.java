@@ -41,4 +41,13 @@ public class MenuTest {
 //	{
 //		menu.getSpecificMenuEntryPrice(8);
 //	}
+	
+	
+	@Test
+	public void testAddMenuEntry()
+	{
+		String dishEntry = "Pollo con patatine, 10";
+		menu.addMenuEntry(dishEntry);
+		assertEquals(dishEntry.toString(), menu.getSpecificMenuEntry(6).toString());
+	}
 }
