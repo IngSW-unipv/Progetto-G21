@@ -15,7 +15,6 @@ public class SimpleBillTester {
 	public static void main(String[] args) {
 		Order o1 = new Order(1, new MenuEntry("Pasta al pomodoro, 5"));
 		Order o2 = new Order(1, new MenuEntry("Tiramisù, 8"));
-		// Bill bill = new Bill(1);
 
 		ArrayList<Order> orders = null;
 		OrderManager orderManager = OrderManager.getInstance();
@@ -37,31 +36,40 @@ public class SimpleBillTester {
 			System.out.println(i.next().toString());
 		}
 
-		// Method getOrders() tester
+		// Method getOrders() tester -- OK
 		if (orders.equals(bill.getOrders())) {
 			System.out.println("OK");
 		} else {
 			System.out.println("TEST FAILED");
 		}
 
-		// Method getTableNum() tester
+		// Method getTableNum() tester -- OK
 		if (bill.getTableNum() == 1) {
 			System.out.println("OK");
 		} else {
 			System.out.println("TEST FAILED");
 		}
 
-		// Method getAmount() tester
-		System.out.println(bill.getAmount());
+		// Method getAmount() tester -- OK
 		if (bill.getAmount() == 13.0) {
 			System.out.println("OK");
 		} else {
 			System.out.println("TEST FAILED");
 		}
 
-		bill.toString();
+		// Method toString tester -- OK
+		String string = "Table: 1\n" + "Pasta al pomodoro, 5\n" + "Tiramisù, 8\n" + "Total: 13,00 €";
+		if (bill.toString().equals(string)) {
+			System.out.println("OK");
+		} else {
+			System.out.println("TEST FAILED");
+		}
+
+		// Testing the generation of the bill file -- OK
 		bill.generateBillFile("C:\\Users\\didyk\\Progetto-G21");
 
+		// Trying to generate path not found exception -- OK
+		bill.generateBillFile("C:\\Users\\WrongPath");
 	}
 
 }
