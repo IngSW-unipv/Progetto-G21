@@ -29,6 +29,7 @@ public class Menu implements MenuInterface {
 	private LinkedHashMap<Integer, MenuEntry> entries;
 	private static Menu instance = null;
 	private String menuFilePath;
+	private int fileLinesCounter;
 
 	/**
 	 * Class constructor method. The method calls checkForMenuFileExistence and
@@ -41,6 +42,7 @@ public class Menu implements MenuInterface {
 		entries = new LinkedHashMap<Integer, MenuEntry>();
 		menuFilePath = path;
 		File menuFile = new File(menuFilePath);
+		fileLinesCounter = 0;
 		if (menuFile.exists() == false || menuFile.isDirectory()) {
 			try {
 				menuFile.createNewFile();
@@ -322,12 +324,14 @@ public class Menu implements MenuInterface {
 	 * LinkedHashMap, given a menuFile.txt.
 	 */
 	public void parseMenuFile() {
+		fileLinesCounter = 0;
 		BufferedReader stream = null;
 		try {
 			stream = new BufferedReader(new FileReader(menuFilePath));
 			int index = 0;
 			String line = null;
 			while ((line = stream.readLine()) != null) {
+				fileLinesCounter++;
 				checkForEntryFormat(line);
 				MenuEntry entry = new MenuEntry(line);
 				index = entries.values().size();
@@ -339,5 +343,9 @@ public class Menu implements MenuInterface {
 		} catch (WrongMenuEntryFormatException e) {
 			System.err.println("The file specified by " + menuFilePath + " has wrong format!");
 		}
+	}
+
+	public int getFileLinesCounter() {
+		return fileLinesCounter;
 	}
 }
