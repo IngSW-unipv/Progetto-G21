@@ -20,7 +20,7 @@ class RestaurantTest {
 	HashSet<Integer> tables = new HashSet<Integer>();
 
 	/**
-	 * Method that clones the HashSet Tables in Restourant
+	 * Method that clones the HashSet Tables in Restaurant.
 	 */
 	void cloneHashSet() {
 		tables = restaurant.getTables();
@@ -29,7 +29,7 @@ class RestaurantTest {
 	/**
 	 * Method that finds the last table inserted.
 	 * 
-	 * @return tableToRemove, which specifies the last table in the file
+	 * @return tableToRemove, which specifies the last table in the file.
 	 */
 	@Test
 	int findLastTable() {
@@ -79,11 +79,10 @@ class RestaurantTest {
 	}
 
 	/**
-	 * Method used to remove the last table inserted
+	 * Method used to remove the last table inserted.
 	 * 
-	 * @param tableToRemove specifies the last entry of the file
+	 * @param tableToRemove specifies the last entry of the file.
 	 */
-
 	@Test
 	void testRemoveLastTable() {
 		restaurant.removeTable(findLastTable());
@@ -92,8 +91,8 @@ class RestaurantTest {
 	}
 
 	/**
-	 * Method used to add a random table between 1 and 31 If the number extracted is
-	 * already in the file it adds one table at the end of the HashSet
+	 * Method used to add a random table between 1 and 31. If the number extracted
+	 * is already in the file it adds one table at the end of the HashSet.
 	 * 
 	 * @param rand generates the random variable.
 	 */
