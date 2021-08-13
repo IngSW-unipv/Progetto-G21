@@ -93,7 +93,6 @@ public class Restaurant {
 	public void addTable(int tableNum) {
 		try {
 			checkForTableExistance(tableNum);
-		} catch (TableDoesNotExistsException e) {
 			Iterator<Integer> i = tables.iterator();
 			int max = 0;
 
@@ -105,8 +104,9 @@ public class Restaurant {
 			}
 
 			addTableWithoutCheck(max + 1);
+		} catch (TableDoesNotExistsException e) {
+			addTableWithoutCheck(tableNum);
 		}
-		addTableWithoutCheck(tableNum);
 	}
 
 	/**
@@ -123,7 +123,7 @@ public class Restaurant {
 
 		try {
 			stream = new BufferedWriter(new FileWriter(tablesFile, true));
-			stream.append(((Integer) (tableNum)).toString());
+			stream.append(((Integer) (tableNum)).toString() + "\n");
 			stream.flush();
 			stream.close();
 			tables.add(tableNum);
