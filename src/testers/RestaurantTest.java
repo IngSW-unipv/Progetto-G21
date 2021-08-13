@@ -3,6 +3,7 @@ package testers;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashSet;
+import java.util.Iterator;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,48 +19,90 @@ class RestaurantTest {
 	String tablesFilePath = "Files/tablesFile.txt";
 	HashSet<Integer> tables = new HashSet<Integer>();
 
-	void removeAllTables() {
-		for (int i = 1; i < restaurant.getTables().size(); i++) {
-			restaurant.removeTable(i);
-		}
+	/**
+	 * Method that clones the HashSet Tables in Restourant
+	 */
+	void cloneHashSet() {
+		tables = restaurant.getTables();
 	}
 
-	void addHashSetTables(int j) {
-		for (int i = 1; i <= j; i++) {
-			tables.add(i);
+	/**
+	 * Method that finds the last table inserted.
+	 * 
+	 * @return tableToRemove, which specifies the last table in the file
+	 */
+	@Test
+	int findLastTable() {
+		int tableToRemove = 0;
+		cloneHashSet();
+		Iterator<Integer> iterator = tables.iterator();
+		while (iterator.hasNext()) {
+			tableToRemove = iterator.next();
 		}
+		return tableToRemove;
 	}
 
+	/**
+	 * Tester of method getRestaurantMenu() in Restaurant.java
+	 */
 	@Test
 	void testGetRestaurantMenu() {
 		assertEquals(menu, restaurant.getRestaurantMenu());
 	}
 
+	/**
+	 * Tester of method getOrderManager() in Restaurant.java
+	 */
 	@Test
 	void testGetOrderManager() {
 		assertEquals(orderManager, restaurant.getOrderManager());
 	}
 
+	/**
+	 * Tester of method getTable() in Restaurant.java
+	 */
 	@Test
 	void testGetTable() {
-		addHashSetTables(3);
+		cloneHashSet();
 		assertEquals(tables, restaurant.getTables());
 	}
 
+	/**
+	 * Method used to add a table at the end of the file.
+	 * 
+	 */
 	@Test
-	void testAddTable() {
-		restaurant.addTable(4);
-		addHashSetTables(4);
-
+	void testAddTableAtTheEnd() {
+		restaurant.addTable(findLastTable() + 1);
+		cloneHashSet();
 		assertEquals(tables, restaurant.getTables());
 	}
 
-	@Test
-	void testRemoveTable() {
-		addHashSetTables(3);
-		tables.remove(3);
-		restaurant.removeTable(3);
+	/**
+	 * Method used to remove the last table inserted
+	 * 
+	 * @param tableToRemove specifies the last entry of the file
+	 */
 
+	@Test
+	void testRemoveLastTable() {
+		restaurant.removeTable(findLastTable());
+		cloneHashSet();
+		assertEquals(tables, restaurant.getTables());
+	}
+
+	/**
+	 * Method used to add a random table between 1 and 31 If the number extracted is
+	 * already in the file it adds one table at the end of the HashSet
+	 * 
+	 * @param rand generates the random variable.
+	 */
+	@Test
+	void testAddRandomTable() {
+		cloneHashSet();
+		int rand = (int) Math.floor(Math.random() * (31));
+		restaurant.addTable(rand);
+		tables.add(rand);
 		assertEquals(tables, restaurant.getTables());
 	}
 
