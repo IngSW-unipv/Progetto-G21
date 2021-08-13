@@ -32,8 +32,8 @@ public class StrategyExample extends StrategyAbstract {
 
 	}
 
-	private StrategyExample(SystemController c) {
-		super(c);
+	private StrategyExample(SystemController controller) {
+		super(controller);
 	}
 
 	@Override
