@@ -1,6 +1,6 @@
-package systemcontrollers;
+package controller;
 
-import strategies.GenericTestStrategy;
+import strategies.StrategyExample;
 
 /**
  * Simple test class, this behaviour represents the standard invocation approach
@@ -18,11 +18,11 @@ public class Class1 {
 	public Class1() {
 		this.string = new String[1];
 		string[0] = "La classe 1 è stata creata";
-		ListeningPost.getInstance().notifyListeningPost(GenericTestStrategy.getStrategyName(), string);
+		ListeningPost.getInstance().notifyListeningPost(StrategyExample.getStrategyName(), string);
 	}
 
 	public void repeatIntroduction() {
-		ListeningPost.getInstance().notifyListeningPost(GenericTestStrategy.getStrategyName(), string);
+		ListeningPost.getInstance().notifyListeningPost(StrategyExample.getStrategyName(), string);
 	}
 
 }

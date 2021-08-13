@@ -1,6 +1,6 @@
 package strategies;
 
-import systemcontrollers.SystemController;
+import controller.SystemController;
 
 /**
  * Strategy abstract, each strategy has a execute method in common, this is the

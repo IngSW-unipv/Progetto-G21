@@ -1,6 +1,6 @@
 package strategies;
 
-import systemcontrollers.SystemController;
+import controller.SystemController;
 
 /**
  * This is a strategy example. Every strategy must be constructed via the
@@ -10,18 +10,18 @@ import systemcontrollers.SystemController;
  * will find a way to force it.
  */
 
-public class GenericTestStrategy extends StrategyAbstract {
-	private static GenericTestStrategy instance;
+public class StrategyExample extends StrategyAbstract {
+	private static StrategyExample instance;
 
-	public static GenericTestStrategy createStrategy(SystemController controller) {
+	public static StrategyExample createStrategy(SystemController controller) {
 		if (instance == null) {
-			instance = new GenericTestStrategy(controller);
+			instance = new StrategyExample(controller);
 			return instance;
 		} else
 			return instance;
 	}
 
-	public static GenericTestStrategy createStrategy() {
+	public static StrategyExample createStrategy() {
 		if (instance != null)
 			return instance;
 		else {
@@ -32,7 +32,7 @@ public class GenericTestStrategy extends StrategyAbstract {
 
 	}
 
-	private GenericTestStrategy(SystemController c) {
+	private StrategyExample(SystemController c) {
 		super(c);
 	}
 

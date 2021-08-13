@@ -1,9 +1,9 @@
-package systemcontrollers;
+package controller;
 
 import java.util.HashMap;
 
 import model.Restaurant;
-import strategies.GenericTestStrategy;
+import strategies.StrategyExample;
 import strategies.StrategyAbstract;
 
 /**
@@ -57,7 +57,7 @@ public class SystemController {
 	 * itself.
 	 */
 	private void createStrategies() {
-		strategies.put(GenericTestStrategy.getStrategyName(), GenericTestStrategy.createStrategy(this));
+		strategies.put(StrategyExample.getStrategyName(), StrategyExample.createStrategy(this));
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package systemcontrollers;
+package controller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
