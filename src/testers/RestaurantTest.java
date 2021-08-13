@@ -16,7 +16,6 @@ class RestaurantTest {
 	Restaurant restaurant = Restaurant.getInstance();
 	OrderManager orderManager = OrderManager.getInstance();
 	Menu menu = Menu.getInstance("/Progetto-G21/Files/menuFile.txt");
-	String tablesFilePath = "Files/tablesFile.txt";
 	HashSet<Integer> tables = new HashSet<Integer>();
 
 	/**
