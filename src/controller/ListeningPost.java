@@ -1,4 +1,5 @@
 package controller;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -17,12 +18,14 @@ import java.util.regex.Pattern;
 
 public class ListeningPost extends Thread {
 	private static ListeningPost post;
-	private SystemController controller;
-	private ServerSocket server;
-	private Socket kitchenClient;
+	private Restaurant restaurant;
+	// private WaitersGuiController waiterController;
+	// private ChefsGuiController chefsController;
+
+	private ServerSocket serverSocket;
+	private Socket chefsClientSocket;
 	private BufferedReader bufferRead;
 	private BufferedWriter bufferWrite;
-	
 
 	/**
 	 * ListeningPost default constructor (private in order to respect Singleton
@@ -30,16 +33,17 @@ public class ListeningPost extends Thread {
 	 */
 	private ListeningPost() {
 		try {
-			kitchenClient = server.accept();
-			BufferedReader bufferRead = new BufferedReader(new InputStreamReader(kitchenClient.getInputStream()));
-			BufferedWriter bufferWrite = new BufferedWriter(new OutputStreamWriter(kitchenClient.getOutputStream()));
+			chefsClientSocket = serverSocket.accept();
+			BufferedReader bufferRead = new BufferedReader(new InputStreamReader(chefsClientSocket.getInputStream()));
+			BufferedWriter bufferWrite = new BufferedWriter(
+					new OutputStreamWriter(chefsClientSocket.getOutputStream()));
 			System.out.println("Server running!\n");
-			System.out.println(server.getLocalSocketAddress());
-			System.out.println(server.getLocalPort());
+			System.out.println(serverSocket.getLocalSocketAddress());
+			System.out.println(serverSocket.getLocalPort());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	/**
@@ -62,8 +66,8 @@ public class ListeningPost extends Thread {
 	 * 
 	 * @param controller specifies the involved controller.
 	 */
-	public void bindController(SystemController controller) {
-		this.controller = controller;
+	public void bindController(Restaurant restaurant) {
+		this.restaurant = restaurant;
 	}
 
 	/**
@@ -75,11 +79,11 @@ public class ListeningPost extends Thread {
 	 * @param strategyRequired specifies the involved strategy.
 	 * @param args             specifies strategies' arguments.
 	 */
-	public synchronized void notifyListeningPost(String strategyRequired, String[] args) {
-		if (controller == null) {
+	public synchronized void notifyMainController(String strategyRequired, String[] args) {
+		if (restaurant == null) {
 			System.out.println("Controller not bound. Bind controller to run this method.");
 		} else {
-			controller.strategyCall(strategyRequired, args);
+			restaurant.strategyCall(strategyRequired, args);
 		}
 	}
 
@@ -88,6 +92,7 @@ public class ListeningPost extends Thread {
 	 * input buffer, so as to immediately perform the required services when the
 	 * message arrives, through invocation of the ListeningPost.
 	 */
+	@Override
 	public void run() {
 		while (true) {
 			Pattern p = Pattern.compile("^([a-zA-Z0-9]+, )+[a-zA-Z0-9]+$");
@@ -95,13 +100,17 @@ public class ListeningPost extends Thread {
 			try {
 				String message;
 				while ((message = bufferRead.readLine()) == null)
-					; // is ok???? 
-					  /*yes, the readline returns a null value if the file it's
-					  // empty, putting this construct here blocks the thread while the buffer is empty, as soon
-					  // as a new message comes through the input channel, the thread restarts. -Daniele */
+					; // is ok????
+				/*
+				 * yes, the readline returns a null value if the file it's // empty, putting
+				 * this construct here blocks the thread while the buffer is empty, as soon //
+				 * as a new message comes through the input channel, the thread restarts.
+				 * -Daniele
+				 */
 				if (p.matcher(message).matches()) {
 					unpackedMessage = message.split(", ");
-					notifyListeningPost(unpackedMessage[0],Arrays.copyOfRange(unpackedMessage, 1, unpackedMessage.length - 1));
+					notifyMainController(unpackedMessage[0],
+							Arrays.copyOfRange(unpackedMessage, 1, unpackedMessage.length - 1));
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -109,7 +118,7 @@ public class ListeningPost extends Thread {
 
 		}
 	}
-	
+
 	/** Small method that writes a message to the socket. */
 	public synchronized void sendMessage(String message) {
 		try {

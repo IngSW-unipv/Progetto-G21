@@ -1,6 +1,6 @@
 package strategies;
 
-import controller.SystemController;
+import controller.Restaurant;
 
 /**
  * This is a strategy example. Every strategy must be constructed via the
@@ -13,9 +13,9 @@ import controller.SystemController;
 public class StrategyExample extends StrategyAbstract {
 	private static StrategyExample instance;
 
-	public static StrategyExample createStrategy(SystemController controller) {
+	public static StrategyExample createStrategy(Restaurant restaurant) {
 		if (instance == null) {
-			instance = new StrategyExample(controller);
+			instance = new StrategyExample(restaurant);
 			return instance;
 		} else
 			return instance;
@@ -32,17 +32,12 @@ public class StrategyExample extends StrategyAbstract {
 
 	}
 
-	private StrategyExample(SystemController controller) {
-		super(controller);
+	private StrategyExample(Restaurant restaurant) {
+		super(restaurant);
 	}
 
 	@Override
 	public void execute(String[] args) {
-		System.out.println("This example strategy will print the contents of the args array.");
-		for (String s : args) {
-			System.out.println(s);
-		}
-		System.out.println("Now, it will grab stuff using controller methods and print it");
-		super.getController().testMethod();
+
 	}
 }

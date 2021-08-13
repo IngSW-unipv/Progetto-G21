@@ -38,7 +38,7 @@
                               </Label>
                               <TextField fx:id="newOrderTableField" layoutX="150.0" layoutY="60.0" />
                               <TextField fx:id="NewOrderEntryField" layoutX="150.0" layoutY="100.0" />
-                              <Button fx:id="createNewOrderButton" layoutX="192.0" layoutY="133.0" mnemonicParsing="false" text="Create">
+                              <Button fx:id="createNewOrderButton" layoutX="192.0" layoutY="140.0" mnemonicParsing="false" text="Create">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -50,7 +50,7 @@
                             <AnchorPane fx:id="ordersPane" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="400.0" />
                           </content>
                         </ScrollPane>
-                        <Pane layoutY="176.0" prefHeight="130.0" prefWidth="350.0">
+                        <Pane layoutY="180.0" prefHeight="135.0" prefWidth="350.0">
                            <children>
                               <Label layoutX="15.0" layoutY="15.0" text="Add a new table:">
                                  <font>
@@ -63,34 +63,34 @@
                                  </font>
                               </Label>
                               <TextField fx:id="addNewTableField" layoutX="150.0" layoutY="60.0" />
-                              <Button fx:id="addNewTableButton" layoutX="202.0" layoutY="94.0" mnemonicParsing="false" text="Add">
+                              <Button fx:id="addNewTableButton" layoutX="200.0" layoutY="100.0" mnemonicParsing="false" text="Add">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Button>
                            </children>
                         </Pane>
-                        <Pane layoutY="306.0" prefHeight="130.0" prefWidth="350.0">
+                        <Pane layoutY="315.0" prefHeight="135.0" prefWidth="350.0">
                            <children>
                               <Label layoutX="15.0" layoutY="15.0" text="Remove a table:">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="100.0" layoutY="59.0" text="Table">
+                              <Label layoutX="100.0" layoutY="60.0" text="Table">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="removeTableField" layoutX="150.0" layoutY="60.0" />
-                              <Button fx:id="removeTableButton" layoutX="190.0" layoutY="93.0" mnemonicParsing="false" text="Remove">
+                              <Button fx:id="removeTableButton" layoutX="190.0" layoutY="100.0" mnemonicParsing="false" text="Remove">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Button>
                            </children>
                         </Pane>
-                        <Label fx:id="promptOrderTableLabel" layoutX="14.0" layoutY="460.0" text="-&gt;">
+                        <Label fx:id="promptOrderTableLabel" layoutX="15.0" layoutY="460.0" text="-&gt;">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -116,7 +116,7 @@
                                  </font>
                               </Label>
                               <TextField fx:id="newBillTableField" layoutX="150.0" layoutY="60.0" />
-                              <Button fx:id="printBillButton" layoutX="201.0" layoutY="94.0" mnemonicParsing="false" text="Print">
+                              <Button fx:id="printBillButton" layoutX="200.0" layoutY="100.0" mnemonicParsing="false" text="Print">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -124,7 +124,7 @@
                            </children>
                         </Pane>
                         <TextArea fx:id="printBillField" layoutX="400.0" prefHeight="500.0" prefWidth="400.0" />
-                        <Label fx:id="promptBillLabel" layoutX="14.0" layoutY="460.0" text="-&gt;">
+                        <Label fx:id="promptBillLabel" layoutX="15.0" layoutY="460.0" text="-&gt;">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -156,7 +156,7 @@
                               </Label>
                               <TextField fx:id="newEntryNameField" layoutX="150.0" layoutY="60.0" />
                               <TextField fx:id="newEntryPriceField" layoutX="150.0" layoutY="100.0" />
-                              <Button fx:id="addNewEntryButton" layoutX="202.0" layoutY="134.0" mnemonicParsing="false" text="Add">
+                              <Button fx:id="addNewEntryButton" layoutX="200.0" layoutY="140.0" mnemonicParsing="false" text="Add">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -182,16 +182,11 @@
                               </Label>
                               <TextField fx:id="removeEntryNameField" layoutX="150.0" layoutY="60.0" />
                               <TextField fx:id="removeEntryPriceField" layoutX="150.0" layoutY="100.0" />
-                              <Button fx:id="removeMenuEntryButton" layoutX="190.0" layoutY="134.0" mnemonicParsing="false" text="Remove">
+                              <Button fx:id="removeMenuEntryButton" layoutX="190.0" layoutY="140.0" mnemonicParsing="false" text="Remove">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Button>
-                              <Label fx:id="addRemovePromptLabel" layoutX="207.0" layoutY="184.0" text="Label">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
                            </children>
                         </Pane>
                         <ScrollPane layoutX="400.0" prefHeight="505.0" prefWidth="400.0">
@@ -199,7 +194,7 @@
                               <AnchorPane fx:id="menuPane" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="400.0" />
                            </content>
                         </ScrollPane>
-                        <Label fx:id="promptEntryLabel" layoutX="14.0" layoutY="460.0" text="-&gt;">
+                        <Label fx:id="promptEntryLabel" layoutX="15.0" layoutY="460.0" text="-&gt;">
                            <font>
                               <Font size="18.0" />
                            </font>

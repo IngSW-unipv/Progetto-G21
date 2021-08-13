@@ -5,6 +5,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * The WaitersGuiController class. It will be used to control the waiter's
+ * graphical interface and it will contain a ListeningPost instance in order to
+ * ensure the communication with the SystemController class.
+ */
+
 public class WaitersGuiController {
 
 	/** FXML calls for new order creation. */
@@ -53,6 +59,8 @@ public class WaitersGuiController {
 	@FXML
 	Label promptEntryLabel;
 
+	// private ListeningPost post;
+
 	public void addNewOrder() {
 
 	}
@@ -82,6 +90,10 @@ public class WaitersGuiController {
 	}
 
 	public void updateMenu() {
+
+	}
+
+	public void setOrderDelivered() {
 
 	}
 

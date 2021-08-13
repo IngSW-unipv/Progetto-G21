@@ -18,11 +18,11 @@ public class Class1 {
 	public Class1() {
 		this.string = new String[1];
 		string[0] = "La classe 1 è stata creata";
-		ListeningPost.getInstance().notifyListeningPost(StrategyExample.getStrategyName(), string);
+		ListeningPost.getInstance().notifyMainController(StrategyExample.getStrategyName(), string);
 	}
 
 	public void repeatIntroduction() {
-		ListeningPost.getInstance().notifyListeningPost(StrategyExample.getStrategyName(), string);
+		ListeningPost.getInstance().notifyMainController(StrategyExample.getStrategyName(), string);
 	}
 
 }

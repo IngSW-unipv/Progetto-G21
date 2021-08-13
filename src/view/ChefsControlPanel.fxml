@@ -7,12 +7,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="titleLabel" layoutX="242.0" layoutY="14.0" text="Chef's control panel">
+      <Label layoutX="242.0" layoutY="14.0" text="Chef's control panel">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <ScrollPane fx:id="IncomingOrdersPane" layoutY="67.0" prefHeight="535.0" prefWidth="800.0">
+      <ScrollPane layoutY="67.0" prefHeight="535.0" prefWidth="800.0">
         <content>
           <AnchorPane fx:id="ordersScrollPane" minHeight="0.0" minWidth="0.0" prefHeight="535.0" prefWidth="800.0" />
         </content>

@@ -1,6 +1,6 @@
 package strategies;
 
-import controller.SystemController;
+import controller.Restaurant;
 
 /**
  * Strategy abstract, each strategy has a execute method in common, this is the
@@ -9,18 +9,18 @@ import controller.SystemController;
  */
 
 public abstract class StrategyAbstract implements StrategyInterface {
-	private SystemController controller;
+	private Restaurant restaurant;
+
+	public StrategyAbstract(Restaurant restaurant) {
+		this.restaurant = restaurant;
+	}
 
 	public static String getStrategyName() {
 		return System.class.getSimpleName();
 	}
 
-	protected StrategyAbstract(SystemController controller) {
-		this.controller = controller;
-	}
-
-	public SystemController getController() {
-		return controller;
+	public Restaurant getController() {
+		return restaurant;
 	}
 
 	@Override
