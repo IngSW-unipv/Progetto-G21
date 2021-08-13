@@ -2,6 +2,7 @@ package testers;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.File;
 
 import org.junit.Test;
 
@@ -11,7 +12,10 @@ import model.EntryDoesNotExistException;
 
 public class MenuTest {
 
-	Menu menu = Menu.getInstance("Files/menuFile.txt");
+	File menuFile = new File("Files/menuFile.txt");
+	Menu menu = Menu.getInstance(menuFile.getAbsolutePath());
+
+//	Menu menu = Menu.getInstance("Files/menuFile.txt");
 	
 	MenuEntry entry1 = new MenuEntry("Pasta al pesto", 3);
 	
@@ -48,34 +52,33 @@ public class MenuTest {
 	{
 		String dishEntry = "Pollo con patatine, 10";
 		menu.addMenuEntry(dishEntry);
-		assertEquals(dishEntry.toString(), menu.getSpecificMenuEntry(6).toString());
+		assertEquals(dishEntry.toString(), (menu.getSpecificMenuEntry(menu.getFileLinesCounter() - 1)).toString());
 	}
-	
+//	
+//
+//	@Test(expected = EntryDoesNotExistException.class)
+//	public void testRemoveMenuEntry()
+//	{
+//		menu.removeMenuEntry(5);
+//		menu.getSpecificMenuEntry(5);
+//	}
+
 
 	@Test
-	public void testRemoveMenuEntry()
+	public void testEditSpecificMenuEntryName()
 	{
-		menu.removeMenuEntry(5);
-	//	System.out.println(menu.getSpecificMenuEntryPrice(5));
-		String dishEntry = "Pollo con patatine, 10";
-		menu.addMenuEntry(dishEntry);
+		String newName = "Tagliata di manzo con limone";
+		menu.editSpecificMenuEntry(2, newName);
+	    assertEquals(newName.toString(), menu.getSpecificMenuEntryName(menu.getFileLinesCounter() - 1));
+	
 	}
 	
-
-//	@Test
-//	public void testEditSpecificMenuEntryName()
-//	{
-//		String newName = "Tagliata di manzo con limone";
-//		menu.editSpecificMenuEntry(2, newName);
-//		assertEquals(newName.toString(), menu.getSpecificMenuEntryName(2).toString());
-//	}
-//	
-//	
-//	@Test
-//	public void testEditSpecificMenuEntryPrice()
-//	{
-//		double newPrice = 7;
-//		menu.editSpecificMenuEntry(2, newPrice);
-//		assertEquals(newPrice, menu.getSpecificMenuEntryPrice(2));
-//	}
+	
+	@Test
+	public void testEditSpecificMenuEntryPrice()
+	{
+		double newPrice = 7;
+		menu.editSpecificMenuEntry(2, newPrice);
+	    assertEquals(newPrice, menu.getSpecificMenuEntryPrice(menu.getFileLinesCounter() - 1));
+	}
 }
