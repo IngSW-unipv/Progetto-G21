@@ -162,13 +162,13 @@ public class OrderManager implements OrderManegerInterface {
 	 */
 	@Override
 	public void removeTableAllOrders(int tableNum) {
-		
+
 		Iterator<Order> i1 = new ArrayList<>(notSeen).iterator();
 		Iterator<Order> i2 = new ArrayList<>(notPrepared).iterator();
 		Iterator<Order> i3 = new ArrayList<>(notPreparable).iterator();
 		Iterator<Order> i4 = new ArrayList<>(notDelivered).iterator();
 		Iterator<Order> i5 = new ArrayList<>(delivered).iterator();
-	
+
 		while (i1.hasNext()) {
 			Order order = i1.next();
 			if (order.getTableNum() == tableNum) {
@@ -203,5 +203,32 @@ public class OrderManager implements OrderManegerInterface {
 				delivered.remove(order);
 			}
 		}
+	}
+
+	public ArrayList<Order> getAllOrdersForWaitersGuiController() {
+
+		Iterator<Order> i1 = new ArrayList<>(notSeen).iterator();
+		Iterator<Order> i2 = new ArrayList<>(notPrepared).iterator();
+		Iterator<Order> i3 = new ArrayList<>(notPreparable).iterator();
+		Iterator<Order> i4 = new ArrayList<>(notDelivered).iterator();
+		ArrayList<Order> allOrders = new ArrayList<Order>(0);
+
+		while (i1.hasNext()) {
+			allOrders.add(i1.next());
+		}
+
+		while (i2.hasNext()) {
+			allOrders.add(i2.next());
+		}
+
+		while (i3.hasNext()) {
+			allOrders.add(i3.next());
+		}
+
+		while (i4.hasNext()) {
+			allOrders.add(i4.next());
+		}
+
+		return allOrders;
 	}
 }

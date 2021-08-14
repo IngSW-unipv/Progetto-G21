@@ -10,6 +10,8 @@ import java.net.Socket;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
+import controller.guicontrollers.WaitersGuiController;
+
 /**
  * The ListeningPost class. Once instantiated, it can dynamically change the
  * bound controller in order to forward messages to different parts of the
@@ -19,8 +21,7 @@ import java.util.regex.Pattern;
 public class ListeningPost extends Thread {
 	private static ListeningPost post;
 	private Restaurant restaurant;
-	// private WaitersGuiController waiterController;
-	// private ChefsGuiController chefsController;
+	private WaitersGuiController waiterController;
 
 	private ServerSocket serverSocket;
 	private Socket chefsClientSocket;

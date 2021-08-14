@@ -1,10 +1,16 @@
 package controller.guicontrollers;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import controller.ListeningPost;
+import controller.Restaurant;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import model.Order;
+import model.OrderManager;
 
 /**
  * The WaitersGuiController class. It will be used to control the waiter's
@@ -105,7 +111,14 @@ public class WaitersGuiController {
 	}
 
 	public void updateOrders() {
+		ordersPane.getChildren().clear();
+		OrderManager orderManager = Restaurant.getInstance().getOrderManager();
+		ArrayList<Order> ordersToDisplay = orderManager.getAllOrdersForWaitersGuiController();
 
+		Iterator<Order> iterator = ordersToDisplay.iterator();
+		while (iterator.hasNext()) {
+			ordersPane.getChildren().add(new Label(iterator.next().toString()));
+		}
 	}
 
 	public void updateMenu() {

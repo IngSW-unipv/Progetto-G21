@@ -95,7 +95,7 @@ public class Order {
 	public static int getOrdersCounter() {
 		return ordersCounter;
 	}
-	
+
 	/**
 	 * @param ordersCounter.
 	 */
@@ -136,7 +136,6 @@ public class Order {
 	 */
 	@Override
 	public String toString() {
-		return "Order: " + orderNum + ", isSeen: " + isSeen + ", isPreparable: " + isPreparable + ", isPrepared: "
-				+ isPrepared + ", isDelivered: " + isDelivered;
+		return "Order: " + orderNum + "table: " + tableNum + "entry: " + this.getOrderedEntry().getDishName();
 	}
 }

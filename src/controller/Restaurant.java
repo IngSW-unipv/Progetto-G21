@@ -2,6 +2,7 @@ package controller;
 
 import java.util.HashMap;
 
+import controller.guicontrollers.WaitersGuiController;
 import model.Menu;
 import model.OrderManager;
 import model.TableManager;
@@ -20,6 +21,7 @@ public class Restaurant {
 	private TableManager tableManager;
 	private ListeningPost post;
 	private HashMap<String, StrategyAbstract> strategies;
+	private WaitersGuiController waitersController;
 
 	/**
 	 * Class constructor method.
@@ -29,6 +31,7 @@ public class Restaurant {
 		orderManager = OrderManager.getInstance();
 		tableManager = TableManager.getInstance();
 		post = ListeningPost.getInstance();
+		waitersController = WaitersGuiController.getInstance();
 		post.bindController(this);
 		createStrategies();
 	}
@@ -76,6 +79,13 @@ public class Restaurant {
 	}
 
 	/**
+	 * @return WaitersGuiController instance.
+	 */
+	public WaitersGuiController getWaitersController() {
+		return waitersController;
+	}
+
+	/**
 	 * Eventually this method will auto-instantiate strategies, but until I've
 	 * figured out classpath lib, it will be required to manually load the single
 	 * strategies. The String is the name of the strategy, the value is the strategy
@@ -94,11 +104,11 @@ public class Restaurant {
 	 * @param args             specifies strategies' arguments.
 	 */
 	public void strategyCall(String strategyRequired, String[] args) {
-		StrategyAbstract s;
-		if ((s = strategies.get(strategyRequired)) != null) {
-			s.execute(args);
+		StrategyAbstract strategy;
+		if ((strategy = strategies.get(strategyRequired)) != null) {
+			strategy.execute(args);
 		} else {
-			System.out.println("Strategy does not exist");
+			System.out.println("Strategy does not exist!");
 		}
 	}
 }
