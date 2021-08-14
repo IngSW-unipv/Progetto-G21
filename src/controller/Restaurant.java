@@ -21,13 +21,11 @@ public class Restaurant {
 	private ListeningPost post;
 	private HashMap<String, StrategyAbstract> strategies;
 
-	private static final String menuFilePath = "Files/menuFile.txt";
-
 	/**
 	 * Class constructor method.
 	 */
 	private Restaurant() {
-		restaurantMenu = Menu.getInstance(menuFilePath);
+		restaurantMenu = Menu.getInstance();
 		orderManager = OrderManager.getInstance();
 		tableManager = TableManager.getInstance();
 		post = ListeningPost.getInstance();
