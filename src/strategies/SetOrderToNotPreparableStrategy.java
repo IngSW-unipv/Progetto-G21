@@ -7,16 +7,16 @@ import model.MenuEntry;
 import model.Order;
 import model.OrderManager;
 
-public class SetOrderDeliveredStrategy extends StrategyAbstract {
-	private static SetOrderDeliveredStrategy instance = null;
+public class SetOrderToNotPreparableStrategy extends StrategyAbstract {
+	private static SetOrderToNotPreparableStrategy instance = null;
 
-	private SetOrderDeliveredStrategy(Restaurant restaurant) {
+	private SetOrderToNotPreparableStrategy(Restaurant restaurant) {
 		super(restaurant);
 	}
 
-	public static SetOrderDeliveredStrategy getInstance(Restaurant restaurant) {
+	public static SetOrderToNotPreparableStrategy getInstance(Restaurant restaurant) {
 		if (instance == null) {
-			instance = new SetOrderDeliveredStrategy(restaurant);
+			instance = new SetOrderToNotPreparableStrategy(restaurant);
 		}
 		return instance;
 	}
@@ -28,7 +28,7 @@ public class SetOrderDeliveredStrategy extends StrategyAbstract {
 		Integer tableNum = Integer.parseInt(args[0]);
 		MenuEntry entry = new MenuEntry(args[1]);
 
-		Iterator<Order> iterator = orderManagerInstance.getNotDelivered().iterator();
+		Iterator<Order> iterator = orderManagerInstance.getNotSeen().iterator();
 		Order orderToBeModified = null;
 		while (iterator.hasNext()) {
 			orderToBeModified = iterator.next();
@@ -36,6 +36,6 @@ public class SetOrderDeliveredStrategy extends StrategyAbstract {
 				break;
 			}
 		}
-		orderManagerInstance.deliverOrder(orderToBeModified);
+		orderManagerInstance.seeOrderToNotPreparable(orderToBeModified);
 	}
 }
