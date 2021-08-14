@@ -60,7 +60,7 @@ public class Menu implements MenuInterface {
 	 * @param path is needed in order to call the constructor.
 	 * @return menu instance.
 	 */
-	public static Menu getInstance(String path) {
+	public static Menu getInstance() {
 		if (instance == null) {
 			instance = new Menu();
 		}
