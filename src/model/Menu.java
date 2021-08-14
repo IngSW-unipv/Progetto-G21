@@ -29,7 +29,7 @@ public class Menu implements MenuInterface {
 
 	private LinkedHashMap<Integer, MenuEntry> entries;
 	private static Menu instance = null;
-	private String menuFilePath;
+	private static final String menuFilePath = "Files/menuFile.txt";
 	private int fileLinesCounter;
 
 	/**
@@ -39,9 +39,8 @@ public class Menu implements MenuInterface {
 	 * 
 	 * @param path specifies the location of menu.txt file.
 	 */
-	private Menu(String path) {
+	private Menu() {
 		entries = new LinkedHashMap<Integer, MenuEntry>();
-		menuFilePath = path;
 		File menuFile = new File(menuFilePath);
 		fileLinesCounter = 0;
 		if (menuFile.exists() == false || menuFile.isDirectory()) {
@@ -63,7 +62,7 @@ public class Menu implements MenuInterface {
 	 */
 	public static Menu getInstance(String path) {
 		if (instance == null) {
-			instance = new Menu(path);
+			instance = new Menu();
 		}
 		return instance;
 	}
@@ -152,14 +151,6 @@ public class Menu implements MenuInterface {
 	@Override
 	public String getMenuFilePath() {
 		return menuFilePath;
-	}
-
-	/**
-	 * @param menuFilePath String.
-	 */
-	@Override
-	public void setMenuFilePath(String menuFilePath) {
-		this.menuFilePath = menuFilePath;
 	}
 
 	/**

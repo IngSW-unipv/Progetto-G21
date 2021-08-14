@@ -17,8 +17,6 @@ public interface MenuInterface {
 
 	public String getMenuFilePath();
 
-	public void setMenuFilePath(String menuFilePath);
-
 	public void addMenuEntry(String dishEntry);
 
 	public void removeMenuEntry(String dishEntry);
