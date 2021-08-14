@@ -66,10 +66,10 @@ public class SimpleBillTester {
 		}
 
 		// Testing the generation of the bill file -- OK
-		bill.generateBillFile("C:\\Users\\didyk\\Progetto-G21");
+		bill.generateBillFile("C:/Users/didyk/Progetto-G21");
 
 		// Trying to generate path not found exception -- OK
-		bill.generateBillFile("C:\\Users\\WrongPath");
+		bill.generateBillFile("C:/Users/WrongPath");
 	}
 
 }
