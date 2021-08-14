@@ -25,17 +25,4 @@ public class AddNewOrderStrategy extends StrategyAbstract {
 		OrderManager orderManagerInstance = Restaurant.getInstance().getOrderManager();
 		orderManagerInstance.addOrder(new Order(Integer.parseInt(args[0]), new MenuEntry(args[1])));
 	}
-
-	/*
-	 * In this scenario,args[0]:tableNum,args[1]:
-	 * 
-	 * @Override public void execute(String[] args) { SystemController
-	 * controllerInstance = super.getController(); Menu menuInstance =
-	 * super.getController().getRestaurant().getRestaurantMenu();
-	 * controllerInstance.getRestaurant().getOrderManager() .addOrder(new
-	 * Order(Integer.parseInt(args[0]), )));
-	 * 
-	 * }
-	 */
-
 }
