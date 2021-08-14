@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -81,6 +82,23 @@ public class Menu implements MenuInterface {
 	@Override
 	public Collection<MenuEntry> getEntriesCollection() {
 		return entries.values();
+	}
+
+	/**
+	 * 
+	 * @param dishName specifies the name of the MenuEntry to return.
+	 * @return MenuEntry object (null if MenuEntry doesn't exist).
+	 */
+	public MenuEntry getSpecificMenuEntry(String dishName) {
+		Collection<MenuEntry> menuCollection = getEntriesCollection();
+		Iterator<MenuEntry> iterator = menuCollection.iterator();
+		while (iterator.hasNext()) {
+			MenuEntry entry = iterator.next();
+			if (entry.getDishName() == dishName) {
+				return entry;
+			}
+		}
+		return null;
 	}
 
 	/**
