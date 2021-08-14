@@ -7,22 +7,18 @@ import java.util.Iterator;
 
 import org.junit.jupiter.api.Test;
 
-import model.Menu;
-import model.OrderManager;
-import model.Restaurant;
+import model.TableManager;
 
-class RestaurantTest {
+class TableManagerTest {
 
-	Restaurant restaurant = Restaurant.getInstance();
-	OrderManager orderManager = OrderManager.getInstance();
-	Menu menu = Menu.getInstance("/Progetto-G21/Files/menuFile.txt");
+	TableManager tableManager = TableManager.getInstance();
 	HashSet<Integer> tables = new HashSet<Integer>();
 
 	/**
 	 * Method that clones the HashSet Tables in Restaurant.
 	 */
 	void cloneHashSet() {
-		tables = restaurant.getTables();
+		tables = tableManager.getTables();
 	}
 
 	/**
@@ -42,28 +38,12 @@ class RestaurantTest {
 	}
 
 	/**
-	 * Tester of method getRestaurantMenu() in Restaurant.java
-	 */
-	@Test
-	void testGetRestaurantMenu() {
-		assertEquals(menu, restaurant.getRestaurantMenu());
-	}
-
-	/**
-	 * Tester of method getOrderManager() in Restaurant.java
-	 */
-	@Test
-	void testGetOrderManager() {
-		assertEquals(orderManager, restaurant.getOrderManager());
-	}
-
-	/**
 	 * Tester of method getTable() in Restaurant.java
 	 */
 	@Test
 	void testGetTable() {
 		cloneHashSet();
-		assertEquals(tables, restaurant.getTables());
+		assertEquals(tables, tableManager.getTables());
 	}
 
 	/**
@@ -72,9 +52,9 @@ class RestaurantTest {
 	 */
 	@Test
 	void testAddTableAtTheEnd() {
-		restaurant.addTable(findLastTable() + 1);
+		tableManager.addTable(findLastTable() + 1);
 		cloneHashSet();
-		assertEquals(tables, restaurant.getTables());
+		assertEquals(tables, tableManager.getTables());
 	}
 
 	/**
@@ -84,9 +64,9 @@ class RestaurantTest {
 	 */
 	@Test
 	void testRemoveLastTable() {
-		restaurant.removeTable(findLastTable());
+		tableManager.removeTable(findLastTable());
 		cloneHashSet();
-		assertEquals(tables, restaurant.getTables());
+		assertEquals(tables, tableManager.getTables());
 	}
 
 	/**
@@ -99,9 +79,9 @@ class RestaurantTest {
 	void testAddRandomTable() {
 		cloneHashSet();
 		int rand = (int) Math.floor(Math.random() * (31));
-		restaurant.addTable(rand);
+		tableManager.addTable(rand);
 		tables.add(rand);
-		assertEquals(tables, restaurant.getTables());
+		assertEquals(tables, tableManager.getTables());
 	}
 
 }
