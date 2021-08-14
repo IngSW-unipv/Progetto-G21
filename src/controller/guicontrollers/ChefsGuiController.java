@@ -18,6 +18,19 @@ public class ChefsGuiController {
 	@FXML
 	AnchorPane ordersScrollPane;
 
+	private static ChefsGuiController instance = null;
+
+	private ChefsGuiController() {
+
+	}
+
+	public static ChefsGuiController getInstance() {
+		if (instance == null) {
+			instance = new ChefsGuiController();
+		}
+		return instance;
+	}
+
 	// private ListeningPost post;
 
 	public void updateOrders() {

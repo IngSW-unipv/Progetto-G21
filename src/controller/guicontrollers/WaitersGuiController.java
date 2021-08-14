@@ -1,5 +1,6 @@
 package controller.guicontrollers;
 
+import controller.ListeningPost;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -59,9 +60,27 @@ public class WaitersGuiController {
 	@FXML
 	Label promptEntryLabel;
 
-	// private ListeningPost post;
+	private ListeningPost post;
+
+	private static WaitersGuiController instance = null;
+
+	private WaitersGuiController() {
+		post = ListeningPost.getInstance();
+	}
+
+	public static WaitersGuiController getInstance() {
+		if (instance == null) {
+			instance = new WaitersGuiController();
+		}
+		return instance;
+	}
+
+	public ListeningPost getPost() {
+		return post;
+	}
 
 	public void addNewOrder() {
+		// post.notifyController -> restaurant.strategyCall -> strategy.execute.
 
 	}
 
