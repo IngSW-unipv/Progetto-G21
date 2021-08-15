@@ -17,7 +17,7 @@ public class SimpleMenuTester {
 			menuFile.delete();
 		}
 
-		Menu menu = Menu.getInstance(menuFile.getAbsolutePath());
+		Menu menu = Menu.getInstance();
 
 		showMenu(menu);
 
