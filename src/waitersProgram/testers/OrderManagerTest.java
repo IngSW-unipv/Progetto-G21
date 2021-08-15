@@ -1,5 +1,5 @@
 
-package testers;
+package waitersProgram.testers;
 
 import static org.junit.jupiter.api.Assertions.*;
 

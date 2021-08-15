@@ -1,4 +1,4 @@
-package testers;
+package waitersProgram.testers;
 
 import org.junit.jupiter.api.Test;
 

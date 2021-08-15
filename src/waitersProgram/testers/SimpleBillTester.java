@@ -1,4 +1,4 @@
-package testers;
+package waitersProgram.testers;
 
 import java.util.ArrayList;
 import java.util.Iterator;

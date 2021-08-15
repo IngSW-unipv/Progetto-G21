@@ -1,4 +1,4 @@
-package testers;
+package waitersProgram.testers;
 
 import java.io.File;
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package testers;
+package waitersProgram.testers;
 
 import waitersProgram.model.MenuEntry;
 import waitersProgram.model.Order;
