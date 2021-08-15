@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import model.MenuEntry;
-import model.Order;
+import waitersProgram.model.MenuEntry;
+import waitersProgram.model.Order;
 
 /* @Test, @Before, @After, @Test(expected = Exception.class), @Test(timeout = 50)
  * 

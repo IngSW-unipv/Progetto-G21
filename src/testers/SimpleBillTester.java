@@ -3,10 +3,10 @@ package testers;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import model.Bill;
-import model.MenuEntry;
-import model.Order;
-import model.OrderManager;
+import waitersProgram.model.Bill;
+import waitersProgram.model.MenuEntry;
+import waitersProgram.model.Order;
+import waitersProgram.model.OrderManager;
 
 /* add -> see -> prepare -> deliver. La sequenzialità va rispettata! */
 

@@ -6,8 +6,8 @@ import java.io.File;
 
 import org.junit.Test;
 
-import model.Menu;
-import model.MenuEntry;
+import waitersProgram.model.Menu;
+import waitersProgram.model.MenuEntry;
 
 public class MenuTest {
 

@@ -1,7 +1,7 @@
 package testers;
 
-import model.MenuEntry;
-import model.Order;
+import waitersProgram.model.MenuEntry;
+import waitersProgram.model.Order;
 
 public class SimpleOrderTester {
 

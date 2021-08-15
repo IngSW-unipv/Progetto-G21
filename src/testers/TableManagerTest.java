@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 import org.junit.jupiter.api.Test;
 
-import model.TableManager;
+import waitersProgram.model.TableManager;
 
 class TableManagerTest {
 

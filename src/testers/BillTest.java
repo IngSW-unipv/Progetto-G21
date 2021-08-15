@@ -7,10 +7,10 @@ import java.util.Iterator;
 
 import org.junit.jupiter.api.Test;
 
-import model.Bill;
-import model.MenuEntry;
-import model.Order;
-import model.OrderManager;
+import waitersProgram.model.Bill;
+import waitersProgram.model.MenuEntry;
+import waitersProgram.model.Order;
+import waitersProgram.model.OrderManager;
 
 class BillTest {
 	Order o1 = new Order(1, new MenuEntry("Pasta al pomodoro, 5"));

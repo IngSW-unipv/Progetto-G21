@@ -3,7 +3,7 @@ package testers;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import model.TableManager;
+import waitersProgram.model.TableManager;
 
 public class SimpleTableManagerTester {
 

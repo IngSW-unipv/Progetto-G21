@@ -1,6 +1,6 @@
 package testers;
 
-import model.MenuEntry;
+import waitersProgram.model.MenuEntry;
 
 public class SimpleMenuEntryTester {
 

@@ -4,8 +4,8 @@ import java.io.File;
 import java.util.Collection;
 import java.util.Iterator;
 
-import model.Menu;
-import model.MenuEntry;
+import waitersProgram.model.Menu;
+import waitersProgram.model.MenuEntry;
 
 public class SimpleMenuTester {
 

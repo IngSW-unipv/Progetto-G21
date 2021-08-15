@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import model.MenuEntry;
+import waitersProgram.model.MenuEntry;
 
 public class MenuEntryTest {
 

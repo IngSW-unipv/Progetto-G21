@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import model.MenuEntry;
-import model.Order;
-import model.OrderManager;
+import waitersProgram.model.MenuEntry;
+import waitersProgram.model.Order;
+import waitersProgram.model.OrderManager;
 
 public class OrderManagerTest {
 	
