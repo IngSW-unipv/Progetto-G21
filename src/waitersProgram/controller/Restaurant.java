@@ -1,7 +1,11 @@
 package waitersProgram.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
+import io.github.classgraph.ClassGraph;
+import io.github.classgraph.ClassInfoList;
+import io.github.classgraph.ScanResult;
 import waitersProgram.model.Menu;
 import waitersProgram.model.OrderManager;
 import waitersProgram.model.TableManager;
@@ -91,8 +95,16 @@ public class Restaurant {
 	 * itself.
 	 */
 	private void createStrategies() {
-		// strategies.put(StrategyExample.getStrategyName(),
-		// StrategyExample.createStrategy(this));
+		try (ScanResult sr= new ClassGraph().acceptPackages("waitersProgram.strategies").enableClassInfo().scan()){
+			ClassInfoList cil=sr.getSubclasses("waitersProgram.strategies.StrategyAbstract");
+			List<Class<?>>lt = cil.loadClasses();
+			for (Class<?> ct: lt) {
+			strategies.put(((String)ct.getMethod("getStrategyName", ((Class<?>)null)).invoke(null)),
+						   ((StrategyAbstract)ct.getMethod("getInstance", this.getClass()).invoke(this)));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

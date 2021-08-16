@@ -15,8 +15,8 @@ public abstract class StrategyAbstract implements StrategyInterface {
 		this.restaurant = restaurant;
 	}
 
-	public static String getStrategyName() {
-		return System.class.getSimpleName();
+	public String getStrategyName() {
+		return this.getClass().getSimpleName();
 	}
 
 	public Restaurant getController() {
