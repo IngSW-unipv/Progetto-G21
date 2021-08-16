@@ -19,18 +19,18 @@ import java.util.regex.Pattern;
 public class ListeningPost extends Thread {
 	private static ListeningPost post;
 	private Restaurant restaurant;
-	private WaitersGuiController waiterController;
-
 	private ServerSocket serverSocket;
 	private Socket chefsClientSocket;
 	private BufferedReader bufferRead;
 	private BufferedWriter bufferWrite;
+	
 
 	/**
 	 * ListeningPost default constructor (private in order to respect Singleton
 	 * pattern).
 	 */
 	private ListeningPost() {
+		boolean isFailed=false;
 		try {
 			chefsClientSocket = serverSocket.accept();
 			BufferedReader bufferRead = new BufferedReader(new InputStreamReader(chefsClientSocket.getInputStream()));
@@ -40,7 +40,19 @@ public class ListeningPost extends Thread {
 			System.out.println(serverSocket.getLocalSocketAddress());
 			System.out.println(serverSocket.getLocalPort());
 		} catch (Exception e) {
+			isFailed=true;
 			e.printStackTrace();
+			
+		}
+		finally {
+			if(isFailed && chefsClientSocket.isConnected()) {
+				try {
+					chefsClientSocket.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 
 	}
@@ -93,35 +105,34 @@ public class ListeningPost extends Thread {
 	 */
 	@Override
 	public void run() {
-		while (true) {
-			Pattern p = Pattern.compile("^([a-zA-Z0-9]+, )+[a-zA-Z0-9]+$");
-			String[] unpackedMessage;
-			try {
+		try {
+			while (chefsClientSocket.isConnected()) {
+				Pattern p = Pattern.compile("^([a-zA-Z0-9]+, )+[a-zA-Z0-9]+$");
+				String[] unpackedMessage;
 				String message;
-				while ((message = bufferRead.readLine()) == null)
-					; // is ok????
-				/*
-				 * yes, the readline returns a null value if the file it's // empty, putting
-				 * this construct here blocks the thread while the buffer is empty, as soon //
-				 * as a new message comes through the input channel, the thread restarts.
-				 * -Daniele
-				 */
+				while ((message = bufferRead.readLine()) == null);
 				if (p.matcher(message).matches()) {
 					unpackedMessage = message.split(", ");
 					notifyMainController(unpackedMessage[0],
 							Arrays.copyOfRange(unpackedMessage, 1, unpackedMessage.length - 1));
 				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		finally {
+			try {chefsClientSocket.close();}
+			catch(IOException e) {e.printStackTrace();}
 		}
 	}
 
 	/** Small method that writes a message to the socket. */
 	public synchronized void sendMessage(String message) {
 		try {
-			bufferWrite.write(message + "\n");
+			if(chefsClientSocket.isConnected()) bufferWrite.write(message + "\n");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
