@@ -65,11 +65,7 @@ public class OrderTest {
 	 */
 	@Test
 	public void testToString() {
-		assertEquals("Order: 1, isSeen: false, isPreparable: true, isPrepared: false, isDelivered: false",
-				order1.toString());
-		assertEquals("Order: 2, isSeen: false, isPreparable: true, isPrepared: false, isDelivered: false",
-				order2.toString());
-		assertEquals("Order: 3, isSeen: false, isPreparable: true, isPrepared: false, isDelivered: false",
-				order3.toString());
+		assertEquals("Order: 1table: 1entry: Pasta al pomodoro", order1.toString());
+		assertEquals("Order: 2table: 1entry: Cotoletta alla milanese", order2.toString());
 	}
 }
