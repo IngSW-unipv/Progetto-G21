@@ -36,28 +36,36 @@ public class SimpleBillTester {
 			System.out.println(i.next().toString());
 		}
 
-		// Method getOrders() tester -- OK
+		/**
+		 * Tester of method getOrders().
+		 */
 		if (orders.equals(bill.getOrders())) {
 			System.out.println("OK");
 		} else {
 			System.out.println("TEST FAILED");
 		}
 
-		// Method getTableNum() tester -- OK
+		/**
+		 * Tester of method getTableNum().
+		 */
 		if (bill.getTableNum() == 1) {
 			System.out.println("OK");
 		} else {
 			System.out.println("TEST FAILED");
 		}
 
-		// Method getAmount() tester -- OK
+		/**
+		 * Tester of method getAmount().
+		 */
 		if (bill.getAmount() == 13.0) {
 			System.out.println("OK");
 		} else {
 			System.out.println("TEST FAILED");
 		}
 
-		// Method toString tester -- OK
+		/**
+		 * Tester of method toString().
+		 */
 		String string = "Table: 1\n" + "Pasta al pomodoro, 5\n" + "Tiramisù, 8\n" + "Total: 13,00 €";
 		if (bill.toString().equals(string)) {
 			System.out.println("OK");
@@ -65,10 +73,14 @@ public class SimpleBillTester {
 			System.out.println("TEST FAILED");
 		}
 
-		// Testing the generation of the bill file -- OK
+		/**
+		 * Tester of method generateBillFile().
+		 */
 		bill.generateBillFile("C:/Users/didyk/Progetto-G21");
 
-		// Trying to generate path not found exception -- OK
+		/**
+		 * Tester of method generateBillFile() generating a path not found exception.
+		 */
 		bill.generateBillFile("C:/Users/WrongPath");
 	}
 

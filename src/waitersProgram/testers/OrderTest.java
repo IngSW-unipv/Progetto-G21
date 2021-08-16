@@ -7,10 +7,6 @@ import org.junit.jupiter.api.Test;
 import waitersProgram.model.MenuEntry;
 import waitersProgram.model.Order;
 
-/* @Test, @Before, @After, @Test(expected = Exception.class), @Test(timeout = 50)
- * 
- * https://junit.org/junit5/docs/5.0.1/api/org/junit/jupiter/api/Assertions.html */
-
 public class OrderTest {
 
 	MenuEntry orderedEntry1 = new MenuEntry("Pasta al pomodoro, 7");
@@ -21,6 +17,9 @@ public class OrderTest {
 	Order order2 = new Order(1, orderedEntry2);
 	Order order3 = new Order(2, orderedEntry3);
 
+	/**
+	 * Tester of method getOrderNum().
+	 */
 	@Test
 	public void testGetOrderNum() {
 		assertEquals(1, order1.getOrderNum());
@@ -29,6 +28,9 @@ public class OrderTest {
 		Order.setOrdersCounter(0);
 	}
 
+	/**
+	 * Tester of method getTableNum().
+	 */
 	@Test
 	public void testGetTableNum() {
 		assertEquals(1, order1.getTableNum());
@@ -37,6 +39,9 @@ public class OrderTest {
 		Order.setOrdersCounter(0);
 	}
 
+	/**
+	 * Tester of method getOrderedEntry().
+	 */
 	@Test
 	public void testGetOrderedEntry() {
 		assertEquals(orderedEntry1, order1.getOrderedEntry());
@@ -45,6 +50,9 @@ public class OrderTest {
 		Order.setOrdersCounter(0);
 	}
 
+	/**
+	 * Tester of method getOrdersCounter().
+	 */
 	@Test
 	public void testGetOrdersCounter() {
 		assertEquals(3, order1.getOrdersCounter());
@@ -52,6 +60,9 @@ public class OrderTest {
 		assertEquals(3, order3.getOrdersCounter());
 	}
 
+	/**
+	 * Tester of method toString().
+	 */
 	@Test
 	public void testToString() {
 		assertEquals("Order: 1, isSeen: false, isPreparable: true, isPrepared: false, isDelivered: false",

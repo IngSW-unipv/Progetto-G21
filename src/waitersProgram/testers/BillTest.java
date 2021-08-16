@@ -21,6 +21,12 @@ class BillTest {
 
 	Bill bill = null;
 
+	/**
+	 * Simple method that adds two orders (o1, o2) in the table 1 and creates his
+	 * bill.
+	 * 
+	 * @return ArrayList of orders.
+	 */
 	void addOrders() {
 		orderManager.addOrder(o1);
 		orderManager.addOrder(o2);
@@ -40,30 +46,41 @@ class BillTest {
 
 	}
 
+	/**
+	 * Tester of method getOrders().
+	 */
 	@Test
 	void testGetOrders() {
 		addOrders();
 		assertEquals(orders, bill.getOrders());
 	}
 
+	/**
+	 * Tester of method getTableNum().
+	 */
 	@Test
 	void testGetTableNum() {
 		addOrders();
 		assertEquals(1, bill.getTableNum());
 	}
 
+	/**
+	 * Tester of method getAmount().
+	 */
 	@Test
 	void testGetAmount() {
 		addOrders();
 		assertEquals(13.0, bill.getAmount());
 	}
 
+	/**
+	 * Tester of method toString().
+	 */
 	@Test
 	void testToString() {
 		addOrders();
 		String string = "Table: 1\n" + "Pasta al pomodoro, 5\n" + "Tiramisù, 8\n" + "Total: 13,00 €";
 		assertEquals(string, bill.toString());
-
 	}
 
 }
