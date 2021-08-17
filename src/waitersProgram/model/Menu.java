@@ -194,6 +194,11 @@ public class Menu implements MenuInterface {
 	 */
 	@Override
 	public void removeMenuEntry(String dishEntry) {
+		try {
+			checkForEntryExistence(dishEntry);
+		} catch (EntryDoesNotExistException e) {
+			System.err.println(e.getMessage());
+		}
 		File inputFile = new File(menuFilePath);
 		File tempFile = new File("Files/tempMenuFile.txt");
 
@@ -308,6 +313,24 @@ public class Menu implements MenuInterface {
 	private void checkForEntryExistence(Integer entryKey) throws EntryDoesNotExistException {
 		if (entries.containsKey(entryKey) == false) {
 			throw new EntryDoesNotExistException();
+		}
+	}
+
+	/**
+	 * Method used to check if a specified MenuEntry exists.
+	 * 
+	 * @param dishEntry specifies the stringed MenuEntry.
+	 * @throws EntryDoesNotExistsException.
+	 */
+	private void checkForEntryExistence(String dishEntry) throws EntryDoesNotExistException {
+		Collection<MenuEntry> entryCollection = this.getEntriesCollection();
+		Iterator<MenuEntry> iterator = entryCollection.iterator();
+		while (iterator.hasNext()) {
+			MenuEntry menuEntry = iterator.next();
+			if (menuEntry.toString().equals(dishEntry)) {
+				break;
+			} else
+				throw new EntryDoesNotExistException();
 		}
 	}
 
