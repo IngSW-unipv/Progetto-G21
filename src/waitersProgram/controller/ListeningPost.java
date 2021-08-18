@@ -7,8 +7,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Arrays;
-import java.util.regex.Pattern;
 
 /**
  * The ListeningPost class. Once instantiated, it can dynamically change the
@@ -20,41 +18,38 @@ public class ListeningPost extends Thread {
 	private static ListeningPost post;
 	private Restaurant restaurant;
 	private ServerSocket serverSocket;
-	private Socket chefsClientSocket;
-	private BufferedReader bufferRead;
-	private BufferedWriter bufferWrite;
-	
+	private Socket clientSocket;
+	private BufferedReader readBuffer;
+	private BufferedWriter writeBuffer;
 
 	/**
 	 * ListeningPost default constructor (private in order to respect Singleton
 	 * pattern).
 	 */
 	private ListeningPost() {
-		boolean isFailed=false;
+		boolean isFailed = false;
 		try {
-			chefsClientSocket = serverSocket.accept();
-			BufferedReader bufferRead = new BufferedReader(new InputStreamReader(chefsClientSocket.getInputStream()));
-			BufferedWriter bufferWrite = new BufferedWriter(
-					new OutputStreamWriter(chefsClientSocket.getOutputStream()));
+			serverSocket = new ServerSocket(4999);
+			clientSocket = serverSocket.accept();
+
+			readBuffer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+			writeBuffer = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
+
 			System.out.println("Server running!\n");
 			System.out.println(serverSocket.getLocalSocketAddress());
 			System.out.println(serverSocket.getLocalPort());
 		} catch (Exception e) {
-			isFailed=true;
-			e.printStackTrace();
-			
-		}
-		finally {
-			if(isFailed && chefsClientSocket.isConnected()) {
+			isFailed = true;
+			System.err.println(e.getMessage());
+		} finally {
+			if (isFailed && clientSocket.isConnected()) {
 				try {
-					chefsClientSocket.close();
+					clientSocket.close();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.err.println(e.getMessage());
 				}
 			}
 		}
-
 	}
 
 	/**
@@ -105,34 +100,14 @@ public class ListeningPost extends Thread {
 	 */
 	@Override
 	public void run() {
-		try {
-			while (chefsClientSocket.isConnected()) {
-				Pattern p = Pattern.compile("^([a-zA-Z0-9]+, )+[a-zA-Z0-9]+$");
-				String[] unpackedMessage;
-				String message;
-				while ((message = bufferRead.readLine()) == null);
-				if (p.matcher(message).matches()) {
-					unpackedMessage = message.split(", ");
-					notifyMainController(unpackedMessage[0],
-							Arrays.copyOfRange(unpackedMessage, 1, unpackedMessage.length - 1));
-				}
 
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		finally {
-			try {chefsClientSocket.close();}
-			catch(IOException e) {e.printStackTrace();}
-		}
 	}
 
 	/** Small method that writes a message to the socket. */
 	public synchronized void sendMessage(String message) {
 		try {
-			if(chefsClientSocket.isConnected()) bufferWrite.write(message + "\n");
+			if (clientSocket.isConnected())
+				writeBuffer.write(message + "\n");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
