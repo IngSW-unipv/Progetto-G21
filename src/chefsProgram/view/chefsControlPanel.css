@@ -1,29 +1,27 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
-
-.root {
+.root 
+{
     -fx-font-size: 20px;
     -fx-background-color: #ffffff;
     -fx-color: #e6e6fa;
 }
 
 
-#label1 {
-	-fx-font-size: 35px;
-	-fx-text-fill: blue;
-	-fx-padding: 6 6 6 6; 
-	-fx-font-weight: bold;
-	-fx-font: bold italic 30pt "Arial";
-    -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );
+#titleLabel 
+{
+	-fx-text-fill: blue;	
+	-fx-font:  bold italic 30pt "Lemon";
+    -fx-effect: dropshadow(one-pass-box, black, 8, 0.0, 2, 0);
 }
 
 
-#titleArchorPane {
+#titleArchorPane 
+{
 	-fx-background-color: #e6e6fa;
 	-fx-border-color: blue;
 }
 
-
-#ordersArchorPane {
+	
+#ordersArchorPane 
+{
 	-fx-background-color:#f0f8ff;
 }
-
