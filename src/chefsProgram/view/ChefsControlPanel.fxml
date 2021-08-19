@@ -14,7 +14,7 @@
       </ScrollPane>
       <AnchorPane fx:id="titleArchorPane" prefHeight="68.0" prefWidth="800.0">
          <children>
-            <Label fx:id="titleLabel" layoutX="177.0" layoutY="8.0" text="Chef's control panel">
+            <Label fx:id="titleLabel" layoutX="242.0" layoutY="8.0" text="Chef's control panel">
                <font>
                   <Font size="36.0" />
                </font>

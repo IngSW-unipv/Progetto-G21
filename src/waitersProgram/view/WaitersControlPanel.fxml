@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TabPane layoutY="67.0" prefHeight="530.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -21,17 +21,17 @@
                      <children>
                         <Pane prefHeight="180.0" prefWidth="350.0">
                            <children>
-                              <Label layoutX="15.0" layoutY="15.0" text="Create a new order:">
+                              <Label id="createNewOrderLabel" layoutX="15.0" layoutY="15.0" text="Create a new order:">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="100.0" layoutY="60.0" text="Table">
+                              <Label id="tableLabel" layoutX="100.0" layoutY="60.0" text="Table">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="50.0" layoutY="100.0" text="Menu entry">
+                              <Label id="menuEntryLabel" layoutX="50.0" layoutY="100.0" text="Menu entry">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -52,12 +52,12 @@
                         </ScrollPane>
                         <Pane layoutY="180.0" prefHeight="135.0" prefWidth="350.0">
                            <children>
-                              <Label layoutX="15.0" layoutY="15.0" text="Add a new table:">
+                              <Label id="addNewTableLabel" layoutX="15.0" layoutY="15.0" text="Add a new table:">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="100.0" layoutY="60.0" text="Table">
+                              <Label id="tableLabel" layoutX="100.0" layoutY="60.0" text="Table">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -72,12 +72,12 @@
                         </Pane>
                         <Pane layoutY="315.0" prefHeight="135.0" prefWidth="350.0">
                            <children>
-                              <Label layoutX="15.0" layoutY="15.0" text="Remove a table:">
+                              <Label id="removeTableLabel" layoutX="15.0" layoutY="15.0" text="Remove a table:">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="100.0" layoutY="60.0" text="Table">
+                              <Label id="tableLabel" layoutX="100.0" layoutY="60.0" text="Table">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -105,12 +105,12 @@
                      <children>
                         <Pane prefHeight="300.0" prefWidth="350.0">
                            <children>
-                              <Label layoutX="15.0" layoutY="15.0" text="Print a new bill:">
+                              <Label id="printNewBillLabel" layoutX="15.0" layoutY="15.0" text="Print a new bill:">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="100.0" layoutY="60.0" text="Table">
+                              <Label id="tableLabel" layoutX="100.0" layoutY="60.0" text="Table">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -139,17 +139,17 @@
                      <children>
                         <Pane prefHeight="200.0" prefWidth="350.0">
                            <children>
-                              <Label layoutX="15.0" layoutY="15.0" text="Add a new entry:">
+                              <Label id="addNewEntryLabel" layoutX="15.0" layoutY="15.0" text="Add a new entry:">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="90.0" layoutY="60.0" text="Name">
+                              <Label id="entryNameLabel" layoutX="90.0" layoutY="60.0" text="Name">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="100.0" layoutY="100.0" text="Price">
+                              <Label id="entryPriceLabel" layoutX="100.0" layoutY="100.0" text="Price">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -165,17 +165,17 @@
                         </Pane>
                         <Pane layoutY="200.0" prefHeight="230.0" prefWidth="350.0">
                            <children>
-                              <Label layoutX="15.0" layoutY="15.0" text="Remove an entry:">
+                              <Label id="removeEntryLabel" layoutX="15.0" layoutY="15.0" text="Remove an entry:">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="90.0" layoutY="60.0" text="Name">
+                              <Label id="entryNameLabel" layoutX="90.0" layoutY="60.0" text="Name">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="100.0" layoutY="100.0" text="Price">
+                              <Label id="entryPriceLabel" layoutX="100.0" layoutY="100.0" text="Price">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -204,7 +204,7 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Label layoutX="226.0" layoutY="14.0" text="Waiter's control panel">
+      <Label fx:id="titleLabel" layoutX="226.0" layoutY="14.0" text="Waiter's control panel">
          <font>
             <Font size="36.0" />
          </font>

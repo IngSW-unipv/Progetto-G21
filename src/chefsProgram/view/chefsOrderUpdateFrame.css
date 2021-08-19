@@ -1,6 +1,7 @@
 .root 
 { 
-	-fx-background-color:#f0f8ff;
+	-fx-background-color:
+				linear-gradient(#cfc8ff, #cdccff, #cbd0ff, #cbd4ff, #cbd8fe, #c9ddff, #c8e2ff, #c9e6fe, #cbecfd, #d0f2fb, #d8f7fa, #e2fbf9);	
 }
 
 
