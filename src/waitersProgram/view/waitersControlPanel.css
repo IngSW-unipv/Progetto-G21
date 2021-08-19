@@ -36,6 +36,13 @@
 }
 
 
+.button
+{
+	 -fx-border-color: #79b4f1;	
+	 -fx-background-color: #eccfff;  
+}
+
+
 /*#menuPane 
 {
 	-fx-background-color: ;
