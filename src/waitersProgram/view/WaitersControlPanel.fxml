@@ -13,7 +13,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TabPane layoutY="67.0" prefHeight="530.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane id="tabPaneOrganization" layoutY="67.0" prefHeight="530.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Order &amp; table manager">
             <content>
@@ -47,7 +47,7 @@
                         </Pane>
                         <ScrollPane layoutX="400.0" prefHeight="505.0" prefWidth="400.0">
                           <content>
-                            <AnchorPane fx:id="ordersPane" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="400.0" />
+                            <AnchorPane id="orderTableManagerArchorPane" fx:id="ordersPane" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="400.0" />
                           </content>
                         </ScrollPane>
                         <Pane layoutY="180.0" prefHeight="135.0" prefWidth="350.0">
@@ -90,7 +90,7 @@
                               </Button>
                            </children>
                         </Pane>
-                        <Label fx:id="promptOrderTableLabel" layoutX="15.0" layoutY="460.0" text="-&gt;">
+                        <Label id="arrowLabel" fx:id="promptOrderTableLabel" layoutX="15.0" layoutY="460.0" text="-&gt;">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -123,12 +123,13 @@
                               </Button>
                            </children>
                         </Pane>
-                        <TextArea fx:id="printBillField" layoutX="400.0" prefHeight="500.0" prefWidth="400.0" />
-                        <Label fx:id="promptBillLabel" layoutX="15.0" layoutY="460.0" text="-&gt;">
+                        <TextArea id="billCreatorArchorPane" fx:id="printBillField" layoutX="400.0" prefHeight="500.0" prefWidth="400.0" />
+                        <Label id="arrowLabel" fx:id="promptBillLabel" layoutX="15.0" layoutY="460.0" text="-&gt;">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
+                        <AnchorPane id="billCreatorArchorPane" layoutX="401.0" prefHeight="505.0" prefWidth="401.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -191,10 +192,10 @@
                         </Pane>
                         <ScrollPane layoutX="400.0" prefHeight="505.0" prefWidth="400.0">
                            <content>
-                              <AnchorPane fx:id="menuPane" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="400.0" />
+                              <AnchorPane id="menuModifierArchorPane" fx:id="menuPane" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="400.0" />
                            </content>
                         </ScrollPane>
-                        <Label fx:id="promptEntryLabel" layoutX="15.0" layoutY="460.0" text="-&gt;">
+                        <Label id="arrowLabel" fx:id="promptEntryLabel" layoutX="15.0" layoutY="460.0" text="-&gt;">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -204,10 +205,14 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Label fx:id="titleLabel" layoutX="226.0" layoutY="14.0" text="Waiter's control panel">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Label>
+      <AnchorPane id="titleArchorPane" prefHeight="69.0" prefWidth="800.0">
+         <children>
+            <Label fx:id="titleLabel" layoutX="189.0" layoutY="14.0" text="Waiter's control panel">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
