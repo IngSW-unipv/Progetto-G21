@@ -5,6 +5,7 @@ import waitersProgram.model.Bill;
 
 public class PrintBillStrategy extends StrategyAbstract {
 	private static PrintBillStrategy instance = null;
+	private static Bill billToPrint;
 
 	public PrintBillStrategy(Restaurant restaurant) {
 		super(restaurant);
@@ -19,6 +20,10 @@ public class PrintBillStrategy extends StrategyAbstract {
 
 	@Override
 	public void execute(String[] args) {
-		new Bill(Integer.parseInt(args[0]));
+		billToPrint = new Bill(Integer.parseInt(args[0]));
+	}
+
+	public static Bill getBill() {
+		return billToPrint;
 	}
 }

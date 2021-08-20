@@ -66,6 +66,10 @@ public class ListeningPost extends Thread {
 		return post;
 	}
 
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
+
 	/**
 	 * This method can be invoked when needed to change the bound controllers, and,
 	 * through these, strategies.
