@@ -9,13 +9,13 @@ import javafx.scene.Scene;
 
 public class ChefsControlPanelMain extends Application {
 	@Override
-	public void start(Stage primaryStageChefsControlPanel) {
+	public void start(Stage primaryStage) {
 		try {
-	        Parent rootChefsControlPanel = FXMLLoader.load(getClass().getResource("/chefsProgram/view/ChefsControlPanel.fxml"));
-			Scene sceneChefsControlPanel = new Scene(rootChefsControlPanel,800,600);
-			sceneChefsControlPanel.getStylesheets().add(getClass().getResource("chefsControlPanel.css").toExternalForm());
-			primaryStageChefsControlPanel.setScene(sceneChefsControlPanel);
-			primaryStageChefsControlPanel.show();
+	        Parent root = FXMLLoader.load(getClass().getResource("/chefsProgram/view/ChefsControlPanel.fxml"));
+			Scene scene = new Scene(root,800,600);
+			scene.getStylesheets().add(getClass().getResource("chefsControlPanel.css").toExternalForm());
+			primaryStage.setScene(scene);
+			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -1,0 +1,21 @@
+.root 
+{ 
+	-fx-background-color:
+				linear-gradient(#cfc8ff, #cdccff, #cbd0ff, #cbd4ff, #cbd8fe, #c9ddff, #c8e2ff, #c9e6fe, #cbecfd, #d0f2fb, #d8f7fa, #e2fbf9);	
+}
+
+
+.label 
+{
+	-fx-text-fill: blue;
+	-fx-font: italic 18pt "Lemon";
+    -fx-effect: dropshadow(one-pass-box, #add8e6, 8, 0.0, 2, 0 );
+}
+
+
+CheckBox
+{
+	-fx-color: #e6e6fa; 
+	-fx-text-fill: blue;
+	-fx-font:  bold italic 16pt "PlayBall";
+}

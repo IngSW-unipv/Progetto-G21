@@ -9,13 +9,13 @@ import javafx.scene.Scene;
 
 public class ChefsOrderUpdateFrame extends Application {
 	@Override
-	public void start(Stage primaryStageChefsOrderUpdateFrame) {
+	public void start(Stage primaryStage) {
 		try {
-	        Parent rootChefsOrderUpdateFrame = FXMLLoader.load(getClass().getResource("/chefsProgram/view/ChefsOrderUpdateFrame.fxml"));
-			Scene sceneChefsOrderUpdateFrame = new Scene(rootChefsOrderUpdateFrame,500,200);
-			sceneChefsOrderUpdateFrame.getStylesheets().add(getClass().getResource("chefsOrderUpdateFrame.css").toExternalForm());
-			primaryStageChefsOrderUpdateFrame.setScene(sceneChefsOrderUpdateFrame);
-			primaryStageChefsOrderUpdateFrame.show();
+	        Parent root = FXMLLoader.load(getClass().getResource("/chefsProgram/view/ChefsOrderUpdateFrame.fxml"));
+			Scene scene = new Scene(root,500,200);
+			scene.getStylesheets().add(getClass().getResource("chefsOrderUpdateFrame.css").toExternalForm());
+			primaryStage.setScene(scene);
+			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
