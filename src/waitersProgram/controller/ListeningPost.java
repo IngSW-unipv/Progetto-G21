@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Arrays;
+import java.util.regex.Pattern;
 
 /**
  * The ListeningPost class. Once instantiated, it can dynamically change the
@@ -104,7 +106,28 @@ public class ListeningPost extends Thread {
 	 */
 	@Override
 	public void run() {
+		try {
+			while (clientSocket.isConnected()) {
+				Pattern p = Pattern.compile("^([a-zA-Z0-9]+, )+[a-zA-Z0-9]+$");
+				String[] unpackedMessage;
+				String message;
+				while ((message = readBuffer.readLine()) == null);
+				if (p.matcher(message).matches()) {
+					unpackedMessage = message.split(", ");
+					notifyMainController(unpackedMessage[0],
+							Arrays.copyOfRange(unpackedMessage, 1, unpackedMessage.length - 1));
+				}
 
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		finally {
+			try {clientSocket.close();}
+			catch(IOException e) {e.printStackTrace();}
+		}
 	}
 
 	/** Small method that writes a message to the socket. */

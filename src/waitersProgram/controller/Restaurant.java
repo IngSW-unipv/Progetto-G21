@@ -30,6 +30,7 @@ public class Restaurant {
 	 * Class constructor method.
 	 */
 	private Restaurant() {
+		strategies=new HashMap<String, StrategyAbstract>();
 		restaurantMenu = Menu.getInstance();
 		orderManager = OrderManager.getInstance();
 		tableManager = TableManager.getInstance();
