@@ -7,8 +7,10 @@
 #titleLabel 
 {
 	-fx-text-fill: blue;	
-	-fx-font:  bold italic 40px "Lemon";
-	-fx-padding: -10 0 0 -50;
+	/*-fx-font:  bold italic 40px "Lemon";*/
+	-fx-font:  bold italic 40px "Elephant";
+	/*-fx-padding: -10 0 0 -50;*/
+	-fx-padding: -10 0 0 -20;
     -fx-effect: dropshadow(one-pass-box, black, 8, 0.0, 2, 0);
 }
 
@@ -24,7 +26,8 @@
 #removeEntryLabel
 {
 	-fx-text-fill: blue;
-	-fx-font: italic 18px "Lemon";
+	/*-fx-font: italic 18px "Lemon";*/
+	-fx-font:  bold italic 22px "Elephant";
 }
 
 
@@ -37,15 +40,20 @@
 
 .tab
 {
-	 -fx-border-color: #79b4f1;	
-	 -fx-background-color: #eccfff;  
+	  /*-fx-border-color: #79b4f1;*/	
+	 -fx-border-color: #8e07c3;
+	 -fx-background-color:#c668eb;  
+/*   -fx-background-color: #eccfff;  */
 }
 
 
 .button
 {
-	 -fx-border-color: #79b4f1;	
-	 -fx-background-color: #eccfff;  
+	 /*-fx-border-color: #79b4f1;*/	
+	 -fx-border-color: #8e07c3;
+	 -fx-background-color:#c668eb;  
+/*	 -fx-background-color: #eccfff;  */
+	 
 }
 
 

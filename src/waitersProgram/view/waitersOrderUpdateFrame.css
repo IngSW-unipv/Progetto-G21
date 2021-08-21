@@ -8,7 +8,8 @@
 .label 
 {
 	-fx-text-fill: blue;
-	-fx-font: italic 18pt "Lemon";
+	/*-fx-font: italic 18pt "Lemon";*/
+	-fx-font:  bold italic 22px "Elephant";
     -fx-effect: dropshadow(one-pass-box, #add8e6, 8, 0.0, 2, 0 );
 }
 
