@@ -4,8 +4,18 @@ package chefsProgram.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import io.github.classgraph.ClassInfoList;
 import io.github.classgraph.ScanResult;
@@ -24,17 +34,21 @@ import chefsProgram.strategies.StrategyInterface;
  * contains the server.
  */
 
-public class ChefsGuiController implements ControllerInterface {
+public class ChefsGuiController extends Thread{
 
 	@FXML
 	AnchorPane ordersScrollPane;
 	private HashMap<String, StrategyAbstract> strategies;
+	
+	private Socket serverSocket = null; // = new Socket("localhost", 4999);
+	private BufferedReader readBuffer = null;
+	private BufferedWriter writeBuffer = null;
+	private String serverName = "localhost";
 
 	private static ChefsGuiController instance = null;
 
 	private ChefsGuiController() {
-		strategies=new HashMap<String,StrategyAbstract>();
-		createStrategies();
+		
 	}
 
 	public static ChefsGuiController getInstance() {
@@ -63,29 +77,78 @@ public class ChefsGuiController implements ControllerInterface {
 
 	}
 	
-	private void createStrategies() {
-		try (ScanResult sr= new ClassGraph()
-									.acceptPackages("chefsProgram.strategies")
-									.enableClassInfo()
-									.scan()) {
-			ClassInfoList cl= sr.getSubclasses("chefsProgram.Strategies.StrategyAbstract");
-			List<Class<?>> l=cl.loadClasses();
-			for(Class<?> c : l) {
-				strategies.put(((String) c.getMethod("getStrategyName", ((Class<?>)null)).invoke(null)),
-								((StrategyAbstract)c.getMethod("getInstance", StrategyInterface.class).invoke(this)));
+	public String getServerName() {
+		return serverName;
+	}
+
+	public void setServerName(String serverName) {
+		this.serverName = serverName;
+	}
+	
+	public void connect() {
+		boolean isFailed = false;
+		try {
+			serverSocket = new Socket(serverName, 4999);
+
+			readBuffer = new BufferedReader(new InputStreamReader(serverSocket.getInputStream()));
+			writeBuffer = new BufferedWriter(new OutputStreamWriter(serverSocket.getOutputStream()));
+
+			System.out.println("Client is connected!\n");
+
+			this.start();
+
+		} catch (Exception e) {
+			isFailed = true;
+			System.err.println(e.getMessage());
+		} finally {
+			if (isFailed && serverSocket.isConnected()) {
+				try {
+					serverSocket.close();
+				} catch (Exception e) {
+					System.err.println(e.getMessage());
+				}
 			}
-		}
-		catch (Exception e){
-			System.err.println("Error in the creation of the strategies, program aborting./n" + e.getMessage());
 		}
 	}
 	
-	public void executeStrategy(String strategyName, String[] args) {
-		StrategyAbstract s= strategies.get(strategyName);
-		if(s!=null)
-			strategies.get(strategyName).execute(args);
-		else
-			System.out.println("Strategy does not exist");
+	/** Small method that writes a message to the socket. */
+	public synchronized void sendMessage(String message) {
+		try {
+			if (serverSocket.isConnected())
+				writeBuffer.write(message + "\n");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
+	
+	@Override
+	public void run() {
+		try {
+			Pattern p = Pattern.compile("^([a-zA-Z0-9]+, )+[a-zA-Z0-9]+$");
+			while (serverSocket.isConnected()) {
+				String[] unpackedMessage;
+				String message;
+				while ((message = readBuffer.readLine()) == null && serverSocket.isConnected())
+					;
+				if (p.matcher(message).matches()) {
+					unpackedMessage = message.split(", ");
+					if(unpackedMessage[0].compareTo("ADD")==0) 
+						System.out.println("replace with method to update orders");
+					else 
+						System.out.println("replace with method to remove orders");
+						
+				}
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
 
+		finally {
+			try {
+				serverSocket.close();
+			} catch (IOException e) {
+				System.err.println(e.getMessage());
+			}
+		}
+	}
 }
