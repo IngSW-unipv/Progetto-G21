@@ -74,8 +74,11 @@ public class WaitersGuiController {
 
 	private static WaitersGuiController instance = null;
 
+	private ArrayList<Order> ordersToBeDisplayed;
+
 	private WaitersGuiController() {
 		post = ListeningPost.getInstance();
+		ordersToBeDisplayed = new ArrayList<Order>(0);
 	}
 
 	public static WaitersGuiController getInstance() {
@@ -87,6 +90,10 @@ public class WaitersGuiController {
 
 	public ListeningPost getPost() {
 		return post;
+	}
+
+	public ArrayList<Order> getOrderToBeDisplayed() {
+		return ordersToBeDisplayed;
 	}
 
 	public void addNewOrder() {
@@ -165,9 +172,9 @@ public class WaitersGuiController {
 	private void updateOrders() {
 		ordersPane.getChildren().clear();
 		OrderManager orderManager = Restaurant.getInstance().getOrderManager();
-		ArrayList<Order> ordersToDisplay = orderManager.getAllOrdersForWaitersGuiController();
+		ordersToBeDisplayed = orderManager.getAllOrdersForWaitersGuiController();
 
-		Iterator<Order> iterator = ordersToDisplay.iterator();
+		Iterator<Order> iterator = ordersToBeDisplayed.iterator();
 		while (iterator.hasNext()) {
 			ordersPane.getChildren().add(new Label(iterator.next().toString()));
 		}

@@ -13,7 +13,7 @@ public class WaitersControlPanelMain extends Application {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("WaitersControlPanel.fxml"));
 			Scene scene = new Scene(root);
-			// scene.getStylesheets().add(getClass().getResource("waitersControlPanel.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("iry.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (Exception e) {

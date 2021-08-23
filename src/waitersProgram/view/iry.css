@@ -1,0 +1,7 @@
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #1E3986;
+}
+
+.button {
+	-fx-border-radius: 15px;
+}
