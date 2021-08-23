@@ -159,18 +159,15 @@ public class WaitersGuiController {
 
 	}
 
-	public void removeEntry() {
-		if (checkForEntryNameFormat(removeEntryNameField) == false
-				|| checkForEntryPriceFormat(removeEntryPriceField) == false) {
-			promptEntryLabel.setText("ERROR!");
-		} else {
-			String[] parameters = new String[2];
-			parameters[0] = removeEntryNameField.getText();
-			parameters[1] = removeEntryPriceField.getText();
-			post.notifyMainController("RemoveEntryStrategy", parameters);
-			updateMenu();
-		}
-	}
+	/*
+	 * public void removeEntry() { if (checkForEntryNameFormat(removeEntryNameField)
+	 * == false || checkForEntryPriceFormat(removeEntryPriceField) == false) {
+	 * promptEntryLabel.setText("ERROR!"); } else { String[] parameters = new
+	 * String[2]; parameters[0] = removeEntryNameField.getText(); parameters[1] =
+	 * removeEntryPriceField.getText();
+	 * post.notifyMainController("RemoveEntryStrategy", parameters); updateMenu(); }
+	 * }
+	 */
 
 	private void updateOrders() {
 		ordersPane.getChildren().clear();
