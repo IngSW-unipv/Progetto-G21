@@ -27,14 +27,14 @@
 {
 	-fx-text-fill: blue;
 	/*-fx-font: italic 18px "Lemon";*/
-	-fx-font:  bold italic 22px "Elephant";
+	-fx-font:  bold italic 20px "Elephant";
 }
 
 
 #tableLabel, #menuEntryLabel, #entryNameLabel, #entryPriceLabel
 {
 	-fx-text-fill: blue;
-	-fx-font:  bold italic 16pt "PlayBall";
+	-fx-font:  bold italic 12pt "PlayBall";
 }
 
 

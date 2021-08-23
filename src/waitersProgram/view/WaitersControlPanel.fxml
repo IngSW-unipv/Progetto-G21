@@ -18,13 +18,13 @@
    <children>
       <TabPane id="tabPaneOrganization" layoutY="67.0" prefHeight="530.0" prefWidth="800.0" style="-fx-background-color: #1E3986;" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Order &amp; table manager">
+          <Tab style="-fx-background-color: #1E3986;" text="Order &amp; table manager">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #1E3986;">
                      <children>
                         <Pane prefHeight="180.0" prefWidth="350.0">
                            <children>
-                              <Label id="createNewOrderLabel" layoutX="15.0" layoutY="17.0" text="Create a new order:" textFill="WHITE">
+                              <Label id="createNewOrderLabel" layoutX="15.0" layoutY="16.0" text="Create a new order:" textFill="WHITE">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="24.0" />
                                  </font>
@@ -102,7 +102,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Bill creator">
+          <Tab style="-fx-t: #1E3986;" text="Bill creator">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #1E3986;">
                      <children>
@@ -210,7 +210,7 @@
       </TabPane>
       <AnchorPane id="titleArchorPane" prefHeight="69.0" prefWidth="800.0" style="-fx-background-color: #1E3986;">
          <children>
-            <Label fx:id="titleLabel" layoutX="160.0" layoutY="6.0" prefHeight="58.0" prefWidth="498.0" text="Waiter's control panel" textAlignment="CENTER" textOverrun="CLIP" underline="true" wrapText="true">
+            <Label fx:id="titleLabel" layoutX="160.0" layoutY="4.0" prefHeight="58.0" prefWidth="498.0" text="Waiter's control panel" textAlignment="CENTER" textOverrun="CLIP" underline="true" wrapText="true">
                <font>
                   <Font name="Copperplate Gothic Bold" size="36.0" />
                </font>
