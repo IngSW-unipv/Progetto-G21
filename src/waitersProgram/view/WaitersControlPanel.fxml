@@ -18,7 +18,7 @@
    <children>
       <TabPane id="tabPaneOrganization" layoutY="67.0" prefHeight="530.0" prefWidth="800.0" style="-fx-background-color: #1E3986;" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab style="-fx-background-color: #1E3986;" text="Order &amp; table manager">
+          <Tab style="-fx-background-color: #1E3986; -fx-color: #000000; -fx-font-family: &quot;Copperplate Gothic Light&quot;;" text="Order &amp; table manager">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #1E3986;">
                      <children>
@@ -102,7 +102,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab style="-fx-t: #1E3986;" text="Bill creator">
+          <Tab style="-fx-background-color: #1E3986; -fx-color: #000000; -fx-font-family: &quot;Copperplate Gothic Light&quot;;" text="Bill creator">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #1E3986;">
                      <children>
@@ -137,7 +137,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="Menu modifier">
+            <Tab style="-fx-background-color: #1E3986; -fx-color: #000000; -fx-font-family: &quot;Copperplate Gothic Light&quot;;" text="Menu modifier">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #1E3986;">
                      <children>
