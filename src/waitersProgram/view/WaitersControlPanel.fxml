@@ -9,31 +9,34 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TabPane id="tabPaneOrganization" layoutY="67.0" prefHeight="530.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane id="tabPaneOrganization" layoutY="67.0" prefHeight="530.0" prefWidth="800.0" style="-fx-background-color: #1E3986;" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Order &amp; table manager">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #1E3986;">
                      <children>
                         <Pane prefHeight="180.0" prefWidth="350.0">
                            <children>
-                              <Label id="createNewOrderLabel" layoutX="15.0" layoutY="15.0" text="Create a new order:">
+                              <Label id="createNewOrderLabel" layoutX="15.0" layoutY="17.0" text="Create a new order:" textFill="WHITE">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font name="Copperplate Gothic Light" size="24.0" />
                                  </font>
                               </Label>
-                              <Label id="tableLabel" layoutX="100.0" layoutY="60.0" text="Table">
+                              <Label id="tableLabel" layoutX="87.0" layoutY="61.0" text="Table" textFill="WHITE">
                                  <font>
-                                    <Font size="18.0" />
+                                    <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
                               </Label>
-                              <Label id="menuEntryLabel" layoutX="50.0" layoutY="100.0" text="Menu entry">
+                              <Label id="menuEntryLabel" layoutX="34.0" layoutY="102.0" text="Menu entry" textFill="WHITE">
                                  <font>
-                                    <Font size="18.0" />
+                                    <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="newOrderTableField" layoutX="150.0" layoutY="60.0" />
@@ -47,19 +50,19 @@
                         </Pane>
                         <ScrollPane layoutX="400.0" prefHeight="505.0" prefWidth="400.0">
                           <content>
-                            <AnchorPane id="orderTableManagerArchorPane" fx:id="ordersPane" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="400.0" />
+                            <AnchorPane id="orderTableManagerArchorPane" fx:id="ordersPane" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #1E3986;" />
                           </content>
                         </ScrollPane>
                         <Pane layoutY="180.0" prefHeight="135.0" prefWidth="350.0">
                            <children>
-                              <Label id="addNewTableLabel" layoutX="15.0" layoutY="15.0" text="Add a new table:">
+                              <Label id="addNewTableLabel" layoutX="15.0" layoutY="15.0" text="Add a new table:" textFill="WHITE">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font name="Copperplate Gothic Light" size="24.0" />
                                  </font>
                               </Label>
-                              <Label id="tableLabel" layoutX="100.0" layoutY="60.0" text="Table">
+                              <Label id="tableLabel" layoutX="87.0" layoutY="61.0" text="Table" textFill="WHITE">
                                  <font>
-                                    <Font size="18.0" />
+                                    <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="addNewTableField" layoutX="150.0" layoutY="60.0" />
@@ -72,14 +75,14 @@
                         </Pane>
                         <Pane layoutY="315.0" prefHeight="135.0" prefWidth="350.0">
                            <children>
-                              <Label id="removeTableLabel" layoutX="15.0" layoutY="15.0" text="Remove a table:">
+                              <Label id="removeTableLabel" layoutX="15.0" layoutY="15.0" text="Remove a table:" textFill="WHITE">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font name="Copperplate Gothic Light" size="24.0" />
                                  </font>
                               </Label>
-                              <Label id="tableLabel" layoutX="100.0" layoutY="60.0" text="Table">
+                              <Label id="tableLabel" layoutX="88.0" layoutY="61.0" text="Table" textFill="WHITE">
                                  <font>
-                                    <Font size="18.0" />
+                                    <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="removeTableField" layoutX="150.0" layoutY="60.0" />
@@ -90,9 +93,9 @@
                               </Button>
                            </children>
                         </Pane>
-                        <Label id="arrowLabel" fx:id="promptOrderTableLabel" layoutX="15.0" layoutY="460.0" text="-&gt;">
+                        <Label id="arrowLabel" fx:id="promptOrderTableLabel" layoutX="14.0" layoutY="450.0" text="→" textFill="WHITE">
                            <font>
-                              <Font size="18.0" />
+                              <Font name="Copperplate Gothic Bold" size="36.0" />
                            </font>
                         </Label>
                      </children>
@@ -101,18 +104,18 @@
           </Tab>
           <Tab text="Bill creator">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #1E3986;">
                      <children>
                         <Pane prefHeight="300.0" prefWidth="350.0">
                            <children>
-                              <Label id="printNewBillLabel" layoutX="15.0" layoutY="15.0" text="Print a new bill:">
+                              <Label id="printNewBillLabel" layoutX="15.0" layoutY="15.0" text="Print a new bill:" textFill="WHITE">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font name="Copperplate Gothic Light" size="24.0" />
                                  </font>
                               </Label>
-                              <Label id="tableLabel" layoutX="100.0" layoutY="60.0" text="Table">
+                              <Label id="tableLabel" layoutX="87.0" layoutY="61.0" text="Table" textFill="WHITE">
                                  <font>
-                                    <Font size="18.0" />
+                                    <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="newBillTableField" layoutX="150.0" layoutY="60.0" />
@@ -129,30 +132,30 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <AnchorPane id="billCreatorArchorPane" layoutX="401.0" prefHeight="505.0" prefWidth="401.0" />
+                        <AnchorPane id="billCreatorArchorPane" layoutX="401.0" prefHeight="505.0" prefWidth="401.0" style="-fx-background-color: #1E3986;" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
             <Tab text="Menu modifier">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #1E3986;">
                      <children>
                         <Pane prefHeight="200.0" prefWidth="350.0">
                            <children>
-                              <Label id="addNewEntryLabel" layoutX="15.0" layoutY="15.0" text="Add a new entry:">
+                              <Label id="addNewEntryLabel" layoutX="15.0" layoutY="15.0" text="Add a new entry:" textFill="WHITE">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font name="Copperplate Gothic Light" size="24.0" />
                                  </font>
                               </Label>
-                              <Label id="entryNameLabel" layoutX="90.0" layoutY="60.0" text="Name">
+                              <Label id="entryNameLabel" layoutX="93.0" layoutY="58.0" text="Name" textFill="WHITE">
                                  <font>
-                                    <Font size="18.0" />
+                                    <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
                               </Label>
-                              <Label id="entryPriceLabel" layoutX="100.0" layoutY="100.0" text="Price">
+                              <Label id="entryPriceLabel" layoutX="91.0" layoutY="99.0" text="Price" textFill="WHITE">
                                  <font>
-                                    <Font size="18.0" />
+                                    <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="newEntryNameField" layoutX="150.0" layoutY="60.0" />
@@ -166,19 +169,19 @@
                         </Pane>
                         <Pane layoutY="200.0" prefHeight="230.0" prefWidth="350.0">
                            <children>
-                              <Label id="removeEntryLabel" layoutX="15.0" layoutY="15.0" text="Remove an entry:">
+                              <Label id="removeEntryLabel" layoutX="15.0" layoutY="15.0" text="Remove an entry:" textFill="WHITE">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font name="Copperplate Gothic Light" size="24.0" />
                                  </font>
                               </Label>
-                              <Label id="entryNameLabel" layoutX="90.0" layoutY="60.0" text="Name">
+                              <Label id="entryNameLabel" layoutX="92.0" layoutY="58.0" text="Name" textFill="WHITE">
                                  <font>
-                                    <Font size="18.0" />
+                                    <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
                               </Label>
-                              <Label id="entryPriceLabel" layoutX="100.0" layoutY="100.0" text="Price">
+                              <Label id="entryPriceLabel" layoutX="91.0" layoutY="99.0" text="Price" textFill="WHITE">
                                  <font>
-                                    <Font size="18.0" />
+                                    <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="removeEntryNameField" layoutX="150.0" layoutY="60.0" />
@@ -192,7 +195,7 @@
                         </Pane>
                         <ScrollPane layoutX="400.0" prefHeight="505.0" prefWidth="400.0">
                            <content>
-                              <AnchorPane id="menuModifierArchorPane" fx:id="menuPane" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="400.0" />
+                              <AnchorPane id="menuModifierArchorPane" fx:id="menuPane" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #1E3986;" />
                            </content>
                         </ScrollPane>
                         <Label id="arrowLabel" fx:id="promptEntryLabel" layoutX="15.0" layoutY="460.0" text="-&gt;">
@@ -205,12 +208,38 @@
             </Tab>
         </tabs>
       </TabPane>
-      <AnchorPane id="titleArchorPane" prefHeight="69.0" prefWidth="800.0">
+      <AnchorPane id="titleArchorPane" prefHeight="69.0" prefWidth="800.0" style="-fx-background-color: #1E3986;">
          <children>
-            <Label fx:id="titleLabel" layoutX="189.0" layoutY="14.0" text="Waiter's control panel">
+            <Label fx:id="titleLabel" layoutX="160.0" layoutY="6.0" prefHeight="58.0" prefWidth="498.0" text="Waiter's control panel" textAlignment="CENTER" textOverrun="CLIP" underline="true" wrapText="true">
                <font>
-                  <Font size="36.0" />
+                  <Font name="Copperplate Gothic Bold" size="36.0" />
                </font>
+               <textFill>
+                  <RadialGradient centerX="0.4866666581895616" centerY="0.5" focusDistance="-0.037383231047157905" radius="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="1.0" green="0.9851852059364319" blue="0.9851852059364319" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.007680491551459294">
+                           <color>
+                              <Color red="1.0" green="0.9900000095367432" blue="0.9900000095367432" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.7296466973886329">
+                           <color>
+                              <Color red="0.929411768913269" green="0.5960784554481506" blue="0.18039216101169586" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.929411768913269" green="0.5960784554481506" blue="0.18039216101169586" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </RadialGradient>
+               </textFill>
             </Label>
          </children>
       </AnchorPane>
