@@ -6,14 +6,18 @@ import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.controlsfx.control.textfield.TextFields;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import waitersProgram.model.Bill;
+import waitersProgram.model.Menu;
 import waitersProgram.model.MenuEntry;
 import waitersProgram.model.Order;
 import waitersProgram.model.OrderManager;
+import waitersProgram.model.TableManager;
 import waitersProgram.strategies.PrintBillStrategy;
 
 /**
@@ -26,49 +30,31 @@ public class WaitersGuiController {
 
 	/** FXML calls for new order creation. */
 	@FXML
-	TextField newOrderTableField;
-	@FXML
-	TextField newOrderEntryField;
+	TextField newOrderTableField, newOrderEntryField;
 
 	/** FXML calls for new table creation. */
 	@FXML
-	TextField addNewTableField;
-
-	/** FXML calls for table removal. */
-	@FXML
-	TextField removeTableField;
+	TextField addNewTableField, removeTableField;
 
 	/** FXML calls for new bill printing. */
 	@FXML
-	TextField newBillTableField;
-	@FXML
-	TextField printBillField;
+	TextField newBillTableField, printBillField;
 
 	/** FXML calls for adding a new menu entry. */
 	@FXML
-	TextField newEntryNameField;
-	@FXML
-	TextField newEntryPriceField;
+	TextField newEntryNameField, newEntryPriceField;
 
 	/** FXML calls for entry removal. */
 	@FXML
-	TextField removeEntryNameField;
-	@FXML
-	TextField removeEntryPriceField;
+	TextField removeEntryField;
 
 	/** FXML calls for order's and menu's panes. */
 	@FXML
-	AnchorPane ordersPane;
-	@FXML
-	AnchorPane menuPane;
+	AnchorPane ordersPane, menuPane;
 
 	/** FXML calls for prompt labels. */
 	@FXML
-	Label promptOrderTableLabel;
-	@FXML
-	Label promptBillLabel;
-	@FXML
-	Label promptEntryLabel;
+	Label promptOrderTableLabel, promptBillLabel, promptEntryLabel;
 
 	private ListeningPost post;
 
@@ -94,6 +80,23 @@ public class WaitersGuiController {
 
 	public ArrayList<Order> getOrderToBeDisplayed() {
 		return ordersToBeDisplayed;
+	}
+
+	public void createTablesAutocomplete() {
+		Restaurant restaurant = post.getRestaurant();
+		TableManager tableManager = restaurant.getTableManager();
+		Collection<Integer> tablesCollection = tableManager.getTables();
+		TextFields.bindAutoCompletion(newOrderTableField, tablesCollection);
+		TextFields.bindAutoCompletion(removeTableField, tablesCollection);
+		TextFields.bindAutoCompletion(newBillTableField, tablesCollection);
+	}
+
+	public void createMenuEntriesAutocomplete() {
+		Restaurant restaurant = post.getRestaurant();
+		Menu menu = restaurant.getRestaurantMenu();
+		Collection<MenuEntry> menuCollection = menu.getEntriesCollection();
+		TextFields.bindAutoCompletion(newOrderEntryField, menuCollection);
+		TextFields.bindAutoCompletion(removeEntryField, menuCollection);
 	}
 
 	public void addNewOrder() {

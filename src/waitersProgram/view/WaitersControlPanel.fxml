@@ -40,7 +40,7 @@
                                  </font>
                               </Label>
                               <TextField fx:id="newOrderTableField" layoutX="150.0" layoutY="60.0" />
-                              <TextField fx:id="NewOrderEntryField" layoutX="150.0" layoutY="100.0" />
+                              <TextField fx:id="newOrderEntryField" layoutX="150.0" layoutY="100.0" />
                               <Button fx:id="createNewOrderButton" layoutX="192.0" layoutY="140.0" mnemonicParsing="false" text="Create">
                                  <font>
                                     <Font size="14.0" />
@@ -174,23 +174,17 @@
                                     <Font name="Copperplate Gothic Light" size="24.0" />
                                  </font>
                               </Label>
-                              <Label id="entryNameLabel" layoutX="92.0" layoutY="58.0" text="Name" textFill="WHITE">
-                                 <font>
-                                    <Font name="Copperplate Gothic Light" size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label id="entryPriceLabel" layoutX="91.0" layoutY="99.0" text="Price" textFill="WHITE">
-                                 <font>
-                                    <Font name="Copperplate Gothic Light" size="18.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="removeEntryNameField" layoutX="150.0" layoutY="60.0" />
-                              <TextField fx:id="removeEntryPriceField" layoutX="150.0" layoutY="100.0" />
-                              <Button fx:id="removeMenuEntryButton" layoutX="190.0" layoutY="140.0" mnemonicParsing="false" text="Remove">
+                              <Button fx:id="removeMenuEntryButton" layoutX="189.0" layoutY="115.0" mnemonicParsing="false" text="Remove">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Button>
+                              <Label id="menuEntryLabel" layoutX="26.0" layoutY="73.0" text="Menu entry" textFill="WHITE">
+                                 <font>
+                                    <Font name="Copperplate Gothic Light" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="removeEntryField" layoutX="149.0" layoutY="71.0" />
                            </children>
                         </Pane>
                         <ScrollPane layoutX="400.0" prefHeight="505.0" prefWidth="400.0">
@@ -210,7 +204,7 @@
       </TabPane>
       <AnchorPane id="titleArchorPane" prefHeight="69.0" prefWidth="800.0" style="-fx-background-color: #1E3986;">
          <children>
-            <Label fx:id="titleLabel" layoutX="160.0" layoutY="4.0" prefHeight="58.0" prefWidth="498.0" text="Waiter's control panel" textAlignment="CENTER" textOverrun="CLIP" underline="true" wrapText="true">
+            <Label layoutX="160.0" layoutY="4.0" prefHeight="58.0" prefWidth="498.0" text="Waiter's control panel" textAlignment="CENTER" textOverrun="CLIP" underline="true" wrapText="true">
                <font>
                   <Font name="Copperplate Gothic Bold" size="36.0" />
                </font>
