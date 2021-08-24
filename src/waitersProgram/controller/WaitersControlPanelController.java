@@ -212,6 +212,7 @@ public class WaitersControlPanelController {
 					break;
 				}
 			}
+			break;
 		}
 	}
 
