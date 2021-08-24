@@ -12,19 +12,7 @@
     -fx-border-width: 1.5px;
 }
 
-.scroll-pane {
-	-fx-background-color: transparent;
-    -fx-background-insets: 0;
-    -fx-padding: 10px;
-}
 
-.scroll-pane:focused {
-    -fx-background-insets: 0;
-}
-
-.scroll-pane .corner {
-    -fx-background-insets: 0;
-}
 .button {
 	-fx-border-radius: 20px;
 	-fx-background-radius: 20px;
@@ -36,6 +24,7 @@
 
 .text-field{
 	-fx-background-color: transparent;
+	-fx-border-radius: 10px;
 	-fx-text-inner-color: white;
 }
 

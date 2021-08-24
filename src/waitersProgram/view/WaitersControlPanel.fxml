@@ -27,12 +27,12 @@
                      <children>
                         <Pane layoutX="15.0" layoutY="15.0" prefHeight="180.0" prefWidth="350.0">
                            <children>
-                              <Label id="createNewOrderLabel" layoutX="6.0" layoutY="14.0" text="Create a new order:" textFill="WHITE">
+                              <Label id="createNewOrderLabel" layoutX="16.0" layoutY="16.0" text="Create a new order:" textFill="WHITE">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="24.0" />
                                  </font>
                               </Label>
-                              <Label id="tableLabel" layoutX="83.0" layoutY="69.0" text="Table" textFill="WHITE">
+                              <Label id="tableLabel" layoutX="80.0" layoutY="70.0" text="Table" textFill="WHITE">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
@@ -40,7 +40,7 @@
                                     <Insets />
                                  </opaqueInsets>
                               </Label>
-                              <Label id="menuEntryLabel" layoutX="27.0" layoutY="110.0" text="Menu entry" textFill="WHITE">
+                              <Label id="menuEntryLabel" layoutX="25.0" layoutY="110.0" text="Menu entry" textFill="WHITE">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
@@ -53,8 +53,8 @@
                                     <Font name="Copperplate Gothic Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <ComboBox fx:id="newOrderTableComboBox" layoutX="149.0" layoutY="60.0" prefWidth="150.0" />
-                              <ComboBox fx:id="newOrderEntryComboBox" layoutX="149.0" layoutY="100.0" prefWidth="150.0" />
+                              <ComboBox fx:id="newOrderTableComboBox" layoutX="150.0" layoutY="60.0" prefWidth="150.0" />
+                              <ComboBox fx:id="newOrderEntryComboBox" layoutX="150.0" layoutY="100.0" prefWidth="150.0" />
                            </children>
                         </Pane>
                         <Pane layoutX="15.0" layoutY="195.0" prefHeight="180.0" prefWidth="350.0">
@@ -64,7 +64,7 @@
                                     <Font name="Copperplate Gothic Light" size="24.0" />
                                  </font>
                               </Label>
-                              <Label id="tableLabel" layoutX="83.0" layoutY="69.0" text="Table" textFill="WHITE">
+                              <Label id="tableLabel" layoutX="80.0" layoutY="70.0" text="Table" textFill="WHITE">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
@@ -72,8 +72,8 @@
                                     <Insets />
                                  </opaqueInsets>
                               </Label>
-                              <TextField fx:id="addNewTableField" layoutX="149.0" layoutY="60.0" style="-fx-border-color: #1E3986 #1E3986 #ed982e #1E3986; -fx-border-width: 0 0 2 0;" />
-                              <Button fx:id="addNewTableButton" layoutX="196.0" layoutY="100.0" mnemonicParsing="false" text="Add">
+                              <TextField fx:id="addNewTableField" layoutX="150.0" layoutY="60.0" style="-fx-border-color: #ed982e;" />
+                              <Button fx:id="addNewTableButton" layoutX="200.0" layoutY="100.0" mnemonicParsing="false" text="Add">
                                  <font>
                                     <Font name="Copperplate Gothic Bold" size="14.0" />
                                  </font>
@@ -87,7 +87,7 @@
                                     <Font name="Copperplate Gothic Light" size="24.0" />
                                  </font>
                               </Label>
-                              <Label id="tableLabel" layoutX="83.0" layoutY="69.0" text="Table" textFill="WHITE">
+                              <Label id="tableLabel" layoutX="80.0" layoutY="70.0" text="Table" textFill="WHITE">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
@@ -108,7 +108,7 @@
                               <Font name="Copperplate Gothic Bold" size="36.0" />
                            </font>
                         </Label>
-                        <TableView fx:id="orderTableView" layoutX="370.0" layoutY="15.0" prefHeight="630.0" prefWidth="615.0">
+                        <TableView fx:id="orderTableView" layoutX="370.0" layoutY="15.0" prefHeight="630.0" prefWidth="615.0" style="-fx-font-family: &quot;Copperplate Gothic Light&quot;;">
                           <columns>
                             <TableColumn fx:id="tableColumn" resizable="false" text="Table" />
                             <TableColumn fx:id="orderColumn" prefWidth="380.0" resizable="false" text="Order" />
@@ -130,17 +130,17 @@
                                     <Font name="Copperplate Gothic Light" size="24.0" />
                                  </font>
                               </Label>
-                              <Label id="tableLabel" layoutX="83.0" layoutY="69.0" text="Table" textFill="WHITE">
+                              <Label id="tableLabel" layoutX="80.0" layoutY="70.0" text="Table" textFill="WHITE">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="printBillButton" layoutX="193.0" layoutY="100.0" mnemonicParsing="false" text="Print">
+                              <Button fx:id="printBillButton" layoutX="190.0" layoutY="100.0" mnemonicParsing="false" text="Print">
                                  <font>
                                     <Font name="Copperplate Gothic Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <ComboBox fx:id="newBillTableComboBox" layoutX="149.0" layoutY="60.0" prefWidth="150.0" />
+                              <ComboBox fx:id="newBillTableComboBox" layoutX="150.0" layoutY="60.0" prefWidth="150.0" />
                            </children>
                         </Pane>
                         <Label id="arrowLabel" fx:id="promptBillLabel" layoutX="15.0" layoutY="637.0" text="→" textFill="WHITE">
@@ -148,7 +148,7 @@
                               <Font name="Copperplate Gothic Bold" size="36.0" />
                            </font>
                         </Label>
-                        <TextArea fx:id="billTextArea" layoutX="370.0" layoutY="15.0" prefHeight="630.0" prefWidth="615.0" />
+                        <TextArea fx:id="billTextArea" layoutX="370.0" layoutY="15.0" prefHeight="630.0" prefWidth="615.0" style="-fx-color: #1E3986; -fx-font-family: &quot;Copperplate Gothic Light&quot;;" />
                      </children>
                   </AnchorPane>
             </content>
@@ -164,19 +164,19 @@
                                     <Font name="Copperplate Gothic Light" size="24.0" />
                                  </font>
                               </Label>
-                              <Label id="entryNameLabel" layoutX="83.0" layoutY="69.0" text="Name" textFill="WHITE">
+                              <Label id="entryNameLabel" layoutX="80.0" layoutY="70.0" text="Name" textFill="WHITE">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
                               </Label>
-                              <Label id="entryPriceLabel" layoutX="86.0" layoutY="110.0" text="Price" textFill="WHITE">
+                              <Label id="entryPriceLabel" layoutX="80.0" layoutY="110.0" text="Price" textFill="WHITE">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="newEntryNameField" layoutX="150.0" layoutY="60.0" style="-fx-border-color: #1E3986 #1E3986 #ed982e #1E3986; -fx-border-width: 0 0 2 0;" />
-                              <TextField fx:id="newEntryPriceField" layoutX="150.0" layoutY="100.0" style="-fx-border-color: #1E3986 #1E3986 #ed982e #1E3986; -fx-border-width: 0 0 2 0;" />
-                              <Button fx:id="addNewEntryButton" layoutX="199.0" layoutY="140.0" mnemonicParsing="false" text="Add">
+                              <TextField fx:id="newEntryNameField" layoutX="150.0" layoutY="60.0" style="-fx-border-color: #ed982e;" />
+                              <TextField fx:id="newEntryPriceField" layoutX="150.0" layoutY="100.0" style="-fx-border-color: #ed982e;" />
+                              <Button fx:id="addNewEntryButton" layoutX="200.0" layoutY="140.0" mnemonicParsing="false" text="Add">
                                  <font>
                                     <Font name="Copperplate Gothic Bold" size="14.0" />
                                  </font>
@@ -190,17 +190,17 @@
                                     <Font name="Copperplate Gothic Light" size="24.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="removeMenuEntryButton" layoutX="184.0" layoutY="115.0" mnemonicParsing="false" text="Remove">
+                              <Button fx:id="removeMenuEntryButton" layoutX="185.0" layoutY="100.0" mnemonicParsing="false" text="Remove">
                                  <font>
                                     <Font name="Copperplate Gothic Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <Label id="menuEntryLabel" layoutX="28.0" layoutY="81.0" text="Menu entry" textFill="WHITE">
+                              <Label id="menuEntryLabel" layoutX="25.0" layoutY="70.0" text="Menu entry" textFill="WHITE">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="removeEntryComboBox" layoutX="149.0" layoutY="73.0" prefWidth="150.0" />
+                              <ComboBox fx:id="removeEntryComboBox" layoutX="150.0" layoutY="60.0" prefWidth="150.0" />
                            </children>
                         </Pane>
                         <Label id="arrowLabel" fx:id="promptEntryLabel" layoutX="15.0" layoutY="637.0" text="→" textFill="WHITE">
@@ -208,7 +208,7 @@
                               <Font name="Copperplate Gothic Bold" size="36.0" />
                            </font>
                         </Label>
-                        <TextArea fx:id="menuTextArea" layoutX="370.0" layoutY="15.0" prefHeight="630.0" prefWidth="615.0" />
+                        <TextArea fx:id="menuTextArea" layoutX="370.0" layoutY="15.0" prefHeight="630.0" prefWidth="615.0" style="-fx-font-family: &quot;Copperplate Gothic Light&quot;;" />
                      </children></AnchorPane>
               </content>
             </Tab>
