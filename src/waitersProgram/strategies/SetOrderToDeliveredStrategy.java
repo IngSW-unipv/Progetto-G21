@@ -40,5 +40,7 @@ public class SetOrderToDeliveredStrategy extends StrategyAbstract {
 			}
 		}
 		orderManagerInstance.deliverOrder(currentOrder);
+
+		// WaitersGuiController updateOrders()
 	}
 }

@@ -1,22 +1,24 @@
 package waitersProgram.controller;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.controlsfx.control.textfield.TextFields;
+import org.controlsfx.control.SearchableComboBox;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import waitersProgram.model.Bill;
+import javafx.scene.control.cell.PropertyValueFactory;
 import waitersProgram.model.Menu;
 import waitersProgram.model.MenuEntry;
 import waitersProgram.model.Order;
-import waitersProgram.model.OrderManager;
 import waitersProgram.model.TableManager;
 import waitersProgram.strategies.PrintNewBillStrategy;
 
@@ -30,43 +32,63 @@ public class WaitersControlPanelController {
 
 	/** FXML calls for new order creation. */
 	@FXML
-	TextField newOrderTableField, newOrderEntryField;
+	SearchableComboBox<Integer> newOrderTableComboBox;
+	SearchableComboBox<MenuEntry> newOrderEntryComboBox;
 
 	/** FXML calls for new table creation. */
 	@FXML
-	TextField addNewTableField, removeTableField;
+	TextField addNewTableField;
+
+	/** FXML calls for new table removal. */
+	@FXML
+	SearchableComboBox<Integer> removeTableComboBox;
 
 	/** FXML calls for new bill printing. */
 	@FXML
-	TextField newBillTableField, printBillField;
+	SearchableComboBox<Integer> newBillTableComboBox;
+	TextArea billTextArea;
 
 	/** FXML calls for adding a new menu entry. */
 	@FXML
 	TextField newEntryNameField, newEntryPriceField;
 
-	/** FXML calls for entry removal. */
+	/** FXML calls for menu entry removal. */
 	@FXML
 	TextField removeEntryField;
-
-	/** FXML calls for order's and menu's panes. */
-	@FXML
-	AnchorPane ordersPane, menuPane;
+	SearchableComboBox<MenuEntry> removeEntryComboBox;
+	TextArea menuTextArea;
 
 	/** FXML calls for prompt labels. */
 	@FXML
 	Label promptOrderTableLabel, promptBillLabel, promptEntryLabel;
 
+	/** FXML calls for ChefsOrderUpdateFrame. */
+	@FXML
+	Label tableLabel, orderLabel, orderNumberLabel;
+	CheckBox deliveredCheckBox;
+
+	/** FXML calls for orders Table View. */
+	@FXML
+	TableView<Order> ordersTableView;
+	TableColumn<Order, String> tableColumn;
+	TableColumn<Order, String> orderColumn;
+	TableColumn<Order, String> statusColumn;
+
 	private ListeningPost post;
 
 	private static WaitersControlPanelController instance = null;
 
-	private ArrayList<Order> ordersToBeDisplayed;
-
-	private ArrayList<Label> ordersLabels;
+	private ObservableList<Integer> tablesList;
+	private ObservableList<MenuEntry> entriesList;
+	private ObservableList<Order> ordersList;
 
 	private WaitersControlPanelController() {
 		post = ListeningPost.getInstance();
-		ordersToBeDisplayed = new ArrayList<Order>(0);
+		fillTablesList();
+		fillMenuEntriesList();
+		tableColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Table"));
+		orderColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Table"));
+		statusColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Table"));
 	}
 
 	public static WaitersControlPanelController getInstance() {
@@ -80,39 +102,26 @@ public class WaitersControlPanelController {
 		return post;
 	}
 
-	public ArrayList<Order> getOrderToBeDisplayed() {
-		return ordersToBeDisplayed;
+	public void fillTablesList() {
+		tablesList.clear();
+		TableManager tableManager = Restaurant.getInstance().getTableManager();
+		tablesList.addAll(tableManager.getTables());
 	}
 
-	public void createTablesAutocomplete() {
-		Restaurant restaurant = post.getRestaurant();
-		TableManager tableManager = restaurant.getTableManager();
-		Collection<Integer> tablesCollection = tableManager.getTables();
-		TextFields.bindAutoCompletion(newOrderTableField, tablesCollection);
-		TextFields.bindAutoCompletion(removeTableField, tablesCollection);
-		TextFields.bindAutoCompletion(newBillTableField, tablesCollection);
-	}
-
-	public void createMenuEntriesAutocomplete() {
-		Restaurant restaurant = post.getRestaurant();
-		Menu menu = restaurant.getRestaurantMenu();
-		Collection<MenuEntry> menuCollection = menu.getEntriesCollection();
-		TextFields.bindAutoCompletion(newOrderEntryField, menuCollection);
-		TextFields.bindAutoCompletion(removeEntryField, menuCollection);
+	public void fillMenuEntriesList() {
+		entriesList.clear();
+		Menu menu = Restaurant.getInstance().getRestaurantMenu();
+		entriesList.addAll(menu.getEntriesCollection());
 	}
 
 	public void createNewOrder() {
-		// post.notifyController -> restaurant.strategyCall -> strategy.execute.
-
-		if (checkForTableFormat(newOrderTableField) == false || checkForEntryFormat(newOrderEntryField) == false) {
-			promptOrderTableLabel.setText("ERROR!");
-		} else {
-			String[] parameters = new String[2];
-			parameters[0] = newOrderTableField.getText();
-			parameters[1] = newOrderEntryField.getText();
-			post.notifyMainController("AddNewOrderStrategy", parameters);
-			updateOrders();
-		}
+		Integer selectedTableNum = newOrderTableComboBox.getValue();
+		MenuEntry selectedEntry = newOrderEntryComboBox.getValue();
+		String[] parameters = new String[2];
+		parameters[0] = selectedTableNum.toString();
+		parameters[0] = selectedEntry.toString();
+		post.notifyMainController("AddNewOrderStrategy", parameters);
+		ordersList.add(new Order(selectedTableNum, selectedEntry));
 	}
 
 	public void addNewTable() {
@@ -122,29 +131,25 @@ public class WaitersControlPanelController {
 			String[] parameters = new String[1];
 			parameters[0] = addNewTableField.getText();
 			post.notifyMainController("AddNewTableStrategy", parameters);
+			fillTablesList();
 		}
 	}
 
 	public void removeTable() {
-		if (checkForTableFormat(removeTableField) == false) {
-			promptOrderTableLabel.setText("ERROR!");
-		} else {
-			String[] parameters = new String[1];
-			parameters[0] = removeTableField.getText();
-			post.notifyMainController("RemoveTableStrategy", parameters);
-		}
+		Integer selectedTableNum = removeTableComboBox.getValue();
+		String[] parameters = new String[1];
+		parameters[0] = selectedTableNum.toString();
+		post.notifyMainController("RemoveTableStrategy", parameters);
+		fillTablesList();
 	}
 
 	public void printNewBill() {
-		if (checkForTableFormat(newBillTableField) == false) {
-			promptBillLabel.setText("ERROR!");
-		} else {
-			String[] parameters = new String[1];
-			parameters[0] = printBillField.getText();
-			post.notifyMainController("PrintBillStrategy", parameters);
-			Bill billToPrint = PrintNewBillStrategy.getBill();
-			printBillField.setText(billToPrint.toString());
-		}
+		Integer selectedTableNum = removeTableComboBox.getValue();
+		String[] parameters = new String[1];
+		parameters[0] = selectedTableNum.toString();
+		post.notifyMainController("PrintNewBillStrategy", parameters);
+		billTextArea.clear();
+		billTextArea.setText(PrintNewBillStrategy.getBill().toString());
 	}
 
 	public void addNewEntry() {
@@ -156,64 +161,89 @@ public class WaitersControlPanelController {
 			parameters[0] = newEntryNameField.getText();
 			parameters[1] = newEntryPriceField.getText();
 			post.notifyMainController("AddNewEntryStrategy", parameters);
-			updateMenu();
-		}
-
-	}
-
-	/*
-	 * public void removeEntry() { if (checkForEntryNameFormat(removeEntryNameField)
-	 * == false || checkForEntryPriceFormat(removeEntryPriceField) == false) {
-	 * promptEntryLabel.setText("ERROR!"); } else { String[] parameters = new
-	 * String[2]; parameters[0] = removeEntryNameField.getText(); parameters[1] =
-	 * removeEntryPriceField.getText();
-	 * post.notifyMainController("RemoveEntryStrategy", parameters); updateMenu(); }
-	 * }
-	 */
-
-	private void updateOrders() {
-		ordersPane.getChildren().clear();
-		OrderManager orderManager = Restaurant.getInstance().getOrderManager();
-		ordersToBeDisplayed = orderManager.getAllOrdersForWaitersGuiController();
-
-		Iterator<Order> iterator = ordersToBeDisplayed.iterator();
-		while (iterator.hasNext()) {
-			ordersPane.getChildren().add(new Label(iterator.next().toString()));
+			fillMenuEntriesList();
 		}
 	}
 
-	private void updateMenu() {
-		menuPane.getChildren().clear();
-		Restaurant restaurant = post.getRestaurant();
-		Collection<MenuEntry> entryToDisplay = restaurant.getRestaurantMenu().getEntriesCollection();
+	public void removeEntry() {
+		MenuEntry selectedEntry = removeEntryComboBox.getValue();
+		String[] parameters = new String[1];
+		parameters[0] = selectedEntry.toString();
+		post.notifyMainController("RemoveEntryStrategy", parameters);
+		fillMenuEntriesList();
+	}
 
-		Iterator<MenuEntry> iterator = entryToDisplay.iterator();
+	public void setOrderToDelivered() {
+		String[] parameters = new String[1];
+		parameters[0] = orderNumberLabel.getText();
+		post.notifyMainController("SetOrderToDelivered", parameters);
+	}
+
+	public void addOrderInTableView(Integer tableNum, MenuEntry entry) {
+		ordersList.add(new Order(tableNum, entry));
+	}
+
+	public void removeOrderInTableView(Order order) {
+		ordersList.remove(order);
+	}
+
+	public void modifyOrderStatus(int orderNum, OrderStatus status) {
+		Iterator<Order> iterator = ordersList.iterator();
 		while (iterator.hasNext()) {
-			ordersPane.getChildren().add(new Label(iterator.next().toString()));
+			Order order = iterator.next();
+			if (order.getOrderNum() == orderNum) {
+				switch (status) {
+				case PREPARABLE:
+					order.setPreparable(true);
+					break;
+				case NOT_PREPARABLE:
+					order.setPreparable(false);
+					break;
+				case PREPARED:
+					order.setPrepared(true);
+					break;
+				case DELIVERED:
+					order.setDelivered(true);
+					break;
+				default:
+					break;
+				}
+			}
+		}
+	}
+
+	public void printMenuInTextArea() {
+		menuTextArea.clear();
+		Menu menu = Restaurant.getInstance().getRestaurantMenu();
+		Collection<MenuEntry> menuEntriesCollection = menu.getEntriesCollection();
+		Iterator<MenuEntry> iterator = menuEntriesCollection.iterator();
+		while (iterator.hasNext()) {
+			MenuEntry entryToPrint = iterator.next();
+			menuTextArea.appendText(entryToPrint.toString() + "Ä");
 		}
 	}
 
 	public boolean checkForTableFormat(TextField tableField) {
 		Pattern p = Pattern.compile("\\d{1,3}");
-		Matcher m = p.matcher(tableField.getText());
+		Matcher m = p.matcher(tableField.getText().trim());
 		return m.matches();
 	}
 
 	public boolean checkForEntryFormat(TextField entryField) {
 		Pattern p = Pattern.compile("^[A-Za-z0-9‡ËÏÚ˘·ÈÌÛ˙‚ÍÓÙ˚„Òı‰ÎÔˆ¸ˇ ]*, \\\\d{1,5}\\\\.{0,1}\\\\d{0,2}$");
-		Matcher m = p.matcher(entryField.getText());
+		Matcher m = p.matcher(entryField.getText().trim());
 		return m.matches();
 	}
 
 	public boolean checkForEntryNameFormat(TextField entryNameField) {
 		Pattern p = Pattern.compile("^[A-Za-z0-9‡ËÏÚ˘·ÈÌÛ˙‚ÍÓÙ˚„Òı‰ÎÔˆ¸ˇ ]*$");
-		Matcher m = p.matcher(entryNameField.getText());
+		Matcher m = p.matcher(entryNameField.getText().trim());
 		return m.matches();
 	}
 
 	public boolean checkForEntryPriceFormat(TextField entryPriceField) {
 		Pattern p = Pattern.compile("\\\\d{1,5}\\\\.{0,1}\\\\d{0,2}$");
-		Matcher m = p.matcher(entryPriceField.getText());
+		Matcher m = p.matcher(entryPriceField.getText().trim());
 		return m.matches();
 	}
 

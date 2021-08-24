@@ -34,5 +34,7 @@ public class RemoveOrderStrategy extends StrategyAbstract {
 			}
 		}
 		orderManagerInstance.removeOrder(currentOrder);
+
+		// WaitersGuiController updateOrders()
 	}
 }

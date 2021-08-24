@@ -32,5 +32,10 @@
             <Font name="Copperplate Gothic Light" size="18.0" />
          </font>
       </CheckBox>
+      <Label fx:id="orderNumberLabel" layoutX="12.0" layoutY="86.0" text="Order number:" textFill="WHITE">
+         <font>
+            <Font name="Copperplate Gothic Light" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

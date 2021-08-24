@@ -1,28 +1,19 @@
 package chefsProgram.controller;
 
-
-
-import javafx.fxml.FXML;
-import javafx.scene.layout.AnchorPane;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.regex.Pattern;
 
-import io.github.classgraph.ClassInfoList;
-import io.github.classgraph.ScanResult;
-import io.github.classgraph.ClassGraph;
-
 import chefsProgram.strategies.StrategyAbstract;
-import chefsProgram.strategies.StrategyInterface;
+import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * The ChefsGuiController class. It will be used to control the chef's graphical
@@ -34,12 +25,19 @@ import chefsProgram.strategies.StrategyInterface;
  * contains the server.
  */
 
-public class ChefsGuiController extends Thread{
+public class ChefsGuiController extends Thread {
 
 	@FXML
 	AnchorPane ordersScrollPane;
+
+	@FXML
+	Label tableLabel, orderLabel;
+
+	@FXML
+	CheckBox seenCheckBox, notPreparableCheckBox, preparedCheckBox;
+
 	private HashMap<String, StrategyAbstract> strategies;
-	
+
 	private Socket serverSocket = null; // = new Socket("localhost", 4999);
 	private BufferedReader readBuffer = null;
 	private BufferedWriter writeBuffer = null;
@@ -48,7 +46,7 @@ public class ChefsGuiController extends Thread{
 	private static ChefsGuiController instance = null;
 
 	private ChefsGuiController() {
-		
+
 	}
 
 	public static ChefsGuiController getInstance() {
@@ -58,15 +56,12 @@ public class ChefsGuiController extends Thread{
 		return instance;
 	}
 
-
-
 	public void updateOrders() {
 
 	}
 
 	public void setOrderSeenToPreparable() {
 		// post.notifyMainController(strategy, args)
-
 	}
 
 	public void setOrderSeenToNotPreparable() {
@@ -76,7 +71,7 @@ public class ChefsGuiController extends Thread{
 	public void setOrderToPrepared() {
 
 	}
-	
+
 	public String getServerName() {
 		return serverName;
 	}
@@ -84,7 +79,7 @@ public class ChefsGuiController extends Thread{
 	public void setServerName(String serverName) {
 		this.serverName = serverName;
 	}
-	
+
 	public void connect() {
 		boolean isFailed = false;
 		try {
@@ -110,7 +105,7 @@ public class ChefsGuiController extends Thread{
 			}
 		}
 	}
-	
+
 	/** Small method that writes a message to the socket. */
 	public synchronized void sendMessage(String message) {
 		try {
@@ -120,7 +115,7 @@ public class ChefsGuiController extends Thread{
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void run() {
 		try {
@@ -132,11 +127,11 @@ public class ChefsGuiController extends Thread{
 					;
 				if (p.matcher(message).matches()) {
 					unpackedMessage = message.split(", ");
-					if(unpackedMessage[0].compareTo("ADD")==0) 
+					if (unpackedMessage[0].compareTo("ADD") == 0)
 						System.out.println("replace with method to update orders");
-					else 
+					else
 						System.out.println("replace with method to remove orders");
-						
+
 				}
 			}
 		} catch (Exception e) {

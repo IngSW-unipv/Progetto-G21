@@ -38,5 +38,7 @@ public class SetOrderToNotPreparableStrategy extends StrategyAbstract {
 			}
 		}
 		orderManagerInstance.seeOrderToNotPreparable(orderToBeModified);
+
+		// ChefsGuiController updateOrders()
 	}
 }

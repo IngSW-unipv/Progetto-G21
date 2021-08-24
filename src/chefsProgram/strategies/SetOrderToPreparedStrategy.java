@@ -38,6 +38,8 @@ public class SetOrderToPreparedStrategy extends StrategyAbstract {
 			}
 		}
 		orderManagerInstance.prepareOrder(orderToBeModified);
+
+		// ChefsGuiController updateOrders()
 	}
 
 }
