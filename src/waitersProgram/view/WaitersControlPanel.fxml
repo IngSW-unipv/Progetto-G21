@@ -27,12 +27,12 @@
                      <children>
                         <Pane layoutX="15.0" layoutY="15.0" prefHeight="180.0" prefWidth="350.0">
                            <children>
-                              <Label id="createNewOrderLabel" layoutX="16.0" layoutY="16.0" text="Create a new order:" textFill="WHITE">
+                              <Label id="createNewOrderLabel" layoutX="15.0" layoutY="15.0" text="Create a new order:" textFill="WHITE">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="24.0" />
                                  </font>
                               </Label>
-                              <Label id="tableLabel" layoutX="80.0" layoutY="70.0" text="Table" textFill="WHITE">
+                              <Label id="tableLabel" layoutX="82.0" layoutY="63.0" text="Table" textFill="WHITE">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
@@ -40,7 +40,7 @@
                                     <Insets />
                                  </opaqueInsets>
                               </Label>
-                              <Label id="menuEntryLabel" layoutX="25.0" layoutY="110.0" text="Menu entry" textFill="WHITE">
+                              <Label id="menuEntryLabel" layoutX="27.0" layoutY="103.0" text="Menu entry" textFill="WHITE">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
@@ -48,7 +48,7 @@
                                     <Insets />
                                  </opaqueInsets>
                               </Label>
-                              <Button fx:id="createNewOrderButton" layoutX="185.0" layoutY="140.0" mnemonicParsing="false" text="Create">
+                              <Button fx:id="createNewOrderButton" layoutX="188.0" layoutY="140.0" mnemonicParsing="false" text="Create">
                                  <font>
                                     <Font name="Copperplate Gothic Bold" size="14.0" />
                                  </font>
@@ -59,12 +59,12 @@
                         </Pane>
                         <Pane layoutX="15.0" layoutY="195.0" prefHeight="180.0" prefWidth="350.0">
                            <children>
-                              <Label id="addNewTableLabel" layoutX="16.0" layoutY="16.0" text="Add a new table:" textFill="WHITE">
+                              <Label id="addNewTableLabel" layoutX="15.0" layoutY="15.0" text="Add a new table:" textFill="WHITE">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="24.0" />
                                  </font>
                               </Label>
-                              <Label id="tableLabel" layoutX="80.0" layoutY="70.0" text="Table" textFill="WHITE">
+                              <Label id="tableLabel" layoutX="82.0" layoutY="63.0" text="Table" textFill="WHITE">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
@@ -82,12 +82,12 @@
                         </Pane>
                         <Pane layoutX="15.0" layoutY="375.0" prefHeight="180.0" prefWidth="350.0">
                            <children>
-                              <Label id="removeTableLabel" layoutX="16.0" layoutY="16.0" text="Remove a table:" textFill="WHITE">
+                              <Label id="removeTableLabel" layoutX="15.0" layoutY="15.0" text="Remove a table:" textFill="WHITE">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="24.0" />
                                  </font>
                               </Label>
-                              <Label id="tableLabel" layoutX="80.0" layoutY="70.0" text="Table" textFill="WHITE">
+                              <Label id="tableLabel" layoutX="82.0" layoutY="63.0" text="Table" textFill="WHITE">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
@@ -108,7 +108,7 @@
                               <Font name="Copperplate Gothic Bold" size="36.0" />
                            </font>
                         </Label>
-                        <TableView fx:id="orderTableView" layoutX="370.0" layoutY="15.0" prefHeight="630.0" prefWidth="615.0" style="-fx-font-family: &quot;Copperplate Gothic Light&quot;;">
+                        <TableView fx:id="ordersTableView" layoutX="370.0" layoutY="15.0" prefHeight="630.0" prefWidth="615.0" style="-fx-font-family: &quot;Copperplate Gothic Light&quot;;">
                           <columns>
                             <TableColumn fx:id="tableColumn" resizable="false" text="Table" />
                             <TableColumn fx:id="orderColumn" prefWidth="380.0" resizable="false" text="Order" />
@@ -125,12 +125,12 @@
                      <children>
                         <Pane layoutX="15.0" layoutY="15.0" prefHeight="200.0" prefWidth="350.0">
                            <children>
-                              <Label id="printNewBillLabel" layoutX="16.0" layoutY="16.0" text="Print a new bill:" textFill="WHITE">
+                              <Label id="printNewBillLabel" layoutX="15.0" layoutY="15.0" text="Print a new bill:" textFill="WHITE">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="24.0" />
                                  </font>
                               </Label>
-                              <Label id="tableLabel" layoutX="80.0" layoutY="70.0" text="Table" textFill="WHITE">
+                              <Label id="tableLabel" layoutX="82.0" layoutY="63.0" text="Table" textFill="WHITE">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
@@ -159,17 +159,17 @@
                      <children>
                         <Pane layoutX="15.0" layoutY="15.0" prefHeight="200.0" prefWidth="350.0">
                            <children>
-                              <Label id="addNewEntryLabel" layoutX="16.0" layoutY="16.0" text="Add a new entry:" textFill="WHITE">
+                              <Label id="addNewEntryLabel" layoutX="15.0" layoutY="15.0" text="Add a new entry:" textFill="WHITE">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="24.0" />
                                  </font>
                               </Label>
-                              <Label id="entryNameLabel" layoutX="80.0" layoutY="70.0" text="Name" textFill="WHITE">
+                              <Label id="entryNameLabel" layoutX="86.0" layoutY="63.0" text="Name" textFill="WHITE">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
                               </Label>
-                              <Label id="entryPriceLabel" layoutX="80.0" layoutY="110.0" text="Price" textFill="WHITE">
+                              <Label id="entryPriceLabel" layoutX="86.0" layoutY="103.0" text="Price" textFill="WHITE">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
@@ -185,7 +185,7 @@
                         </Pane>
                         <Pane layoutX="15.0" layoutY="215.0" prefHeight="200.0" prefWidth="350.0">
                            <children>
-                              <Label id="removeEntryLabel" layoutX="16.0" layoutY="15.0" text="Remove an entry:" textFill="WHITE">
+                              <Label id="removeEntryLabel" layoutX="15.0" layoutY="15.0" text="Remove an entry:" textFill="WHITE">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="24.0" />
                                  </font>
@@ -195,7 +195,7 @@
                                     <Font name="Copperplate Gothic Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <Label id="menuEntryLabel" layoutX="25.0" layoutY="70.0" text="Menu entry" textFill="WHITE">
+                              <Label id="menuEntryLabel" layoutX="27.0" layoutY="63.0" text="Menu entry" textFill="WHITE">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
