@@ -6,16 +6,16 @@ import waitersProgram.controller.Restaurant;
 import waitersProgram.model.Order;
 import waitersProgram.model.OrderManager;
 
-public class RemoveOrderStrategy extends StrategyAbstract {
-	private static RemoveOrderStrategy instance = null;
+public class SetOrderToSeenStrategy extends StrategyAbstract {
+	private static SetOrderToSeenStrategy instance = null;
 
-	public RemoveOrderStrategy(Restaurant restaurant) {
+	private SetOrderToSeenStrategy(Restaurant restaurant) {
 		super(restaurant);
 	}
 
-	public static RemoveOrderStrategy getInstance(Restaurant restaurant) {
+	public static SetOrderToSeenStrategy getInstance(Restaurant restaurant) {
 		if (instance == null) {
-			instance = new RemoveOrderStrategy(restaurant);
+			instance = new SetOrderToSeenStrategy(restaurant);
 		}
 		return instance;
 	}
@@ -33,8 +33,7 @@ public class RemoveOrderStrategy extends StrategyAbstract {
 				break;
 			}
 		}
-		orderManagerInstance.removeOrder(currentOrder);
-
-		// post.sendMessage()
+		orderManagerInstance.seeOrderToNotPrepared(currentOrder);
+		// WaitersGuiController.method call
 	}
 }

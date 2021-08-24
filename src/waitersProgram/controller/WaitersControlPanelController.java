@@ -87,8 +87,8 @@ public class WaitersControlPanelController {
 		fillTablesList();
 		fillMenuEntriesList();
 		tableColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Table"));
-		orderColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Table"));
-		statusColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Table"));
+		orderColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Order"));
+		statusColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Status"));
 	}
 
 	public static WaitersControlPanelController getInstance() {
@@ -177,6 +177,7 @@ public class WaitersControlPanelController {
 		String[] parameters = new String[1];
 		parameters[0] = orderNumberLabel.getText();
 		post.notifyMainController("SetOrderToDelivered", parameters);
+		modifyOrderStatus(Integer.parseInt(parameters[0]), OrderStatus.DELIVERED);
 	}
 
 	public void addOrderInTableView(Integer tableNum, MenuEntry entry) {
@@ -194,9 +195,11 @@ public class WaitersControlPanelController {
 			if (order.getOrderNum() == orderNum) {
 				switch (status) {
 				case PREPARABLE:
+					order.setSeen(true);
 					order.setPreparable(true);
 					break;
 				case NOT_PREPARABLE:
+					order.setSeen(true);
 					order.setPreparable(false);
 					break;
 				case PREPARED:

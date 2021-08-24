@@ -29,6 +29,6 @@ public class CreateNewOrderStrategy extends StrategyAbstract {
 		OrderManager orderManagerInstance = Restaurant.getInstance().getOrderManager();
 		orderManagerInstance.addOrder(new Order(Integer.parseInt(args[0]), new MenuEntry(args[1])));
 
-		// WaitersGuiController updateOrders()
+		// post.sendMessage()
 	}
 }

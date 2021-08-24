@@ -1,12 +1,10 @@
-package chefsProgram.strategies;
+package waitersProgram.strategies;
 
 import java.util.Iterator;
 
 import waitersProgram.controller.Restaurant;
-import waitersProgram.model.MenuEntry;
 import waitersProgram.model.Order;
 import waitersProgram.model.OrderManager;
-import waitersProgram.strategies.StrategyAbstract;
 
 public class SetOrderToNotPreparableStrategy extends StrategyAbstract {
 	private static SetOrderToNotPreparableStrategy instance = null;
@@ -22,23 +20,20 @@ public class SetOrderToNotPreparableStrategy extends StrategyAbstract {
 		return instance;
 	}
 
+	/** In this scenario, args[0]: orderNum. */
 	@Override
 	public void execute(String[] args) {
 		OrderManager orderManagerInstance = Restaurant.getInstance().getOrderManager();
-
-		Integer tableNum = Integer.parseInt(args[0]);
-		MenuEntry entry = new MenuEntry(args[1]);
-
+		Integer orderNum = Integer.parseInt(args[0]);
+		Order currentOrder = null;
 		Iterator<Order> iterator = orderManagerInstance.getNotSeen().iterator();
-		Order orderToBeModified = null;
 		while (iterator.hasNext()) {
-			orderToBeModified = iterator.next();
-			if (orderToBeModified.equals(new Order(tableNum, entry))) {
+			currentOrder = iterator.next();
+			if (currentOrder.getOrderNum() == orderNum) {
 				break;
 			}
 		}
-		orderManagerInstance.seeOrderToNotPreparable(orderToBeModified);
-
-		// ChefsGuiController updateOrders()
+		orderManagerInstance.seeOrderToNotPreparable(currentOrder);
+		// WaitersGuiController.method call
 	}
 }

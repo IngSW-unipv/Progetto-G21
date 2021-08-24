@@ -6,14 +6,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.util.HashMap;
 import java.util.regex.Pattern;
 
-import chefsProgram.strategies.StrategyAbstract;
+import chefsProgram.model.MenuEntry;
+import chefsProgram.model.Order;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * The ChefsGuiController class. It will be used to control the chef's graphical
@@ -28,15 +31,18 @@ import javafx.scene.layout.AnchorPane;
 public class ChefsGuiController extends Thread {
 
 	@FXML
-	AnchorPane ordersScrollPane;
+	TableView<Order> ordersTableView;
+	TableColumn<Order, String> tableColumn;
+	TableColumn<Order, String> orderColumn;
+	TableColumn<Order, String> statusColumn;
 
 	@FXML
-	Label tableLabel, orderLabel;
+	Label tableLabel, orderLabel, orderNumberLabel;
 
 	@FXML
 	CheckBox seenCheckBox, notPreparableCheckBox, preparedCheckBox;
 
-	private HashMap<String, StrategyAbstract> strategies;
+	private ObservableList<Order> ordersList;
 
 	private Socket serverSocket = null; // = new Socket("localhost", 4999);
 	private BufferedReader readBuffer = null;
@@ -46,7 +52,10 @@ public class ChefsGuiController extends Thread {
 	private static ChefsGuiController instance = null;
 
 	private ChefsGuiController() {
-
+		connect();
+		tableColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Table"));
+		orderColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Order"));
+		statusColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Status"));
 	}
 
 	public static ChefsGuiController getInstance() {
@@ -56,15 +65,20 @@ public class ChefsGuiController extends Thread {
 		return instance;
 	}
 
-	public void updateOrders() {
+	public void addOrderToChef(int tableNum, MenuEntry entry) {
+		ordersList.add(new Order(tableNum, entry));
+	}
 
+	public void removeOrderToChef(int tableNum, MenuEntry entry) {
+		ordersList.remove(new Order(tableNum, entry));
 	}
 
 	public void setOrderSeenToPreparable() {
-		// post.notifyMainController(strategy, args)
+		// sendMessage();
 	}
 
-	public void setOrderSeenToNotPreparable() {
+	public void setOrderToNotPreparable() {
+		sendMessage("SetOrderToNotPreparable, ");
 
 	}
 
@@ -127,10 +141,11 @@ public class ChefsGuiController extends Thread {
 					;
 				if (p.matcher(message).matches()) {
 					unpackedMessage = message.split(", ");
-					if (unpackedMessage[0].compareTo("ADD") == 0)
+					if (unpackedMessage[0].equals("ADD") == true)
 						System.out.println("replace with method to update orders");
-					else
+					else if (unpackedMessage[0].equals("REMOVE") == true) {
 						System.out.println("replace with method to remove orders");
+					}
 
 				}
 			}
