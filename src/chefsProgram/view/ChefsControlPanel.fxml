@@ -1,49 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #1E3986;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ScrollPane layoutY="67.0" prefHeight="535.0" prefWidth="800.0" style="-fx-background-color: #1E3986;">
-        <content>
-          <AnchorPane fx:id="ordersArchorPane" minHeight="0.0" minWidth="0.0" prefHeight="535.0" prefWidth="800.0" style="-fx-background-color: #1E3986; -fx-border-width: 2 0 0 0; -fx-border-color: #ed982e;" />
-        </content>
-      </ScrollPane>
-      <AnchorPane fx:id="titleArchorPane" prefHeight="68.0" prefWidth="800.0" style="-fx-background-color: #1E3986;">
-         <children>
-            <Label fx:id="titleLabel" layoutX="180.0" layoutY="14.0" text="Chef's control panel">
-               <font>
-                  <Font name="Copperplate Gothic Bold" size="36.0" />
-               </font>
-               <textFill>
-                  <RadialGradient centerX="0.5" centerY="0.5" focusDistance="-0.04" radius="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.007680491551459294">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.929411768913269" green="0.5960784554481506" blue="0.18039216101169586" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </RadialGradient>
-               </textFill>
-            </Label>
-         </children>
-      </AnchorPane>
+      <Label fx:id="titleLabel1" layoutX="280.0" layoutY="14.0" text="Chef's control panel">
+         <font>
+            <Font name="Copperplate Gothic Bold" size="36.0" />
+         </font>
+         <textFill>
+            <RadialGradient centerX="0.5" centerY="0.5" focusDistance="-0.04" radius="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007680491551459294">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.929411768913269" green="0.5960784554481506" blue="0.18039216101169586" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </textFill>
+      </Label>
+      <TableView fx:id="ordersTableView" layoutY="80.0" prefHeight="720.0" prefWidth="1000.0">
+        <columns>
+          <TableColumn fx:id="tableColumn" prefWidth="200.0" resizable="false" text="Table" />
+          <TableColumn fx:id="orderColumn" prefWidth="600.0" resizable="false" text="Order" />
+            <TableColumn fx:id="statusColumn" prefWidth="200.0" text="Status" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>
