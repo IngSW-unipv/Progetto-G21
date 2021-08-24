@@ -5,16 +5,20 @@ import waitersProgram.model.MenuEntry;
 import waitersProgram.model.Order;
 import waitersProgram.model.OrderManager;
 
-public class AddNewOrderStrategy extends StrategyAbstract {
-	private static AddNewOrderStrategy instance = null;
+/**
+ * Called from addNewOrder method in WaitersControlPanelController. IS OK
+ */
 
-	private AddNewOrderStrategy(Restaurant restaurant) {
+public class CreateNewOrderStrategy extends StrategyAbstract {
+	private static CreateNewOrderStrategy instance = null;
+
+	private CreateNewOrderStrategy(Restaurant restaurant) {
 		super(restaurant);
 	}
 
-	public static AddNewOrderStrategy getInstance(Restaurant restaurant) {
+	public static CreateNewOrderStrategy getInstance(Restaurant restaurant) {
 		if (instance == null) {
-			instance = new AddNewOrderStrategy(restaurant);
+			instance = new CreateNewOrderStrategy(restaurant);
 		}
 		return instance;
 	}

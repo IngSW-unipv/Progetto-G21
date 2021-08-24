@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 
 public class WaitersControlPanelMain extends Application {
 
+	// private WaitersControlPanelController wcpController;
+	// private WaitersOrderUpdateFrameController woufController;
+
 	@Override
 	public void start(Stage primaryStage) {
 		try {

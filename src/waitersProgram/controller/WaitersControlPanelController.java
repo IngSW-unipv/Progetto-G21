@@ -18,7 +18,7 @@ import waitersProgram.model.MenuEntry;
 import waitersProgram.model.Order;
 import waitersProgram.model.OrderManager;
 import waitersProgram.model.TableManager;
-import waitersProgram.strategies.PrintBillStrategy;
+import waitersProgram.strategies.PrintNewBillStrategy;
 
 /**
  * The WaitersGuiController class. It will be used to control the waiter's
@@ -26,7 +26,7 @@ import waitersProgram.strategies.PrintBillStrategy;
  * ensure the communication with the SystemController class.
  */
 
-public class WaitersGuiController {
+public class WaitersControlPanelController {
 
 	/** FXML calls for new order creation. */
 	@FXML
@@ -58,18 +58,20 @@ public class WaitersGuiController {
 
 	private ListeningPost post;
 
-	private static WaitersGuiController instance = null;
+	private static WaitersControlPanelController instance = null;
 
 	private ArrayList<Order> ordersToBeDisplayed;
 
-	private WaitersGuiController() {
+	private ArrayList<Label> ordersLabels;
+
+	private WaitersControlPanelController() {
 		post = ListeningPost.getInstance();
 		ordersToBeDisplayed = new ArrayList<Order>(0);
 	}
 
-	public static WaitersGuiController getInstance() {
+	public static WaitersControlPanelController getInstance() {
 		if (instance == null) {
-			instance = new WaitersGuiController();
+			instance = new WaitersControlPanelController();
 		}
 		return instance;
 	}
@@ -99,7 +101,7 @@ public class WaitersGuiController {
 		TextFields.bindAutoCompletion(removeEntryField, menuCollection);
 	}
 
-	public void addNewOrder() {
+	public void createNewOrder() {
 		// post.notifyController -> restaurant.strategyCall -> strategy.execute.
 
 		if (checkForTableFormat(newOrderTableField) == false || checkForEntryFormat(newOrderEntryField) == false) {
@@ -133,14 +135,14 @@ public class WaitersGuiController {
 		}
 	}
 
-	public void printBill() {
+	public void printNewBill() {
 		if (checkForTableFormat(newBillTableField) == false) {
 			promptBillLabel.setText("ERROR!");
 		} else {
 			String[] parameters = new String[1];
 			parameters[0] = printBillField.getText();
 			post.notifyMainController("PrintBillStrategy", parameters);
-			Bill billToPrint = PrintBillStrategy.getBill();
+			Bill billToPrint = PrintNewBillStrategy.getBill();
 			printBillField.setText(billToPrint.toString());
 		}
 	}
@@ -189,10 +191,6 @@ public class WaitersGuiController {
 		while (iterator.hasNext()) {
 			ordersPane.getChildren().add(new Label(iterator.next().toString()));
 		}
-	}
-
-	public void setOrderDelivered() {
-
 	}
 
 	public boolean checkForTableFormat(TextField tableField) {

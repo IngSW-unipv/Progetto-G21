@@ -6,22 +6,16 @@ import waitersProgram.controller.Restaurant;
 import waitersProgram.model.Order;
 import waitersProgram.model.OrderManager;
 
-/**
- * Called from setOrderToDelivered method in WaitersOrderUpdateFrameController.
- * IS OK
- * 
- */
+public class RemoveOrderStrategy extends StrategyAbstract {
+	private static RemoveOrderStrategy instance = null;
 
-public class SetOrderToDeliveredStrategy extends StrategyAbstract {
-	private static SetOrderToDeliveredStrategy instance = null;
-
-	private SetOrderToDeliveredStrategy(Restaurant restaurant) {
+	public RemoveOrderStrategy(Restaurant restaurant) {
 		super(restaurant);
 	}
 
-	public static SetOrderToDeliveredStrategy getInstance(Restaurant restaurant) {
+	public static RemoveOrderStrategy getInstance(Restaurant restaurant) {
 		if (instance == null) {
-			instance = new SetOrderToDeliveredStrategy(restaurant);
+			instance = new RemoveOrderStrategy(restaurant);
 		}
 		return instance;
 	}
@@ -32,13 +26,13 @@ public class SetOrderToDeliveredStrategy extends StrategyAbstract {
 		OrderManager orderManagerInstance = Restaurant.getInstance().getOrderManager();
 		Integer orderNum = Integer.parseInt(args[0]);
 		Order currentOrder = null;
-		Iterator<Order> iterator = orderManagerInstance.getNotDelivered().iterator();
+		Iterator<Order> iterator = orderManagerInstance.getNotSeen().iterator();
 		while (iterator.hasNext()) {
 			currentOrder = iterator.next();
 			if (currentOrder.getOrderNum() == orderNum) {
 				break;
 			}
 		}
-		orderManagerInstance.deliverOrder(currentOrder);
+		orderManagerInstance.removeOrder(currentOrder);
 	}
 }

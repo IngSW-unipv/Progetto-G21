@@ -1,4 +1,4 @@
-package waitersProgram.strategies;
+package chefsProgram.strategies;
 
 import java.util.Iterator;
 
@@ -6,6 +6,7 @@ import waitersProgram.controller.Restaurant;
 import waitersProgram.model.MenuEntry;
 import waitersProgram.model.Order;
 import waitersProgram.model.OrderManager;
+import waitersProgram.strategies.StrategyAbstract;
 
 public class SetOrderToNotPreparedStrategy extends StrategyAbstract {
 	private static SetOrderToNotPreparedStrategy instance = null;

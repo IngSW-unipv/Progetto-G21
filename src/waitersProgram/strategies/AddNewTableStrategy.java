@@ -3,6 +3,10 @@ package waitersProgram.strategies;
 import waitersProgram.controller.Restaurant;
 import waitersProgram.model.TableManager;
 
+/**
+ * Called from addNewTable method in WaitersControlPanelController. IS OK
+ */
+
 public class AddNewTableStrategy extends StrategyAbstract {
 	private static AddNewTableStrategy instance = null;
 
@@ -17,6 +21,7 @@ public class AddNewTableStrategy extends StrategyAbstract {
 		return instance;
 	}
 
+	/** In this scenario, args[0]: tableNum. */
 	@Override
 	public void execute(String[] args) {
 		TableManager tableManagerInstance = Restaurant.getInstance().getTableManager();

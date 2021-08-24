@@ -1,4 +1,4 @@
-package waitersProgram.strategies;
+package chefsProgram.strategies;
 
 import java.util.Iterator;
 
@@ -6,17 +6,18 @@ import waitersProgram.controller.Restaurant;
 import waitersProgram.model.MenuEntry;
 import waitersProgram.model.Order;
 import waitersProgram.model.OrderManager;
+import waitersProgram.strategies.StrategyAbstract;
 
-public class SetOrderToPreparedStrategy extends StrategyAbstract {
-	private static SetOrderToPreparedStrategy instance = null;
+public class SetOrderToNotPreparableStrategy extends StrategyAbstract {
+	private static SetOrderToNotPreparableStrategy instance = null;
 
-	private SetOrderToPreparedStrategy(Restaurant restaurant) {
+	private SetOrderToNotPreparableStrategy(Restaurant restaurant) {
 		super(restaurant);
 	}
 
-	public static SetOrderToPreparedStrategy getInstance(Restaurant restaurant) {
+	public static SetOrderToNotPreparableStrategy getInstance(Restaurant restaurant) {
 		if (instance == null) {
-			instance = new SetOrderToPreparedStrategy(restaurant);
+			instance = new SetOrderToNotPreparableStrategy(restaurant);
 		}
 		return instance;
 	}
@@ -28,7 +29,7 @@ public class SetOrderToPreparedStrategy extends StrategyAbstract {
 		Integer tableNum = Integer.parseInt(args[0]);
 		MenuEntry entry = new MenuEntry(args[1]);
 
-		Iterator<Order> iterator = orderManagerInstance.getNotPrepared().iterator();
+		Iterator<Order> iterator = orderManagerInstance.getNotSeen().iterator();
 		Order orderToBeModified = null;
 		while (iterator.hasNext()) {
 			orderToBeModified = iterator.next();
@@ -36,7 +37,6 @@ public class SetOrderToPreparedStrategy extends StrategyAbstract {
 				break;
 			}
 		}
-		orderManagerInstance.prepareOrder(orderToBeModified);
+		orderManagerInstance.seeOrderToNotPreparable(orderToBeModified);
 	}
-
 }

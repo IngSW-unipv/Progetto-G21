@@ -3,6 +3,8 @@ package waitersProgram.strategies;
 import waitersProgram.controller.Restaurant;
 import waitersProgram.model.Menu;
 
+/** Called from addNewEntry method in WaitersControlPanelController. */
+
 public class AddNewEntryStrategy extends StrategyAbstract {
 	private static AddNewEntryStrategy instance = null;
 
@@ -17,9 +19,10 @@ public class AddNewEntryStrategy extends StrategyAbstract {
 		return instance;
 	}
 
+	/** In this scenario, args[0]: entry name, args[1]: entry price. */
 	@Override
 	public void execute(String[] args) {
 		Menu menuInstance = Restaurant.getInstance().getRestaurantMenu();
-		menuInstance.addMenuEntry(args[0]);
+		menuInstance.addMenuEntry(args[0].trim() + ", " + args[1].trim());
 	}
 }
