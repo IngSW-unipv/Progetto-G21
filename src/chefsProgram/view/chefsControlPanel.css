@@ -1,31 +1,5 @@
-.root 
-{
-    -fx-font-size: 20px;
-    -fx-background-color: #ffffff;
-    -fx-color: #e6e6fa;
-}
-
-
-#titleLabel 
-{
-	-fx-text-fill: blue;	
-	/*-fx-font:  bold italic 40px "Lemon";*/
-	-fx-font:  bold italic 40px "Elephant";
-	/*-fx-padding: 0 0 0 -80;*/
-	-fx-padding: 0 0 0 -50;
-    -fx-effect: dropshadow(one-pass-box, black, 8, 0.0, 2, 0);
-}
-
-
-#titleArchorPane 
-{
-	-fx-background-color: #e6e6fa;
-	-fx-border-color: blue;
-}
-
-	
-#ordersArchorPane 
-{
-	-fx-background-color:
-			linear-gradient(#cfc8ff, #cdccff, #cbd0ff, #cbd4ff, #cbd8fe, #c9ddff, #c8e2ff, #c9e6fe, #cbecfd, #d0f2fb, #d8f7fa, #e2fbf9);	
+.tab-pane{
+	-fx-border-
+    -fx-border-color: #ed982e;
+    -fx-border-width: 1.5px;
 }
