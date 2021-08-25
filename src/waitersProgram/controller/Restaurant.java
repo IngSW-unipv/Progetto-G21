@@ -24,7 +24,7 @@ public class Restaurant {
 	private TableManager tableManager;
 	private ListeningPost post;
 	private HashMap<String, StrategyAbstract> strategies;
-	private WaitersControlPanelController waitersController;
+	private WaitersController waitersController;
 
 	/**
 	 * Class constructor method.
@@ -35,7 +35,7 @@ public class Restaurant {
 		orderManager = OrderManager.getInstance();
 		tableManager = TableManager.getInstance();
 		post = ListeningPost.getInstance();
-		waitersController = WaitersControlPanelController.getInstance();
+		waitersController = WaitersController.getInstance();
 		post.bindController(this);
 		createStrategies();
 	}
@@ -85,7 +85,7 @@ public class Restaurant {
 	/**
 	 * @return WaitersGuiController instance.
 	 */
-	public WaitersControlPanelController getWaitersController() {
+	public WaitersController getWaitersController() {
 		return waitersController;
 	}
 

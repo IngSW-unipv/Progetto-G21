@@ -111,7 +111,8 @@ public class ListeningPost extends Thread {
 				Pattern p = Pattern.compile("^([a-zA-Z0-9]+, )+[a-zA-Z0-9]+$");
 				String[] unpackedMessage;
 				String message;
-				while ((message = readBuffer.readLine()) == null);
+				while ((message = readBuffer.readLine()) == null)
+					;
 				if (p.matcher(message).matches()) {
 					unpackedMessage = message.split(", ");
 					notifyMainController(unpackedMessage[0],
@@ -120,13 +121,15 @@ public class ListeningPost extends Thread {
 
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		finally {
-			try {clientSocket.close();}
-			catch(IOException e) {e.printStackTrace();}
+			try {
+				clientSocket.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
