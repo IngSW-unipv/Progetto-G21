@@ -3,7 +3,7 @@ package waitersProgram.testers;
 import waitersProgram.model.MenuEntry;
 import waitersProgram.model.Order;
 
-public class SimpleOrderTester {
+public class SimpleOrderTest {
 
 	public static void main(String[] args) {
 		MenuEntry orderedEntry1 = new MenuEntry("Pasta al pomodoro, 7");

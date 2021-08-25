@@ -10,7 +10,7 @@ import waitersProgram.model.OrderManager;
 
 /* add -> see -> prepare -> deliver. La sequenzialità va rispettata! */
 
-public class SimpleBillTester {
+public class SimpleBillTest {
 
 	public static void main(String[] args) {
 		Order o1 = new Order(1, new MenuEntry("Pasta al pomodoro, 5"));

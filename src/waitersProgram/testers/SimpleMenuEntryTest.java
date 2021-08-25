@@ -2,7 +2,7 @@ package waitersProgram.testers;
 
 import waitersProgram.model.MenuEntry;
 
-public class SimpleMenuEntryTester {
+public class SimpleMenuEntryTest {
 
 	public static void main(String[] args) {
 		MenuEntry entry = new MenuEntry("Pasta alla carbonara", 7.50);

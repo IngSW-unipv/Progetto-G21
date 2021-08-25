@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 import waitersProgram.model.TableManager;
 
-public class SimpleTableManagerTester {
+public class SimpleTableManagerTest {
 
 	public static void main(String[] args) {
 

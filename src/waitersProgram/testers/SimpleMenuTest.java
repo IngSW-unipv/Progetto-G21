@@ -7,7 +7,7 @@ import java.util.Iterator;
 import waitersProgram.model.Menu;
 import waitersProgram.model.MenuEntry;
 
-public class SimpleMenuTester {
+public class SimpleMenuTest {
 
 	public static void main(String[] args) {
 		File menuFile = new File("Files/menuFile.txt");
