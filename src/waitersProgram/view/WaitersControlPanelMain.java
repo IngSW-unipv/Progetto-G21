@@ -12,20 +12,21 @@ public class WaitersControlPanelMain extends Application {
 	// private WaitersOrderUpdateFrameController woufController;
 
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage stage) {
+		Parent root;
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("WaitersControlPanel.fxml"));
+			root = FXMLLoader.load(getClass().getResource("WaitersControlPanel.fxml"));
+			stage.setTitle("Waiters control panel");
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("newWaitersControlPanel.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
+			scene.getStylesheets().add(getClass().getResource("waitersControlPanel.css").toExternalForm());
+			stage.setScene(scene);
+			stage.show();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println(e.getMessage());
 		}
 	}
 
 	public static void main(String[] args) {
 		launch(args);
 	}
-
 }

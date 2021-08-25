@@ -1,0 +1,88 @@
+.root 
+{
+    -fx-background-color: #ffffff;
+}
+
+
+#titleLabel 
+{
+	-fx-text-fill: blue;	
+	/*-fx-font:  bold italic 40px "Lemon";*/
+	-fx-font:  bold italic 40px "Elephant";
+	/*-fx-padding: -10 0 0 -50;*/
+	-fx-padding: -10 0 0 -20;
+    -fx-effect: dropshadow(one-pass-box, black, 8, 0.0, 2, 0);
+}
+
+
+#titleArchorPane 
+{
+	-fx-background-color: #e6e6fa;
+	-fx-border-color: blue;
+}
+
+
+#createNewOrderLabel, #addNewTableLabel, #removeTableLabel, #printNewBillLabel, #addNewEntryLabel,
+#removeEntryLabel
+{
+	-fx-text-fill: blue;
+	/*-fx-font: italic 18px "Lemon";*/
+	-fx-font:  bold italic 20px "Elephant";
+}
+
+
+#tableLabel, #menuEntryLabel, #entryNameLabel, #entryPriceLabel
+{
+	-fx-text-fill: blue;
+	-fx-font:  bold italic 12pt "PlayBall";
+}
+
+
+.tab
+{
+	  /*-fx-border-color: #79b4f1;*/	
+	 -fx-border-color: #8e07c3;
+	 -fx-background-color:#c668eb;  
+/*   -fx-background-color: #eccfff;  */
+}
+
+
+.button
+{
+	 /*-fx-border-color: #79b4f1;*/	
+	 -fx-border-color: #8e07c3;
+	 -fx-background-color:#c668eb;  
+/*	 -fx-background-color: #eccfff;  */
+	 
+}
+
+
+#orderTableManagerArchorPane, #billCreatorArchorPane, #menuModifierArchorPane 
+{
+	-fx-background-color: #f2e3ff;
+}
+
+
+TabPane
+{
+	 -fx-background-color: 
+	       linear-gradient(#cfc8ff, #cdccff, #cbd0ff, #cbd4ff, #cbd8fe, #c9ddff, #c8e2ff, #c9e6fe, #cbecfd, #d0f2fb, #d8f7fa, #e2fbf9);
+}
+
+
+#arrowLabel
+{
+	-fx-text-fill: blue;
+}
+
+
+TextField
+{
+	-fx-border-color: #79b4f1;	
+}
+
+
+#tabPaneOrganization
+{
+	-fx-color: #e6e6fa;
+}

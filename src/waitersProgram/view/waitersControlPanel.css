@@ -1,88 +1,46 @@
-.root 
-{
-    -fx-background-color: #ffffff;
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #1E3986;
+}
+
+.tab-header-background {
+	-fx-border-style: hidden hidden solid hidden;
+	-fx-border-color: #ed982e;
+}
+
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-color: #ed982e;
+    -fx-border-width: 1.5px;
 }
 
 
-#titleLabel 
-{
-	-fx-text-fill: blue;	
-	/*-fx-font:  bold italic 40px "Lemon";*/
-	-fx-font:  bold italic 40px "Elephant";
-	/*-fx-padding: -10 0 0 -50;*/
-	-fx-padding: -10 0 0 -20;
-    -fx-effect: dropshadow(one-pass-box, black, 8, 0.0, 2, 0);
+.button {
+	-fx-border-radius: 20px;
+	-fx-background-radius: 20px;
+	-fx-border-color: #ed982e;
+	-fx-background-color: #FCD681;
+	-fx-text-fill: black;
+	
 }
 
-
-#titleArchorPane 
-{
-	-fx-background-color: #e6e6fa;
-	-fx-border-color: blue;
+.text-field{
+	-fx-background-color: transparent;
+	-fx-border-radius: 10px;
+	-fx-text-inner-color: white;
 }
 
-
-#createNewOrderLabel, #addNewTableLabel, #removeTableLabel, #printNewBillLabel, #addNewEntryLabel,
-#removeEntryLabel
-{
-	-fx-text-fill: blue;
-	/*-fx-font: italic 18px "Lemon";*/
-	-fx-font:  bold italic 20px "Elephant";
-}
-
-
-#tableLabel, #menuEntryLabel, #entryNameLabel, #entryPriceLabel
-{
-	-fx-text-fill: blue;
-	-fx-font:  bold italic 12pt "PlayBall";
-}
-
-
-.tab
-{
-	  /*-fx-border-color: #79b4f1;*/	
-	 -fx-border-color: #8e07c3;
-	 -fx-background-color:#c668eb;  
-/*   -fx-background-color: #eccfff;  */
-}
-
-
-.button
-{
-	 /*-fx-border-color: #79b4f1;*/	
-	 -fx-border-color: #8e07c3;
-	 -fx-background-color:#c668eb;  
-/*	 -fx-background-color: #eccfff;  */
-	 
-}
-
-
-#orderTableManagerArchorPane, #billCreatorArchorPane, #menuModifierArchorPane 
-{
-	-fx-background-color: #f2e3ff;
-}
-
-
-TabPane
-{
-	 -fx-background-color: 
-	       linear-gradient(#cfc8ff, #cdccff, #cbd0ff, #cbd4ff, #cbd8fe, #c9ddff, #c8e2ff, #c9e6fe, #cbecfd, #d0f2fb, #d8f7fa, #e2fbf9);
-}
-
-
-#arrowLabel
-{
-	-fx-text-fill: blue;
-}
-
-
-TextField
-{
-	-fx-border-color: #79b4f1;	
-}
-
-
-#tabPaneOrganization
-{
-	-fx-color: #e6e6fa;
+.combo-box{
+	-fx-control-inner-background: #1E3986;
+	-fx-control-inner-text-color: white;
+	-fx-background-color: transparent;
+	-fx-border-color: #ed982e;
+	-fx-border-radius: 10px;
+	/*-fx-control-inner-color: #ed982e;*/
+	
+	-fx-accent: #ed982e;
+	-fx-selection-bar: #ed982e;
+	-fx-selection-bar-non-focused: #ed982e;
+	-fx-focus-color: #ed982e;
+	-fx-faint-focus-color: #ed982e;
+	/*-fx-border-radius: 5px;*/
+	
 }
