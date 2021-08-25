@@ -39,9 +39,10 @@
       </Label>
       <TableView fx:id="ordersTableView" layoutY="80.0" prefHeight="720.0" prefWidth="1000.0">
         <columns>
-          <TableColumn fx:id="tableColumn" prefWidth="200.0" resizable="false" text="Table" />
-          <TableColumn fx:id="orderColumn" prefWidth="600.0" resizable="false" text="Order" />
+          <TableColumn fx:id="tableColumn" prefWidth="100.0" resizable="false" text="Table" />
+          <TableColumn fx:id="orderColumn" prefWidth="500.0" resizable="false" text="Order" />
             <TableColumn fx:id="statusColumn" prefWidth="200.0" text="Status" />
+            <TableColumn fx:id="statusColumn1" prefWidth="200.0" text="Action" />
         </columns>
       </TableView>
    </children>
