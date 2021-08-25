@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #1E3986;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="titleLabel1" layoutX="280.0" layoutY="14.0" text="Chef's control panel">
+      <Label fx:id="titleLabel1" layoutX="280.0" layoutY="14.0" text="Chef's control panel" underline="true">
          <font>
             <Font name="Copperplate Gothic Bold" size="36.0" />
          </font>
@@ -37,7 +37,7 @@
             </RadialGradient>
          </textFill>
       </Label>
-      <TableView fx:id="ordersTableView" layoutY="80.0" prefHeight="720.0" prefWidth="1000.0">
+      <TableView fx:id="ordersTableView" layoutY="80.0" prefHeight="720.0" prefWidth="1000.0" style="-fx-font-family: &quot;Copperplate Gothic Light&quot;;">
         <columns>
           <TableColumn fx:id="tableColumn" prefWidth="100.0" resizable="false" text="Table" />
           <TableColumn fx:id="orderColumn" prefWidth="500.0" resizable="false" text="Order" />
