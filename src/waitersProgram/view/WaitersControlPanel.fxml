@@ -113,7 +113,7 @@
                             <TableColumn fx:id="tableColumn" prefWidth="50.0" resizable="false" text="Table" />
                             <TableColumn fx:id="orderColumn" prefWidth="335.0" resizable="false" text="Order" />
                               <TableColumn fx:id="statusColumn" maxWidth="346.0" prefWidth="115.0" resizable="false" text="Status" />
-                              <TableColumn fx:id="statusColumn1" maxWidth="346.0" prefWidth="115.0" resizable="false" text="ACTION" />
+                              <TableColumn fx:id="actionColumn" maxWidth="346.0" prefWidth="115.0" resizable="false" text="ACTION" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

@@ -42,7 +42,7 @@
           <TableColumn fx:id="tableColumn" prefWidth="100.0" resizable="false" text="Table" />
           <TableColumn fx:id="orderColumn" prefWidth="500.0" resizable="false" text="Order" />
             <TableColumn fx:id="statusColumn" prefWidth="200.0" text="Status" />
-            <TableColumn fx:id="statusColumn1" prefWidth="200.0" text="Action" />
+            <TableColumn fx:id="actionColumn" prefWidth="200.0" text="Action" />
         </columns>
       </TableView>
    </children>
