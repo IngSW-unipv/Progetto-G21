@@ -25,5 +25,4 @@ public class RemoveTableStrategy extends StrategyAbstract {
 		TableManager tableManagerInstance = Restaurant.getInstance().getTableManager();
 		tableManagerInstance.removeTable(Integer.parseInt(args[0]));
 	}
-
 }

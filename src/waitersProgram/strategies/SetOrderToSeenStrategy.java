@@ -2,7 +2,9 @@ package waitersProgram.strategies;
 
 import java.util.Iterator;
 
+import waitersProgram.controller.OrderStatus;
 import waitersProgram.controller.Restaurant;
+import waitersProgram.controller.WaitersController;
 import waitersProgram.model.Order;
 import waitersProgram.model.OrderManager;
 
@@ -33,7 +35,11 @@ public class SetOrderToSeenStrategy extends StrategyAbstract {
 				break;
 			}
 		}
-		orderManagerInstance.seeOrderToNotPrepared(currentOrder);
-		// WaitersGuiController.method call
+
+		if (currentOrder != null) {
+			orderManagerInstance.seeOrderToNotPrepared(currentOrder);
+			WaitersController controller = WaitersController.getInstance();
+			controller.modifyOrderStatus(Integer.parseInt(args[0]), OrderStatus.SEEN);
+		}
 	}
 }

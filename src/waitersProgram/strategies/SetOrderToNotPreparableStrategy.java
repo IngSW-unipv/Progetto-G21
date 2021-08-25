@@ -2,7 +2,9 @@ package waitersProgram.strategies;
 
 import java.util.Iterator;
 
+import waitersProgram.controller.OrderStatus;
 import waitersProgram.controller.Restaurant;
+import waitersProgram.controller.WaitersController;
 import waitersProgram.model.Order;
 import waitersProgram.model.OrderManager;
 
@@ -25,15 +27,14 @@ public class SetOrderToNotPreparableStrategy extends StrategyAbstract {
 	public void execute(String[] args) {
 		OrderManager orderManagerInstance = Restaurant.getInstance().getOrderManager();
 		Integer orderNum = Integer.parseInt(args[0]);
-		Order currentOrder = null;
 		Iterator<Order> iterator = orderManagerInstance.getNotSeen().iterator();
 		while (iterator.hasNext()) {
-			currentOrder = iterator.next();
+			Order currentOrder = iterator.next();
 			if (currentOrder.getOrderNum() == orderNum) {
-				break;
+				orderManagerInstance.seeOrderToNotPreparable(currentOrder);
 			}
 		}
-		orderManagerInstance.seeOrderToNotPreparable(currentOrder);
-		// WaitersGuiController.method call
+		WaitersController controller = WaitersController.getInstance();
+		controller.modifyOrderStatus(Integer.parseInt(args[0]), OrderStatus.NOT_PREPARABLE);
 	}
 }

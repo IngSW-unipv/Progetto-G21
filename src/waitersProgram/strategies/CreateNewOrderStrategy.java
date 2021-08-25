@@ -1,12 +1,13 @@
 package waitersProgram.strategies;
 
+import waitersProgram.controller.ListeningPost;
 import waitersProgram.controller.Restaurant;
 import waitersProgram.model.MenuEntry;
 import waitersProgram.model.Order;
 import waitersProgram.model.OrderManager;
 
 /**
- * Called from addNewOrder method in WaitersControlPanelController. IS OK
+ * Called from addNewOrder method in WaitersControlPanelController.
  */
 
 public class CreateNewOrderStrategy extends StrategyAbstract {
@@ -27,8 +28,12 @@ public class CreateNewOrderStrategy extends StrategyAbstract {
 	@Override
 	public void execute(String[] args) {
 		OrderManager orderManagerInstance = Restaurant.getInstance().getOrderManager();
-		orderManagerInstance.addOrder(new Order(Integer.parseInt(args[0]), new MenuEntry(args[1])));
+		Order currentOrder = new Order(Integer.parseInt(args[0]), new MenuEntry(args[1]));
+		orderManagerInstance.addOrder(currentOrder);
 
-		// post.sendMessage()
+		ListeningPost post = ListeningPost.getInstance();
+		post.sendMessage("ADD, " + Integer.toString(currentOrder.getOrderNum()) + ", " + currentOrder.getTableNum()
+				+ ", " + currentOrder.getOrderedEntry().getDishName() + ", "
+				+ currentOrder.getOrderedEntry().getDishPrice());
 	}
 }

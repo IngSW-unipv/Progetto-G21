@@ -25,5 +25,4 @@ public class RemoveEntryStrategy extends StrategyAbstract {
 		Menu menuInstance = Restaurant.getInstance().getRestaurantMenu();
 		menuInstance.removeMenuEntry(args[0]);
 	}
-
 }

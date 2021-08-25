@@ -2,6 +2,7 @@ package waitersProgram.strategies;
 
 import java.util.Iterator;
 
+import waitersProgram.controller.ListeningPost;
 import waitersProgram.controller.Restaurant;
 import waitersProgram.model.Order;
 import waitersProgram.model.OrderManager;
@@ -39,7 +40,11 @@ public class SetOrderToDeliveredStrategy extends StrategyAbstract {
 				break;
 			}
 		}
-		orderManagerInstance.deliverOrder(currentOrder);
-		// post.sendMessage()
+
+		if (currentOrder != null) {
+			orderManagerInstance.deliverOrder(currentOrder);
+			ListeningPost post = ListeningPost.getInstance();
+			post.sendMessage("SET_DELIVERED, " + Integer.toString(currentOrder.getOrderNum()));
+		}
 	}
 }

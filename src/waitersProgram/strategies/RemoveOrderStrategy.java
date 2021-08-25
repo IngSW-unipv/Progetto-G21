@@ -2,6 +2,7 @@ package waitersProgram.strategies;
 
 import java.util.Iterator;
 
+import waitersProgram.controller.ListeningPost;
 import waitersProgram.controller.Restaurant;
 import waitersProgram.model.Order;
 import waitersProgram.model.OrderManager;
@@ -33,8 +34,11 @@ public class RemoveOrderStrategy extends StrategyAbstract {
 				break;
 			}
 		}
-		orderManagerInstance.removeOrder(currentOrder);
 
-		// post.sendMessage()
+		if (currentOrder != null) {
+			orderManagerInstance.removeOrder(currentOrder);
+			ListeningPost post = ListeningPost.getInstance();
+			post.sendMessage("REMOVE, " + Integer.toString(currentOrder.getOrderNum()));
+		}
 	}
 }

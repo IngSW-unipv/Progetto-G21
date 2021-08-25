@@ -27,5 +27,4 @@ public class AddNewTableStrategy extends StrategyAbstract {
 		TableManager tableManagerInstance = Restaurant.getInstance().getTableManager();
 		tableManagerInstance.addTable(Integer.parseInt(args[0]));
 	}
-
 }
