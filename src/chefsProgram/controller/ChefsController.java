@@ -6,17 +6,23 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.Iterator;
 import java.util.regex.Pattern;
 
 import chefsProgram.model.MenuEntry;
 import chefsProgram.model.Order;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
+import waitersProgram.controller.OrderStatus;
 
 /**
  * The ChefsGuiController class. It will be used to control the chef's graphical
@@ -28,18 +34,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * contains the server.
  */
 
-public class ChefsGuiController extends Thread {
+public class ChefsController extends Thread {
 
+	/** ChefsControlPanel FXML calls. */
 	@FXML
 	TableView<Order> ordersTableView;
-	TableColumn<Order, String> tableColumn;
-	TableColumn<Order, String> orderColumn;
-	TableColumn<Order, String> statusColumn;
+	TableColumn<Order, String> tableColumn, orderColumn, statusColumn;
+	TableColumn<Order, Void> actionColumn;
 
+	/** ChefsOrderUpdateFrame FXML calls. */
 	@FXML
 	Label tableLabel, orderLabel, orderNumberLabel;
-
-	@FXML
 	CheckBox seenCheckBox, notPreparableCheckBox, preparedCheckBox;
 
 	private ObservableList<Order> ordersList;
@@ -49,41 +54,129 @@ public class ChefsGuiController extends Thread {
 	private BufferedWriter writeBuffer = null;
 	private String serverName = "localhost";
 
-	private static ChefsGuiController instance = null;
+	private static ChefsController instance = null;
 
-	private ChefsGuiController() {
+	private ChefsController() {
+		ordersList = FXCollections.observableArrayList();
 		connect();
 		tableColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Table"));
 		orderColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Order"));
 		statusColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Status"));
+		addButtonToTable();
 	}
 
-	public static ChefsGuiController getInstance() {
+	public static ChefsController getInstance() {
 		if (instance == null) {
-			instance = new ChefsGuiController();
+			instance = new ChefsController();
 		}
 		return instance;
 	}
 
-	public void addOrderToChef(int tableNum, MenuEntry entry) {
+	private void addButtonToTable() {
+		Callback<TableColumn<Order, Void>, TableCell<Order, Void>> cellFactory = new Callback<TableColumn<Order, Void>, TableCell<Order, Void>>() {
+			@Override
+			public TableCell<Order, Void> call(final TableColumn<Order, Void> param) {
+				final TableCell<Order, Void> cell = new TableCell<Order, Void>() {
+
+					private final Button actionButton = new Button("Action");
+
+					{
+						actionButton.setOnAction(new ButtonClickEventHandler());
+					}
+
+					@Override
+					public void updateItem(Void item, boolean empty) {
+						super.updateItem(item, empty);
+						if (empty) {
+							setGraphic(null);
+						} else {
+							setGraphic(actionButton);
+						}
+					}
+				};
+				return cell;
+			}
+		};
+		actionColumn.setCellFactory(cellFactory);
+	}
+
+	/** Method called in run(). */
+	public void addOrderToChef(int orderNum, int tableNum, MenuEntry entry) {
+		Order orderToAdd = new Order(tableNum, entry);
+		orderToAdd.setOrderNum(orderNum);
 		ordersList.add(new Order(tableNum, entry));
 	}
 
-	public void removeOrderToChef(int tableNum, MenuEntry entry) {
-		ordersList.remove(new Order(tableNum, entry));
+	/** Method called in run(). */
+	public void removeOrderToChef(int orderNum) {
+		Iterator<Order> iterator = ordersList.iterator();
+		Order currentOrder = null;
+		while (iterator.hasNext()) {
+			currentOrder = iterator.next();
+			if (currentOrder.getOrderNum() == orderNum) {
+				break;
+			}
+		}
+		ordersList.remove(currentOrder);
 	}
 
+	public void modifyOrderStatus(int orderNum, OrderStatus status) {
+		Iterator<Order> iterator = ordersList.iterator();
+		while (iterator.hasNext()) {
+			Order order = iterator.next();
+			if (order.getOrderNum() == orderNum) {
+				switch (status) {
+				case SEEN:
+					order.setSeen(true);
+					order.setPreparable(true);
+					order.setPrepared(false);
+					order.setDelivered(false);
+					break;
+				case NOT_PREPARABLE:
+					order.setSeen(true);
+					order.setPreparable(false);
+					order.setPrepared(false);
+					order.setDelivered(false);
+					break;
+				case PREPARED:
+					order.setSeen(true);
+					order.setPreparable(true);
+					order.setPrepared(true);
+					order.setDelivered(false);
+					break;
+				case DELIVERED:
+					order.setSeen(true);
+					order.setPreparable(true);
+					order.setPrepared(true);
+					order.setDelivered(true);
+					break;
+				default:
+					break;
+				}
+			}
+			break;
+		}
+	}
+
+	/** Method triggered by seenCheckBox. */
 	public void setOrderSeenToPreparable() {
-		// sendMessage();
+		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
+		String orderNum = orderNumberLabelSplitted[1].trim();
+		sendMessage("SetOrderToSeenStrategy, " + orderNum);
 	}
 
+	/** Method triggered by notPreparableCheckBox. */
 	public void setOrderToNotPreparable() {
-		sendMessage("SetOrderToNotPreparable, ");
-
+		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
+		String orderNum = orderNumberLabelSplitted[1].trim();
+		sendMessage("SetOrderToNotPreparableStrategy, " + orderNum);
 	}
 
+	/** Method triggered by preparedCheckBox. */
 	public void setOrderToPrepared() {
-
+		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
+		String orderNum = orderNumberLabelSplitted[1].trim();
+		sendMessage("SetOrderToPreparedStrategy, " + orderNum);
 	}
 
 	public String getServerName() {
@@ -101,8 +194,6 @@ public class ChefsGuiController extends Thread {
 
 			readBuffer = new BufferedReader(new InputStreamReader(serverSocket.getInputStream()));
 			writeBuffer = new BufferedWriter(new OutputStreamWriter(serverSocket.getOutputStream()));
-
-			System.out.println("Client is connected!\n");
 
 			this.start();
 
@@ -141,12 +232,22 @@ public class ChefsGuiController extends Thread {
 					;
 				if (p.matcher(message).matches()) {
 					unpackedMessage = message.split(", ");
-					if (unpackedMessage[0].equals("ADD") == true)
-						System.out.println("replace with method to update orders");
-					else if (unpackedMessage[0].equals("REMOVE") == true) {
-						System.out.println("replace with method to remove orders");
+					if (unpackedMessage[0].equals("ADD") == true) {
+						// ADD, orderNum, tableNum, entryName, entryPrice
+						int orderNum = Integer.parseInt(unpackedMessage[1].trim());
+						int tableNum = Integer.parseInt(unpackedMessage[2].trim());
+						String entryName = unpackedMessage[3].trim();
+						String entryPrice = unpackedMessage[4].trim();
+						addOrderToChef(orderNum, tableNum, new MenuEntry(entryName + ", " + entryPrice));
+					} else if (unpackedMessage[0].equals("REMOVE") == true) {
+						// REMOVE, orderNum
+						int orderNum = Integer.parseInt(unpackedMessage[1].trim());
+						removeOrderToChef(orderNum);
+					} else if (unpackedMessage[0].equals("SET_DELIVERED") == true) {
+						// SET_DELIVERED, orderNum
+						int orderNum = Integer.parseInt(unpackedMessage[1].trim());
+						modifyOrderStatus(orderNum, OrderStatus.DELIVERED);
 					}
-
 				}
 			}
 		} catch (Exception e) {

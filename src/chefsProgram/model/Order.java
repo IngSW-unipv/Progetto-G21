@@ -7,7 +7,6 @@ package chefsProgram.model;
  * and some status variables.
  */
 
-
 public class Order {
 
 	private int orderNum; // Numerical order's identifier.
@@ -95,6 +94,13 @@ public class Order {
 	 */
 	public static int getOrdersCounter() {
 		return ordersCounter;
+	}
+
+	/**
+	 * @param orderNum.
+	 */
+	public void setOrderNum(int orderNum) {
+		this.orderNum = orderNum;
 	}
 
 	/**
