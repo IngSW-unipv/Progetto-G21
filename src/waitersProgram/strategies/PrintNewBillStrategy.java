@@ -3,7 +3,7 @@ package waitersProgram.strategies;
 import waitersProgram.controller.Restaurant;
 import waitersProgram.model.Bill;
 
-/** Called from printBill method in WaitersControlPanelController. IS OK */
+/** Called from printBill method in WaitersControlPanelController. */
 
 public class PrintNewBillStrategy extends StrategyAbstract {
 	private static PrintNewBillStrategy instance = null;

@@ -8,6 +8,11 @@ import waitersProgram.controller.WaitersController;
 import waitersProgram.model.Order;
 import waitersProgram.model.OrderManager;
 
+/**
+ * Called from ListeningPost after ChefsController setOrderToNotPreparable
+ * invocation.
+ */
+
 public class SetOrderToNotPreparableStrategy extends StrategyAbstract {
 	private static SetOrderToNotPreparableStrategy instance = null;
 

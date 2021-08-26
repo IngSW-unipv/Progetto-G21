@@ -28,7 +28,7 @@ import waitersProgram.controller.OrderStatus;
  * The ChefsGuiController class. It will be used to control the chef's graphical
  * interface (both ChefsControlPanel and ChefsOrderUpdateFrame) and it will
  * contain a ListeningPost instance in order to ensure the communication with
- * the Restaurant class (facade controller).
+ * the Restaurant class (backend's facade controller).
  * 
  * This class and its GUI will be running on a different device than the others
  * in order to obtain a distributed system: that's the client, ListeningPost
@@ -59,7 +59,7 @@ public class ChefsController extends Thread {
 
 	/**
 	 * Class constructor method. It's intended as the initialization method of the
-	 * graphical interface.
+	 * controller.
 	 */
 	private ChefsController() {
 		ordersList = FXCollections.observableArrayList();
@@ -68,20 +68,6 @@ public class ChefsController extends Thread {
 		orderColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Order"));
 		statusColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Status"));
 		addButtonToTable();
-	}
-
-	/**
-	 * Static method that returns a ChefsController instance in order to observe the
-	 * Singleton pattern. It calls the class constructor only if this has not
-	 * happened before.
-	 * 
-	 * @return menu instance.
-	 */
-	public static ChefsController getInstance() {
-		if (instance == null) {
-			instance = new ChefsController();
-		}
-		return instance;
 	}
 
 	/**
@@ -115,6 +101,20 @@ public class ChefsController extends Thread {
 			}
 		};
 		actionColumn.setCellFactory(cellFactory);
+	}
+
+	/**
+	 * Static method that returns a ChefsController instance in order to observe the
+	 * Singleton pattern. It calls the class constructor only if this has not
+	 * happened before.
+	 * 
+	 * @return ChefsController instance.
+	 */
+	public static ChefsController getInstance() {
+		if (instance == null) {
+			instance = new ChefsController();
+		}
+		return instance;
 	}
 
 	/**
@@ -198,7 +198,7 @@ public class ChefsController extends Thread {
 
 	/**
 	 * Method triggered by seenCheckBox. It calls SetOrderToSeenStrategy via the
-	 * sendMessage method, which sends a string to the Server (ListeningPost).
+	 * sendMessage method, which sends a string to the server (ListeningPost).
 	 */
 	public void setOrderSeenToPreparable() {
 		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
@@ -209,7 +209,7 @@ public class ChefsController extends Thread {
 	/**
 	 * Method triggered by notPreparableCheckBox. It calls
 	 * SetOrderToNotPreparableStrategy via the sendMessage method, which sends a
-	 * string to the Server (ListeningPost).
+	 * string to the server (ListeningPost).
 	 */
 	public void setOrderToNotPreparable() {
 		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
@@ -219,7 +219,7 @@ public class ChefsController extends Thread {
 
 	/**
 	 * Method triggered by preparedCheckBox. It calls SetOrderToPreparedStrategy via
-	 * the sendMessage method, which sends a string to the Server (ListeningPost).
+	 * the sendMessage method, which sends a string to the server (ListeningPost).
 	 */
 	public void setOrderToPrepared() {
 		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
@@ -235,7 +235,6 @@ public class ChefsController extends Thread {
 	}
 
 	/**
-	 * 
 	 * @param serverName.
 	 */
 	public void setServerName(String serverName) {
@@ -243,9 +242,9 @@ public class ChefsController extends Thread {
 	}
 
 	/**
-	 * Method used to establish a connection with the Server. Through the start
+	 * Method used to establish a connection with the server. Through the start
 	 * method it starts a thread which is always listening for messages from the
-	 * Server.
+	 * server.
 	 */
 	public void connect() {
 		boolean isFailed = false;
@@ -272,9 +271,9 @@ public class ChefsController extends Thread {
 	}
 
 	/**
-	 * Small method that writes a message to the socket.
+	 * Small method that writes a message to the server's socket.
 	 * 
-	 * @param message specify the message to send to the Server.
+	 * @param message specify the message to send to the server.
 	 */
 	public synchronized void sendMessage(String message) {
 		try {

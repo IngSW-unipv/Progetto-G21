@@ -28,8 +28,13 @@ import waitersProgram.strategies.PrintNewBillStrategy;
 
 /**
  * The WaitersController class. It will be used to control the waiter's
- * graphical interface and it will contain a ListeningPost instance in order to
- * ensure the communication with the Restaurant class.
+ * graphical interface (both WaitersControlPanel and WaitersOrderUpdateFrame)
+ * and it will contain a ListeningPost instance in order to ensure the
+ * communication with the Restaurant class (backend's facade controller).
+ * 
+ * This class and its GUI will be running on the same device of ListeningPost
+ * class (server), so it's not necessary to establish a socket communication (in
+ * ChefsController that was mandatory).
  */
 
 public class WaitersController {
@@ -71,6 +76,10 @@ public class WaitersController {
 	private ObservableList<MenuEntry> entriesList;
 	private ObservableList<Order> ordersList;
 
+	/**
+	 * Class constructor method. It's intended as the initialization method of the
+	 * controller.
+	 */
 	private WaitersController() {
 		tablesList = FXCollections.observableArrayList();
 		entriesList = FXCollections.observableArrayList();
@@ -86,31 +95,11 @@ public class WaitersController {
 		addButtonToTable();
 	}
 
-	public static WaitersController getInstance() {
-		if (instance == null) {
-			instance = new WaitersController();
-		}
-		return instance;
-	}
-
-	public ListeningPost getPost() {
-		return post;
-	}
-
-	/** Method called in the constructor and in addNewTable(), removeTable(). */
-	private void fillTablesList() {
-		tablesList.clear();
-		TableManager tableManager = Restaurant.getInstance().getTableManager();
-		tablesList.addAll(tableManager.getTables());
-	}
-
-	/** Method called in the constructor and in addNewEntry(), removeEntry(). */
-	private void fillMenuEntriesList() {
-		entriesList.clear();
-		Menu menu = Restaurant.getInstance().getRestaurantMenu();
-		entriesList.addAll(menu.getEntriesCollection());
-	}
-
+	/**
+	 * Method used to add the order's status changing button to each row of
+	 * ordersTableView. It invokes actionButton.setOnAction in order to bind the
+	 * same EventHandler to each created button.
+	 */
 	private void addButtonToTable() {
 		Callback<TableColumn<Order, Void>, TableCell<Order, Void>> cellFactory = new Callback<TableColumn<Order, Void>, TableCell<Order, Void>>() {
 			@Override
@@ -139,23 +128,81 @@ public class WaitersController {
 		actionColumn.setCellFactory(cellFactory);
 	}
 
-	/** Test regex!! */
+	/**
+	 * Private method called in the constructor and in addNewTable(), removeTable().
+	 * It's used to update tables ObservableList.
+	 */
+	private void fillTablesList() {
+		tablesList.clear();
+		TableManager tableManager = Restaurant.getInstance().getTableManager();
+		tablesList.addAll(tableManager.getTables());
+	}
+
+	/**
+	 * Private method called in the constructor and in addNewEntry(), removeEntry().
+	 * It's used to update entries ObservableList.
+	 */
+	private void fillMenuEntriesList() {
+		entriesList.clear();
+		Menu menu = Restaurant.getInstance().getRestaurantMenu();
+		entriesList.addAll(menu.getEntriesCollection());
+	}
+
+	/**
+	 * Private method used to check tableField format.
+	 * 
+	 * @param tableField.
+	 * @return boolean variable.
+	 */
 	private boolean checkForTableFormat(TextField tableField) {
 		Pattern p = Pattern.compile("\\d{1,3}");
 		Matcher m = p.matcher(tableField.getText().trim());
 		return m.matches();
 	}
 
+	/**
+	 * Private method used to check entryNameField format.
+	 * 
+	 * @param entryNameField.
+	 * @return boolean variable.
+	 */
 	private boolean checkForEntryNameFormat(TextField entryNameField) {
 		Pattern p = Pattern.compile("^[A-Za-z0-9‡ËÏÚ˘·ÈÌÛ˙‚ÍÓÙ˚„Òı‰ÎÔˆ¸ˇ ]*$");
 		Matcher m = p.matcher(entryNameField.getText().trim());
 		return m.matches();
 	}
 
+	/**
+	 * Private method used to check entryPriceField format.
+	 * 
+	 * @param entryPriceField.
+	 * @return boolean variable.
+	 */
 	private boolean checkForEntryPriceFormat(TextField entryPriceField) {
 		Pattern p = Pattern.compile("\\\\d{1,5}\\\\.{0,1}\\\\d{0,2}$");
 		Matcher m = p.matcher(entryPriceField.getText().trim());
 		return m.matches();
+	}
+
+	/**
+	 * Static method that returns a WaitersController instance in order to observe
+	 * the Singleton pattern. It calls the class constructor only if this has not
+	 * happened before.
+	 * 
+	 * @return WaitersController instance.
+	 */
+	public static WaitersController getInstance() {
+		if (instance == null) {
+			instance = new WaitersController();
+		}
+		return instance;
+	}
+
+	/**
+	 * @return used ListeningPost instance.
+	 */
+	public ListeningPost getPost() {
+		return post;
 	}
 
 	/** Method triggered by createNewOrderButton. */
@@ -235,10 +282,21 @@ public class WaitersController {
 		modifyOrderStatus(Integer.parseInt(parameters[0]), OrderStatus.DELIVERED);
 	}
 
+	/**
+	 * Method used to add a new order in orders' TableView.
+	 * 
+	 * @param order's tableNum.
+	 * @param order's entry.
+	 */
 	public void addOrderInTableView(Integer tableNum, MenuEntry entry) {
 		ordersList.add(new Order(tableNum, entry));
 	}
 
+	/**
+	 * Method used to remove an order from orders' TableView.
+	 * 
+	 * @param order's tableNum.
+	 */
 	public void removeOrderInTableView(Order order) {
 		ordersList.remove(order);
 	}
@@ -246,6 +304,9 @@ public class WaitersController {
 	/**
 	 * Method called in setOrderToDelivered() and in strategies in order to change
 	 * the order status.
+	 * 
+	 * @param order's tableNum.
+	 * @param new     order's status.
 	 */
 	public void modifyOrderStatus(int orderNum, OrderStatus status) {
 		Iterator<Order> iterator = ordersList.iterator();

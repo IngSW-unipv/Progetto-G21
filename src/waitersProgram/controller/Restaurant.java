@@ -12,9 +12,7 @@ import waitersProgram.model.TableManager;
 import waitersProgram.strategies.StrategyAbstract;
 
 /**
- * The Restaurant class. Is used to unify all the other model classes in order
- * to represent a real restaurant. The class contains methods for managing
- * restaurant tables.
+ * The Restaurant class. Is used as the backend's facade controller.
  */
 public class Restaurant {
 
@@ -30,7 +28,7 @@ public class Restaurant {
 	 * Class constructor method.
 	 */
 	private Restaurant() {
-		strategies=new HashMap<String, StrategyAbstract>();
+		strategies = new HashMap<String, StrategyAbstract>();
 		restaurantMenu = Menu.getInstance();
 		orderManager = OrderManager.getInstance();
 		tableManager = TableManager.getInstance();
@@ -90,20 +88,17 @@ public class Restaurant {
 	}
 
 	/**
-	 * Eventually this method will auto-instantiate strategies, but until I've
-	 * figured out classpath lib, it will be required to manually load the single
-	 * strategies. The String is the name of the strategy, the value is the strategy
-	 * itself.
+	 * Method that auto-instantiate strategies using classgraph.
 	 */
 	private void createStrategies() {
-		try (ScanResult sr= new ClassGraph().acceptPackages("waitersProgram.strategies").enableClassInfo().scan()){
-			ClassInfoList cil=sr.getSubclasses("waitersProgram.strategies.StrategyAbstract");
-			List<Class<?>>lt = cil.loadClasses();
-			for (Class<?> ct: lt) {
-			strategies.put(((String)ct.getMethod("getStrategyName", ((Class<?>)null)).invoke(null)),
-						   ((StrategyAbstract)ct.getMethod("getInstance", this.getClass()).invoke(this)));
+		try (ScanResult sr = new ClassGraph().acceptPackages("waitersProgram.strategies").enableClassInfo().scan()) {
+			ClassInfoList cil = sr.getSubclasses("waitersProgram.strategies.StrategyAbstract");
+			List<Class<?>> lt = cil.loadClasses();
+			for (Class<?> ct : lt) {
+				strategies.put(((String) ct.getMethod("getStrategyName", ((Class<?>) null)).invoke(null)),
+						((StrategyAbstract) ct.getMethod("getInstance", this.getClass()).invoke(this)));
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -114,6 +109,7 @@ public class Restaurant {
 	 * 
 	 * @param strategyRequired specifies the involved strategy.
 	 * @param args             specifies strategies' arguments.
+	 *
 	 */
 	public void strategyCall(String strategyRequired, String[] args) {
 		StrategyAbstract strategy;

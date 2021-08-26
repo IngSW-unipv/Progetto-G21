@@ -3,9 +3,7 @@ package waitersProgram.strategies;
 import waitersProgram.controller.Restaurant;
 import waitersProgram.model.TableManager;
 
-/**
- * Called from addNewTable method in WaitersControlPanelController. IS OK
- */
+/** Called from addNewTable method in WaitersControlPanelController. */
 
 public class AddNewTableStrategy extends StrategyAbstract {
 	private static AddNewTableStrategy instance = null;

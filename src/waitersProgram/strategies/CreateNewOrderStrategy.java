@@ -6,9 +6,7 @@ import waitersProgram.model.MenuEntry;
 import waitersProgram.model.Order;
 import waitersProgram.model.OrderManager;
 
-/**
- * Called from addNewOrder method in WaitersControlPanelController.
- */
+/** Called from addNewOrder method in WaitersControlPanelController. */
 
 public class CreateNewOrderStrategy extends StrategyAbstract {
 	private static CreateNewOrderStrategy instance = null;

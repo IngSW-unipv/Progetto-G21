@@ -87,7 +87,7 @@ public class ListeningPost extends Thread {
 
 	/**
 	 * This method can be invoked when needed to change the bound backend
-	 * controllers.
+	 * controller.
 	 * 
 	 * @param controller specifies the involved controller.
 	 */
@@ -96,10 +96,10 @@ public class ListeningPost extends Thread {
 	}
 
 	/**
-	 * This method allows an object to communicate a message composed by the name of
-	 * the strategy, which can be interpreted as a service provided by the bound
-	 * controller, and a vector of strings as arguments to be passed to said
-	 * strategy, which will be executed by the bound controller.
+	 * This method allows an object to communicate a message to the backend
+	 * controller in order to call a strategy. The message is composed by the name
+	 * of the strategy and a vector of strings (strategy arguments). Strategies has
+	 * to be interpreted as services provided by the bound backend controller.
 	 * 
 	 * @param strategyRequired specifies the involved strategy.
 	 * @param args             specifies strategies' arguments.

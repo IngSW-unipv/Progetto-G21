@@ -6,11 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/** The WaitersControlPanelMain class. Used to start waiter's application. */
 public class WaitersControlPanelMain extends Application {
-
-	// private WaitersControlPanelController wcpController;
-	// private WaitersOrderUpdateFrameController woufController;
-
 	@Override
 	public void start(Stage stage) {
 		Parent root;

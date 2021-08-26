@@ -8,6 +8,11 @@ import waitersProgram.controller.WaitersController;
 import waitersProgram.model.Order;
 import waitersProgram.model.OrderManager;
 
+/**
+ * Called from ListeningPost after ChefsController setOrderToSeenToPreparable
+ * invocation.
+ */
+
 public class SetOrderToSeenStrategy extends StrategyAbstract {
 	private static SetOrderToSeenStrategy instance = null;
 

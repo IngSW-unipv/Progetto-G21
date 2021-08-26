@@ -3,7 +3,7 @@ package waitersProgram.strategies;
 import waitersProgram.controller.Restaurant;
 import waitersProgram.model.TableManager;
 
-/** Called from removeTable method in WaitersControlPanelController. IS OK */
+/** Called from removeTable method in WaitersControlPanelController. */
 
 public class RemoveTableStrategy extends StrategyAbstract {
 	private static RemoveTableStrategy instance = null;

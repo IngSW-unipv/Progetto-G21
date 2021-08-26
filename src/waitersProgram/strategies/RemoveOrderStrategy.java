@@ -7,6 +7,8 @@ import waitersProgram.controller.Restaurant;
 import waitersProgram.model.Order;
 import waitersProgram.model.OrderManager;
 
+/** Called from removeOrder method in WaitersControlPanelController. */
+
 public class RemoveOrderStrategy extends StrategyAbstract {
 	private static RemoveOrderStrategy instance = null;
 

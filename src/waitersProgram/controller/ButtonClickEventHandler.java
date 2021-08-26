@@ -19,8 +19,6 @@ public class ButtonClickEventHandler implements EventHandler<ActionEvent> {
 	 * Method that contains the instructions to be performed after pressing the
 	 * button. It launches WaitersOrderUpdateFrame GUI in order to change the
 	 * order's status.
-	 * 
-	 * @param ActionEvent object.
 	 */
 	@Override
 	public void handle(ActionEvent event) {

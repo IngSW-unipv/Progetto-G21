@@ -9,8 +9,6 @@ import waitersProgram.model.OrderManager;
 
 /**
  * Called from setOrderToDelivered method in WaitersOrderUpdateFrameController.
- * IS OK
- * 
  */
 
 public class SetOrderToDeliveredStrategy extends StrategyAbstract {
