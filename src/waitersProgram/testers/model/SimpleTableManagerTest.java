@@ -1,4 +1,4 @@
-package waitersProgram.testers;
+package waitersProgram.testers.model;
 
 import java.util.HashSet;
 import java.util.Iterator;

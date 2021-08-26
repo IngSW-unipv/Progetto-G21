@@ -1,5 +1,5 @@
 
-package waitersProgram.testers;
+package waitersProgram.testers.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
