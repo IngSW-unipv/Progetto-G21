@@ -26,8 +26,9 @@ import waitersProgram.controller.OrderStatus;
 
 /**
  * The ChefsGuiController class. It will be used to control the chef's graphical
- * interface and it will contain a ListeningPost instance in order to ensure the
- * communication with the SystemController class.
+ * interface (both ChefsControlPanel and ChefsOrderUpdateFrame) and it will
+ * contain a ListeningPost instance in order to ensure the communication with
+ * the Restaurant class (facade controller).
  * 
  * This class and its GUI will be running on a different device than the others
  * in order to obtain a distributed system: that's the client, ListeningPost
@@ -56,6 +57,10 @@ public class ChefsController extends Thread {
 
 	private static ChefsController instance = null;
 
+	/**
+	 * Class constructor method. It's intended as the initialization method of the
+	 * graphical interface.
+	 */
 	private ChefsController() {
 		ordersList = FXCollections.observableArrayList();
 		connect();
@@ -65,6 +70,13 @@ public class ChefsController extends Thread {
 		addButtonToTable();
 	}
 
+	/**
+	 * Static method that returns a ChefsController instance in order to observe the
+	 * Singleton pattern. It calls the class constructor only if this has not
+	 * happened before.
+	 * 
+	 * @return menu instance.
+	 */
 	public static ChefsController getInstance() {
 		if (instance == null) {
 			instance = new ChefsController();
@@ -72,6 +84,11 @@ public class ChefsController extends Thread {
 		return instance;
 	}
 
+	/**
+	 * Method used to add the order's status changing button to each row of
+	 * ordersTableView. It invokes actionButton.setOnAction in order to bind the
+	 * same EventHandler to each created button.
+	 */
 	private void addButtonToTable() {
 		Callback<TableColumn<Order, Void>, TableCell<Order, Void>> cellFactory = new Callback<TableColumn<Order, Void>, TableCell<Order, Void>>() {
 			@Override
@@ -100,14 +117,26 @@ public class ChefsController extends Thread {
 		actionColumn.setCellFactory(cellFactory);
 	}
 
-	/** Method called in run(). */
+	/**
+	 * Method called in run(). It's used to add a specified order to ordersTableView
+	 * through ordersList.
+	 * 
+	 * @param orderNum specify the involved order's number.
+	 * @param tableNum specify the involved order's table number.
+	 * @param entry    specify the involved order's menu entry.
+	 */
 	public void addOrderToChef(int orderNum, int tableNum, MenuEntry entry) {
 		Order orderToAdd = new Order(tableNum, entry);
 		orderToAdd.setOrderNum(orderNum);
 		ordersList.add(new Order(tableNum, entry));
 	}
 
-	/** Method called in run(). */
+	/**
+	 * Method called in run(). It's used to remove a specified order to
+	 * ordersTableView through ordersList.
+	 * 
+	 * @param orderNum specify the involved order's number.
+	 */
 	public void removeOrderToChef(int orderNum) {
 		Iterator<Order> iterator = ordersList.iterator();
 		Order currentOrder = null;
@@ -117,9 +146,18 @@ public class ChefsController extends Thread {
 				break;
 			}
 		}
-		ordersList.remove(currentOrder);
+		if (currentOrder != null) {
+			ordersList.remove(currentOrder);
+		}
 	}
 
+	/**
+	 * Method called in run(). It's used to change status to a specified order in
+	 * ordersTableView.
+	 * 
+	 * @param orderNum specify the involved order's number.
+	 * @param status   specify the new order status (OrderStatus object).
+	 */
 	public void modifyOrderStatus(int orderNum, OrderStatus status) {
 		Iterator<Order> iterator = ordersList.iterator();
 		while (iterator.hasNext()) {
@@ -158,35 +196,57 @@ public class ChefsController extends Thread {
 		}
 	}
 
-	/** Method triggered by seenCheckBox. */
+	/**
+	 * Method triggered by seenCheckBox. It calls SetOrderToSeenStrategy via the
+	 * sendMessage method, which sends a string to the Server (ListeningPost).
+	 */
 	public void setOrderSeenToPreparable() {
 		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
 		String orderNum = orderNumberLabelSplitted[1].trim();
 		sendMessage("SetOrderToSeenStrategy, " + orderNum);
 	}
 
-	/** Method triggered by notPreparableCheckBox. */
+	/**
+	 * Method triggered by notPreparableCheckBox. It calls
+	 * SetOrderToNotPreparableStrategy via the sendMessage method, which sends a
+	 * string to the Server (ListeningPost).
+	 */
 	public void setOrderToNotPreparable() {
 		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
 		String orderNum = orderNumberLabelSplitted[1].trim();
 		sendMessage("SetOrderToNotPreparableStrategy, " + orderNum);
 	}
 
-	/** Method triggered by preparedCheckBox. */
+	/**
+	 * Method triggered by preparedCheckBox. It calls SetOrderToPreparedStrategy via
+	 * the sendMessage method, which sends a string to the Server (ListeningPost).
+	 */
 	public void setOrderToPrepared() {
 		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
 		String orderNum = orderNumberLabelSplitted[1].trim();
 		sendMessage("SetOrderToPreparedStrategy, " + orderNum);
 	}
 
+	/**
+	 * @return serverName.
+	 */
 	public String getServerName() {
 		return serverName;
 	}
 
+	/**
+	 * 
+	 * @param serverName.
+	 */
 	public void setServerName(String serverName) {
 		this.serverName = serverName;
 	}
 
+	/**
+	 * Method used to establish a connection with the Server. Through the start
+	 * method it starts a thread which is always listening for messages from the
+	 * Server.
+	 */
 	public void connect() {
 		boolean isFailed = false;
 		try {
@@ -211,7 +271,11 @@ public class ChefsController extends Thread {
 		}
 	}
 
-	/** Small method that writes a message to the socket. */
+	/**
+	 * Small method that writes a message to the socket.
+	 * 
+	 * @param message specify the message to send to the Server.
+	 */
 	public synchronized void sendMessage(String message) {
 		try {
 			if (serverSocket.isConnected())
@@ -221,6 +285,10 @@ public class ChefsController extends Thread {
 		}
 	}
 
+	/**
+	 * Client thread main method. It's used to intercept messages from the server
+	 * and, based on these, update the GUI.
+	 */
 	@Override
 	public void run() {
 		try {

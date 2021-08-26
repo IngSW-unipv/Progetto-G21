@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/** The ChefsControlPanelMain class. Used to start chef's application. */
 public class ChefsControlPanelMain extends Application {
 	@Override
 	public void start(Stage stage) {

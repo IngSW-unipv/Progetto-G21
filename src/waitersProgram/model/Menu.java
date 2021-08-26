@@ -36,8 +36,6 @@ public class Menu implements MenuInterface {
 	 * Class constructor method. The method calls checkForMenuFileExistence and
 	 * parseMenuFile in order to check if menu.txt file exists and to parse its
 	 * content.
-	 * 
-	 * @param path specifies the location of menu.txt file.
 	 */
 	private Menu() {
 		entries = new LinkedHashMap<Integer, MenuEntry>();

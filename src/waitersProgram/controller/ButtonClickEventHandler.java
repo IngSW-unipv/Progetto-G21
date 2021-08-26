@@ -8,8 +8,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Event class triggered by pressing the change order's status button. The
+ * specified button is located in each row of the ordersTableView, inside the
+ * actionTableColumn.
+ */
 public class ButtonClickEventHandler implements EventHandler<ActionEvent> {
 
+	/**
+	 * Method that contains the instructions to be performed after pressing the
+	 * button. It launches WaitersOrderUpdateFrame GUI in order to change the
+	 * order's status.
+	 * 
+	 * @param ActionEvent object.
+	 */
 	@Override
 	public void handle(ActionEvent event) {
 		Parent root;

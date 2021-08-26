@@ -11,11 +11,21 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 
 /**
- * The ListeningPost class. Once instantiated, it can dynamically change the
- * bound controller in order to forward messages to different parts of the
- * program.
+ * The ListeningPost class. It's used to connect the backend to the GUI
+ * controllers via strategies invocation. The "connected" backend controller is
+ * the Restaurant class (backend's facade controller). The "connected" frontend
+ * controllers are WaitersController and ChefsController. Through a
+ * ListeningPost instance WaitersController is able to directly invoke
+ * strategies. ChefsController, on the other hand, being located on a different
+ * device, will call the strategies by sending messages to ListeningPost over
+ * the network: in this case ListeningPost will be the Server, ChefsController
+ * the only connected client.
+ * 
+ * Even if it won't be done during system runtime, the bound backend controller
+ * can be changed in order to forward messages to new additions in the backend.
+ * This choice was made to ensure greater code modularity and allow easier
+ * future changes in project's architecture.
  */
-
 public class ListeningPost extends Thread {
 	private static ListeningPost post;
 	private Restaurant restaurant;
@@ -25,8 +35,8 @@ public class ListeningPost extends Thread {
 	private BufferedWriter writeBuffer;
 
 	/**
-	 * ListeningPost default constructor (private in order to respect Singleton
-	 * pattern).
+	 * Class constructor method. (private in order to respect Singleton pattern).
+	 * Starts the server to allow connection and communication with ChefsController.
 	 */
 	private ListeningPost() {
 		boolean isFailed = false;
@@ -68,13 +78,16 @@ public class ListeningPost extends Thread {
 		return post;
 	}
 
+	/**
+	 * @return backend controller's instance.
+	 */
 	public Restaurant getRestaurant() {
 		return restaurant;
 	}
 
 	/**
-	 * This method can be invoked when needed to change the bound controllers, and,
-	 * through these, strategies.
+	 * This method can be invoked when needed to change the bound backend
+	 * controllers.
 	 * 
 	 * @param controller specifies the involved controller.
 	 */
@@ -133,7 +146,11 @@ public class ListeningPost extends Thread {
 		}
 	}
 
-	/** Small method that writes a message to the socket. */
+	/**
+	 * Small method that writes a message to the socket.
+	 * 
+	 * @param message specify the message to send.
+	 */
 	public synchronized void sendMessage(String message) {
 		try {
 			if (clientSocket.isConnected())
