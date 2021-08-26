@@ -4,7 +4,7 @@
   router="FAN">  
   <package id="1" language="java" name="chefsProgram.model" project="Progetto-G21" 
     file="/Progetto-G21/src/chefsProgram/model" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="570" width="752" x="1" y="2"/>    
+    <position height="570" width="760" x="-1" y="-1"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <class id="2" language="java" name="chefsProgram.model.Order" project="Progetto-G21" 
@@ -25,12 +25,63 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="4">    
+  <package id="4" language="java" name="chefsProgram.controller" project="Progetto-G21" 
+    file="/Progetto-G21/src/chefsProgram/controller" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="629" width="774" x="-6" y="606"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="5" language="java" name="chefsProgram.controller.ButtonClickEventHandler" project="Progetto-G21" 
+    file="/Progetto-G21/src/chefsProgram/controller/ButtonClickEventHandler.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="228" y="743"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="chefsProgram.controller.ChefsGuiController" project="Progetto-G21" 
+    file="/Progetto-G21/src/chefsProgram/controller/ChefsGuiController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="548" y="952"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="7">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="5" name="orderedEntry"/>      
-      <multiplicity id="6" minimum="0" maximum="1"/>    
+      <attribute id="8" name="orderedEntry">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="9" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="10">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="11" name="ordersList">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="12" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="13">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="14" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="15" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
