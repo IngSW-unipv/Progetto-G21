@@ -6,7 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import waitersProgram.model.Order;
 
 /**
  * Event class triggered by pressing the change order's status button. The
@@ -30,10 +32,21 @@ public class ButtonClickEventHandler implements EventHandler<ActionEvent> {
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("waitersOrderUpdateFrame.css").toExternalForm());
 			stage.setScene(scene);
+			setCheckBox();
 			stage.show();
 			((Node) (event.getSource())).getScene().getWindow().hide();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
+	}
+
+	/** Small method used to initialize the checkBoxes. */
+	private void setCheckBox() {
+		WaitersController waitersController = WaitersController.getInstance();
+		Label orderNumberLabel = waitersController.getOrderNumberLabel();
+		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
+		String orderNum = orderNumberLabelSplitted[1].trim();
+		Order currentOrder = waitersController.searchForAnOrder(Integer.parseInt(orderNum));
+		waitersController.setDeliveredCheckBox(currentOrder.isDelivered());
 	}
 }

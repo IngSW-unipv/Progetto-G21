@@ -65,7 +65,7 @@ public class WaitersController {
 
 	/** WaitersOrderUpdateFrame FXML calls. */
 	@FXML
-	Label tableLabel, orderLabel, orderNumberLabel;
+	Label tableLabel, orderLabel, orderNumberLabel, removeErrorLabel;
 	CheckBox deliveredCheckBox;
 
 	private ListeningPost post;
@@ -185,6 +185,24 @@ public class WaitersController {
 	}
 
 	/**
+	 * Private method used to get an order from the orders ObservableList.
+	 * 
+	 * @param orderNum specify the order number.
+	 * @return order instance.
+	 */
+	public Order searchForAnOrder(int orderNum) {
+		Iterator<Order> iterator = ordersList.iterator();
+		Order currentOrder = null;
+		while (iterator.hasNext()) {
+			currentOrder = iterator.next();
+			if (currentOrder.getOrderNum() == orderNum) {
+				break;
+			}
+		}
+		return currentOrder;
+	}
+
+	/**
 	 * Static method that returns a WaitersController instance in order to observe
 	 * the Singleton pattern. It calls the class constructor only if this has not
 	 * happened before.
@@ -203,6 +221,20 @@ public class WaitersController {
 	 */
 	public ListeningPost getPost() {
 		return post;
+	}
+
+	/**
+	 * @return orderNumberLabel.
+	 */
+	public Label getOrderNumberLabel() {
+		return orderNumberLabel;
+	}
+
+	/**
+	 * @param check (true or false if you have to check or uncheck the checkBox).
+	 */
+	public void setDeliveredCheckBox(boolean check) {
+		deliveredCheckBox.setSelected(check);
 	}
 
 	/** Method triggered by createNewOrderButton. */
@@ -276,10 +308,42 @@ public class WaitersController {
 	public void setOrderToDelivered() {
 		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
 		String orderNum = orderNumberLabelSplitted[1].trim();
-		String[] parameters = new String[1];
-		parameters[0] = orderNum;
-		post.notifyMainController("SetOrderToDeliveredStrategy", parameters);
-		modifyOrderStatus(Integer.parseInt(parameters[0]), OrderStatus.DELIVERED);
+		Order currentOrder = searchForAnOrder(Integer.parseInt(orderNum));
+		boolean isSeen = currentOrder.isSeen();
+		boolean isPreparable = currentOrder.isPreparable();
+		boolean isPrepared = currentOrder.isPrepared();
+		boolean isDelivered = currentOrder.isDelivered();
+		if ((isSeen == true) && (isPreparable == true) && (isPrepared == true) && (isDelivered == false)) {
+			String[] parameters = new String[1];
+			parameters[0] = orderNum;
+			post.notifyMainController("SetOrderToDeliveredStrategy", parameters);
+			modifyOrderStatus(Integer.parseInt(parameters[0]), OrderStatus.DELIVERED);
+			ordersList.remove(currentOrder);
+		} else {
+			deliveredCheckBox.setSelected(false);
+		}
+	}
+
+	/** Method triggered by removeOrderButton. */
+	public void removeOrder() {
+		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
+		String orderNum = orderNumberLabelSplitted[1].trim();
+		Order currentOrder = searchForAnOrder(Integer.parseInt(orderNum));
+		boolean isSeen = currentOrder.isSeen();
+		boolean isPreparable = currentOrder.isPreparable();
+		boolean isPrepared = currentOrder.isPrepared();
+		boolean isDelivered = currentOrder.isDelivered();
+		if ((isSeen == false) && (isPreparable == true) && (isPrepared == false) && (isDelivered == false)) {
+			String[] parameters = new String[1];
+			parameters[0] = orderNum;
+			post.notifyMainController("RemoveOrderStrategy", parameters);
+			modifyOrderStatus(Integer.parseInt(parameters[0]), OrderStatus.DELIVERED);
+			ordersList.remove(currentOrder);
+		} else if ((isSeen == true) && (isPreparable == false) && (isPrepared == false) && (isDelivered == false)) {
+			ordersList.remove(currentOrder);
+		} else {
+			removeErrorLabel.setText("The order can't be removed!");
+		}
 	}
 
 	/**

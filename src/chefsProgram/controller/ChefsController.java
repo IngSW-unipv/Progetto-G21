@@ -104,6 +104,24 @@ public class ChefsController extends Thread {
 	}
 
 	/**
+	 * Private method used to get an order from the orders ObservableList.
+	 * 
+	 * @param orderNum specify the order number.
+	 * @return order instance.
+	 */
+	public Order searchForAnOrder(int orderNum) {
+		Iterator<Order> iterator = ordersList.iterator();
+		Order currentOrder = null;
+		while (iterator.hasNext()) {
+			currentOrder = iterator.next();
+			if (currentOrder.getOrderNum() == orderNum) {
+				break;
+			}
+		}
+		return currentOrder;
+	}
+
+	/**
 	 * Static method that returns a ChefsController instance in order to observe the
 	 * Singleton pattern. It calls the class constructor only if this has not
 	 * happened before.
@@ -115,6 +133,34 @@ public class ChefsController extends Thread {
 			instance = new ChefsController();
 		}
 		return instance;
+	}
+
+	/**
+	 * @return orderNumberLabel.
+	 */
+	public Label getOrderNumberLabel() {
+		return orderNumberLabel;
+	}
+
+	/**
+	 * @param check (true or false if you have to check or uncheck the checkBox).
+	 */
+	public void setSeenCheckBox(boolean check) {
+		seenCheckBox.setSelected(check);
+	}
+
+	/**
+	 * @param check (true or false if you have to check or uncheck the checkBox).
+	 */
+	public void setNotPreparableCheckBox(boolean check) {
+		seenCheckBox.setSelected(check);
+	}
+
+	/**
+	 * @param check (true or false if you have to check or uncheck the checkBox).
+	 */
+	public void setPreparedCheckBox(boolean check) {
+		seenCheckBox.setSelected(check);
 	}
 
 	/**
@@ -203,7 +249,16 @@ public class ChefsController extends Thread {
 	public void setOrderSeenToPreparable() {
 		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
 		String orderNum = orderNumberLabelSplitted[1].trim();
-		sendMessage("SetOrderToSeenStrategy, " + orderNum);
+		Order currentOrder = searchForAnOrder(Integer.parseInt(orderNum));
+		boolean isSeen = currentOrder.isSeen();
+		boolean isPreparable = currentOrder.isPreparable();
+		boolean isPrepared = currentOrder.isPrepared();
+		boolean isDelivered = currentOrder.isDelivered();
+		if ((isSeen == false) && (isPreparable == true) && (isPrepared == false) && (isDelivered == false)) {
+			sendMessage("SetOrderToSeenStrategy, " + orderNum);
+		} else {
+			seenCheckBox.setSelected(false);
+		}
 	}
 
 	/**
@@ -214,7 +269,17 @@ public class ChefsController extends Thread {
 	public void setOrderToNotPreparable() {
 		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
 		String orderNum = orderNumberLabelSplitted[1].trim();
-		sendMessage("SetOrderToNotPreparableStrategy, " + orderNum);
+		Order currentOrder = searchForAnOrder(Integer.parseInt(orderNum));
+		boolean isSeen = currentOrder.isSeen();
+		boolean isPreparable = currentOrder.isPreparable();
+		boolean isPrepared = currentOrder.isPrepared();
+		boolean isDelivered = currentOrder.isDelivered();
+		if ((isSeen == false) && (isPreparable == true) && (isPrepared == false) && (isDelivered == false)) {
+			sendMessage("SetOrderToNotPreparableStrategy, " + orderNum);
+			ordersList.remove(currentOrder);
+		} else {
+			seenCheckBox.setSelected(false);
+		}
 	}
 
 	/**
@@ -224,7 +289,16 @@ public class ChefsController extends Thread {
 	public void setOrderToPrepared() {
 		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
 		String orderNum = orderNumberLabelSplitted[1].trim();
-		sendMessage("SetOrderToPreparedStrategy, " + orderNum);
+		Order currentOrder = searchForAnOrder(Integer.parseInt(orderNum));
+		boolean isSeen = currentOrder.isSeen();
+		boolean isPreparable = currentOrder.isPreparable();
+		boolean isPrepared = currentOrder.isPrepared();
+		boolean isDelivered = currentOrder.isDelivered();
+		if ((isSeen == true) && (isPreparable == true) && (isPrepared == false) && (isDelivered == false)) {
+			sendMessage("SetOrderToPreparedStrategy, " + orderNum);
+		} else {
+			seenCheckBox.setSelected(false);
+		}
 	}
 
 	/**
@@ -314,6 +388,7 @@ public class ChefsController extends Thread {
 						// SET_DELIVERED, orderNum
 						int orderNum = Integer.parseInt(unpackedMessage[1].trim());
 						modifyOrderStatus(orderNum, OrderStatus.DELIVERED);
+						removeOrderToChef(orderNum);
 					}
 				}
 			}

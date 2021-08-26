@@ -1,11 +1,13 @@
 package chefsProgram.controller;
 
+import chefsProgram.model.Order;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
@@ -30,10 +32,23 @@ public class ButtonClickEventHandler implements EventHandler<ActionEvent> {
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("chefsOrderUpdateFrame.css").toExternalForm());
 			stage.setScene(scene);
+			setCheckBox();
 			stage.show();
 			((Node) (event.getSource())).getScene().getWindow().hide();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
+	}
+
+	/** Small method used to initialize the checkBoxes. */
+	private void setCheckBox() {
+		ChefsController chefsController = ChefsController.getInstance();
+		Label orderNumberLabel = chefsController.getOrderNumberLabel();
+		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
+		String orderNum = orderNumberLabelSplitted[1].trim();
+		Order currentOrder = chefsController.searchForAnOrder(Integer.parseInt(orderNum));
+		chefsController.setSeenCheckBox(currentOrder.isSeen());
+		chefsController.setNotPreparableCheckBox(!currentOrder.isPreparable());
+		chefsController.setSeenCheckBox(currentOrder.isPrepared());
 	}
 }
