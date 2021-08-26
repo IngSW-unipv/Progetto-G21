@@ -42,7 +42,7 @@ public class SimpleOrderTest {
 		/**
 		 * Tester of method getOrdersCounter().
 		 */
-		if (order2.getOrdersCounter() == 2) {
+		if (Order.getOrdersCounter() == 2) {
 			System.out.println("OK");
 		} else {
 			System.out.println("TEST FAILED");

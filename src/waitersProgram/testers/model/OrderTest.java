@@ -55,9 +55,9 @@ public class OrderTest {
 	 */
 	@Test
 	public void testGetOrdersCounter() {
-		assertEquals(3, order1.getOrdersCounter());
-		assertEquals(3, order2.getOrdersCounter());
-		assertEquals(3, order3.getOrdersCounter());
+		assertEquals(3, Order.getOrdersCounter());
+		assertEquals(3, Order.getOrdersCounter());
+		assertEquals(3, Order.getOrdersCounter());
 	}
 
 	/**
