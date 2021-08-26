@@ -149,22 +149,12 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="18" language="java" name="waitersProgram.controller.WaitersControlPanelController" project="Progetto-G21" 
-    file="/Progetto-G21/src/waitersProgram/controller/WaitersControlPanelController.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-420" y="1479"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <package id="19" language="java" name="waitersProgram.strategies" project="Progetto-G21" 
+  <package id="18" language="java" name="waitersProgram.strategies" project="Progetto-G21" 
     file="/Progetto-G21/src/waitersProgram/strategies" binary="false" corner="BOTTOM_RIGHT">    
     <position height="913" width="2945" x="-926" y="2027"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="20" language="java" name="waitersProgram.strategies.RemoveTableStrategy" project="Progetto-G21" 
+  <class id="19" language="java" name="waitersProgram.strategies.RemoveTableStrategy" project="Progetto-G21" 
     file="/Progetto-G21/src/waitersProgram/strategies/RemoveTableStrategy.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-716" y="2377"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -173,7 +163,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="21" language="java" name="waitersProgram.strategies.SetOrderToPreparedStrategy" project="Progetto-G21" 
+  <class id="20" language="java" name="waitersProgram.strategies.SetOrderToPreparedStrategy" project="Progetto-G21" 
     file="/Progetto-G21/src/waitersProgram/strategies/SetOrderToPreparedStrategy.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-639" y="2520"/>    
@@ -183,7 +173,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="22" language="java" name="waitersProgram.strategies.RemoveOrderStrategy" project="Progetto-G21" 
+  <class id="21" language="java" name="waitersProgram.strategies.RemoveOrderStrategy" project="Progetto-G21" 
     file="/Progetto-G21/src/waitersProgram/strategies/RemoveOrderStrategy.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-559" y="2667"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -192,7 +182,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="23" language="java" name="waitersProgram.strategies.PrintNewBillStrategy" project="Progetto-G21" 
+  <class id="22" language="java" name="waitersProgram.strategies.PrintNewBillStrategy" project="Progetto-G21" 
     file="/Progetto-G21/src/waitersProgram/strategies/PrintNewBillStrategy.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-384" y="2828"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -201,7 +191,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="24" language="java" name="waitersProgram.strategies.CreateNewOrderStrategy" project="Progetto-G21" 
+  <class id="23" language="java" name="waitersProgram.strategies.CreateNewOrderStrategy" project="Progetto-G21" 
     file="/Progetto-G21/src/waitersProgram/strategies/CreateNewOrderStrategy.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="326" y="2821"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -210,7 +200,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="25" language="java" name="waitersProgram.strategies.SetOrderToSeenStrategy" project="Progetto-G21" 
+  <class id="24" language="java" name="waitersProgram.strategies.SetOrderToSeenStrategy" project="Progetto-G21" 
     file="/Progetto-G21/src/waitersProgram/strategies/SetOrderToSeenStrategy.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-21" y="2819"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -219,7 +209,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="26" language="java" name="waitersProgram.strategies.SetOrderToNotPreparableStrategy" project="Progetto-G21" 
+  <class id="25" language="java" name="waitersProgram.strategies.SetOrderToNotPreparableStrategy" project="Progetto-G21" 
     file="/Progetto-G21/src/waitersProgram/strategies/SetOrderToNotPreparableStrategy.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="710" y="2815"/>    
@@ -229,7 +219,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="27" language="java" name="waitersProgram.strategies.StrategyInterface" project="Progetto-G21" 
+  <interface id="26" language="java" name="waitersProgram.strategies.StrategyInterface" project="Progetto-G21" 
     file="/Progetto-G21/src/waitersProgram/strategies/StrategyInterface.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="568" y="2209"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -238,7 +228,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="28" language="java" name="waitersProgram.strategies.AddNewEntryStrategy" project="Progetto-G21" 
+  <class id="27" language="java" name="waitersProgram.strategies.AddNewEntryStrategy" project="Progetto-G21" 
     file="/Progetto-G21/src/waitersProgram/strategies/AddNewEntryStrategy.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1429" y="2810"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -247,7 +237,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="29" language="java" name="waitersProgram.strategies.SetOrderToDeliveredStrategy" project="Progetto-G21" 
+  <class id="28" language="java" name="waitersProgram.strategies.SetOrderToDeliveredStrategy" project="Progetto-G21" 
     file="/Progetto-G21/src/waitersProgram/strategies/SetOrderToDeliveredStrategy.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1107" y="2812"/>    
@@ -257,7 +247,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="30" language="java" name="waitersProgram.strategies.StrategyExample" project="Progetto-G21" 
+  <class id="29" language="java" name="waitersProgram.strategies.StrategyExample" project="Progetto-G21" 
     file="/Progetto-G21/src/waitersProgram/strategies/StrategyExample.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1552" y="2665"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -266,7 +256,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="31" language="java" name="waitersProgram.strategies.AddNewTableStrategy" project="Progetto-G21" 
+  <class id="30" language="java" name="waitersProgram.strategies.AddNewTableStrategy" project="Progetto-G21" 
     file="/Progetto-G21/src/waitersProgram/strategies/AddNewTableStrategy.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1685" y="2524"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -275,7 +265,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="32" language="java" name="waitersProgram.strategies.StrategyAbstract" project="Progetto-G21" 
+  <class id="31" language="java" name="waitersProgram.strategies.StrategyAbstract" project="Progetto-G21" 
     file="/Progetto-G21/src/waitersProgram/strategies/StrategyAbstract.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="568" y="2403"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -284,7 +274,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="33" language="java" name="waitersProgram.strategies.RemoveEntryStrategy" project="Progetto-G21" 
+  <class id="32" language="java" name="waitersProgram.strategies.RemoveEntryStrategy" project="Progetto-G21" 
     file="/Progetto-G21/src/waitersProgram/strategies/RemoveEntryStrategy.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1813" y="2379"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -293,501 +283,441 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="34">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="35" name="restaurantMenu">        
-        <position height="18" width="84" x="-306" y="765"/>      
-      </attribute>      
-      <multiplicity id="36" minimum="0" maximum="1">        
-        <position height="16" width="23" x="-325" y="820"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="37">    
-    <end type="SOURCE" refId="22" navigable="false">      
-      <attribute id="38" name="instance">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="39" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="22" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="40">    
-    <end type="SOURCE" refId="31" navigable="false">      
-      <attribute id="41" name="instance">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="42" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="31" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="43">    
-    <end type="SOURCE" refId="33"/>    
-    <end type="TARGET" refId="32"/>  
-  </generalization>  
-  <association id="44">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="45" name="orderManager">        
-        <position height="18" width="76" x="410" y="674"/>      
-      </attribute>      
-      <multiplicity id="46" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="47">    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="32"/>  
-  </generalization>  
-  <association id="48">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="49" name="tableManager">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="50" minimum="0" maximum="1">        
-        <position height="16" width="23" x="847" y="633"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="51">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="52" name="notDelivered">        
-        <position height="18" width="68" x="363" y="505"/>      
-      </attribute>      
-      <multiplicity id="53" minimum="0" maximum="2147483647">        
-        <position height="16" width="21" x="251" y="558"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="54">    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="55" name="post">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="56" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="16" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="57">    
-    <bendpoint x="343" y="613"/>    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="58" name="notPreparable">        
-        <position height="18" width="75" x="362" y="567"/>      
-      </attribute>      
-      <multiplicity id="59" minimum="0" maximum="2147483647">        
-        <position height="16" width="21" x="255" y="607"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="60">    
-    <end type="SOURCE" refId="32" navigable="false">      
-      <attribute id="61" name="restaurant">        
-        <position height="18" width="58" x="193" y="1454"/>      
-      </attribute>      
-      <multiplicity id="62" minimum="0" maximum="1">        
-        <position height="16" width="23" x="212" y="1467"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="63">    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="64" name="restaurant">        
-        <position height="18" width="58" x="66" y="1455"/>      
-      </attribute>      
-      <multiplicity id="65" minimum="0" maximum="1">        
-        <position height="16" width="23" x="88" y="1472"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="66">    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="67" name="instance">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="68" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="18" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="69">    
-    <end type="SOURCE" refId="31"/>    
-    <end type="TARGET" refId="32"/>  
-  </generalization>  
-  <association id="70">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="71" name="waitersController">        
-        <position height="18" width="91" x="-250" y="1398"/>      
-      </attribute>      
-      <multiplicity id="72" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="18" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="73">    
-    <end type="SOURCE" refId="28"/>    
-    <end type="TARGET" refId="32"/>  
-  </generalization>  
-  <association id="74">    
-    <bendpoint x="344" y="578"/>    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="75" name="delivered">        
-        <position height="18" width="52" x="379" y="533"/>      
-      </attribute>      
-      <multiplicity id="76" minimum="0" maximum="2147483647">        
-        <position height="16" width="21" x="252" y="580"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="77">    
-    <bendpoint x="123" y="1565"/>    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="78" name="post">        
-        <position height="18" width="29" x="141" y="1630"/>      
-      </attribute>      
-      <multiplicity id="79" minimum="0" maximum="1">        
-        <position height="16" width="23" x="145" y="1615"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="16" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="80">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="2"/>  
-  </realization>  
-  <realization id="81">    
-    <end type="SOURCE" refId="32"/>    
-    <end type="TARGET" refId="27"/>  
-  </realization>  
-  <generalization id="82">    
-    <end type="SOURCE" refId="23"/>    
-    <end type="TARGET" refId="32"/>  
-  </generalization>  
-  <association id="83">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="84" name="instance">        
-        <position height="18" width="49" x="-387" y="811"/>      
-      </attribute>      
-      <multiplicity id="85" minimum="0" maximum="1">        
-        <position height="16" width="23" x="-315" y="750"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="86">    
-    <end type="SOURCE" refId="25"/>    
-    <end type="TARGET" refId="32"/>  
-  </generalization>  
-  <association id="87">    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="88" name="ordersList">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="89" minimum="0" maximum="2147483647">        
-        <position height="16" width="21" x="36" y="707"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="90">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="91" name="orderedEntry">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="92" minimum="0" maximum="1">        
-        <position height="16" width="23" x="-28" y="499"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="93">    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="94" name="post">        
-        <position height="18" width="29" x="-18" y="1686"/>      
-      </attribute>      
-      <multiplicity id="95" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="16" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="96">    
+  <association id="33">    
     <bendpoint x="344" y="482"/>    
     <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="97" name="notPrepared">        
+      <attribute id="34" name="notPrepared">        
         <position height="18" width="67" x="368" y="459"/>      
       </attribute>      
-      <multiplicity id="98" minimum="0" maximum="2147483647">        
+      <multiplicity id="35" minimum="0" maximum="2147483647">        
         <position height="16" width="21" x="248" y="497"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="99">    
-    <end type="SOURCE" refId="33" navigable="false">      
-      <attribute id="100" name="instance">        
+  <association id="36">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="37" name="instance">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="101" minimum="0" maximum="1">        
+      <multiplicity id="38" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="33" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="102">    
-    <end type="SOURCE" refId="23" navigable="false">      
-      <attribute id="103" name="instance">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="104" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="23" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="105">    
-    <end type="SOURCE" refId="24"/>    
-    <end type="TARGET" refId="32"/>  
-  </generalization>  
-  <association id="106">    
-    <end type="SOURCE" refId="29" navigable="false">      
-      <attribute id="107" name="instance">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="108" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="29" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="109">    
-    <end type="SOURCE" refId="26"/>    
-    <end type="TARGET" refId="32"/>  
-  </generalization>  
-  <association id="110">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="111" name="instance">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="112" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="113">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="114" name="strategies">        
-        <position height="18" width="56" x="470" y="2314"/>      
-      </attribute>      
-      <multiplicity id="115" minimum="0" maximum="2147483647">        
-        <position height="16" width="21" x="491" y="2303"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="32" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="116">    
-    <end type="SOURCE" refId="30" navigable="false">      
-      <attribute id="117" name="instance">        
+  <association id="39">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="40" name="restaurantMenu">        
+        <position height="18" width="84" x="-306" y="765"/>      
+      </attribute>      
+      <multiplicity id="41" minimum="0" maximum="1">        
+        <position height="16" width="23" x="-325" y="820"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="42">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="43" name="instance">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="118" minimum="0" maximum="1">        
+      <multiplicity id="44" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="45">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="46" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="47" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="48">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="31"/>  
+  </generalization>  
+  <association id="49">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="50" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="51" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="30" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="119">    
+  <association id="52">    
     <end type="SOURCE" refId="28" navigable="false">      
-      <attribute id="120" name="instance">        
+      <attribute id="53" name="instance">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="121" minimum="0" maximum="1">        
+      <multiplicity id="54" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="28" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="122">    
-    <end type="SOURCE" refId="30"/>    
-    <end type="TARGET" refId="32"/>  
+  <generalization id="55">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="31"/>  
   </generalization>  
-  <generalization id="123">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="32"/>  
-  </generalization>  
-  <association id="124">    
-    <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="125" name="instance">        
-        <position height="0" width="0" x="0" y="0"/>      
+  <association id="56">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="57" name="orderManager">        
+        <position height="18" width="76" x="410" y="674"/>      
       </attribute>      
-      <multiplicity id="126" minimum="0" maximum="1">        
+      <multiplicity id="58" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="20" navigable="true"/>    
+    <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="127">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="128" name="instance">        
+  <generalization id="59">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="31"/>  
+  </generalization>  
+  <generalization id="60">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="31"/>  
+  </generalization>  
+  <association id="61">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="62" name="instance">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="129" minimum="0" maximum="1">        
+      <multiplicity id="63" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="64">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="65" name="tableManager">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="66" minimum="0" maximum="1">        
+        <position height="16" width="23" x="847" y="633"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="67">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="68" name="strategies">        
+        <position height="18" width="56" x="470" y="2314"/>      
+      </attribute>      
+      <multiplicity id="69" minimum="0" maximum="2147483647">        
+        <position height="16" width="21" x="491" y="2303"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="70">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="71" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="72" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="73">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="74" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="75" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="76">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="31"/>  
+  </generalization>  
+  <association id="77">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="78" name="notDelivered">        
+        <position height="18" width="68" x="363" y="505"/>      
+      </attribute>      
+      <multiplicity id="79" minimum="0" maximum="2147483647">        
+        <position height="16" width="21" x="251" y="558"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="80">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="81" name="post">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="82" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="83">    
+    <bendpoint x="343" y="613"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="84" name="notPreparable">        
+        <position height="18" width="75" x="362" y="567"/>      
+      </attribute>      
+      <multiplicity id="85" minimum="0" maximum="2147483647">        
+        <position height="16" width="21" x="255" y="607"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="86">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="87" name="restaurant">        
+        <position height="18" width="58" x="193" y="1454"/>      
+      </attribute>      
+      <multiplicity id="88" minimum="0" maximum="1">        
+        <position height="16" width="23" x="212" y="1467"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="89">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="90" name="restaurant">        
+        <position height="18" width="58" x="66" y="1455"/>      
+      </attribute>      
+      <multiplicity id="91" minimum="0" maximum="1">        
+        <position height="16" width="23" x="88" y="1472"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="92">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="31"/>  
+  </generalization>  
+  <association id="93">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="94" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="95" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="96">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="97" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="98" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="130">    
+  <generalization id="99">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="31"/>  
+  </generalization>  
+  <association id="100">    
     <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="131" name="instance">        
+      <attribute id="101" name="instance">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="132" minimum="0" maximum="1">        
+      <multiplicity id="102" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="14" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="133">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="32"/>  
+  <generalization id="103">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="31"/>  
   </generalization>  
-  <association id="134">    
-    <end type="SOURCE" refId="25" navigable="false">      
-      <attribute id="135" name="instance">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="136" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="25" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="137">    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="138" name="entriesList">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="139" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="140">    
+  <association id="104">    
     <end type="SOURCE" refId="24" navigable="false">      
-      <attribute id="141" name="instance">        
+      <attribute id="105" name="instance">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="142" minimum="0" maximum="1">        
+      <multiplicity id="106" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="24" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="143">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="144" name="entries">        
+  <association id="107">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="108" name="instance">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="145" minimum="0" maximum="2147483647">        
+      <multiplicity id="109" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="110">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="31"/>  
+  </generalization>  
+  <association id="111">    
+    <bendpoint x="344" y="578"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="112" name="delivered">        
+        <position height="18" width="52" x="379" y="533"/>      
+      </attribute>      
+      <multiplicity id="113" minimum="0" maximum="2147483647">        
+        <position height="16" width="21" x="252" y="580"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="114">    
+    <bendpoint x="123" y="1565"/>    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="115" name="post">        
+        <position height="18" width="29" x="141" y="1630"/>      
+      </attribute>      
+      <multiplicity id="116" minimum="0" maximum="1">        
+        <position height="16" width="23" x="145" y="1615"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="117">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="118">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="26"/>  
+  </realization>  
+  <generalization id="119">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="31"/>  
+  </generalization>  
+  <association id="120">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="121" name="instance">        
+        <position height="18" width="49" x="-387" y="811"/>      
+      </attribute>      
+      <multiplicity id="122" minimum="0" maximum="1">        
+        <position height="16" width="23" x="-315" y="750"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="123">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="31"/>  
+  </generalization>  
+  <association id="124">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="125" name="orderedEntry">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="126" minimum="0" maximum="1">        
+        <position height="16" width="23" x="-28" y="499"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="127">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="128" name="entries">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="129" minimum="0" maximum="2147483647">        
         <position height="16" width="21" x="-216" y="490"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="146">    
-    <end type="SOURCE" refId="29"/>    
-    <end type="TARGET" refId="32"/>  
+  <generalization id="130">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="31"/>  
   </generalization>  
-  <association id="147">    
-    <end type="SOURCE" refId="26" navigable="false">      
-      <attribute id="148" name="instance">        
+  <association id="131">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="132" name="instance">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="149" minimum="0" maximum="1">        
+      <multiplicity id="133" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="26" navigable="true"/>    
+    <end type="TARGET" refId="25" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="150">    
+  <realization id="134">    
     <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="3"/>  
   </realization>  
-  <association id="151">    
+  <association id="135">    
     <bendpoint x="342" y="659"/>    
     <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="152" name="notSeen">        
+      <attribute id="136" name="notSeen">        
         <position height="18" width="48" x="379" y="602"/>      
       </attribute>      
-      <multiplicity id="153" minimum="0" maximum="2147483647">        
+      <multiplicity id="137" minimum="0" maximum="2147483647">        
         <position height="16" width="21" x="252" y="528"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="154">    
-    <end type="SOURCE" refId="21" navigable="false">      
-      <attribute id="155" name="instance">        
+  <association id="138">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="139" name="instance">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="156" minimum="0" maximum="1">        
+      <multiplicity id="140" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="21" navigable="true"/>    
+    <end type="TARGET" refId="20" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
