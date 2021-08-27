@@ -57,16 +57,23 @@ public class ChefsController extends Thread {
 	private static ChefsController instance = null;
 
 	/**
-	 * Class constructor method. It's intended as the initialization method of the
-	 * controller.
+	 * Class constructor method. (look initialize method for FXML elements).
 	 */
 	private ChefsController() {
 		ordersList = FXCollections.observableArrayList();
+	}
+
+	/**
+	 * Method required to initialize FXML elements.
+	 */
+	@FXML
+	private void initialize() {
 		connect();
 		tableColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Table"));
 		orderColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Order"));
 		statusColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Status"));
 		addButtonToTable();
+		ordersTableView.setItems(ordersList);
 	}
 
 	/**
@@ -323,12 +330,12 @@ public class ChefsController extends Thread {
 		boolean isFailed = false;
 		try {
 			serverSocket = new Socket(serverName, 4999);
-	
+
 			readBuffer = new BufferedReader(new InputStreamReader(serverSocket.getInputStream()));
 			writeBuffer = new BufferedWriter(new OutputStreamWriter(serverSocket.getOutputStream()));
-	
+
 			this.start();
-	
+
 		} catch (Exception e) {
 			isFailed = true;
 			System.err.println(e.getMessage());

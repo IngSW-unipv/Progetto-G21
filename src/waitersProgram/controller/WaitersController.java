@@ -72,13 +72,12 @@ public class WaitersController {
 
 	private static WaitersController instance = null;
 
-	private ObservableList<Integer> tablesList;
-	private ObservableList<MenuEntry> entriesList;
+	private ObservableList<String> tablesList;
+	private ObservableList<String> entriesList;
 	private ObservableList<Order> ordersList;
 
 	/**
-	 * Class constructor method. It's intended as the initialization method of the
-	 * controller.
+	 * Class constructor method. (look initialize method for FXML elements).
 	 */
 	private WaitersController() {
 		tablesList = FXCollections.observableArrayList();
@@ -88,11 +87,18 @@ public class WaitersController {
 
 		fillTablesList();
 		fillMenuEntriesList();
+	}
 
+	/**
+	 * Method required to initialize FXML elements.
+	 */
+	@FXML
+	private void initialize() {
 		tableColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Table"));
 		orderColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Order"));
 		statusColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Status"));
 		addButtonToTable();
+		ordersTableView.setItems(ordersList);
 	}
 
 	/**
@@ -135,7 +141,11 @@ public class WaitersController {
 	private void fillTablesList() {
 		tablesList.clear();
 		TableManager tableManager = Restaurant.getInstance().getTableManager();
-		tablesList.addAll(tableManager.getTables());
+		Iterator<Integer> iterator = tableManager.getTables().iterator();
+		while (iterator.hasNext()) {
+			Integer tableNum = iterator.next();
+			tablesList.add(Integer.toString(tableNum));
+		}
 	}
 
 	/**
@@ -145,7 +155,11 @@ public class WaitersController {
 	private void fillMenuEntriesList() {
 		entriesList.clear();
 		Menu menu = Restaurant.getInstance().getRestaurantMenu();
-		entriesList.addAll(menu.getEntriesCollection());
+		Iterator<MenuEntry> iterator = menu.getEntriesCollection().iterator();
+		while (iterator.hasNext()) {
+			MenuEntry menuEntry = iterator.next();
+			entriesList.add(menuEntry.toString());
+		}
 	}
 
 	/**
