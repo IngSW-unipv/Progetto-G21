@@ -22,7 +22,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
-import waitersProgram.controller.OrderStatus;
 
 /**
  * The ChefsGuiController class. It will be used to control the chef's graphical
@@ -104,24 +103,6 @@ public class ChefsController extends Thread {
 	}
 
 	/**
-	 * Private method used to get an order from the orders ObservableList.
-	 * 
-	 * @param orderNum specify the order number.
-	 * @return order instance.
-	 */
-	public Order searchForAnOrder(int orderNum) {
-		Iterator<Order> iterator = ordersList.iterator();
-		Order currentOrder = null;
-		while (iterator.hasNext()) {
-			currentOrder = iterator.next();
-			if (currentOrder.getOrderNum() == orderNum) {
-				break;
-			}
-		}
-		return currentOrder;
-	}
-
-	/**
 	 * Static method that returns a ChefsController instance in order to observe the
 	 * Singleton pattern. It calls the class constructor only if this has not
 	 * happened before.
@@ -140,6 +121,31 @@ public class ChefsController extends Thread {
 	 */
 	public Label getOrderNumberLabel() {
 		return orderNumberLabel;
+	}
+
+	/**
+	 * @return serverName.
+	 */
+	public String getServerName() {
+		return serverName;
+	}
+
+	/**
+	 * Private method used to get an order from the orders ObservableList.
+	 * 
+	 * @param orderNum specify the order number.
+	 * @return order instance.
+	 */
+	public Order searchForAnOrder(int orderNum) {
+		Iterator<Order> iterator = ordersList.iterator();
+		Order currentOrder = null;
+		while (iterator.hasNext()) {
+			currentOrder = iterator.next();
+			if (currentOrder.getOrderNum() == orderNum) {
+				break;
+			}
+		}
+		return currentOrder;
 	}
 
 	/**
@@ -164,6 +170,72 @@ public class ChefsController extends Thread {
 	}
 
 	/**
+	 * Method triggered by seenCheckBox. It calls SetOrderToSeenStrategy via the
+	 * sendMessage method, which sends a string to the server (ListeningPost).
+	 */
+	public void setOrderToSeen() {
+		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
+		String orderNum = orderNumberLabelSplitted[1].trim();
+		Order currentOrder = searchForAnOrder(Integer.parseInt(orderNum));
+		boolean isSeen = currentOrder.isSeen();
+		boolean isPreparable = currentOrder.isPreparable();
+		boolean isPrepared = currentOrder.isPrepared();
+		boolean isDelivered = currentOrder.isDelivered();
+		if ((isSeen == false) && (isPreparable == true) && (isPrepared == false) && (isDelivered == false)) {
+			sendMessage("SetOrderToSeenStrategy, " + orderNum);
+		} else {
+			seenCheckBox.setSelected(false);
+		}
+	}
+
+	/**
+	 * Method triggered by notPreparableCheckBox. It calls
+	 * SetOrderToNotPreparableStrategy via the sendMessage method, which sends a
+	 * string to the server (ListeningPost).
+	 */
+	public void setOrderToNotPreparable() {
+		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
+		String orderNum = orderNumberLabelSplitted[1].trim();
+		Order currentOrder = searchForAnOrder(Integer.parseInt(orderNum));
+		boolean isSeen = currentOrder.isSeen();
+		boolean isPreparable = currentOrder.isPreparable();
+		boolean isPrepared = currentOrder.isPrepared();
+		boolean isDelivered = currentOrder.isDelivered();
+		if ((isSeen == false) && (isPreparable == true) && (isPrepared == false) && (isDelivered == false)) {
+			sendMessage("SetOrderToNotPreparableStrategy, " + orderNum);
+			ordersList.remove(currentOrder);
+		} else {
+			seenCheckBox.setSelected(false);
+		}
+	}
+
+	/**
+	 * Method triggered by preparedCheckBox. It calls SetOrderToPreparedStrategy via
+	 * the sendMessage method, which sends a string to the server (ListeningPost).
+	 */
+	public void setOrderToPrepared() {
+		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
+		String orderNum = orderNumberLabelSplitted[1].trim();
+		Order currentOrder = searchForAnOrder(Integer.parseInt(orderNum));
+		boolean isSeen = currentOrder.isSeen();
+		boolean isPreparable = currentOrder.isPreparable();
+		boolean isPrepared = currentOrder.isPrepared();
+		boolean isDelivered = currentOrder.isDelivered();
+		if ((isSeen == true) && (isPreparable == true) && (isPrepared == false) && (isDelivered == false)) {
+			sendMessage("SetOrderToPreparedStrategy, " + orderNum);
+		} else {
+			seenCheckBox.setSelected(false);
+		}
+	}
+
+	/**
+	 * @param serverName.
+	 */
+	public void setServerName(String serverName) {
+		this.serverName = serverName;
+	}
+
+	/**
 	 * Method called in run(). It's used to add a specified order to ordersTableView
 	 * through ordersList.
 	 * 
@@ -171,7 +243,7 @@ public class ChefsController extends Thread {
 	 * @param tableNum specify the involved order's table number.
 	 * @param entry    specify the involved order's menu entry.
 	 */
-	public void addOrderToChef(int orderNum, int tableNum, MenuEntry entry) {
+	public void addOrderToTableView(int orderNum, int tableNum, MenuEntry entry) {
 		Order orderToAdd = new Order(tableNum, entry);
 		orderToAdd.setOrderNum(orderNum);
 		ordersList.add(new Order(tableNum, entry));
@@ -183,7 +255,7 @@ public class ChefsController extends Thread {
 	 * 
 	 * @param orderNum specify the involved order's number.
 	 */
-	public void removeOrderToChef(int orderNum) {
+	public void removeOrderFromTableView(int orderNum) {
 		Iterator<Order> iterator = ordersList.iterator();
 		Order currentOrder = null;
 		while (iterator.hasNext()) {
@@ -243,79 +315,6 @@ public class ChefsController extends Thread {
 	}
 
 	/**
-	 * Method triggered by seenCheckBox. It calls SetOrderToSeenStrategy via the
-	 * sendMessage method, which sends a string to the server (ListeningPost).
-	 */
-	public void setOrderSeenToPreparable() {
-		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
-		String orderNum = orderNumberLabelSplitted[1].trim();
-		Order currentOrder = searchForAnOrder(Integer.parseInt(orderNum));
-		boolean isSeen = currentOrder.isSeen();
-		boolean isPreparable = currentOrder.isPreparable();
-		boolean isPrepared = currentOrder.isPrepared();
-		boolean isDelivered = currentOrder.isDelivered();
-		if ((isSeen == false) && (isPreparable == true) && (isPrepared == false) && (isDelivered == false)) {
-			sendMessage("SetOrderToSeenStrategy, " + orderNum);
-		} else {
-			seenCheckBox.setSelected(false);
-		}
-	}
-
-	/**
-	 * Method triggered by notPreparableCheckBox. It calls
-	 * SetOrderToNotPreparableStrategy via the sendMessage method, which sends a
-	 * string to the server (ListeningPost).
-	 */
-	public void setOrderToNotPreparable() {
-		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
-		String orderNum = orderNumberLabelSplitted[1].trim();
-		Order currentOrder = searchForAnOrder(Integer.parseInt(orderNum));
-		boolean isSeen = currentOrder.isSeen();
-		boolean isPreparable = currentOrder.isPreparable();
-		boolean isPrepared = currentOrder.isPrepared();
-		boolean isDelivered = currentOrder.isDelivered();
-		if ((isSeen == false) && (isPreparable == true) && (isPrepared == false) && (isDelivered == false)) {
-			sendMessage("SetOrderToNotPreparableStrategy, " + orderNum);
-			ordersList.remove(currentOrder);
-		} else {
-			seenCheckBox.setSelected(false);
-		}
-	}
-
-	/**
-	 * Method triggered by preparedCheckBox. It calls SetOrderToPreparedStrategy via
-	 * the sendMessage method, which sends a string to the server (ListeningPost).
-	 */
-	public void setOrderToPrepared() {
-		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
-		String orderNum = orderNumberLabelSplitted[1].trim();
-		Order currentOrder = searchForAnOrder(Integer.parseInt(orderNum));
-		boolean isSeen = currentOrder.isSeen();
-		boolean isPreparable = currentOrder.isPreparable();
-		boolean isPrepared = currentOrder.isPrepared();
-		boolean isDelivered = currentOrder.isDelivered();
-		if ((isSeen == true) && (isPreparable == true) && (isPrepared == false) && (isDelivered == false)) {
-			sendMessage("SetOrderToPreparedStrategy, " + orderNum);
-		} else {
-			seenCheckBox.setSelected(false);
-		}
-	}
-
-	/**
-	 * @return serverName.
-	 */
-	public String getServerName() {
-		return serverName;
-	}
-
-	/**
-	 * @param serverName.
-	 */
-	public void setServerName(String serverName) {
-		this.serverName = serverName;
-	}
-
-	/**
 	 * Method used to establish a connection with the server. Through the start
 	 * method it starts a thread which is always listening for messages from the
 	 * server.
@@ -324,12 +323,12 @@ public class ChefsController extends Thread {
 		boolean isFailed = false;
 		try {
 			serverSocket = new Socket(serverName, 4999);
-
+	
 			readBuffer = new BufferedReader(new InputStreamReader(serverSocket.getInputStream()));
 			writeBuffer = new BufferedWriter(new OutputStreamWriter(serverSocket.getOutputStream()));
-
+	
 			this.start();
-
+	
 		} catch (Exception e) {
 			isFailed = true;
 			System.err.println(e.getMessage());
@@ -379,16 +378,16 @@ public class ChefsController extends Thread {
 						int tableNum = Integer.parseInt(unpackedMessage[2].trim());
 						String entryName = unpackedMessage[3].trim();
 						String entryPrice = unpackedMessage[4].trim();
-						addOrderToChef(orderNum, tableNum, new MenuEntry(entryName + ", " + entryPrice));
+						addOrderToTableView(orderNum, tableNum, new MenuEntry(entryName + ", " + entryPrice));
 					} else if (unpackedMessage[0].equals("REMOVE") == true) {
 						// REMOVE, orderNum
 						int orderNum = Integer.parseInt(unpackedMessage[1].trim());
-						removeOrderToChef(orderNum);
+						removeOrderFromTableView(orderNum);
 					} else if (unpackedMessage[0].equals("SET_DELIVERED") == true) {
 						// SET_DELIVERED, orderNum
 						int orderNum = Integer.parseInt(unpackedMessage[1].trim());
 						modifyOrderStatus(orderNum, OrderStatus.DELIVERED);
-						removeOrderToChef(orderNum);
+						removeOrderFromTableView(orderNum);
 					}
 				}
 			}

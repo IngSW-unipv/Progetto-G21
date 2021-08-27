@@ -364,7 +364,7 @@ public class WaitersController {
 	 * @param order's tableNum.
 	 * @param order's entry.
 	 */
-	public void addOrderInTableView(Integer tableNum, MenuEntry entry) {
+	public void addOrderToTableView(Integer tableNum, MenuEntry entry) {
 		ordersList.add(new Order(tableNum, entry));
 	}
 
@@ -373,7 +373,7 @@ public class WaitersController {
 	 * 
 	 * @param order's tableNum.
 	 */
-	public void removeOrderInTableView(Order order) {
+	public void removeOrderFromTableView(Order order) {
 		ordersList.remove(order);
 	}
 
