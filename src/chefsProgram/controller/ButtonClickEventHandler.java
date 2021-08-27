@@ -13,9 +13,27 @@ import javafx.stage.Stage;
 /**
  * Event class triggered by pressing the change order's status button. The
  * specified button is located in each row of the ordersTableView, inside the
- * actionTableColumn.
+ * actionTableColumn. The class contains an Order instance, necessary to provide
+ * informations to ChefsOrderUpdateFrame GUI.
  */
 public class ButtonClickEventHandler implements EventHandler<ActionEvent> {
+	private Order order;
+
+	/**
+	 * Class constructor method.
+	 * 
+	 * @param order to display.
+	 */
+	public ButtonClickEventHandler(Order order) {
+		this.order = order;
+	}
+
+	/**
+	 * @return order displayed in ChefsOrderUpdateFrame.
+	 */
+	public Order getOrder() {
+		return order;
+	}
 
 	/**
 	 * Method that contains the instructions to be performed after pressing the
@@ -32,12 +50,24 @@ public class ButtonClickEventHandler implements EventHandler<ActionEvent> {
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("chefsOrderUpdateFrame.css").toExternalForm());
 			stage.setScene(scene);
+			setLabels();
 			setCheckBox();
 			stage.show();
 			((Node) (event.getSource())).getScene().getWindow().hide();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
+	}
+
+	/** Small method used to initialize labels. */
+	private void setLabels() {
+		String tableLabel = Integer.toString(order.getTableNum());
+		String orderLabel = order.getOrderedEntry().toString();
+		String orderNumberLabel = Integer.toString(order.getOrderNum());
+		ChefsController chefsController = ChefsController.getInstance();
+		chefsController.setTableLabel("Table: " + tableLabel);
+		chefsController.setOrderLabel("Order: " + orderLabel);
+		chefsController.setOrderNumberLabel("Order number: " + orderNumberLabel);
 	}
 
 	/** Small method used to initialize the checkBoxes. */
