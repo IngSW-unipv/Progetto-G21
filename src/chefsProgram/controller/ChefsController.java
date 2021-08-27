@@ -21,7 +21,6 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 
 /**
  * The ChefsGuiController class. It will be used to control the chef's graphical
@@ -72,41 +71,24 @@ public class ChefsController extends Thread {
 		tableColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Table"));
 		orderColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Order"));
 		statusColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Status"));
-		addButtonToTable();
-		ordersTableView.setItems(ordersList);
-	}
 
-	/**
-	 * Method used to add the order's status changing button to each row of
-	 * ordersTableView. It invokes actionButton.setOnAction in order to bind the
-	 * same EventHandler to each created button.
-	 */
-	private void addButtonToTable() {
-		Callback<TableColumn<Order, Void>, TableCell<Order, Void>> cellFactory = new Callback<TableColumn<Order, Void>, TableCell<Order, Void>>() {
-			@Override
-			public TableCell<Order, Void> call(final TableColumn<Order, Void> param) {
-				final TableCell<Order, Void> cell = new TableCell<Order, Void>() {
+		actionColumn.setCellFactory(col -> new TableCell<Order, Void>() {
 
-					private final Button actionButton = new Button("Action");
+			private final Button actionButton;
 
-					{
-						actionButton.setOnAction(new ButtonClickEventHandler());
-					}
-
-					@Override
-					public void updateItem(Void item, boolean empty) {
-						super.updateItem(item, empty);
-						if (empty) {
-							setGraphic(null);
-						} else {
-							setGraphic(actionButton);
-						}
-					}
-				};
-				return cell;
+			{
+				actionButton = new Button("Change status");
+				actionButton.setOnAction(new ButtonClickEventHandler(getTableRow().getItem()));
 			}
-		};
-		actionColumn.setCellFactory(cellFactory);
+
+			@Override
+			protected void updateItem(Void item, boolean empty) {
+				super.updateItem(item, empty);
+				setGraphic(empty ? null : actionButton);
+			}
+		});
+
+		ordersTableView.setItems(ordersList);
 	}
 
 	/**
@@ -128,6 +110,21 @@ public class ChefsController extends Thread {
 	 */
 	public Label getOrderNumberLabel() {
 		return orderNumberLabel;
+	}
+
+	/** @param tableLabel text. */
+	public void setTableLabel(String text) {
+		tableLabel.setText(text);
+	}
+
+	/** @param orderLabel text. */
+	public void setOrderLabel(String text) {
+		orderLabel.setText(text);
+	}
+
+	/** @param orderNumberLabel text. */
+	public void setOrderNumberLabel(String text) {
+		orderNumberLabel.setText(text);
 	}
 
 	/**
