@@ -1,7 +1,13 @@
 package waitersProgram.strategies;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import waitersProgram.controller.ListeningPost;
 import waitersProgram.controller.Restaurant;
 import waitersProgram.model.Bill;
+import waitersProgram.model.Order;
+import waitersProgram.model.OrderManager;
 
 /** Called from printBill method in WaitersControlPanelController. */
 
@@ -23,6 +29,16 @@ public class PrintNewBillStrategy extends StrategyAbstract {
 	/** In this scenario, args[0]: tableNum. */
 	@Override
 	public void execute(String[] args) {
+		OrderManager orderManager = Restaurant.getInstance().getOrderManager();
+		ListeningPost post = ListeningPost.getInstance();
+		ArrayList<Order> ordersToBeRemoved = orderManager.getTableAllOrders(Integer.parseInt(args[0].trim()));
+		Iterator<Order> iterator = ordersToBeRemoved.iterator();
+
+		while (iterator.hasNext()) {
+			Order currentOrder = iterator.next();
+			post.sendMessage("REMOVE, " + Integer.toString(currentOrder.getOrderNum()));
+		}
+
 		billToPrint = new Bill(Integer.parseInt(args[0]));
 	}
 

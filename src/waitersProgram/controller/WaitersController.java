@@ -1,5 +1,6 @@
 package waitersProgram.controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.regex.Matcher;
@@ -40,10 +41,10 @@ public class WaitersController {
 
 	/** WaitersControlPanel's first tab FXML calls. */
 	@FXML
-	SearchableComboBox<Integer> newOrderTableComboBox;
-	SearchableComboBox<MenuEntry> newOrderEntryComboBox;
+	SearchableComboBox<String> newOrderTableComboBox;
+	SearchableComboBox<String> newOrderEntryComboBox;
 	TextField addNewTableField;
-	SearchableComboBox<Integer> removeTableComboBox;
+	SearchableComboBox<String> removeTableComboBox;
 	TableView<Order> ordersTableView;
 	TableColumn<Order, String> tableColumn, orderColumn, statusColumn;
 	TableColumn<Order, Void> actionColumn;
@@ -51,14 +52,14 @@ public class WaitersController {
 
 	/** WaitersControlPanel's second tab FXML calls. */
 	@FXML
-	SearchableComboBox<Integer> newBillTableComboBox;
+	SearchableComboBox<String> newBillTableComboBox;
 	TextArea billTextArea;
 	Label promptBillLabel;
 
 	/** WaitersControlPanel's third tab FXML calls. */
 	@FXML
 	TextField newEntryNameField, newEntryPriceField;
-	SearchableComboBox<MenuEntry> removeEntryComboBox;
+	SearchableComboBox<String> removeEntryComboBox;
 	TextArea menuTextArea;
 	Label promptEntryLabel;
 
@@ -79,13 +80,7 @@ public class WaitersController {
 	 * Class constructor method. (look initialize method for FXML elements).
 	 */
 	private WaitersController() {
-		tablesList = FXCollections.observableArrayList();
-		entriesList = FXCollections.observableArrayList();
-		ordersList = FXCollections.observableArrayList();
-		post = ListeningPost.getInstance();
 
-		fillTablesList();
-		fillMenuEntriesList();
 	}
 
 	/**
@@ -93,6 +88,13 @@ public class WaitersController {
 	 */
 	@FXML
 	private void initialize() {
+		tablesList = FXCollections.observableArrayList();
+		entriesList = FXCollections.observableArrayList();
+		ordersList = FXCollections.observableArrayList();
+		post = ListeningPost.getInstance();
+
+		fillTablesList();
+		fillMenuEntriesList();
 		tableColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Table"));
 		orderColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Order"));
 		statusColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Status"));
@@ -150,9 +152,9 @@ public class WaitersController {
 	 * @param tableField.
 	 * @return boolean variable.
 	 */
-	private boolean checkForTableFormat(TextField tableField) {
+	private boolean checkForTableFormat(String tableField) {
 		Pattern p = Pattern.compile("\\d{1,3}");
-		Matcher m = p.matcher(tableField.getText().trim());
+		Matcher m = p.matcher(tableField.trim());
 		return m.matches();
 	}
 
@@ -162,9 +164,9 @@ public class WaitersController {
 	 * @param entryNameField.
 	 * @return boolean variable.
 	 */
-	private boolean checkForEntryNameFormat(TextField entryNameField) {
+	private boolean checkForEntryNameFormat(String entryNameField) {
 		Pattern p = Pattern.compile("^[A-Za-z0-9‡ËÏÚ˘·ÈÌÛ˙‚ÍÓÙ˚„Òı‰ÎÔˆ¸ˇ ]*$");
-		Matcher m = p.matcher(entryNameField.getText().trim());
+		Matcher m = p.matcher(entryNameField.trim());
 		return m.matches();
 	}
 
@@ -174,9 +176,9 @@ public class WaitersController {
 	 * @param entryPriceField.
 	 * @return boolean variable.
 	 */
-	private boolean checkForEntryPriceFormat(TextField entryPriceField) {
+	private boolean checkForEntryPriceFormat(String entryPriceField) {
 		Pattern p = Pattern.compile("\\\\d{1,5}\\\\.{0,1}\\\\d{0,2}$");
-		Matcher m = p.matcher(entryPriceField.getText().trim());
+		Matcher m = p.matcher(entryPriceField.trim());
 		return m.matches();
 	}
 
@@ -224,6 +226,13 @@ public class WaitersController {
 	}
 
 	/**
+	 * @param check (true or false if you have to check or uncheck the checkBox).
+	 */
+	public void setDeliveredCheckBox(boolean check) {
+		deliveredCheckBox.setSelected(check);
+	}
+
+	/**
 	 * Private method used to get an order from the orders ObservableList.
 	 * 
 	 * @param orderNum specify the order number.
@@ -241,27 +250,17 @@ public class WaitersController {
 		return currentOrder;
 	}
 
-	/**
-	 * @param check (true or false if you have to check or uncheck the checkBox).
-	 */
-	public void setDeliveredCheckBox(boolean check) {
-		deliveredCheckBox.setSelected(check);
-	}
-
 	/** Method triggered by createNewOrderButton. */
 	public void createNewOrder() {
-		Integer selectedTableNum = newOrderTableComboBox.getValue();
-		MenuEntry selectedEntry = newOrderEntryComboBox.getValue();
 		String[] parameters = new String[2];
-		parameters[0] = selectedTableNum.toString();
-		parameters[1] = selectedEntry.toString();
-		post.notifyMainController("AddNewOrderStrategy", parameters);
-		ordersList.add(new Order(selectedTableNum, selectedEntry));
+		parameters[0] = newOrderTableComboBox.getValue().trim();
+		parameters[1] = newOrderEntryComboBox.getValue().trim();
+		post.notifyMainController("CreateNewOrderStrategy", parameters);
 	}
 
 	/** Method triggered by addNewTableButton. */
 	public void addNewTable() {
-		if (checkForTableFormat(addNewTableField) == false) {
+		if (checkForTableFormat(addNewTableField.getText().trim()) == false) {
 			promptOrderTableLabel.setText("ERROR!");
 		} else {
 			String[] parameters = new String[1];
@@ -273,9 +272,8 @@ public class WaitersController {
 
 	/** Method triggered by removeTableButton. */
 	public void removeTable() {
-		Integer selectedTableNum = removeTableComboBox.getValue();
 		String[] parameters = new String[1];
-		parameters[0] = selectedTableNum.toString();
+		parameters[0] = removeTableComboBox.getValue().trim();
 		post.notifyMainController("RemoveTableStrategy", parameters);
 		fillTablesList();
 	}
@@ -283,17 +281,25 @@ public class WaitersController {
 	/** Method triggered by printBillButton. */
 	public void printNewBill() {
 		billTextArea.clear();
-		Integer selectedTableNum = removeTableComboBox.getValue();
 		String[] parameters = new String[1];
-		parameters[0] = selectedTableNum.toString();
+		parameters[0] = newBillTableComboBox.getValue().trim();
 		post.notifyMainController("PrintNewBillStrategy", parameters);
+		ArrayList<Order> orderToBeRemoved = new ArrayList<Order>(0);
+		Iterator<Order> iterator = ordersList.iterator();
+		while (iterator.hasNext()) {
+			Order currentOrder = iterator.next();
+			if (currentOrder.getTableNum() == Integer.parseInt(parameters[0])) {
+				orderToBeRemoved.add(currentOrder);
+			}
+		}
+		ordersList.removeAll(orderToBeRemoved);
 		billTextArea.setText(PrintNewBillStrategy.getBill().toString());
 	}
 
 	/** Method triggered by addNewEntryButton. */
 	public void addNewEntry() {
-		if (checkForEntryNameFormat(newEntryNameField) == false
-				|| checkForEntryPriceFormat(newEntryPriceField) == false) {
+		if (checkForEntryNameFormat(newEntryNameField.getText()) == false
+				|| checkForEntryPriceFormat(newEntryPriceField.getText()) == false) {
 			promptEntryLabel.setText("ERROR!");
 		} else {
 			String[] parameters = new String[2];
@@ -307,9 +313,8 @@ public class WaitersController {
 
 	/** Method triggered by removeMenuEntryButton. */
 	public void removeEntry() {
-		MenuEntry selectedEntry = removeEntryComboBox.getValue();
 		String[] parameters = new String[1];
-		parameters[0] = selectedEntry.toString();
+		parameters[0] = removeEntryComboBox.getValue().trim();
 		post.notifyMainController("RemoveEntryStrategy", parameters);
 		fillMenuEntriesList();
 		printMenuInTextArea();
@@ -372,11 +377,10 @@ public class WaitersController {
 	/**
 	 * Method used to add a new order in orders' TableView.
 	 * 
-	 * @param order's tableNum.
-	 * @param order's entry.
+	 * @param order to add.
 	 */
-	public void addOrderToTableView(Integer tableNum, MenuEntry entry) {
-		ordersList.add(new Order(tableNum, entry));
+	public void addOrderToTableView(Order order) {
+		ordersList.add(order);
 	}
 
 	/**

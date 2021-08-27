@@ -205,30 +205,50 @@ public class OrderManager implements OrderManegerInterface {
 		}
 	}
 
-	public ArrayList<Order> getAllOrdersForWaitersGuiController() {
+	public ArrayList<Order> getTableAllOrders(int tableNum) {
 
 		Iterator<Order> i1 = new ArrayList<>(notSeen).iterator();
 		Iterator<Order> i2 = new ArrayList<>(notPrepared).iterator();
 		Iterator<Order> i3 = new ArrayList<>(notPreparable).iterator();
 		Iterator<Order> i4 = new ArrayList<>(notDelivered).iterator();
-		ArrayList<Order> allOrders = new ArrayList<Order>(0);
+		Iterator<Order> i5 = new ArrayList<>(delivered).iterator();
+		ArrayList<Order> allTableOrders = new ArrayList<Order>(0);
 
 		while (i1.hasNext()) {
-			allOrders.add(i1.next());
+			Order currentOrder = i1.next();
+			if (currentOrder.getTableNum() == tableNum) {
+				allTableOrders.add(currentOrder);
+			}
 		}
 
 		while (i2.hasNext()) {
-			allOrders.add(i2.next());
+			Order currentOrder = i2.next();
+			if (currentOrder.getTableNum() == tableNum) {
+				allTableOrders.add(currentOrder);
+			}
 		}
 
 		while (i3.hasNext()) {
-			allOrders.add(i3.next());
+			Order currentOrder = i3.next();
+			if (currentOrder.getTableNum() == tableNum) {
+				allTableOrders.add(currentOrder);
+			}
 		}
 
 		while (i4.hasNext()) {
-			allOrders.add(i4.next());
+			Order currentOrder = i4.next();
+			if (currentOrder.getTableNum() == tableNum) {
+				allTableOrders.add(currentOrder);
+			}
 		}
 
-		return allOrders;
+		while (i5.hasNext()) {
+			Order currentOrder = i5.next();
+			if (currentOrder.getTableNum() == tableNum) {
+				allTableOrders.add(currentOrder);
+			}
+		}
+
+		return allTableOrders;
 	}
 }
