@@ -31,14 +31,20 @@ public class SetOrderToPreparedStrategy extends StrategyAbstract {
 	public void execute(String[] args) {
 		OrderManager orderManagerInstance = Restaurant.getInstance().getOrderManager();
 		Integer orderNum = Integer.parseInt(args[0]);
+		Order currentOrder = null;
+		Order orderToBeSetted = null;
 		Iterator<Order> iterator = orderManagerInstance.getNotPrepared().iterator();
 		while (iterator.hasNext()) {
-			Order currentOrder = iterator.next();
+			currentOrder = iterator.next();
 			if (currentOrder.getOrderNum() == orderNum) {
-				orderManagerInstance.prepareOrder(currentOrder);
+				orderToBeSetted = currentOrder;
 			}
 		}
-		WaitersController controller = WaitersController.getInstance();
-		controller.modifyOrderStatus(Integer.parseInt(args[0]), OrderStatus.PREPARED);
+
+		if (orderToBeSetted != null) {
+			orderManagerInstance.prepareOrder(currentOrder);
+			WaitersController controller = WaitersController.getInstance();
+			controller.modifyOrderStatus(Integer.parseInt(args[0]), OrderStatus.PREPARED);
+		}
 	}
 }

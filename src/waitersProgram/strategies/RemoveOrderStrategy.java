@@ -29,18 +29,20 @@ public class RemoveOrderStrategy extends StrategyAbstract {
 		OrderManager orderManagerInstance = Restaurant.getInstance().getOrderManager();
 		Integer orderNum = Integer.parseInt(args[0]);
 		Order currentOrder = null;
+		Order orderToBeRemoved = null;
 		Iterator<Order> iterator = orderManagerInstance.getNotSeen().iterator();
 		while (iterator.hasNext()) {
 			currentOrder = iterator.next();
 			if (currentOrder.getOrderNum() == orderNum) {
+				orderToBeRemoved = currentOrder;
 				break;
 			}
 		}
 
-		if (currentOrder != null) {
-			orderManagerInstance.removeOrder(currentOrder);
+		if (orderToBeRemoved != null) {
+			orderManagerInstance.removeOrder(orderToBeRemoved);
 			ListeningPost post = ListeningPost.getInstance();
-			post.sendMessage("REMOVE, " + Integer.toString(currentOrder.getOrderNum()));
+			post.sendMessage("REMOVE, " + Integer.toString(orderToBeRemoved.getOrderNum()));
 		}
 	}
 }

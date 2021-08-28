@@ -230,6 +230,9 @@ public class WaitersController {
 	 */
 	public void setDeliveredCheckBox(boolean check) {
 		deliveredCheckBox.setSelected(check);
+		if (check == true) {
+			deliveredCheckBox.setDisable(check);
+		}
 	}
 
 	/**
@@ -432,8 +435,8 @@ public class WaitersController {
 				default:
 					break;
 				}
+				break;
 			}
-			break;
 		}
 	}
 }

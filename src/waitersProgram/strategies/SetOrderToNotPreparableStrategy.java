@@ -32,14 +32,20 @@ public class SetOrderToNotPreparableStrategy extends StrategyAbstract {
 	public void execute(String[] args) {
 		OrderManager orderManagerInstance = Restaurant.getInstance().getOrderManager();
 		Integer orderNum = Integer.parseInt(args[0]);
+		Order currentOrder = null;
+		Order orderToBeSetted = null;
 		Iterator<Order> iterator = orderManagerInstance.getNotSeen().iterator();
 		while (iterator.hasNext()) {
-			Order currentOrder = iterator.next();
+			currentOrder = iterator.next();
 			if (currentOrder.getOrderNum() == orderNum) {
-				orderManagerInstance.seeOrderToNotPreparable(currentOrder);
+				orderToBeSetted = currentOrder;
 			}
 		}
-		WaitersController controller = WaitersController.getInstance();
-		controller.modifyOrderStatus(Integer.parseInt(args[0]), OrderStatus.NOT_PREPARABLE);
+
+		if (orderToBeSetted != null) {
+			orderManagerInstance.seeOrderToNotPreparable(orderToBeSetted);
+			WaitersController controller = WaitersController.getInstance();
+			controller.modifyOrderStatus(Integer.parseInt(args[0]), OrderStatus.NOT_PREPARABLE);
+		}
 	}
 }

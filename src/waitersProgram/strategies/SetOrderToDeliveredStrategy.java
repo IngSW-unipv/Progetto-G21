@@ -31,18 +31,20 @@ public class SetOrderToDeliveredStrategy extends StrategyAbstract {
 		OrderManager orderManagerInstance = Restaurant.getInstance().getOrderManager();
 		Integer orderNum = Integer.parseInt(args[0]);
 		Order currentOrder = null;
+		Order orderToBeSetted = null;
 		Iterator<Order> iterator = orderManagerInstance.getNotDelivered().iterator();
 		while (iterator.hasNext()) {
 			currentOrder = iterator.next();
 			if (currentOrder.getOrderNum() == orderNum) {
+				orderToBeSetted = currentOrder;
 				break;
 			}
 		}
 
-		if (currentOrder != null) {
-			orderManagerInstance.deliverOrder(currentOrder);
+		if (orderToBeSetted != null) {
+			orderManagerInstance.deliverOrder(orderToBeSetted);
 			ListeningPost post = ListeningPost.getInstance();
-			post.sendMessage("SET_DELIVERED, " + Integer.toString(currentOrder.getOrderNum()));
+			post.sendMessage("SET_DELIVERED, " + Integer.toString(orderToBeSetted.getOrderNum()));
 		}
 	}
 }

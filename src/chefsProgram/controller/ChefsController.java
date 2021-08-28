@@ -59,7 +59,7 @@ public class ChefsController extends Thread {
 	 * Class constructor method. (look initialize method for FXML elements).
 	 */
 	private ChefsController() {
-		ordersList = FXCollections.observableArrayList();
+
 	}
 
 	/**
@@ -67,6 +67,7 @@ public class ChefsController extends Thread {
 	 */
 	@FXML
 	private void initialize() {
+		ordersList = FXCollections.observableArrayList();
 		connect();
 		tableColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Table"));
 		orderColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Order"));
@@ -157,20 +158,29 @@ public class ChefsController extends Thread {
 	 */
 	public void setSeenCheckBox(boolean check) {
 		seenCheckBox.setSelected(check);
+		if (check == true) {
+			seenCheckBox.setDisable(check);
+		}
 	}
 
 	/**
 	 * @param check (true or false if you have to check or uncheck the checkBox).
 	 */
 	public void setNotPreparableCheckBox(boolean check) {
-		seenCheckBox.setSelected(check);
+		notPreparableCheckBox.setSelected(check);
+		if (check == true) {
+			notPreparableCheckBox.setDisable(check);
+		}
 	}
 
 	/**
 	 * @param check (true or false if you have to check or uncheck the checkBox).
 	 */
 	public void setPreparedCheckBox(boolean check) {
-		seenCheckBox.setSelected(check);
+		preparedCheckBox.setSelected(check);
+		if (check == true) {
+			preparedCheckBox.setDisable(check);
+		}
 	}
 
 	/**
@@ -209,7 +219,7 @@ public class ChefsController extends Thread {
 			sendMessage("SetOrderToNotPreparableStrategy, " + orderNum);
 			ordersList.remove(currentOrder);
 		} else {
-			seenCheckBox.setSelected(false);
+			notPreparableCheckBox.setSelected(false);
 		}
 	}
 
@@ -228,7 +238,7 @@ public class ChefsController extends Thread {
 		if ((isSeen == true) && (isPreparable == true) && (isPrepared == false) && (isDelivered == false)) {
 			sendMessage("SetOrderToPreparedStrategy, " + orderNum);
 		} else {
-			seenCheckBox.setSelected(false);
+			preparedCheckBox.setSelected(false);
 		}
 	}
 
@@ -262,14 +272,16 @@ public class ChefsController extends Thread {
 	public void removeOrderFromTableView(int orderNum) {
 		Iterator<Order> iterator = ordersList.iterator();
 		Order currentOrder = null;
+		Order orderToBeRemoved = null;
 		while (iterator.hasNext()) {
 			currentOrder = iterator.next();
 			if (currentOrder.getOrderNum() == orderNum) {
+				orderToBeRemoved = currentOrder;
 				break;
 			}
 		}
-		if (currentOrder != null) {
-			ordersList.remove(currentOrder);
+		if (orderToBeRemoved != null) {
+			ordersList.remove(orderToBeRemoved);
 		}
 	}
 
@@ -313,8 +325,8 @@ public class ChefsController extends Thread {
 				default:
 					break;
 				}
+				break;
 			}
-			break;
 		}
 	}
 

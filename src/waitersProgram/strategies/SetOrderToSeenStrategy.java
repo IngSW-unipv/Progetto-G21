@@ -33,16 +33,18 @@ public class SetOrderToSeenStrategy extends StrategyAbstract {
 		OrderManager orderManagerInstance = Restaurant.getInstance().getOrderManager();
 		Integer orderNum = Integer.parseInt(args[0]);
 		Order currentOrder = null;
+		Order orderToBeSetted = null;
 		Iterator<Order> iterator = orderManagerInstance.getNotSeen().iterator();
 		while (iterator.hasNext()) {
 			currentOrder = iterator.next();
 			if (currentOrder.getOrderNum() == orderNum) {
+				orderToBeSetted = currentOrder;
 				break;
 			}
 		}
 
-		if (currentOrder != null) {
-			orderManagerInstance.seeOrderToNotPrepared(currentOrder);
+		if (orderToBeSetted != null) {
+			orderManagerInstance.seeOrderToNotPrepared(orderToBeSetted);
 			WaitersController controller = WaitersController.getInstance();
 			controller.modifyOrderStatus(Integer.parseInt(args[0]), OrderStatus.SEEN);
 		}
