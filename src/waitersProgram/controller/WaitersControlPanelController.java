@@ -12,7 +12,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -24,6 +23,7 @@ import waitersProgram.model.Menu;
 import waitersProgram.model.MenuEntry;
 import waitersProgram.model.Order;
 import waitersProgram.model.TableManager;
+import waitersProgram.strategies.CreateNewOrderStrategy;
 import waitersProgram.strategies.PrintNewBillStrategy;
 
 /**
@@ -37,7 +37,7 @@ import waitersProgram.strategies.PrintNewBillStrategy;
  * ChefsController that was mandatory).
  */
 
-public class WaitersController {
+public class WaitersControlPanelController {
 
 	/** WaitersControlPanel's first tab FXML calls. */
 	@FXML
@@ -63,24 +63,16 @@ public class WaitersController {
 	TextArea menuTextArea;
 	Label promptEntryLabel;
 
-	/** WaitersOrderUpdateFrame FXML calls. */
-	@FXML
-	Label tableLabel, orderLabel, orderNumberLabel, removeErrorLabel;
-	CheckBox deliveredCheckBox;
-
 	private ListeningPost post;
-
-	private static WaitersController instance = null;
+	private static WaitersControlPanelController instance = null;
 
 	private ObservableList<String> tablesList;
 	private ObservableList<String> entriesList;
 	private ObservableList<Order> ordersList;
 
-	/**
-	 * Class constructor method. (look initialize method for FXML elements).
-	 */
-	private WaitersController() {
-
+	/** Simple class constructor. */
+	public WaitersControlPanelController() {
+		instance = this;
 	}
 
 	/**
@@ -99,13 +91,14 @@ public class WaitersController {
 		orderColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Order"));
 		statusColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Status"));
 
+		WaitersControlPanelController mainController = this;
 		actionColumn.setCellFactory(col -> new TableCell<Order, Void>() {
 
 			private final Button actionButton;
 
 			{
 				actionButton = new Button("Change status");
-				actionButton.setOnAction(new ButtonClickEventHandler(getTableRow().getItem()));
+				actionButton.setOnAction(new ButtonClickEventHandler(mainController));
 			}
 
 			@Override
@@ -183,20 +176,6 @@ public class WaitersController {
 	}
 
 	/**
-	 * Static method that returns a WaitersController instance in order to observe
-	 * the Singleton pattern. It calls the class constructor only if this has not
-	 * happened before.
-	 * 
-	 * @return WaitersController instance.
-	 */
-	public static WaitersController getInstance() {
-		if (instance == null) {
-			instance = new WaitersController();
-		}
-		return instance;
-	}
-
-	/**
 	 * @return used ListeningPost instance.
 	 */
 	public ListeningPost getPost() {
@@ -204,35 +183,10 @@ public class WaitersController {
 	}
 
 	/**
-	 * @return orderNumberLabel.
+	 * @return current instance.
 	 */
-	public Label getOrderNumberLabel() {
-		return orderNumberLabel;
-	}
-
-	/** @param tableLabel text. */
-	public void setTableLabel(String text) {
-		tableLabel.setText(text);
-	}
-
-	/** @param orderLabel text. */
-	public void setOrderLabel(String text) {
-		orderLabel.setText(text);
-	}
-
-	/** @param orderNumberLabel text. */
-	public void setOrderNumberLabel(String text) {
-		orderNumberLabel.setText(text);
-	}
-
-	/**
-	 * @param check (true or false if you have to check or uncheck the checkBox).
-	 */
-	public void setDeliveredCheckBox(boolean check) {
-		deliveredCheckBox.setSelected(check);
-		if (check == true) {
-			deliveredCheckBox.setDisable(check);
-		}
+	public static WaitersControlPanelController getInstance() {
+		return instance;
 	}
 
 	/**
@@ -259,6 +213,7 @@ public class WaitersController {
 		parameters[0] = newOrderTableComboBox.getValue().trim();
 		parameters[1] = newOrderEntryComboBox.getValue().trim();
 		post.notifyMainController("CreateNewOrderStrategy", parameters);
+		addOrderToTableView(CreateNewOrderStrategy.getOrder());
 	}
 
 	/** Method triggered by addNewTableButton. */
@@ -332,48 +287,6 @@ public class WaitersController {
 		while (iterator.hasNext()) {
 			MenuEntry entryToPrint = iterator.next();
 			menuTextArea.appendText(entryToPrint.toString() + "€");
-		}
-	}
-
-	/** Method triggered by removeOrderButton. */
-	public void removeOrder() {
-		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
-		String orderNum = orderNumberLabelSplitted[1].trim();
-		Order currentOrder = searchForAnOrder(Integer.parseInt(orderNum));
-		boolean isSeen = currentOrder.isSeen();
-		boolean isPreparable = currentOrder.isPreparable();
-		boolean isPrepared = currentOrder.isPrepared();
-		boolean isDelivered = currentOrder.isDelivered();
-		if ((isSeen == false) && (isPreparable == true) && (isPrepared == false) && (isDelivered == false)) {
-			String[] parameters = new String[1];
-			parameters[0] = orderNum;
-			post.notifyMainController("RemoveOrderStrategy", parameters);
-			modifyOrderStatus(Integer.parseInt(parameters[0]), OrderStatus.DELIVERED);
-			ordersList.remove(currentOrder);
-		} else if ((isSeen == true) && (isPreparable == false) && (isPrepared == false) && (isDelivered == false)) {
-			ordersList.remove(currentOrder);
-		} else {
-			removeErrorLabel.setText("The order can't be removed!");
-		}
-	}
-
-	/** Method triggered by deliveredCheckBox. */
-	public void setOrderToDelivered() {
-		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
-		String orderNum = orderNumberLabelSplitted[1].trim();
-		Order currentOrder = searchForAnOrder(Integer.parseInt(orderNum));
-		boolean isSeen = currentOrder.isSeen();
-		boolean isPreparable = currentOrder.isPreparable();
-		boolean isPrepared = currentOrder.isPrepared();
-		boolean isDelivered = currentOrder.isDelivered();
-		if ((isSeen == true) && (isPreparable == true) && (isPrepared == true) && (isDelivered == false)) {
-			String[] parameters = new String[1];
-			parameters[0] = orderNum;
-			post.notifyMainController("SetOrderToDeliveredStrategy", parameters);
-			modifyOrderStatus(Integer.parseInt(parameters[0]), OrderStatus.DELIVERED);
-			ordersList.remove(currentOrder);
-		} else {
-			deliveredCheckBox.setSelected(false);
 		}
 	}
 

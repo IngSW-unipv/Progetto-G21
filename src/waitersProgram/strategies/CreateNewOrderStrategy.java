@@ -2,7 +2,6 @@ package waitersProgram.strategies;
 
 import waitersProgram.controller.ListeningPost;
 import waitersProgram.controller.Restaurant;
-import waitersProgram.controller.WaitersController;
 import waitersProgram.model.MenuEntry;
 import waitersProgram.model.Order;
 import waitersProgram.model.OrderManager;
@@ -11,6 +10,7 @@ import waitersProgram.model.OrderManager;
 
 public class CreateNewOrderStrategy extends StrategyAbstract {
 	private static CreateNewOrderStrategy instance = null;
+	private static Order orderToDisplay;
 
 	private CreateNewOrderStrategy(Restaurant restaurant) {
 		super(restaurant);
@@ -30,12 +30,15 @@ public class CreateNewOrderStrategy extends StrategyAbstract {
 		Order currentOrder = new Order(Integer.parseInt(args[0]), new MenuEntry(args[1]));
 		orderManagerInstance.addOrder(currentOrder);
 
-		WaitersController controller = WaitersController.getInstance();
-		controller.addOrderToTableView(currentOrder);
+		orderToDisplay = currentOrder;
 
 		ListeningPost post = ListeningPost.getInstance();
 		post.sendMessage("ADD, " + Integer.toString(currentOrder.getOrderNum()) + ", " + currentOrder.getTableNum()
 				+ ", " + currentOrder.getOrderedEntry().getDishName() + ", "
 				+ currentOrder.getOrderedEntry().getDishPrice());
+	}
+
+	public static Order getOrder() {
+		return orderToDisplay;
 	}
 }

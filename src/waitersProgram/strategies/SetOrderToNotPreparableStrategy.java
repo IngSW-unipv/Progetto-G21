@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 import waitersProgram.controller.OrderStatus;
 import waitersProgram.controller.Restaurant;
-import waitersProgram.controller.WaitersController;
+import waitersProgram.controller.WaitersControlPanelController;
 import waitersProgram.model.Order;
 import waitersProgram.model.OrderManager;
 
@@ -44,7 +44,7 @@ public class SetOrderToNotPreparableStrategy extends StrategyAbstract {
 
 		if (orderToBeSetted != null) {
 			orderManagerInstance.seeOrderToNotPreparable(orderToBeSetted);
-			WaitersController controller = WaitersController.getInstance();
+			WaitersControlPanelController controller = WaitersControlPanelController.getInstance();
 			controller.modifyOrderStatus(Integer.parseInt(args[0]), OrderStatus.NOT_PREPARABLE);
 		}
 	}

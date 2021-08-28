@@ -15,8 +15,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -33,7 +31,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * contains the server.
  */
 
-public class ChefsController extends Thread {
+public class ChefsControlPanelController extends Thread {
 
 	/** ChefsControlPanel FXML calls. */
 	@FXML
@@ -41,26 +39,12 @@ public class ChefsController extends Thread {
 	TableColumn<Order, String> tableColumn, orderColumn, statusColumn;
 	TableColumn<Order, Void> actionColumn;
 
-	/** ChefsOrderUpdateFrame FXML calls. */
-	@FXML
-	Label tableLabel, orderLabel, orderNumberLabel;
-	CheckBox seenCheckBox, notPreparableCheckBox, preparedCheckBox;
-
 	private ObservableList<Order> ordersList;
 
 	private Socket serverSocket = null; // = new Socket("localhost", 4999);
 	private BufferedReader readBuffer = null;
 	private BufferedWriter writeBuffer = null;
 	private String serverName = "localhost";
-
-	private static ChefsController instance = null;
-
-	/**
-	 * Class constructor method. (look initialize method for FXML elements).
-	 */
-	private ChefsController() {
-
-	}
 
 	/**
 	 * Method required to initialize FXML elements.
@@ -73,13 +57,14 @@ public class ChefsController extends Thread {
 		orderColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Order"));
 		statusColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Status"));
 
+		ChefsControlPanelController mainController = this;
 		actionColumn.setCellFactory(col -> new TableCell<Order, Void>() {
 
 			private final Button actionButton;
 
 			{
 				actionButton = new Button("Change status");
-				actionButton.setOnAction(new ButtonClickEventHandler(getTableRow().getItem()));
+				actionButton.setOnAction(new ButtonClickEventHandler(mainController));
 			}
 
 			@Override
@@ -90,42 +75,6 @@ public class ChefsController extends Thread {
 		});
 
 		ordersTableView.setItems(ordersList);
-	}
-
-	/**
-	 * Static method that returns a ChefsController instance in order to observe the
-	 * Singleton pattern. It calls the class constructor only if this has not
-	 * happened before.
-	 * 
-	 * @return ChefsController instance.
-	 */
-	public static ChefsController getInstance() {
-		if (instance == null) {
-			instance = new ChefsController();
-		}
-		return instance;
-	}
-
-	/**
-	 * @return orderNumberLabel.
-	 */
-	public Label getOrderNumberLabel() {
-		return orderNumberLabel;
-	}
-
-	/** @param tableLabel text. */
-	public void setTableLabel(String text) {
-		tableLabel.setText(text);
-	}
-
-	/** @param orderLabel text. */
-	public void setOrderLabel(String text) {
-		orderLabel.setText(text);
-	}
-
-	/** @param orderNumberLabel text. */
-	public void setOrderNumberLabel(String text) {
-		orderNumberLabel.setText(text);
 	}
 
 	/**
@@ -151,95 +100,6 @@ public class ChefsController extends Thread {
 			}
 		}
 		return currentOrder;
-	}
-
-	/**
-	 * @param check (true or false if you have to check or uncheck the checkBox).
-	 */
-	public void setSeenCheckBox(boolean check) {
-		seenCheckBox.setSelected(check);
-		if (check == true) {
-			seenCheckBox.setDisable(check);
-		}
-	}
-
-	/**
-	 * @param check (true or false if you have to check or uncheck the checkBox).
-	 */
-	public void setNotPreparableCheckBox(boolean check) {
-		notPreparableCheckBox.setSelected(check);
-		if (check == true) {
-			notPreparableCheckBox.setDisable(check);
-		}
-	}
-
-	/**
-	 * @param check (true or false if you have to check or uncheck the checkBox).
-	 */
-	public void setPreparedCheckBox(boolean check) {
-		preparedCheckBox.setSelected(check);
-		if (check == true) {
-			preparedCheckBox.setDisable(check);
-		}
-	}
-
-	/**
-	 * Method triggered by seenCheckBox. It calls SetOrderToSeenStrategy via the
-	 * sendMessage method, which sends a string to the server (ListeningPost).
-	 */
-	public void setOrderToSeen() {
-		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
-		String orderNum = orderNumberLabelSplitted[1].trim();
-		Order currentOrder = searchForAnOrder(Integer.parseInt(orderNum));
-		boolean isSeen = currentOrder.isSeen();
-		boolean isPreparable = currentOrder.isPreparable();
-		boolean isPrepared = currentOrder.isPrepared();
-		boolean isDelivered = currentOrder.isDelivered();
-		if ((isSeen == false) && (isPreparable == true) && (isPrepared == false) && (isDelivered == false)) {
-			sendMessage("SetOrderToSeenStrategy, " + orderNum);
-		} else {
-			seenCheckBox.setSelected(false);
-		}
-	}
-
-	/**
-	 * Method triggered by notPreparableCheckBox. It calls
-	 * SetOrderToNotPreparableStrategy via the sendMessage method, which sends a
-	 * string to the server (ListeningPost).
-	 */
-	public void setOrderToNotPreparable() {
-		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
-		String orderNum = orderNumberLabelSplitted[1].trim();
-		Order currentOrder = searchForAnOrder(Integer.parseInt(orderNum));
-		boolean isSeen = currentOrder.isSeen();
-		boolean isPreparable = currentOrder.isPreparable();
-		boolean isPrepared = currentOrder.isPrepared();
-		boolean isDelivered = currentOrder.isDelivered();
-		if ((isSeen == false) && (isPreparable == true) && (isPrepared == false) && (isDelivered == false)) {
-			sendMessage("SetOrderToNotPreparableStrategy, " + orderNum);
-			ordersList.remove(currentOrder);
-		} else {
-			notPreparableCheckBox.setSelected(false);
-		}
-	}
-
-	/**
-	 * Method triggered by preparedCheckBox. It calls SetOrderToPreparedStrategy via
-	 * the sendMessage method, which sends a string to the server (ListeningPost).
-	 */
-	public void setOrderToPrepared() {
-		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
-		String orderNum = orderNumberLabelSplitted[1].trim();
-		Order currentOrder = searchForAnOrder(Integer.parseInt(orderNum));
-		boolean isSeen = currentOrder.isSeen();
-		boolean isPreparable = currentOrder.isPreparable();
-		boolean isPrepared = currentOrder.isPrepared();
-		boolean isDelivered = currentOrder.isDelivered();
-		if ((isSeen == true) && (isPreparable == true) && (isPrepared == false) && (isDelivered == false)) {
-			sendMessage("SetOrderToPreparedStrategy, " + orderNum);
-		} else {
-			preparedCheckBox.setSelected(false);
-		}
 	}
 
 	/**
