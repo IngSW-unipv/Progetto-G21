@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import waitersProgram.model.Order;
 
 /**
  * Event class triggered by pressing the change order's status button. The
@@ -16,15 +17,17 @@ import javafx.stage.Stage;
  */
 public class ButtonClickEventHandler implements EventHandler<ActionEvent> {
 	private WaitersControlPanelController mainController;
+	private Order order = null;
 
 	/**
 	 * Class constructor method.
 	 * 
 	 * @param mainController.
 	 */
-	public ButtonClickEventHandler(WaitersControlPanelController mainController) {
+	public ButtonClickEventHandler(WaitersControlPanelController mainController, Order order) {
 		super();
 		this.mainController = mainController;
+		this.order = order;
 	}
 
 	/**
@@ -44,6 +47,7 @@ public class ButtonClickEventHandler implements EventHandler<ActionEvent> {
 			stage.setScene(scene);
 			WaitersOrderUpdateFrameController updateFrameController = fxmlLoader.getController();
 			updateFrameController.setMainController(mainController);
+			updateFrameController.setOrder(order);
 			stage.show();
 			((Node) (event.getSource())).getScene().getWindow().hide();
 		} catch (Exception e) {

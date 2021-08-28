@@ -70,16 +70,12 @@ public class WaitersControlPanelController {
 	private ObservableList<String> entriesList;
 	private ObservableList<Order> ordersList;
 
-	/** Simple class constructor. */
-	public WaitersControlPanelController() {
-		instance = this;
-	}
-
 	/**
 	 * Method required to initialize FXML elements.
 	 */
 	@FXML
 	private void initialize() {
+		setInstance();
 		tablesList = FXCollections.observableArrayList();
 		entriesList = FXCollections.observableArrayList();
 		ordersList = FXCollections.observableArrayList();
@@ -98,7 +94,7 @@ public class WaitersControlPanelController {
 
 			{
 				actionButton = new Button("Change status");
-				actionButton.setOnAction(new ButtonClickEventHandler(mainController));
+				actionButton.setOnAction(new ButtonClickEventHandler(mainController, this.getTableRow().getItem()));
 			}
 
 			@Override
@@ -173,6 +169,11 @@ public class WaitersControlPanelController {
 		Pattern p = Pattern.compile("\\\\d{1,5}\\\\.{0,1}\\\\d{0,2}$");
 		Matcher m = p.matcher(entryPriceField.trim());
 		return m.matches();
+	}
+
+	/** Simple current instance setter. */
+	public void setInstance() {
+		instance = this;
 	}
 
 	/**

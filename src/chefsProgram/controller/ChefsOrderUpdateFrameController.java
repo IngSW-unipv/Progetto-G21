@@ -15,11 +15,9 @@ public class ChefsOrderUpdateFrameController {
 	CheckBox seenCheckBox, notPreparableCheckBox, preparedCheckBox;
 
 	/**
-	 * Class constructor method.
-	 * 
-	 * @param order to be displayed in ChefsOrderUpdateFrame.
+	 * @param order to be displayed.
 	 */
-	public ChefsOrderUpdateFrameController(Order order) {
+	public void setOrder(Order order) {
 		this.order = order;
 	}
 

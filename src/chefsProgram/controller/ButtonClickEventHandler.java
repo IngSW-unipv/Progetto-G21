@@ -1,5 +1,6 @@
 package chefsProgram.controller;
 
+import chefsProgram.model.Order;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -16,15 +17,17 @@ import javafx.stage.Stage;
  */
 public class ButtonClickEventHandler implements EventHandler<ActionEvent> {
 	private ChefsControlPanelController mainController;
+	private Order order = null;
 
 	/**
 	 * Class constructor method.
 	 * 
 	 * @param mainController.
 	 */
-	public ButtonClickEventHandler(ChefsControlPanelController mainController) {
+	public ButtonClickEventHandler(ChefsControlPanelController mainController, Order order) {
 		super();
 		this.mainController = mainController;
+		this.order = order;
 	}
 
 	/**
@@ -44,6 +47,7 @@ public class ButtonClickEventHandler implements EventHandler<ActionEvent> {
 			stage.setScene(scene);
 			ChefsOrderUpdateFrameController updateFrameController = fxmlLoader.getController();
 			updateFrameController.setMainController(mainController);
+			updateFrameController.setOrder(order);
 			stage.show();
 			((Node) (event.getSource())).getScene().getWindow().hide();
 		} catch (Exception e) {

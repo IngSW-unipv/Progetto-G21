@@ -15,11 +15,9 @@ public class WaitersOrderUpdateFrameController {
 	CheckBox deliveredCheckBox;
 
 	/**
-	 * Class constructor method.
-	 * 
-	 * @param order to be displayed in WaitersOrderUpdateFrame.
+	 * @param order to be displayed.
 	 */
-	public WaitersOrderUpdateFrameController(Order order) {
+	public void setOrder(Order order) {
 		this.order = order;
 	}
 

@@ -52,7 +52,6 @@ public class ChefsControlPanelController extends Thread {
 	@FXML
 	private void initialize() {
 		ordersList = FXCollections.observableArrayList();
-		connect();
 		tableColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Table"));
 		orderColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Order"));
 		statusColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Status"));
@@ -64,7 +63,7 @@ public class ChefsControlPanelController extends Thread {
 
 			{
 				actionButton = new Button("Change status");
-				actionButton.setOnAction(new ButtonClickEventHandler(mainController));
+				actionButton.setOnAction(new ButtonClickEventHandler(mainController, this.getTableRow().getItem()));
 			}
 
 			@Override
@@ -75,6 +74,7 @@ public class ChefsControlPanelController extends Thread {
 		});
 
 		ordersTableView.setItems(ordersList);
+		connect();
 	}
 
 	/**
