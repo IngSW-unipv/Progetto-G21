@@ -53,8 +53,8 @@
                                     <Font name="Copperplate Gothic Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <SearchableComboBox fx:id="newOrderTableComboBox" layoutX="147.0" layoutY="60.0" prefWidth="150.0" />
-                              <SearchableComboBox fx:id="newOrderEntryComboBox" layoutX="147.0" layoutY="100.0" prefWidth="150.0" />
+                              <SearchableComboBox fx:id="newOrderTableComboBox" layoutX="147.0" layoutY="60.0" prefWidth="150.0 style="-fx-font-family: &quot;Copperplate Gothic Light&quot;;" />
+                              <SearchableComboBox fx:id="newOrderEntryComboBox" layoutX="147.0" layoutY="100.0" prefWidth="150.0" style="-fx-font-family: &quot;Copperplate Gothic Light&quot;;" />
                            </children>
                         </Pane>
                         <Pane layoutX="15.0" layoutY="195.0" prefHeight="180.0" prefWidth="350.0">
@@ -100,7 +100,7 @@
                                     <Font name="Copperplate Gothic Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <SearchableComboBox fx:id="removeTableComboBox" layoutX="147.0" layoutY="60.0" prefWidth="150.0" />
+                              <SearchableComboBox fx:id="removeTableComboBox" layoutX="147.0" layoutY="60.0" prefWidth="150.0" style="-fx-font-family: &quot;Copperplate Gothic Light&quot;;" />
                            </children>
                         </Pane>
                         <Label id="arrowLabel" fx:id="promptOrderTableLabel" layoutX="15.0" layoutY="637.0" text="→" textFill="WHITE">
@@ -143,7 +143,7 @@
                                     <Font name="Copperplate Gothic Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <SearchableComboBox fx:id="newBillTableComboBox" layoutX="147.0" layoutY="60.0" prefWidth="150.0" />
+                              <SearchableComboBox fx:id="newBillTableComboBox" layoutX="147.0" layoutY="60.0" prefWidth="150.0" style="-fx-font-family: &quot;Copperplate Gothic Light&quot;;" />
                            </children>
                         </Pane>
                         <Label id="arrowLabel" fx:id="promptBillLabel" layoutX="15.0" layoutY="637.0" text="→" textFill="WHITE">
@@ -203,7 +203,7 @@
                                     <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
                               </Label>
-                              <SearchableComboBox fx:id="removeEntryComboBox" layoutX="147.0" layoutY="60.0" prefWidth="150.0" />
+                              <SearchableComboBox fx:id="removeEntryComboBox" layoutX="147.0" layoutY="60.0" prefWidth="150.0" style="-fx-font-family: &quot;Copperplate Gothic Light&quot;;" />
                            </children>
                         </Pane>
                         <Label id="arrowLabel" fx:id="promptEntryLabel" layoutX="15.0" layoutY="637.0" text="→" textFill="WHITE">
