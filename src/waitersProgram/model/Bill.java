@@ -144,7 +144,7 @@ public class Bill {
 			stream.flush();
 			stream.close();
 		} catch (IOException e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 
 	}

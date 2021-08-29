@@ -41,9 +41,13 @@ public class ListeningPost extends Thread {
 	private ListeningPost() {
 		restaurant = Restaurant.getInstance();
 		bindController(restaurant);
-		boolean isFailed = false;
+		setServerOnline();
+	}
+
+	private void setServerOnline() {
 		try {
 			serverSocket = new ServerSocket(4999);
+			clientSocket = new Socket();
 			clientSocket = serverSocket.accept();
 
 			readBuffer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -53,16 +57,7 @@ public class ListeningPost extends Thread {
 			System.out.println(serverSocket.getLocalSocketAddress());
 			System.out.println(serverSocket.getLocalPort());
 		} catch (Exception e) {
-			isFailed = true;
-			System.err.println(e.getMessage());
-		} finally {
-			if (isFailed && clientSocket.isConnected()) {
-				try {
-					clientSocket.close();
-				} catch (IOException e) {
-					System.err.println(e.getMessage());
-				}
-			}
+			e.printStackTrace();
 		}
 	}
 
@@ -122,7 +117,7 @@ public class ListeningPost extends Thread {
 	@Override
 	public void run() {
 		try {
-			while (clientSocket.isConnected()) {
+			while (clientSocket != null && clientSocket.isConnected()) {
 				Pattern p = Pattern.compile("^([a-zA-Z0-9]+, )+[a-zA-Z0-9]+$");
 				String[] unpackedMessage;
 				String message;
@@ -137,12 +132,9 @@ public class ListeningPost extends Thread {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-
-		finally {
 			try {
 				clientSocket.close();
-			} catch (IOException e) {
+			} catch (IOException e1) {
 				e.printStackTrace();
 			}
 		}

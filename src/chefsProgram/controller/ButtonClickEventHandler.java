@@ -51,7 +51,7 @@ public class ButtonClickEventHandler implements EventHandler<ActionEvent> {
 			stage.show();
 			((Node) (event.getSource())).getScene().getWindow().hide();
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 }

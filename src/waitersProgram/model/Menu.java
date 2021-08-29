@@ -45,7 +45,7 @@ public class Menu implements MenuInterface {
 			try {
 				menuFile.createNewFile();
 			} catch (IOException e) {
-				System.err.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 		parseMenuFile();
@@ -108,7 +108,7 @@ public class Menu implements MenuInterface {
 			checkForEntryExistence(entryKey);
 			return entries.get(entryKey);
 		} catch (EntryDoesNotExistException e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -123,7 +123,7 @@ public class Menu implements MenuInterface {
 			checkForEntryExistence(entryKey);
 			return entries.get(entryKey).getDishName();
 		} catch (EntryDoesNotExistException e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -138,7 +138,7 @@ public class Menu implements MenuInterface {
 			checkForEntryExistence(entryKey);
 			return entries.get(entryKey).getDishPrice();
 		} catch (EntryDoesNotExistException e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 			return 0;
 		}
 	}
@@ -163,7 +163,7 @@ public class Menu implements MenuInterface {
 		try {
 			checkForEntryFormat(dishEntry);
 		} catch (WrongMenuEntryFormatException e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 
 		File menuFile = new File(menuFilePath);
@@ -175,7 +175,7 @@ public class Menu implements MenuInterface {
 			stream.flush();
 			stream.close();
 		} catch (IOException e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 
 		rewriteMenu();
@@ -195,7 +195,7 @@ public class Menu implements MenuInterface {
 		try {
 			checkForEntryExistence(dishEntry);
 		} catch (EntryDoesNotExistException e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 		File inputFile = new File(menuFilePath);
 		File tempFile = new File("Files/tempMenuFile.txt");
@@ -204,7 +204,7 @@ public class Menu implements MenuInterface {
 			try {
 				tempFile.createNewFile();
 			} catch (IOException e) {
-				System.err.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -229,9 +229,9 @@ public class Menu implements MenuInterface {
 			tempFile.renameTo(new File(menuFilePath));
 			rewriteMenu();
 		} catch (FileNotFoundException e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		} catch (IOException e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
@@ -249,7 +249,7 @@ public class Menu implements MenuInterface {
 			String toBeRemoved = entryToBeRemoved.toString();
 			removeMenuEntry(toBeRemoved);
 		} catch (EntryDoesNotExistException e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
@@ -269,7 +269,7 @@ public class Menu implements MenuInterface {
 			removeMenuEntry(entryKey);
 			addMenuEntry(newEntryName + ", " + entryPrice);
 		} catch (EntryDoesNotExistException e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
@@ -289,7 +289,7 @@ public class Menu implements MenuInterface {
 			removeMenuEntry(entryKey);
 			addMenuEntry(entryName + ", " + Double.toString(newPrice));
 		} catch (EntryDoesNotExistException e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
@@ -369,8 +369,9 @@ public class Menu implements MenuInterface {
 			}
 			stream.close();
 		} catch (IOException e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		} catch (WrongMenuEntryFormatException e) {
+			e.printStackTrace();
 			System.err.println("The file specified by " + menuFilePath + " has wrong format!");
 		}
 	}

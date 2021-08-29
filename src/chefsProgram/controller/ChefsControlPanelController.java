@@ -205,13 +205,13 @@ public class ChefsControlPanelController extends Thread {
 
 		} catch (Exception e) {
 			isFailed = true;
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		} finally {
 			if (isFailed && serverSocket.isConnected()) {
 				try {
 					serverSocket.close();
 				} catch (Exception e) {
-					System.err.println(e.getMessage());
+					e.printStackTrace();
 				}
 			}
 		}
@@ -266,14 +266,14 @@ public class ChefsControlPanelController extends Thread {
 				}
 			}
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 
 		finally {
 			try {
 				serverSocket.close();
 			} catch (IOException e) {
-				System.err.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 	}

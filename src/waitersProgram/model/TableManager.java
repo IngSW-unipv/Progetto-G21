@@ -29,7 +29,7 @@ public class TableManager {
 			try {
 				tablesFile.createNewFile();
 			} catch (IOException e) {
-				System.err.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 		parseTablesFile();
@@ -103,7 +103,7 @@ public class TableManager {
 			stream.close();
 			tables.add(tableNum);
 		} catch (IOException e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 
 	}
@@ -118,7 +118,7 @@ public class TableManager {
 		try {
 			checkForTableExistance(tableNum);
 		} catch (TableDoesNotExistsException e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 
 		tables.remove(tableNum);
@@ -130,7 +130,7 @@ public class TableManager {
 			try {
 				tempFile.createNewFile();
 			} catch (IOException e) {
-				System.err.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 
@@ -155,9 +155,9 @@ public class TableManager {
 			tempFile.renameTo(new File(tablesFilePath));
 
 		} catch (FileNotFoundException e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		} catch (IOException e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
@@ -204,9 +204,9 @@ public class TableManager {
 			}
 			stream.close();
 		} catch (IOException e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		} catch (WrongTableEntryFormatException e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 
 	}

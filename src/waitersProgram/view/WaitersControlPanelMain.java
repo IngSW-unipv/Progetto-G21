@@ -32,7 +32,7 @@ public class WaitersControlPanelMain extends Application {
 			});
 			pause.play();
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
@@ -45,7 +45,7 @@ public class WaitersControlPanelMain extends Application {
 		try {
 			rootProgram = FXMLLoader.load(getClass().getResource("WaitersControlPanel.fxml"));
 		} catch (IOException e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 		Scene sceneProgram = new Scene(rootProgram);
 		sceneProgram.getStylesheets().add(getClass().getResource("waitersControlPanel.css").toExternalForm());
