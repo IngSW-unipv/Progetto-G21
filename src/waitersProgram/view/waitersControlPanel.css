@@ -31,6 +31,7 @@
 .combo-box{
 	-fx-control-inner-background: #1E3986;
 	-fx-control-inner-text-color: white;
+	-fx-font-family: "Copperplate Gothic Light";
 	-fx-background-color: transparent;
 	-fx-border-color: #ed982e;
 	-fx-border-radius: 10px;
