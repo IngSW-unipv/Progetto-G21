@@ -55,6 +55,7 @@ public class Restaurant {
 	public static Restaurant getInstance() {
 		if (instance == null) {
 			instance = new Restaurant();
+			instance.createStrategies();
 		}
 		return instance;
 	}
@@ -88,13 +89,10 @@ public class Restaurant {
 			System.out.println(sr);
 			ClassInfoList cil = sr.getSubclasses("waitersProgram.strategies.StrategyAbstract");
 			List<Class<?>> lt = cil.loadClasses();
-			Iterator<Class<?>> iterator = lt.iterator();
-			while (iterator.hasNext()) {
-				Class<?> currentClass = iterator.next();
-				StrategyAbstract sa = ((StrategyAbstract) currentClass.getMethod("getInstance", Restaurant.class)
-						.invoke(Restaurant.getInstance()));
-				strategies.put(sa.getStrategyName(), sa);
+			for (Class<?> ct: lt) {
+				strategies.put(ct.getSimpleName(), ((StrategyAbstract)ct.getMethod("getInstance", Restaurant.class).invoke(ct, Restaurant.getInstance())));
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
