@@ -83,8 +83,15 @@ public class WaitersControlPanelController {
 		ordersList = FXCollections.observableArrayList(); // it works so far!
 		post = ListeningPost.getInstance(); // something wrong!
 
-		// fillTablesList();
-		// fillMenuEntriesList();
+		fillTablesList();
+		fillMenuEntriesList();
+
+		newOrderTableComboBox.setItems(tablesList);
+		removeTableComboBox.setItems(tablesList);
+		newBillTableComboBox.setItems(tablesList);
+		newOrderEntryComboBox.setItems(entriesList);
+		removeEntryComboBox.setItems(entriesList);
+
 		// tableColumn.setCellValueFactory(new PropertyValueFactory<Order,
 		// String>("Table"));
 		// orderColumn.setCellValueFactory(new PropertyValueFactory<Order,

@@ -41,23 +41,28 @@ public class ListeningPost extends Thread {
 	private ListeningPost() {
 		restaurant = Restaurant.getInstance();
 		bindController(restaurant);
-		setServerOnline();
-	}
 
-	private void setServerOnline() {
+		boolean isFailed = false;
 		try {
 			serverSocket = new ServerSocket(4999);
-			clientSocket = new Socket();
+			System.out.println("The program is running!");
 			clientSocket = serverSocket.accept();
-
 			readBuffer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 			writeBuffer = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
-
 			System.out.println("Server running!\n");
 			System.out.println(serverSocket.getLocalSocketAddress());
 			System.out.println(serverSocket.getLocalPort());
 		} catch (Exception e) {
-			e.printStackTrace();
+			isFailed = true;
+			System.err.println(e.getMessage());
+		} finally {
+			if (isFailed && clientSocket.isConnected()) {
+				try {
+					clientSocket.close();
+				} catch (IOException e) {
+					System.err.println(e.getMessage());
+				}
+			}
 		}
 	}
 
