@@ -1,6 +1,7 @@
 package waitersProgram.controller;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import io.github.classgraph.ClassGraph;
@@ -9,6 +10,17 @@ import io.github.classgraph.ScanResult;
 import waitersProgram.model.Menu;
 import waitersProgram.model.OrderManager;
 import waitersProgram.model.TableManager;
+import waitersProgram.strategies.AddNewEntryStrategy;
+import waitersProgram.strategies.AddNewTableStrategy;
+import waitersProgram.strategies.CreateNewOrderStrategy;
+import waitersProgram.strategies.PrintNewBillStrategy;
+import waitersProgram.strategies.RemoveEntryStrategy;
+import waitersProgram.strategies.RemoveOrderStrategy;
+import waitersProgram.strategies.RemoveTableStrategy;
+import waitersProgram.strategies.SetOrderToDeliveredStrategy;
+import waitersProgram.strategies.SetOrderToNotPreparableStrategy;
+import waitersProgram.strategies.SetOrderToPreparedStrategy;
+import waitersProgram.strategies.SetOrderToSeenStrategy;
 import waitersProgram.strategies.StrategyAbstract;
 
 /**
@@ -20,7 +32,6 @@ public class Restaurant {
 	private Menu restaurantMenu;
 	private OrderManager orderManager;
 	private TableManager tableManager;
-	private ListeningPost post;
 	private HashMap<String, StrategyAbstract> strategies;
 
 	/**
@@ -31,9 +42,7 @@ public class Restaurant {
 		restaurantMenu = Menu.getInstance();
 		orderManager = OrderManager.getInstance();
 		tableManager = TableManager.getInstance();
-		post = ListeningPost.getInstance();
-		post.bindController(this);
-		createStrategies();
+		createStrategiesWithoutClassGraph();
 	}
 
 	/**
@@ -72,26 +81,40 @@ public class Restaurant {
 	}
 
 	/**
-	 * @return ListeningPost instance.
-	 */
-	public ListeningPost getListeningPost() {
-		return post;
-	}
-
-	/**
 	 * Method that auto-instantiate strategies using classgraph.
 	 */
 	private void createStrategies() {
 		try (ScanResult sr = new ClassGraph().acceptPackages("waitersProgram.strategies").enableClassInfo().scan()) {
+			System.out.println(sr);
 			ClassInfoList cil = sr.getSubclasses("waitersProgram.strategies.StrategyAbstract");
 			List<Class<?>> lt = cil.loadClasses();
-			for (Class<?> ct : lt) {
-				strategies.put(((String) ct.getMethod("getStrategyName", ((Class<?>) null)).invoke(null)),
-						((StrategyAbstract) ct.getMethod("getInstance", this.getClass()).invoke(this)));
+			Iterator<Class<?>> iterator = lt.iterator();
+			while (iterator.hasNext()) {
+				Class<?> currentClass = iterator.next();
+				StrategyAbstract sa = ((StrategyAbstract) currentClass.getMethod("getInstance", Restaurant.class)
+						.invoke(Restaurant.getInstance()));
+				strategies.put(sa.getStrategyName(), sa);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Method that fills strategies HashMap without classgraph.
+	 */
+	private void createStrategiesWithoutClassGraph() {
+		strategies.put("AddNewEntryStrategy", AddNewEntryStrategy.getInstance(this));
+		strategies.put("AddNewTableStrategy", AddNewTableStrategy.getInstance(this));
+		strategies.put("CreateNewOrderStrategy", CreateNewOrderStrategy.getInstance(this));
+		strategies.put("PrintNewBillStrategy", PrintNewBillStrategy.getInstance(this));
+		strategies.put("RemoveEntryStrategy", RemoveEntryStrategy.getInstance(this));
+		strategies.put("RemoveOrderStrategy", RemoveOrderStrategy.getInstance(this));
+		strategies.put("RemoveTableStrategy", RemoveTableStrategy.getInstance(this));
+		strategies.put("SetOrderToDeliveredStrategy", SetOrderToDeliveredStrategy.getInstance(this));
+		strategies.put("SetOrderToNotPreparableStrategy", SetOrderToNotPreparableStrategy.getInstance(this));
+		strategies.put("SetOrderToPreparedStrategy", SetOrderToPreparedStrategy.getInstance(this));
+		strategies.put("SetOrderToSeenStrategy", SetOrderToSeenStrategy.getInstance(this));
 	}
 
 	/**

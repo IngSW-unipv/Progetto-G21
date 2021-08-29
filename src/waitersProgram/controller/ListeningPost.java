@@ -39,6 +39,8 @@ public class ListeningPost extends Thread {
 	 * Starts the server to allow connection and communication with ChefsController.
 	 */
 	private ListeningPost() {
+		restaurant = Restaurant.getInstance();
+		bindController(restaurant);
 		boolean isFailed = false;
 		try {
 			serverSocket = new ServerSocket(4999);

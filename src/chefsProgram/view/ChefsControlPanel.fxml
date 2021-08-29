@@ -9,9 +9,9 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #1E3986;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #1E3986;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chefsProgram.controller.ChefsControlPanelController">
    <children>
-      <Label fx:id="titleLabel1" layoutX="280.0" layoutY="14.0" text="Chef's control panel" underline="true">
+      <Label layoutX="280.0" layoutY="14.0" text="Chef's control panel" underline="true">
          <font>
             <Font name="Copperplate Gothic Bold" size="36.0" />
          </font>

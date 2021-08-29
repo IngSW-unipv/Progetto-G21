@@ -11,14 +11,12 @@ import org.controlsfx.control.SearchableComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import waitersProgram.model.Menu;
 import waitersProgram.model.MenuEntry;
 import waitersProgram.model.Order;
@@ -41,10 +39,10 @@ public class WaitersControlPanelController {
 
 	/** WaitersControlPanel's first tab FXML calls. */
 	@FXML
-	SearchableComboBox<String> newOrderTableComboBox;
-	SearchableComboBox<String> newOrderEntryComboBox;
+	ComboBox<String> newOrderTableComboBox;
+	ComboBox<String> newOrderEntryComboBox;
 	TextField addNewTableField;
-	SearchableComboBox<String> removeTableComboBox;
+	ComboBox<String> removeTableComboBox;
 	TableView<Order> ordersTableView;
 	TableColumn<Order, String> tableColumn, orderColumn, statusColumn;
 	TableColumn<Order, Void> actionColumn;
@@ -52,7 +50,7 @@ public class WaitersControlPanelController {
 
 	/** WaitersControlPanel's second tab FXML calls. */
 	@FXML
-	SearchableComboBox<String> newBillTableComboBox;
+	ComboBox<String> newBillTableComboBox;
 	TextArea billTextArea;
 	Label promptBillLabel;
 
@@ -70,6 +68,10 @@ public class WaitersControlPanelController {
 	private ObservableList<String> entriesList;
 	private ObservableList<Order> ordersList;
 
+	public WaitersControlPanelController() {
+
+	}
+
 	/**
 	 * Method required to initialize FXML elements.
 	 */
@@ -78,33 +80,33 @@ public class WaitersControlPanelController {
 		setInstance();
 		tablesList = FXCollections.observableArrayList();
 		entriesList = FXCollections.observableArrayList();
-		ordersList = FXCollections.observableArrayList();
-		post = ListeningPost.getInstance();
+		ordersList = FXCollections.observableArrayList(); // it works so far!
+		post = ListeningPost.getInstance(); // something wrong!
 
-		fillTablesList();
-		fillMenuEntriesList();
-		tableColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Table"));
-		orderColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Order"));
-		statusColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Status"));
+		// fillTablesList();
+		// fillMenuEntriesList();
+		// tableColumn.setCellValueFactory(new PropertyValueFactory<Order,
+		// String>("Table"));
+		// orderColumn.setCellValueFactory(new PropertyValueFactory<Order,
+		// String>("Order"));
+		// statusColumn.setCellValueFactory(new PropertyValueFactory<Order,
+		// String>("Status"));
 
 		WaitersControlPanelController mainController = this;
-		actionColumn.setCellFactory(col -> new TableCell<Order, Void>() {
+		/*
+		 * actionColumn.setCellFactory(col -> new TableCell<Order, Void>() {
+		 * 
+		 * private final Button actionButton;
+		 * 
+		 * { actionButton = new Button("Change status"); actionButton.setOnAction(new
+		 * ButtonClickEventHandler(mainController, this.getTableRow().getItem())); }
+		 * 
+		 * @Override protected void updateItem(Void item, boolean empty) {
+		 * super.updateItem(item, empty); setGraphic(empty ? null : actionButton); } });
+		 */
 
-			private final Button actionButton;
+		// ordersTableView.setItems(ordersList);
 
-			{
-				actionButton = new Button("Change status");
-				actionButton.setOnAction(new ButtonClickEventHandler(mainController, this.getTableRow().getItem()));
-			}
-
-			@Override
-			protected void updateItem(Void item, boolean empty) {
-				super.updateItem(item, empty);
-				setGraphic(empty ? null : actionButton);
-			}
-		});
-
-		ordersTableView.setItems(ordersList);
 	}
 
 	/**

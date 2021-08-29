@@ -11,14 +11,10 @@ import java.util.regex.Pattern;
 
 import chefsProgram.model.MenuEntry;
 import chefsProgram.model.Order;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * The ChefsGuiController class. It will be used to control the chef's graphical
@@ -46,35 +42,37 @@ public class ChefsControlPanelController extends Thread {
 	private BufferedWriter writeBuffer = null;
 	private String serverName = "localhost";
 
+	public ChefsControlPanelController() {
+
+	}
+
 	/**
 	 * Method required to initialize FXML elements.
 	 */
 	@FXML
 	private void initialize() {
-		ordersList = FXCollections.observableArrayList();
-		tableColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Table"));
-		orderColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Order"));
-		statusColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("Status"));
-
-		ChefsControlPanelController mainController = this;
-		actionColumn.setCellFactory(col -> new TableCell<Order, Void>() {
-
-			private final Button actionButton;
-
-			{
-				actionButton = new Button("Change status");
-				actionButton.setOnAction(new ButtonClickEventHandler(mainController, this.getTableRow().getItem()));
-			}
-
-			@Override
-			protected void updateItem(Void item, boolean empty) {
-				super.updateItem(item, empty);
-				setGraphic(empty ? null : actionButton);
-			}
-		});
-
-		ordersTableView.setItems(ordersList);
-		connect();
+		System.out.println("CIAO!");
+		/*
+		 * ordersList = FXCollections.observableArrayList();
+		 * tableColumn.setCellValueFactory(new PropertyValueFactory<Order,
+		 * String>("Table")); orderColumn.setCellValueFactory(new
+		 * PropertyValueFactory<Order, String>("Order"));
+		 * statusColumn.setCellValueFactory(new PropertyValueFactory<Order,
+		 * String>("Status"));
+		 * 
+		 * ChefsControlPanelController mainController = this;
+		 * actionColumn.setCellFactory(col -> new TableCell<Order, Void>() {
+		 * 
+		 * private final Button actionButton;
+		 * 
+		 * { actionButton = new Button("Change status"); actionButton.setOnAction(new
+		 * ButtonClickEventHandler(mainController, this.getTableRow().getItem())); }
+		 * 
+		 * @Override protected void updateItem(Void item, boolean empty) {
+		 * super.updateItem(item, empty); setGraphic(empty ? null : actionButton); } });
+		 * 
+		 * ordersTableView.setItems(ordersList); connect();
+		 */
 	}
 
 	/**
