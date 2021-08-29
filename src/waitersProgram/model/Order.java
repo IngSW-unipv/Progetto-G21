@@ -12,6 +12,8 @@ public class Order {
 	private int orderNum; // Numerical order's identifier.
 	private int tableNum; // Table's identifier.
 	private MenuEntry orderedEntry; // Ordered dish specified by a MenuEntry.
+	private String orderedEntryStringed;
+	private String orderStatusStringed;
 
 	// Order's status flags.
 	private boolean isSeen;
@@ -37,6 +39,9 @@ public class Order {
 		this.isPreparable = true;
 		this.isPrepared = false;
 		this.isDelivered = false;
+		String[] splitted = orderedEntry.toString().split(", ");
+		orderedEntryStringed = splitted[0];
+		orderStatusStringed = "NOT SEEN";
 	}
 
 	/**
@@ -59,6 +64,20 @@ public class Order {
 	 */
 	public MenuEntry getOrderedEntry() {
 		return orderedEntry;
+	}
+
+	/**
+	 * @return orderedEntryStringed.
+	 */
+	public String getOrderedEntryStringed() {
+		return orderedEntryStringed;
+	}
+
+	/**
+	 * @return orderStatusStringed.
+	 */
+	public String getOrderStatusStringed() {
+		return orderStatusStringed;
 	}
 
 	/**
@@ -97,6 +116,13 @@ public class Order {
 	}
 
 	/**
+	 * @param orderNum.
+	 */
+	public void setOrderNum(int orderNum) {
+		this.orderNum = orderNum;
+	}
+
+	/**
 	 * @param ordersCounter.
 	 */
 	public static void setOrdersCounter(int ordersCounter) {
@@ -108,6 +134,10 @@ public class Order {
 	 */
 	public void setSeen(boolean isSeen) {
 		this.isSeen = isSeen;
+
+		if (isSeen) {
+			orderStatusStringed = "SEEN";
+		}
 	}
 
 	/**
@@ -115,6 +145,12 @@ public class Order {
 	 */
 	public void setPreparable(boolean isPreparable) {
 		this.isPreparable = isPreparable;
+
+		if (this.isSeen && isPreparable) {
+			orderStatusStringed = "PREPARABLE";
+		} else if (this.isSeen == true && isPreparable == false) {
+			orderStatusStringed = "NOT PREPARABLE";
+		}
 	}
 
 	/**
@@ -122,6 +158,10 @@ public class Order {
 	 */
 	public void setPrepared(boolean isPrepared) {
 		this.isPrepared = isPrepared;
+
+		if (this.isSeen && this.isPreparable && this.isPrepared) {
+			orderStatusStringed = "PREPARED";
+		}
 	}
 
 	/**
@@ -129,6 +169,10 @@ public class Order {
 	 */
 	public void setDelivered(boolean isDelivered) {
 		this.isDelivered = isDelivered;
+
+		if (this.isSeen && this.isPreparable && this.isPrepared && isDelivered == true) {
+			orderStatusStringed = "DELIVERED";
+		}
 	}
 
 	/**
@@ -136,6 +180,6 @@ public class Order {
 	 */
 	@Override
 	public String toString() {
-		return "Order: " + orderNum + "table: " + tableNum + "entry: " + this.getOrderedEntry().getDishName();
+		return "Order: " + orderNum + " table: " + tableNum + " entry: " + this.getOrderedEntry().getDishName();
 	}
 }

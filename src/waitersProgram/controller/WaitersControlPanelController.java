@@ -1,5 +1,6 @@
 package waitersProgram.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -11,12 +12,16 @@ import org.controlsfx.control.SearchableComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import waitersProgram.model.Menu;
 import waitersProgram.model.MenuEntry;
 import waitersProgram.model.Order;
@@ -39,38 +44,29 @@ public class WaitersControlPanelController {
 
 	/** WaitersControlPanel's first tab FXML calls. */
 	@FXML
-	ComboBox<String> newOrderTableComboBox;
-	ComboBox<String> newOrderEntryComboBox;
-	TextField addNewTableField;
-	ComboBox<String> removeTableComboBox;
+	SearchableComboBox<String> newOrderTableComboBox, newOrderEntryComboBox, removeTableComboBox, newBillTableComboBox,
+			removeEntryComboBox;
+	@FXML
+	TextField addNewTableField, newEntryNameField, newEntryPriceField;
+
+	@FXML
 	TableView<Order> ordersTableView;
+
+	@FXML
 	TableColumn<Order, String> tableColumn, orderColumn, statusColumn;
-	TableColumn<Order, Void> actionColumn;
-	Label promptOrderTableLabel;
 
-	/** WaitersControlPanel's second tab FXML calls. */
 	@FXML
-	ComboBox<String> newBillTableComboBox;
-	TextArea billTextArea;
-	Label promptBillLabel;
+	Label promptOrderTableLabel, promptBillLabel, promptEntryLabel;
 
-	/** WaitersControlPanel's third tab FXML calls. */
 	@FXML
-	TextField newEntryNameField, newEntryPriceField;
-	SearchableComboBox<String> removeEntryComboBox;
-	TextArea menuTextArea;
-	Label promptEntryLabel;
+	TextArea billTextArea, menuTextArea;
 
 	private ListeningPost post;
 	private static WaitersControlPanelController instance = null;
 
-	private ObservableList<String> tablesList;
-	private ObservableList<String> entriesList;
-	private ObservableList<Order> ordersList;
-
-	public WaitersControlPanelController() {
-
-	}
+	private ObservableList<String> tablesList = FXCollections.observableArrayList();
+	private ObservableList<String> entriesList = FXCollections.observableArrayList();
+	private ObservableList<Order> ordersList = FXCollections.observableArrayList();
 
 	/**
 	 * Method required to initialize FXML elements.
@@ -78,49 +74,61 @@ public class WaitersControlPanelController {
 	@FXML
 	private void initialize() {
 		setInstance();
-		tablesList = FXCollections.observableArrayList();
-		entriesList = FXCollections.observableArrayList();
-		ordersList = FXCollections.observableArrayList(); // it works so far!
-		post = ListeningPost.getInstance(); // something wrong!
-
 		fillTablesList();
 		fillMenuEntriesList();
-
 		newOrderTableComboBox.setItems(tablesList);
 		removeTableComboBox.setItems(tablesList);
 		newBillTableComboBox.setItems(tablesList);
 		newOrderEntryComboBox.setItems(entriesList);
 		removeEntryComboBox.setItems(entriesList);
+		ordersTableView.setItems(ordersList);
 
-		// tableColumn.setCellValueFactory(new PropertyValueFactory<Order,
-		// String>("Table"));
-		// orderColumn.setCellValueFactory(new PropertyValueFactory<Order,
-		// String>("Order"));
-		// statusColumn.setCellValueFactory(new PropertyValueFactory<Order,
-		// String>("Status"));
+		// For test purposes
+		ordersList.add(new Order(32, new MenuEntry("Pasta al pomodoro, 4")));
+		ordersList.add(new Order(32, new MenuEntry("Lasagne, 5")));
 
-		WaitersControlPanelController mainController = this;
-		/*
-		 * actionColumn.setCellFactory(col -> new TableCell<Order, Void>() {
-		 * 
-		 * private final Button actionButton;
-		 * 
-		 * { actionButton = new Button("Change status"); actionButton.setOnAction(new
-		 * ButtonClickEventHandler(mainController, this.getTableRow().getItem())); }
-		 * 
-		 * @Override protected void updateItem(Void item, boolean empty) {
-		 * super.updateItem(item, empty); setGraphic(empty ? null : actionButton); } });
-		 */
+		tableColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("tableNum"));
+		orderColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("orderedEntryStringed"));
+		statusColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("orderStatusStringed"));
 
-		// ordersTableView.setItems(ordersList);
+		// post = ListeningPost.getInstance();
+	}
 
+	/**
+	 * Method used to show WaitersOrderUpdateFrame. Triggered by mouse click on
+	 * table rows.
+	 */
+	@FXML
+	private void handleRowSelect() {
+		Order row = ordersTableView.getSelectionModel().getSelectedItem();
+		if (row != null) {
+			FXMLLoader fxmlLoader = new FXMLLoader(
+					getClass().getResource("/waitersProgram/view/WaitersOrderUpdateFrame.fxml"));
+			try {
+				Parent root = fxmlLoader.load();
+				Stage stage = new Stage();
+				stage.setTitle("Update order status!");
+				Scene scene = new Scene(root);
+				scene.getStylesheets().add(
+						getClass().getResource("/waitersProgram/view/waitersOrderUpdateFrame.css").toExternalForm());
+				stage.setScene(scene);
+				// WaitersOrderUpdateFrameController updateFrameController =
+				// fxmlLoader.getController();
+				// updateFrameController.setMainController(this);
+				// updateFrameController.setOrder(row);
+				System.out.println(row.toString());
+				stage.show();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**
 	 * Private method called in the constructor and in addNewTable(), removeTable().
 	 * It's used to update tables ObservableList.
 	 */
-	private void fillTablesList() {
+	public void fillTablesList() {
 		tablesList.clear();
 		TableManager tableManager = Restaurant.getInstance().getTableManager();
 		Iterator<Integer> iterator = tableManager.getTables().iterator();
@@ -134,7 +142,7 @@ public class WaitersControlPanelController {
 	 * Private method called in the constructor and in addNewEntry(), removeEntry().
 	 * It's used to update entries ObservableList.
 	 */
-	private void fillMenuEntriesList() {
+	public void fillMenuEntriesList() {
 		entriesList.clear();
 		Menu menu = Restaurant.getInstance().getRestaurantMenu();
 		Iterator<MenuEntry> iterator = menu.getEntriesCollection().iterator();

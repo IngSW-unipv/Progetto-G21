@@ -42,5 +42,8 @@
 	-fx-focus-color: #ed982e;
 	-fx-faint-focus-color: #ed982e;
 	/*-fx-border-radius: 5px;*/
-	
+}
+
+.table-view{
+	-fx-text-fill: black;
 }

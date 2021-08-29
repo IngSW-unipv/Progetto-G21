@@ -37,12 +37,11 @@
             </RadialGradient>
          </textFill>
       </Label>
-      <TableView fx:id="ordersTableView" layoutY="80.0" prefHeight="720.0" prefWidth="1000.0" style="-fx-font-family: &quot;Copperplate Gothic Light&quot;;">
+      <TableView fx:id="ordersTableView" layoutY="80.0" onMouseClicked="#handleRowSelect" prefHeight="720.0" prefWidth="1000.0" style="-fx-font-family: &quot;Copperplate Gothic Light&quot;;">
         <columns>
-          <TableColumn fx:id="tableColumn" prefWidth="100.0" resizable="false" text="Table" />
-          <TableColumn fx:id="orderColumn" prefWidth="500.0" resizable="false" text="Order" />
-            <TableColumn fx:id="statusColumn" prefWidth="200.0" text="Status" />
-            <TableColumn fx:id="actionColumn" prefWidth="200.0" text="Action" />
+          <TableColumn fx:id="tableColumn" editable="false" prefWidth="200.0" resizable="false" sortable="false" text="Table" />
+          <TableColumn fx:id="orderColumn" editable="false" prefWidth="500.0" resizable="false" sortable="false" text="Order" />
+            <TableColumn fx:id="statusColumn" editable="false" prefWidth="300.0" sortable="false" text="Status" />
         </columns>
       </TableView>
    </children>

@@ -11,10 +11,16 @@ import java.util.regex.Pattern;
 
 import chefsProgram.model.MenuEntry;
 import chefsProgram.model.Order;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 /**
  * The ChefsGuiController class. It will be used to control the chef's graphical
@@ -32,47 +38,65 @@ public class ChefsControlPanelController extends Thread {
 	/** ChefsControlPanel FXML calls. */
 	@FXML
 	TableView<Order> ordersTableView;
-	TableColumn<Order, String> tableColumn, orderColumn, statusColumn;
-	TableColumn<Order, Void> actionColumn;
 
-	private ObservableList<Order> ordersList;
+	@FXML
+	TableColumn<Order, String> tableColumn, orderColumn, statusColumn;
+
+	private ObservableList<Order> ordersList = FXCollections.observableArrayList();
 
 	private Socket serverSocket = null; // = new Socket("localhost", 4999);
 	private BufferedReader readBuffer = null;
 	private BufferedWriter writeBuffer = null;
 	private String serverName = "localhost";
 
-	public ChefsControlPanelController() {
-
-	}
-
 	/**
 	 * Method required to initialize FXML elements.
 	 */
 	@FXML
 	private void initialize() {
-		System.out.println("CIAO!");
-		/*
-		 * ordersList = FXCollections.observableArrayList();
-		 * tableColumn.setCellValueFactory(new PropertyValueFactory<Order,
-		 * String>("Table")); orderColumn.setCellValueFactory(new
-		 * PropertyValueFactory<Order, String>("Order"));
-		 * statusColumn.setCellValueFactory(new PropertyValueFactory<Order,
-		 * String>("Status"));
-		 * 
-		 * ChefsControlPanelController mainController = this;
-		 * actionColumn.setCellFactory(col -> new TableCell<Order, Void>() {
-		 * 
-		 * private final Button actionButton;
-		 * 
-		 * { actionButton = new Button("Change status"); actionButton.setOnAction(new
-		 * ButtonClickEventHandler(mainController, this.getTableRow().getItem())); }
-		 * 
-		 * @Override protected void updateItem(Void item, boolean empty) {
-		 * super.updateItem(item, empty); setGraphic(empty ? null : actionButton); } });
-		 * 
-		 * ordersTableView.setItems(ordersList); connect();
-		 */
+		ordersTableView.setItems(ordersList);
+
+		// For test purposes
+		ordersList.add(new Order(32, new MenuEntry("Pasta al pomodoro, 4")));
+		Order order = new Order(32, new MenuEntry("Lasagne, 5"));
+		ordersList.add(order);
+		modifyOrderStatus(order.getOrderNum(), OrderStatus.NOT_PREPARABLE);
+
+		tableColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("tableNum"));
+		orderColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("orderedEntryStringed"));
+		statusColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("orderStatusStringed"));
+
+		// connect();
+	}
+
+	/**
+	 * Method used to show ChefsOrderUpdateFrame. Triggered by mouse click on table
+	 * rows.
+	 */
+	@FXML
+	private void handleRowSelect() {
+		Order row = ordersTableView.getSelectionModel().getSelectedItem();
+		if (row != null) {
+			try {
+				FXMLLoader fxmlLoader = new FXMLLoader(
+						getClass().getResource("/chefsProgram/view/ChefsOrderUpdateFrame.fxml"));
+				Parent root = fxmlLoader.load();
+				Stage stage = new Stage();
+				stage.setTitle("Update order status!");
+				Scene scene = new Scene(root);
+				scene.getStylesheets()
+						.add(getClass().getResource("/chefsProgram/view/chefsOrderUpdateFrame.css").toExternalForm());
+				stage.setScene(scene);
+				// ChefsOrderUpdateFrameController updateFrameController =
+				// fxmlLoader.getController();
+				// updateFrameController.setMainController(this);
+				// updateFrameController.setOrder(row);
+				stage.show();
+				System.out.println(row);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**
