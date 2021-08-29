@@ -55,7 +55,7 @@ public class Restaurant {
 	public static Restaurant getInstance() {
 		if (instance == null) {
 			instance = new Restaurant();
-			instance.createStrategies();
+			//instance.createStrategies();
 		}
 		return instance;
 	}
