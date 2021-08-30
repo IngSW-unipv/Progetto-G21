@@ -53,7 +53,7 @@
                                     <Font name="Copperplate Gothic Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <SearchableComboBox fx:id="newOrderTableComboBox" layoutX="147.0" layoutY="60.0" prefWidth="150.0 style="-fx-font-family: &quot;Copperplate Gothic Light&quot;;" />
+                              <SearchableComboBox fx:id="newOrderTableComboBox" layoutX="147.0" layoutY="60" prefWidth="150.0" style="-fx-font-family: &quot;Copperplate Gothic Light&quot;;" />
                               <SearchableComboBox fx:id="newOrderEntryComboBox" layoutX="147.0" layoutY="100.0" prefWidth="150.0" style="-fx-font-family: &quot;Copperplate Gothic Light&quot;;" />
                            </children>
                         </Pane>
