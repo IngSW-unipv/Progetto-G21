@@ -12,6 +12,8 @@ public class WaitersOrderUpdateFrameController {
 	/** WaitersOrderUpdateFrame FXML calls. */
 	@FXML
 	Label tableLabel, orderLabel, orderNumberLabel, removeErrorLabel;
+
+	@FXML
 	CheckBox deliveredCheckBox;
 
 	/**
@@ -42,15 +44,14 @@ public class WaitersOrderUpdateFrameController {
 		String tableLabelString = Integer.toString(order.getTableNum());
 		String orderLabelString = order.getOrderedEntry().toString();
 		String orderNumberLabelString = Integer.toString(order.getOrderNum());
-		tableLabel.setText(tableLabelString);
-		orderLabel.setText(orderLabelString);
-		orderNumberLabel.setText(orderNumberLabelString);
+		tableLabel.setText("Table: " + tableLabelString);
+		orderLabel.setText("Order: " + orderLabelString);
+		orderNumberLabel.setText("Order number: " + orderNumberLabelString);
 	}
 
 	/** Small method used to initialize the checkBoxes. */
 	public void setCheckBoxes() {
 		deliveredCheckBox.setSelected(order.isDelivered());
-
 		if (deliveredCheckBox.isSelected()) {
 			deliveredCheckBox.setDisable(true);
 		}
@@ -58,21 +59,19 @@ public class WaitersOrderUpdateFrameController {
 
 	/** Method triggered by removeOrderButton. */
 	public void removeOrder() {
-		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
-		String orderNum = orderNumberLabelSplitted[1].trim();
-		Order currentOrder = mainController.searchForAnOrder(Integer.parseInt(orderNum));
-		boolean isSeen = currentOrder.isSeen();
-		boolean isPreparable = currentOrder.isPreparable();
-		boolean isPrepared = currentOrder.isPrepared();
-		boolean isDelivered = currentOrder.isDelivered();
+		String orderNumber = Integer.toString(order.getOrderNum());
+		boolean isSeen = order.isSeen();
+		boolean isPreparable = order.isPreparable();
+		boolean isPrepared = order.isPrepared();
+		boolean isDelivered = order.isDelivered();
 		if ((isSeen == false) && (isPreparable == true) && (isPrepared == false) && (isDelivered == false)) {
 			String[] parameters = new String[1];
-			parameters[0] = orderNum;
+			parameters[0] = orderNumber;
 			mainController.getPost().notifyMainController("RemoveOrderStrategy", parameters);
-			mainController.modifyOrderStatus(Integer.parseInt(parameters[0]), OrderStatus.DELIVERED);
-			mainController.removeOrderFromTableView(currentOrder);
+			mainController.modifyOrderStatus(order.getOrderNum(), OrderStatus.DELIVERED);
+			mainController.removeOrderFromTableView(order);
 		} else if ((isSeen == true) && (isPreparable == false) && (isPrepared == false) && (isDelivered == false)) {
-			mainController.removeOrderFromTableView(currentOrder);
+			mainController.removeOrderFromTableView(order);
 		} else {
 			removeErrorLabel.setText("The order can't be removed!");
 		}
@@ -80,19 +79,17 @@ public class WaitersOrderUpdateFrameController {
 
 	/** Method triggered by deliveredCheckBox. */
 	public void setOrderToDelivered() {
-		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
-		String orderNum = orderNumberLabelSplitted[1].trim();
-		Order currentOrder = mainController.searchForAnOrder(Integer.parseInt(orderNum));
-		boolean isSeen = currentOrder.isSeen();
-		boolean isPreparable = currentOrder.isPreparable();
-		boolean isPrepared = currentOrder.isPrepared();
-		boolean isDelivered = currentOrder.isDelivered();
+		String orderNumber = Integer.toString(order.getOrderNum());
+		boolean isSeen = order.isSeen();
+		boolean isPreparable = order.isPreparable();
+		boolean isPrepared = order.isPrepared();
+		boolean isDelivered = order.isDelivered();
 		if ((isSeen == true) && (isPreparable == true) && (isPrepared == true) && (isDelivered == false)) {
 			String[] parameters = new String[1];
-			parameters[0] = orderNum;
+			parameters[0] = orderNumber;
 			mainController.getPost().notifyMainController("SetOrderToDeliveredStrategy", parameters);
 			mainController.modifyOrderStatus(Integer.parseInt(parameters[0]), OrderStatus.DELIVERED);
-			mainController.removeOrderFromTableView(currentOrder);
+			mainController.removeOrderFromTableView(order);
 		} else {
 			deliveredCheckBox.setSelected(false);
 		}

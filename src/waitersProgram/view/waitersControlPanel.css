@@ -28,13 +28,14 @@
 	-fx-text-inner-color: white;
 }
 
-.combo-box{
+.combo-box {
 	-fx-control-inner-background: #1E3986;
 	-fx-control-inner-text-color: white;
 	-fx-font-family: "Copperplate Gothic Light";
 	-fx-background-color: transparent;
 	-fx-border-color: #ed982e;
 	-fx-border-radius: 10px;
+	-fx-text-fill: white;
 	/*-fx-control-inner-color: #ed982e;*/
 	
 	-fx-accent: #ed982e;
@@ -43,6 +44,10 @@
 	-fx-focus-color: #ed982e;
 	-fx-faint-focus-color: #ed982e;
 	/*-fx-border-radius: 5px;*/
+}
+
+.combo-box .list-cell{
+	-fx-text-fill: white;	
 }
 
 .table-view{

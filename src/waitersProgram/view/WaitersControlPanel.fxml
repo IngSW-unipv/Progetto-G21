@@ -48,7 +48,7 @@
                                     <Insets />
                                  </opaqueInsets>
                               </Label>
-                              <Button fx:id="createNewOrderButton" layoutX="185.0" layoutY="140.0" mnemonicParsing="false" text="Create">
+                              <Button fx:id="createNewOrderButton" layoutX="185.0" layoutY="140.0" mnemonicParsing="false" onAction="#createNewOrder" text="Create">
                                  <font>
                                     <Font name="Copperplate Gothic Bold" size="14.0" />
                                  </font>
@@ -73,7 +73,7 @@
                                  </opaqueInsets>
                               </Label>
                               <TextField fx:id="addNewTableField" layoutX="150.0" layoutY="60.0" prefWidth="150.0" style="-fx-border-color: #ed982e;" />
-                              <Button fx:id="addNewTableButton" layoutX="200.0" layoutY="100.0" mnemonicParsing="false" text="Add">
+                              <Button fx:id="addNewTableButton" layoutX="200.0" layoutY="100.0" mnemonicParsing="false" onAction="#addNewTable" text="Add">
                                  <font>
                                     <Font name="Copperplate Gothic Bold" size="14.0" />
                                  </font>
@@ -95,7 +95,7 @@
                                     <Insets />
                                  </opaqueInsets>
                               </Label>
-                              <Button fx:id="removeTableButton" layoutX="183.0" layoutY="100.0" mnemonicParsing="false" text="Remove">
+                              <Button fx:id="removeTableButton" layoutX="183.0" layoutY="100.0" mnemonicParsing="false" onAction="#removeTable" text="Remove">
                                  <font>
                                     <Font name="Copperplate Gothic Bold" size="14.0" />
                                  </font>
@@ -138,7 +138,7 @@
                                     <Font name="Copperplate Gothic Light" size="18.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="printBillButton" layoutX="192.0" layoutY="100.0" mnemonicParsing="false" text="Print">
+                              <Button fx:id="printBillButton" layoutX="192.0" layoutY="100.0" mnemonicParsing="false" onAction="#printNewBill" text="Print">
                                  <font>
                                     <Font name="Copperplate Gothic Bold" size="14.0" />
                                  </font>
@@ -179,7 +179,7 @@
                               </Label>
                               <TextField fx:id="newEntryNameField" layoutX="150.0" layoutY="60.0" style="-fx-border-color: #ed982e;" />
                               <TextField fx:id="newEntryPriceField" layoutX="150.0" layoutY="100.0" style="-fx-border-color: #ed982e;" />
-                              <Button fx:id="addNewEntryButton" layoutX="200.0" layoutY="140.0" mnemonicParsing="false" text="Add">
+                              <Button fx:id="addNewEntryButton" layoutX="200.0" layoutY="140.0" mnemonicParsing="false" onAction="#addNewEntry" text="Add">
                                  <font>
                                     <Font name="Copperplate Gothic Bold" size="14.0" />
                                  </font>
@@ -193,7 +193,7 @@
                                     <Font name="Copperplate Gothic Light" size="24.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="removeMenuEntryButton" layoutX="183.0" layoutY="100.0" mnemonicParsing="false" text="Remove">
+                              <Button fx:id="removeMenuEntryButton" layoutX="183.0" layoutY="100.0" mnemonicParsing="false" onAction="#removeEntry" text="Remove">
                                  <font>
                                     <Font name="Copperplate Gothic Bold" size="14.0" />
                                  </font>

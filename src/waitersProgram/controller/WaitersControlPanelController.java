@@ -76,6 +76,7 @@ public class WaitersControlPanelController {
 		setInstance();
 		fillTablesList();
 		fillMenuEntriesList();
+
 		newOrderTableComboBox.setItems(tablesList);
 		removeTableComboBox.setItems(tablesList);
 		newBillTableComboBox.setItems(tablesList);
@@ -112,10 +113,9 @@ public class WaitersControlPanelController {
 				scene.getStylesheets().add(
 						getClass().getResource("/waitersProgram/view/waitersOrderUpdateFrame.css").toExternalForm());
 				stage.setScene(scene);
-				// WaitersOrderUpdateFrameController updateFrameController =
-				// fxmlLoader.getController();
-				// updateFrameController.setMainController(this);
-				// updateFrameController.setOrder(row);
+				WaitersOrderUpdateFrameController updateFrameController = fxmlLoader.getController();
+				updateFrameController.setOrder(row);
+				updateFrameController.setMainController(this);
 				System.out.println(row.toString());
 				stage.show();
 			} catch (IOException e) {
@@ -207,31 +207,16 @@ public class WaitersControlPanelController {
 		return instance;
 	}
 
-	/**
-	 * Private method used to get an order from the orders ObservableList.
-	 * 
-	 * @param orderNum specify the order number.
-	 * @return order instance.
-	 */
-	public Order searchForAnOrder(int orderNum) {
-		Iterator<Order> iterator = ordersList.iterator();
-		Order currentOrder = null;
-		while (iterator.hasNext()) {
-			currentOrder = iterator.next();
-			if (currentOrder.getOrderNum() == orderNum) {
-				break;
-			}
-		}
-		return currentOrder;
-	}
-
 	/** Method triggered by createNewOrderButton. */
 	public void createNewOrder() {
-		String[] parameters = new String[2];
-		parameters[0] = newOrderTableComboBox.getValue().trim();
-		parameters[1] = newOrderEntryComboBox.getValue().trim();
-		post.notifyMainController("CreateNewOrderStrategy", parameters);
-		addOrderToTableView(CreateNewOrderStrategy.getOrder());
+		if ((!newOrderTableComboBox.getSelectionModel().isEmpty())
+				&& (!newOrderEntryComboBox.getSelectionModel().isEmpty())) {
+			String[] parameters = new String[2];
+			parameters[0] = newOrderTableComboBox.getValue().trim();
+			parameters[1] = newOrderEntryComboBox.getValue().trim();
+			post.notifyMainController("CreateNewOrderStrategy", parameters);
+			addOrderToTableView(CreateNewOrderStrategy.getOrder());
+		}
 	}
 
 	/** Method triggered by addNewTableButton. */
@@ -248,28 +233,32 @@ public class WaitersControlPanelController {
 
 	/** Method triggered by removeTableButton. */
 	public void removeTable() {
-		String[] parameters = new String[1];
-		parameters[0] = removeTableComboBox.getValue().trim();
-		post.notifyMainController("RemoveTableStrategy", parameters);
-		fillTablesList();
+		if (!removeTableComboBox.getSelectionModel().isEmpty()) {
+			String[] parameters = new String[1];
+			parameters[0] = removeTableComboBox.getValue().trim();
+			post.notifyMainController("RemoveTableStrategy", parameters);
+			fillTablesList();
+		}
 	}
 
 	/** Method triggered by printBillButton. */
 	public void printNewBill() {
-		billTextArea.clear();
-		String[] parameters = new String[1];
-		parameters[0] = newBillTableComboBox.getValue().trim();
-		post.notifyMainController("PrintNewBillStrategy", parameters);
-		ArrayList<Order> orderToBeRemoved = new ArrayList<Order>(0);
-		Iterator<Order> iterator = ordersList.iterator();
-		while (iterator.hasNext()) {
-			Order currentOrder = iterator.next();
-			if (currentOrder.getTableNum() == Integer.parseInt(parameters[0])) {
-				orderToBeRemoved.add(currentOrder);
+		if (!newBillTableComboBox.getSelectionModel().isEmpty()) {
+			billTextArea.clear();
+			String[] parameters = new String[1];
+			parameters[0] = newBillTableComboBox.getValue().trim();
+			post.notifyMainController("PrintNewBillStrategy", parameters);
+			ArrayList<Order> orderToBeRemoved = new ArrayList<Order>(0);
+			Iterator<Order> iterator = ordersList.iterator();
+			while (iterator.hasNext()) {
+				Order currentOrder = iterator.next();
+				if (currentOrder.getTableNum() == Integer.parseInt(parameters[0])) {
+					orderToBeRemoved.add(currentOrder);
+				}
 			}
+			ordersList.removeAll(orderToBeRemoved);
+			billTextArea.setText(PrintNewBillStrategy.getBill().toString());
 		}
-		ordersList.removeAll(orderToBeRemoved);
-		billTextArea.setText(PrintNewBillStrategy.getBill().toString());
 	}
 
 	/** Method triggered by addNewEntryButton. */
@@ -289,11 +278,13 @@ public class WaitersControlPanelController {
 
 	/** Method triggered by removeMenuEntryButton. */
 	public void removeEntry() {
-		String[] parameters = new String[1];
-		parameters[0] = removeEntryComboBox.getValue().trim();
-		post.notifyMainController("RemoveEntryStrategy", parameters);
-		fillMenuEntriesList();
-		printMenuInTextArea();
+		if (!removeEntryComboBox.getSelectionModel().isEmpty()) {
+			String[] parameters = new String[1];
+			parameters[0] = removeEntryComboBox.getValue().trim();
+			post.notifyMainController("RemoveEntryStrategy", parameters);
+			fillMenuEntriesList();
+			printMenuInTextArea();
+		}
 	}
 
 	/** Method called by addNewEntry() & removeEntry(). */

@@ -87,10 +87,9 @@ public class ChefsControlPanelController extends Thread {
 				scene.getStylesheets()
 						.add(getClass().getResource("/chefsProgram/view/chefsOrderUpdateFrame.css").toExternalForm());
 				stage.setScene(scene);
-				// ChefsOrderUpdateFrameController updateFrameController =
-				// fxmlLoader.getController();
-				// updateFrameController.setMainController(this);
-				// updateFrameController.setOrder(row);
+				ChefsOrderUpdateFrameController updateFrameController = fxmlLoader.getController();
+				updateFrameController.setOrder(row);
+				updateFrameController.setMainController(this);
 				stage.show();
 				System.out.println(row);
 			} catch (IOException e) {
@@ -104,24 +103,6 @@ public class ChefsControlPanelController extends Thread {
 	 */
 	public String getServerName() {
 		return serverName;
-	}
-
-	/**
-	 * Private method used to get an order from the orders ObservableList.
-	 * 
-	 * @param orderNum specify the order number.
-	 * @return order instance.
-	 */
-	public Order searchForAnOrder(int orderNum) {
-		Iterator<Order> iterator = ordersList.iterator();
-		Order currentOrder = null;
-		while (iterator.hasNext()) {
-			currentOrder = iterator.next();
-			if (currentOrder.getOrderNum() == orderNum) {
-				break;
-			}
-		}
-		return currentOrder;
 	}
 
 	/**

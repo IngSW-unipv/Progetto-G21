@@ -47,6 +47,7 @@ public class ListeningPost extends Thread {
 			serverSocket = new ServerSocket(4999);
 			System.out.println("The program is running!");
 			clientSocket = serverSocket.accept();
+			this.start();
 			readBuffer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 			writeBuffer = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
 			System.out.println("Server running!\n");

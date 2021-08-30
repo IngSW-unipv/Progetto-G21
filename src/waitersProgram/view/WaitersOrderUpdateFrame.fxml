@@ -6,14 +6,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: #1E3986;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: #1E3986;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="waitersProgram.controller.WaitersOrderUpdateFrameController">
    <children>
       <Label fx:id="orderLabel" layoutX="12.0" layoutY="50.0" text="Order:" textFill="WHITE">
          <font>
             <Font name="Copperplate Gothic Light" size="24.0" />
          </font>
       </Label>
-      <CheckBox fx:id="deliveredCheckBox" layoutX="644.0" layoutY="355.0" mnemonicParsing="false" style="-fx-border-color: #ed982e; -fx-border-style: dashed; -fx-padding: 4; -fx-border-width: 2 2 2 2;" text="Delivered" textFill="WHITE">
+      <CheckBox fx:id="deliveredCheckBox" layoutX="644.0" layoutY="355.0" mnemonicParsing="false" onAction="#setOrderToDelivered" style="-fx-border-color: #ed982e; -fx-border-style: dashed; -fx-padding: 4; -fx-border-width: 2 2 2 2;" text="Delivered" textFill="WHITE">
          <font>
             <Font name="Copperplate Gothic Light" size="18.0" />
          </font>
@@ -28,7 +28,7 @@
             <Font name="Copperplate Gothic Light" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="removeOrderButton" layoutX="12.0" layoutY="360.0" mnemonicParsing="false" text="Remove order">
+      <Button fx:id="removeOrderButton" layoutX="12.0" layoutY="360.0" mnemonicParsing="false" onAction="#removeOrder" text="Remove order">
          <font>
             <Font name="Copperplate Gothic Bold" size="14.0" />
          </font>

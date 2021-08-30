@@ -12,6 +12,8 @@ public class ChefsOrderUpdateFrameController {
 	/** ChefsOrderUpdateFrame FXML calls. */
 	@FXML
 	Label tableLabel, orderLabel, orderNumberLabel;
+
+	@FXML
 	CheckBox seenCheckBox, notPreparableCheckBox, preparedCheckBox;
 
 	/**
@@ -42,9 +44,9 @@ public class ChefsOrderUpdateFrameController {
 		String tableLabelString = Integer.toString(order.getTableNum());
 		String orderLabelString = order.getOrderedEntry().toString();
 		String orderNumberLabelString = Integer.toString(order.getOrderNum());
-		tableLabel.setText(tableLabelString);
-		orderLabel.setText(orderLabelString);
-		orderNumberLabel.setText(orderNumberLabelString);
+		tableLabel.setText("Table: " + tableLabelString);
+		orderLabel.setText("Order: " + orderLabelString);
+		orderNumberLabel.setText("Order number: " + orderNumberLabelString);
 	}
 
 	/** Small method used to initialize the checkBoxes. */
@@ -59,6 +61,7 @@ public class ChefsOrderUpdateFrameController {
 
 		if (notPreparableCheckBox.isSelected()) {
 			notPreparableCheckBox.setDisable(true);
+			preparedCheckBox.setDisable(true);
 		}
 
 		if (preparedCheckBox.isSelected()) {
@@ -71,15 +74,13 @@ public class ChefsOrderUpdateFrameController {
 	 * sendMessage method, which sends a string to the server (ListeningPost).
 	 */
 	public void setOrderToSeen() {
-		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
-		String orderNum = orderNumberLabelSplitted[1].trim();
-		Order currentOrder = mainController.searchForAnOrder(Integer.parseInt(orderNum));
-		boolean isSeen = currentOrder.isSeen();
-		boolean isPreparable = currentOrder.isPreparable();
-		boolean isPrepared = currentOrder.isPrepared();
-		boolean isDelivered = currentOrder.isDelivered();
+		String orderNumber = Integer.toString(order.getOrderNum());
+		boolean isSeen = order.isSeen();
+		boolean isPreparable = order.isPreparable();
+		boolean isPrepared = order.isPrepared();
+		boolean isDelivered = order.isDelivered();
 		if ((isSeen == false) && (isPreparable == true) && (isPrepared == false) && (isDelivered == false)) {
-			mainController.sendMessage("SetOrderToSeenStrategy, " + orderNum);
+			mainController.sendMessage("SetOrderToSeenStrategy, " + orderNumber);
 		} else {
 			seenCheckBox.setSelected(false);
 		}
@@ -91,16 +92,14 @@ public class ChefsOrderUpdateFrameController {
 	 * string to the server (ListeningPost).
 	 */
 	public void setOrderToNotPreparable() {
-		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
-		String orderNum = orderNumberLabelSplitted[1].trim();
-		Order currentOrder = mainController.searchForAnOrder(Integer.parseInt(orderNum));
-		boolean isSeen = currentOrder.isSeen();
-		boolean isPreparable = currentOrder.isPreparable();
-		boolean isPrepared = currentOrder.isPrepared();
-		boolean isDelivered = currentOrder.isDelivered();
+		String orderNumber = Integer.toString(order.getOrderNum());
+		boolean isSeen = order.isSeen();
+		boolean isPreparable = order.isPreparable();
+		boolean isPrepared = order.isPrepared();
+		boolean isDelivered = order.isDelivered();
 		if ((isSeen == false) && (isPreparable == true) && (isPrepared == false) && (isDelivered == false)) {
-			mainController.sendMessage("SetOrderToNotPreparableStrategy, " + orderNum);
-			mainController.removeOrderFromTableView(currentOrder.getOrderNum());
+			mainController.sendMessage("SetOrderToNotPreparableStrategy, " + orderNumber);
+			mainController.removeOrderFromTableView(order.getOrderNum());
 		} else {
 			notPreparableCheckBox.setSelected(false);
 		}
@@ -111,15 +110,13 @@ public class ChefsOrderUpdateFrameController {
 	 * the sendMessage method, which sends a string to the server (ListeningPost).
 	 */
 	public void setOrderToPrepared() {
-		String[] orderNumberLabelSplitted = orderNumberLabel.getText().split(" ");
-		String orderNum = orderNumberLabelSplitted[1].trim();
-		Order currentOrder = mainController.searchForAnOrder(Integer.parseInt(orderNum));
-		boolean isSeen = currentOrder.isSeen();
-		boolean isPreparable = currentOrder.isPreparable();
-		boolean isPrepared = currentOrder.isPrepared();
-		boolean isDelivered = currentOrder.isDelivered();
+		String orderNumber = Integer.toString(order.getOrderNum());
+		boolean isSeen = order.isSeen();
+		boolean isPreparable = order.isPreparable();
+		boolean isPrepared = order.isPrepared();
+		boolean isDelivered = order.isDelivered();
 		if ((isSeen == true) && (isPreparable == true) && (isPrepared == false) && (isDelivered == false)) {
-			mainController.sendMessage("SetOrderToPreparedStrategy, " + orderNum);
+			mainController.sendMessage("SetOrderToPreparedStrategy, " + orderNumber);
 		} else {
 			preparedCheckBox.setSelected(false);
 		}
