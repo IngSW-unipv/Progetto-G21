@@ -2,11 +2,14 @@ package chefsProgram.controller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Iterator;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import chefsProgram.model.MenuEntry;
@@ -44,9 +47,9 @@ public class ChefsControlPanelController extends Thread {
 
 	private ObservableList<Order> ordersList = FXCollections.observableArrayList();
 
-	private Socket serverSocket = null; // = new Socket("localhost", 4999);
-	private BufferedReader readBuffer = null;
-	private BufferedWriter writeBuffer = null;
+	private Socket clientSocket = null; // = new Socket("localhost", 4999);
+	private Scanner inputStream = null;
+	private PrintWriter outputStream = null;
 	private String serverName = "localhost";
 
 	/**
@@ -57,16 +60,16 @@ public class ChefsControlPanelController extends Thread {
 		ordersTableView.setItems(ordersList);
 
 		// For test purposes
-		ordersList.add(new Order(32, new MenuEntry("Pasta al pomodoro, 4")));
-		Order order = new Order(32, new MenuEntry("Lasagne, 5"));
-		ordersList.add(order);
-		modifyOrderStatus(order.getOrderNum(), OrderStatus.NOT_PREPARABLE);
+		//ordersList.add(new Order(32, new MenuEntry("Pasta al pomodoro, 4")));
+		//Order order = new Order(32, new MenuEntry("Lasagne, 5"));
+		//ordersList.add(order);
+		//modifyOrderStatus(order.getOrderNum(), OrderStatus.NOT_PREPARABLE);
 
 		tableColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("tableNum"));
 		orderColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("orderedEntryStringed"));
 		statusColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("orderStatusStringed"));
 
-		// connect();
+		connect();
 	}
 
 	/**
@@ -201,20 +204,17 @@ public class ChefsControlPanelController extends Thread {
 	public void connect() {
 		boolean isFailed = false;
 		try {
-			serverSocket = new Socket(serverName, 4999);
-
-			readBuffer = new BufferedReader(new InputStreamReader(serverSocket.getInputStream()));
-			writeBuffer = new BufferedWriter(new OutputStreamWriter(serverSocket.getOutputStream()));
-
+			clientSocket = new Socket(serverName, 6789);
+			inputStream = new Scanner(new InputStreamReader(clientSocket.getInputStream()));
+			outputStream = new PrintWriter(new DataOutputStream(clientSocket.getOutputStream()));
 			this.start();
-
 		} catch (Exception e) {
 			isFailed = true;
 			e.printStackTrace();
 		} finally {
-			if (isFailed && serverSocket.isConnected()) {
+			if (isFailed && clientSocket.isConnected()) {
 				try {
-					serverSocket.close();
+					clientSocket.close();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -228,11 +228,9 @@ public class ChefsControlPanelController extends Thread {
 	 * @param message specify the message to send to the server.
 	 */
 	public synchronized void sendMessage(String message) {
-		try {
-			if (serverSocket.isConnected())
-				writeBuffer.write(message + "\n");
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (clientSocket.isConnected()) {
+			outputStream.println(message);
+			outputStream.flush();
 		}
 	}
 
@@ -244,11 +242,14 @@ public class ChefsControlPanelController extends Thread {
 	public void run() {
 		try {
 			Pattern p = Pattern.compile("^([a-zA-Z0-9]+, )+[a-zA-Z0-9]+$");
-			while (serverSocket.isConnected()) {
+			while (clientSocket.isConnected()) {
 				String[] unpackedMessage;
 				String message;
-				while ((message = readBuffer.readLine()) == null && serverSocket.isConnected())
+				System.out.println("ARRIVATO PRIMA DEL WHILE!");
+				while (!inputStream.hasNextLine())
 					;
+				message = inputStream.nextLine();
+				System.out.println("USCITO DAL WHILE!");
 				if (p.matcher(message).matches()) {
 					unpackedMessage = message.split(", ");
 					if (unpackedMessage[0].equals("ADD") == true) {
@@ -276,7 +277,7 @@ public class ChefsControlPanelController extends Thread {
 
 		finally {
 			try {
-				serverSocket.close();
+				clientSocket.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

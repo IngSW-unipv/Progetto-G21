@@ -1,13 +1,12 @@
 package waitersProgram.controller;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 /**
@@ -31,8 +30,8 @@ public class ListeningPost extends Thread {
 	private Restaurant restaurant;
 	private ServerSocket serverSocket;
 	private Socket clientSocket;
-	private BufferedReader readBuffer;
-	private BufferedWriter writeBuffer;
+	private Scanner inputStream;
+	private PrintWriter outputStream;
 
 	/**
 	 * Class constructor method. (private in order to respect Singleton pattern).
@@ -44,12 +43,11 @@ public class ListeningPost extends Thread {
 
 		boolean isFailed = false;
 		try {
-			serverSocket = new ServerSocket(4999);
+			serverSocket = new ServerSocket(6789);
 			System.out.println("The program is running!");
 			clientSocket = serverSocket.accept();
-			this.start();
-			readBuffer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-			writeBuffer = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
+			inputStream = new Scanner(new InputStreamReader(clientSocket.getInputStream()));
+			outputStream = new PrintWriter(new DataOutputStream(clientSocket.getOutputStream()));
 			System.out.println("Server running!\n");
 			System.out.println(serverSocket.getLocalSocketAddress());
 			System.out.println(serverSocket.getLocalPort());
@@ -59,6 +57,8 @@ public class ListeningPost extends Thread {
 		} finally {
 			if (isFailed && clientSocket.isConnected()) {
 				try {
+					inputStream.close();
+					outputStream.close();
 					clientSocket.close();
 				} catch (IOException e) {
 					System.err.println(e.getMessage());
@@ -127,14 +127,14 @@ public class ListeningPost extends Thread {
 				Pattern p = Pattern.compile("^([a-zA-Z0-9]+, )+[a-zA-Z0-9]+$");
 				String[] unpackedMessage;
 				String message;
-				while ((message = readBuffer.readLine()) == null)
+				while (!inputStream.hasNextLine())
 					;
+				message = inputStream.nextLine();
 				if (p.matcher(message).matches()) {
 					unpackedMessage = message.split(", ");
 					notifyMainController(unpackedMessage[0],
 							Arrays.copyOfRange(unpackedMessage, 1, unpackedMessage.length - 1));
 				}
-
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -152,11 +152,10 @@ public class ListeningPost extends Thread {
 	 * @param message specify the message to send.
 	 */
 	public synchronized void sendMessage(String message) {
-		try {
-			if (clientSocket.isConnected())
-				writeBuffer.write(message + "\n");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		if (clientSocket.isConnected()) {
+			outputStream.println(message);
+			outputStream.flush();
+			System.out.println(message);
+		}	
 	}
 }

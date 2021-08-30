@@ -44,7 +44,7 @@ public class SetOrderToPreparedStrategy extends StrategyAbstract {
 		if (orderToBeSetted != null) {
 			orderManagerInstance.prepareOrder(currentOrder);
 			WaitersControlPanelController controller = WaitersControlPanelController.getInstance();
-			controller.modifyOrderStatus(Integer.parseInt(args[0]), OrderStatus.PREPARED);
+			controller.modifyOrderStatus(currentOrder.getOrderNum(), OrderStatus.PREPARED);
 		}
 	}
 }

@@ -1,7 +1,6 @@
 package waitersProgram.controller;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import io.github.classgraph.ClassGraph;
@@ -38,11 +37,10 @@ public class Restaurant {
 	 * Class constructor method.
 	 */
 	private Restaurant() {
-		strategies = new HashMap<String, StrategyAbstract>();
 		restaurantMenu = Menu.getInstance();
 		orderManager = OrderManager.getInstance();
 		tableManager = TableManager.getInstance();
-		createStrategiesWithoutClassGraph();
+		strategies = new HashMap<String, StrategyAbstract>();
 	}
 
 	/**
@@ -55,7 +53,8 @@ public class Restaurant {
 	public static Restaurant getInstance() {
 		if (instance == null) {
 			instance = new Restaurant();
-			//instance.createStrategies();
+			// instance.createStrategies();
+			instance.createStrategiesWithoutClassGraph();
 		}
 		return instance;
 	}
@@ -89,10 +88,11 @@ public class Restaurant {
 			System.out.println(sr);
 			ClassInfoList cil = sr.getSubclasses("waitersProgram.strategies.StrategyAbstract");
 			List<Class<?>> lt = cil.loadClasses();
-			for (Class<?> ct: lt) {
-				strategies.put(ct.getSimpleName(), ((StrategyAbstract)ct.getMethod("getInstance", Restaurant.class).invoke(ct, Restaurant.getInstance())));
+			for (Class<?> ct : lt) {
+				strategies.put(ct.getSimpleName(), ((StrategyAbstract) ct.getMethod("getInstance", Restaurant.class)
+						.invoke(ct, Restaurant.getInstance())));
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

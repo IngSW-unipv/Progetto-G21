@@ -45,7 +45,7 @@ public class SetOrderToNotPreparableStrategy extends StrategyAbstract {
 		if (orderToBeSetted != null) {
 			orderManagerInstance.seeOrderToNotPreparable(orderToBeSetted);
 			WaitersControlPanelController controller = WaitersControlPanelController.getInstance();
-			controller.modifyOrderStatus(Integer.parseInt(args[0]), OrderStatus.NOT_PREPARABLE);
+			controller.modifyOrderStatus(orderToBeSetted.getOrderNum(), OrderStatus.NOT_PREPARABLE);
 		}
 	}
 }

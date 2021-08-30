@@ -85,14 +85,14 @@ public class WaitersControlPanelController {
 		ordersTableView.setItems(ordersList);
 
 		// For test purposes
-		ordersList.add(new Order(32, new MenuEntry("Pasta al pomodoro, 4")));
-		ordersList.add(new Order(32, new MenuEntry("Lasagne, 5")));
+		// ordersList.add(new Order(32, new MenuEntry("Pasta al pomodoro, 4")));
+		// ordersList.add(new Order(32, new MenuEntry("Lasagne, 5")));
 
 		tableColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("tableNum"));
 		orderColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("orderedEntryStringed"));
 		statusColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("orderStatusStringed"));
 
-		// post = ListeningPost.getInstance();
+		post = ListeningPost.getInstance();
 	}
 
 	/**

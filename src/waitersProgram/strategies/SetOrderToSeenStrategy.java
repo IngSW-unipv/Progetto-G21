@@ -46,7 +46,7 @@ public class SetOrderToSeenStrategy extends StrategyAbstract {
 		if (orderToBeSetted != null) {
 			orderManagerInstance.seeOrderToNotPrepared(orderToBeSetted);
 			WaitersControlPanelController controller = WaitersControlPanelController.getInstance();
-			controller.modifyOrderStatus(Integer.parseInt(args[0]), OrderStatus.SEEN);
+			controller.modifyOrderStatus(orderToBeSetted.getOrderNum(), OrderStatus.SEEN);
 		}
 	}
 }
