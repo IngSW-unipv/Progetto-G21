@@ -88,7 +88,7 @@ public class WaitersOrderUpdateFrameController {
 			String[] parameters = new String[1];
 			parameters[0] = orderNumber;
 			mainController.getPost().notifyMainController("SetOrderToDeliveredStrategy", parameters);
-			mainController.modifyOrderStatus(Integer.parseInt(parameters[0]), OrderStatus.DELIVERED);
+			mainController.modifyOrderStatus(order.getOrderNum(), OrderStatus.DELIVERED);
 			mainController.removeOrderFromTableView(order);
 		} else {
 			deliveredCheckBox.setSelected(false);

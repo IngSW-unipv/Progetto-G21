@@ -124,11 +124,36 @@ public class WaitersControlPanelController {
 		}
 	}
 
+	/** Method used to erase order prompt label. */
+	@FXML
+	private void eraseOrderPromptLabel() {
+		promptOrderTableLabel.setText(".");
+	}
+
+	/** Method used to erase bill prompt label. */
+	@FXML
+	private void eraseBillPromptLabel() {
+		promptBillLabel.setText(".");
+	}
+
+	/** Method used to erase entry prompt label. */
+	@FXML
+	private void eraseEntryPromptLabel() {
+		promptEntryLabel.setText(".");
+	}
+
 	/**
-	 * Private method called in the constructor and in addNewTable(), removeTable().
+	 * Private method used to set the current instance to instance variable.
+	 */
+	private void setInstance() {
+		instance = this;
+	}
+
+	/**
+	 * Private method called in initialize() and in addNewTable(), removeTable().
 	 * It's used to update tables ObservableList.
 	 */
-	public void fillTablesList() {
+	private void fillTablesList() {
 		tablesList.clear();
 		TableManager tableManager = Restaurant.getInstance().getTableManager();
 		Iterator<Integer> iterator = tableManager.getTables().iterator();
@@ -139,10 +164,10 @@ public class WaitersControlPanelController {
 	}
 
 	/**
-	 * Private method called in the constructor and in addNewEntry(), removeEntry().
+	 * Private method called in initialize() and in addNewEntry(), removeEntry().
 	 * It's used to update entries ObservableList.
 	 */
-	public void fillMenuEntriesList() {
+	private void fillMenuEntriesList() {
 		entriesList.clear();
 		Menu menu = Restaurant.getInstance().getRestaurantMenu();
 		Iterator<MenuEntry> iterator = menu.getEntriesCollection().iterator();
@@ -188,9 +213,16 @@ public class WaitersControlPanelController {
 		return m.matches();
 	}
 
-	/** Simple current instance setter. */
-	public void setInstance() {
-		instance = this;
+	/** Method called by addNewEntry() & removeEntry(). */
+	private void printMenuInTextArea() {
+		menuTextArea.clear();
+		Menu menu = Restaurant.getInstance().getRestaurantMenu();
+		Collection<MenuEntry> menuEntriesCollection = menu.getEntriesCollection();
+		Iterator<MenuEntry> iterator = menuEntriesCollection.iterator();
+		while (iterator.hasNext()) {
+			MenuEntry entryToPrint = iterator.next();
+			menuTextArea.appendText(entryToPrint.toString() + "€");
+		}
 	}
 
 	/**
@@ -208,6 +240,7 @@ public class WaitersControlPanelController {
 	}
 
 	/** Method triggered by createNewOrderButton. */
+	@FXML
 	public void createNewOrder() {
 		if ((!newOrderTableComboBox.getSelectionModel().isEmpty())
 				&& (!newOrderEntryComboBox.getSelectionModel().isEmpty())) {
@@ -220,6 +253,7 @@ public class WaitersControlPanelController {
 	}
 
 	/** Method triggered by addNewTableButton. */
+	@FXML
 	public void addNewTable() {
 		if (checkForTableFormat(addNewTableField.getText().trim()) == false) {
 			promptOrderTableLabel.setText("ERROR!");
@@ -232,6 +266,7 @@ public class WaitersControlPanelController {
 	}
 
 	/** Method triggered by removeTableButton. */
+	@FXML
 	public void removeTable() {
 		if (!removeTableComboBox.getSelectionModel().isEmpty()) {
 			String[] parameters = new String[1];
@@ -242,6 +277,7 @@ public class WaitersControlPanelController {
 	}
 
 	/** Method triggered by printBillButton. */
+	@FXML
 	public void printNewBill() {
 		if (!newBillTableComboBox.getSelectionModel().isEmpty()) {
 			billTextArea.clear();
@@ -262,6 +298,7 @@ public class WaitersControlPanelController {
 	}
 
 	/** Method triggered by addNewEntryButton. */
+	@FXML
 	public void addNewEntry() {
 		if (checkForEntryNameFormat(newEntryNameField.getText()) == false
 				|| checkForEntryPriceFormat(newEntryPriceField.getText()) == false) {
@@ -277,6 +314,7 @@ public class WaitersControlPanelController {
 	}
 
 	/** Method triggered by removeMenuEntryButton. */
+	@FXML
 	public void removeEntry() {
 		if (!removeEntryComboBox.getSelectionModel().isEmpty()) {
 			String[] parameters = new String[1];
@@ -284,18 +322,6 @@ public class WaitersControlPanelController {
 			post.notifyMainController("RemoveEntryStrategy", parameters);
 			fillMenuEntriesList();
 			printMenuInTextArea();
-		}
-	}
-
-	/** Method called by addNewEntry() & removeEntry(). */
-	public void printMenuInTextArea() {
-		menuTextArea.clear();
-		Menu menu = Restaurant.getInstance().getRestaurantMenu();
-		Collection<MenuEntry> menuEntriesCollection = menu.getEntriesCollection();
-		Iterator<MenuEntry> iterator = menuEntriesCollection.iterator();
-		while (iterator.hasNext()) {
-			MenuEntry entryToPrint = iterator.next();
-			menuTextArea.appendText(entryToPrint.toString() + "€");
 		}
 	}
 

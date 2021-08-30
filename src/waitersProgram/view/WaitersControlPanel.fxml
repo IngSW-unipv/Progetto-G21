@@ -21,7 +21,7 @@
    <children>
       <TabPane id="tabPaneOrganization" layoutY="80.0" prefHeight="720.0" prefWidth="1000.0" style="-fx-background-color: #1E3986;" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab style="-fx-background-color: #1E3986; -fx-color: #000000; -fx-font-family: &quot;Copperplate Gothic Light&quot;;" text="Order &amp; table manager">
+          <Tab onSelectionChanged="#eraseOrderPromptLabel" style="-fx-background-color: #1E3986; -fx-color: #000000; -fx-font-family: &quot;Copperplate Gothic Light&quot;;" text="Order &amp; table manager">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #1E3986;">
                      <children>
@@ -103,9 +103,9 @@
                               <SearchableComboBox fx:id="removeTableComboBox" layoutX="147.0" layoutY="60.0" prefWidth="150.0" style="-fx-font-family: &quot;Copperplate Gothic Light&quot;;" />
                            </children>
                         </Pane>
-                        <Label id="arrowLabel" fx:id="promptOrderTableLabel" layoutX="15.0" layoutY="637.0" text="→" textFill="WHITE">
+                        <Label id="arrowLabel" fx:id="promptOrderTableLabel" layoutX="15.0" layoutY="637.0" text="." textFill="WHITE">
                            <font>
-                              <Font name="Copperplate Gothic Bold" size="36.0" />
+                              <Font name="Copperplate Gothic Bold" size="18.0" />
                            </font>
                         </Label>
                         <TableView fx:id="ordersTableView" layoutX="370.0" layoutY="15.0" onMouseClicked="#handleRowSelect" prefHeight="630.0" prefWidth="615.0" style="-fx-font-family: &quot;Copperplate Gothic Light&quot;;">
@@ -122,7 +122,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab style="-fx-background-color: #1E3986; -fx-color: #000000; -fx-font-family: &quot;Copperplate Gothic Light&quot;;" text="Bill creator">
+          <Tab onSelectionChanged="#eraseBillPromptLabel" style="-fx-background-color: #1E3986; -fx-color: #000000; -fx-font-family: &quot;Copperplate Gothic Light&quot;;" text="Bill creator">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #1E3986;">
                      <children>
@@ -146,9 +146,9 @@
                               <SearchableComboBox fx:id="newBillTableComboBox" layoutX="147.0" layoutY="60.0" prefWidth="150.0" style="-fx-font-family: &quot;Copperplate Gothic Light&quot;;" />
                            </children>
                         </Pane>
-                        <Label id="arrowLabel" fx:id="promptBillLabel" layoutX="15.0" layoutY="637.0" text="→" textFill="WHITE">
+                        <Label id="arrowLabel" fx:id="promptBillLabel" layoutX="15.0" layoutY="637.0" text="." textFill="WHITE">
                            <font>
-                              <Font name="Copperplate Gothic Bold" size="36.0" />
+                              <Font name="Copperplate Gothic Bold" size="18.0" />
                            </font>
                         </Label>
                         <TextArea fx:id="billTextArea" layoutX="370.0" layoutY="15.0" prefHeight="630.0" prefWidth="615.0" style="-fx-color: #1E3986; -fx-font-family: &quot;Copperplate Gothic Light&quot;;" />
@@ -156,7 +156,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab style="-fx-background-color: #1E3986; -fx-color: #000000; -fx-font-family: &quot;Copperplate Gothic Light&quot;;" text="Menu modifier">
+            <Tab onSelectionChanged="#eraseEntryPromptLabel" style="-fx-background-color: #1E3986; -fx-color: #000000; -fx-font-family: &quot;Copperplate Gothic Light&quot;;" text="Menu modifier">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #1E3986;">
                      <children>
@@ -206,9 +206,9 @@
                               <SearchableComboBox fx:id="removeEntryComboBox" layoutX="147.0" layoutY="60.0" prefWidth="150.0" style="-fx-font-family: &quot;Copperplate Gothic Light&quot;;" />
                            </children>
                         </Pane>
-                        <Label id="arrowLabel" fx:id="promptEntryLabel" layoutX="15.0" layoutY="637.0" text="→" textFill="WHITE">
+                        <Label id="arrowLabel" fx:id="promptEntryLabel" layoutX="15.0" layoutY="637.0" text="." textFill="WHITE">
                            <font>
-                              <Font name="Copperplate Gothic Bold" size="36.0" />
+                              <Font name="Copperplate Gothic Bold" size="18.0" />
                            </font>
                         </Label>
                         <TextArea fx:id="menuTextArea" layoutX="370.0" layoutY="15.0" prefHeight="630.0" prefWidth="615.0" style="-fx-font-family: &quot;Copperplate Gothic Light&quot;;" />

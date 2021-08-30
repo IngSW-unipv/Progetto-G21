@@ -81,6 +81,7 @@ public class ChefsOrderUpdateFrameController {
 		boolean isDelivered = order.isDelivered();
 		if ((isSeen == false) && (isPreparable == true) && (isPrepared == false) && (isDelivered == false)) {
 			mainController.sendMessage("SetOrderToSeenStrategy, " + orderNumber);
+			mainController.modifyOrderStatus(order.getOrderNum(), OrderStatus.SEEN);
 		} else {
 			seenCheckBox.setSelected(false);
 		}
@@ -99,6 +100,7 @@ public class ChefsOrderUpdateFrameController {
 		boolean isDelivered = order.isDelivered();
 		if ((isSeen == false) && (isPreparable == true) && (isPrepared == false) && (isDelivered == false)) {
 			mainController.sendMessage("SetOrderToNotPreparableStrategy, " + orderNumber);
+			mainController.modifyOrderStatus(order.getOrderNum(), OrderStatus.NOT_PREPARABLE);
 			mainController.removeOrderFromTableView(order.getOrderNum());
 		} else {
 			notPreparableCheckBox.setSelected(false);
@@ -117,6 +119,7 @@ public class ChefsOrderUpdateFrameController {
 		boolean isDelivered = order.isDelivered();
 		if ((isSeen == true) && (isPreparable == true) && (isPrepared == false) && (isDelivered == false)) {
 			mainController.sendMessage("SetOrderToPreparedStrategy, " + orderNumber);
+			mainController.modifyOrderStatus(order.getOrderNum(), OrderStatus.PREPARED);
 		} else {
 			preparedCheckBox.setSelected(false);
 		}
