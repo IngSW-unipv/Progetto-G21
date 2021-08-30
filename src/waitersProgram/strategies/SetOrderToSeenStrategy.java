@@ -43,6 +43,8 @@ public class SetOrderToSeenStrategy extends StrategyAbstract {
 			}
 		}
 
+		System.out.println(orderToBeSetted.toString());
+
 		if (orderToBeSetted != null) {
 			orderManagerInstance.seeOrderToNotPrepared(orderToBeSetted);
 			WaitersControlPanelController controller = WaitersControlPanelController.getInstance();

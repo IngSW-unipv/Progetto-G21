@@ -154,13 +154,14 @@ public class WaitersControlPanelController {
 	 * It's used to update tables ObservableList.
 	 */
 	private void fillTablesList() {
-		tablesList.clear();
-		TableManager tableManager = Restaurant.getInstance().getTableManager();
+		ObservableList<String> newTablesList = FXCollections.observableArrayList();
+		TableManager tableManager = Restaurant.getInstance().getTableManager(); // costruttore
 		Iterator<Integer> iterator = tableManager.getTables().iterator();
 		while (iterator.hasNext()) {
 			Integer tableNum = iterator.next();
-			tablesList.add(Integer.toString(tableNum));
+			newTablesList.add(Integer.toString(tableNum));
 		}
+		tablesList = newTablesList;
 	}
 
 	/**
@@ -168,13 +169,14 @@ public class WaitersControlPanelController {
 	 * It's used to update entries ObservableList.
 	 */
 	private void fillMenuEntriesList() {
-		entriesList.clear();
+		ObservableList<String> newEntriesList = FXCollections.observableArrayList();
 		Menu menu = Restaurant.getInstance().getRestaurantMenu();
 		Iterator<MenuEntry> iterator = menu.getEntriesCollection().iterator();
 		while (iterator.hasNext()) {
 			MenuEntry menuEntry = iterator.next();
-			entriesList.add(menuEntry.toString());
+			newEntriesList.add(menuEntry.toString());
 		}
+		entriesList = newEntriesList;
 	}
 
 	/**
@@ -196,7 +198,7 @@ public class WaitersControlPanelController {
 	 * @return boolean variable.
 	 */
 	private boolean checkForEntryNameFormat(String entryNameField) {
-		Pattern p = Pattern.compile("^[A-Za-z0-9‡ËÏÚ˘·ÈÌÛ˙‚ÍÓÙ˚„Òı‰ÎÔˆ¸ˇ ]*$");
+		Pattern p = Pattern.compile("^[A-Za-z0-9‡ËÏÚ˘·ÈÌÛ˙‚ÍÓÙ˚„Òı‰ÎÔˆ¸ˇ ]+$");
 		Matcher m = p.matcher(entryNameField.trim());
 		return m.matches();
 	}
@@ -208,7 +210,7 @@ public class WaitersControlPanelController {
 	 * @return boolean variable.
 	 */
 	private boolean checkForEntryPriceFormat(String entryPriceField) {
-		Pattern p = Pattern.compile("\\\\d{1,5}\\\\.{0,1}\\\\d{0,2}$");
+		Pattern p = Pattern.compile("\\d{1,5}\\.{0,1}\\d{0,2}$");
 		Matcher m = p.matcher(entryPriceField.trim());
 		return m.matches();
 	}
@@ -221,7 +223,7 @@ public class WaitersControlPanelController {
 		Iterator<MenuEntry> iterator = menuEntriesCollection.iterator();
 		while (iterator.hasNext()) {
 			MenuEntry entryToPrint = iterator.next();
-			menuTextArea.appendText(entryToPrint.toString() + "Ä");
+			menuTextArea.appendText(entryToPrint.toString() + "Ä" + "\n");
 		}
 	}
 
@@ -262,6 +264,10 @@ public class WaitersControlPanelController {
 			parameters[0] = addNewTableField.getText().trim();
 			post.notifyMainController("AddNewTableStrategy", parameters);
 			fillTablesList();
+			promptOrderTableLabel.setText(".");
+			newOrderTableComboBox.setItems(tablesList);
+			newBillTableComboBox.setItems(tablesList);
+			removeTableComboBox.setItems(tablesList);
 		}
 	}
 
@@ -273,6 +279,9 @@ public class WaitersControlPanelController {
 			parameters[0] = removeTableComboBox.getValue().trim();
 			post.notifyMainController("RemoveTableStrategy", parameters);
 			fillTablesList();
+			newOrderTableComboBox.setItems(tablesList);
+			newBillTableComboBox.setItems(tablesList);
+			removeTableComboBox.setItems(tablesList);
 		}
 	}
 
@@ -310,6 +319,9 @@ public class WaitersControlPanelController {
 			post.notifyMainController("AddNewEntryStrategy", parameters);
 			fillMenuEntriesList();
 			printMenuInTextArea();
+			promptEntryLabel.setText(".");
+			newOrderEntryComboBox.setItems(entriesList);
+			removeEntryComboBox.setItems(entriesList);
 		}
 	}
 
@@ -322,6 +334,8 @@ public class WaitersControlPanelController {
 			post.notifyMainController("RemoveEntryStrategy", parameters);
 			fillMenuEntriesList();
 			printMenuInTextArea();
+			newOrderEntryComboBox.setItems(entriesList);
+			removeEntryComboBox.setItems(entriesList);
 		}
 	}
 
@@ -352,39 +366,47 @@ public class WaitersControlPanelController {
 	 */
 	public void modifyOrderStatus(int orderNum, OrderStatus status) {
 		Iterator<Order> iterator = ordersList.iterator();
+		Order orderToBeModified = null;
 		while (iterator.hasNext()) {
-			Order order = iterator.next();
-			if (order.getOrderNum() == orderNum) {
-				switch (status) {
-				case SEEN:
-					order.setSeen(true);
-					order.setPreparable(true);
-					order.setPrepared(false);
-					order.setDelivered(false);
-					break;
-				case NOT_PREPARABLE:
-					order.setSeen(true);
-					order.setPreparable(false);
-					order.setPrepared(false);
-					order.setDelivered(false);
-					break;
-				case PREPARED:
-					order.setSeen(true);
-					order.setPreparable(true);
-					order.setPrepared(true);
-					order.setDelivered(false);
-					break;
-				case DELIVERED:
-					order.setSeen(true);
-					order.setPreparable(true);
-					order.setPrepared(true);
-					order.setDelivered(true);
-					break;
-				default:
-					break;
-				}
+			Order currentOrder = iterator.next();
+			if (currentOrder.getOrderNum() == orderNum) {
+				orderToBeModified = currentOrder;
 				break;
 			}
 		}
+
+		if (orderToBeModified != null) {
+			removeOrderFromTableView(orderToBeModified);
+			switch (status) {
+			case SEEN:
+				orderToBeModified.setSeen(true);
+				orderToBeModified.setPreparable(true);
+				orderToBeModified.setPrepared(false);
+				orderToBeModified.setDelivered(false);
+				break;
+			case NOT_PREPARABLE:
+				orderToBeModified.setSeen(true);
+				orderToBeModified.setPreparable(false);
+				orderToBeModified.setPrepared(false);
+				orderToBeModified.setDelivered(false);
+				break;
+			case PREPARED:
+				orderToBeModified.setSeen(true);
+				orderToBeModified.setPreparable(true);
+				orderToBeModified.setPrepared(true);
+				orderToBeModified.setDelivered(false);
+				break;
+			case DELIVERED:
+				orderToBeModified.setSeen(true);
+				orderToBeModified.setPreparable(true);
+				orderToBeModified.setPrepared(true);
+				orderToBeModified.setDelivered(true);
+				break;
+			default:
+				break;
+			}
+			addOrderToTableView(orderToBeModified);
+		}
+
 	}
 }

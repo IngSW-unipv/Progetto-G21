@@ -98,10 +98,11 @@ public class TableManager {
 
 		try {
 			stream = new BufferedWriter(new FileWriter(tablesFile, true));
-			stream.append(((Integer) (tableNum)).toString() + "\n");
+			stream.append(((Integer) tableNum).toString() + "\n");
 			stream.flush();
 			stream.close();
-			tables.add(tableNum);
+			tables.clear();
+			parseTablesFile();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

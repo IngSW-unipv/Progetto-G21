@@ -40,17 +40,9 @@ public class Bill {
 	 */
 	private void lookForTableOrders() {
 		OrderManegerInterface manager = OrderManager.getInstance();
-		Iterator<Order> iNotSeen = manager.getNotSeen().iterator();
 		Iterator<Order> iNotPrepared = manager.getNotPrepared().iterator();
 		Iterator<Order> iNotDelivered = manager.getNotDelivered().iterator();
 		Iterator<Order> iDelivered = manager.getDelivered().iterator();
-
-		while (iNotSeen.hasNext()) {
-			Order currentOrder = iNotSeen.next();
-			if (currentOrder.getTableNum() == tableNum) {
-				orders.add(currentOrder);
-			}
-		}
 
 		while (iNotPrepared.hasNext()) {
 			Order currentOrder = iNotPrepared.next();

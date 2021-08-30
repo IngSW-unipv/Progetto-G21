@@ -57,14 +57,22 @@ public class ChefsOrderUpdateFrameController {
 
 		if (seenCheckBox.isSelected()) {
 			seenCheckBox.setDisable(true);
+			notPreparableCheckBox.setDisable(true);
+		}
+
+		if (!seenCheckBox.isSelected() && !notPreparableCheckBox.isSelected()) {
+			preparedCheckBox.setDisable(true);
 		}
 
 		if (notPreparableCheckBox.isSelected()) {
+			seenCheckBox.setDisable(true);
 			notPreparableCheckBox.setDisable(true);
 			preparedCheckBox.setDisable(true);
 		}
 
 		if (preparedCheckBox.isSelected()) {
+			seenCheckBox.setDisable(true);
+			notPreparableCheckBox.setDisable(true);
 			preparedCheckBox.setDisable(true);
 		}
 	}
@@ -73,6 +81,7 @@ public class ChefsOrderUpdateFrameController {
 	 * Method triggered by seenCheckBox. It calls SetOrderToSeenStrategy via the
 	 * sendMessage method, which sends a string to the server (ListeningPost).
 	 */
+	@FXML
 	public void setOrderToSeen() {
 		String orderNumber = Integer.toString(order.getOrderNum());
 		boolean isSeen = order.isSeen();
@@ -92,6 +101,7 @@ public class ChefsOrderUpdateFrameController {
 	 * SetOrderToNotPreparableStrategy via the sendMessage method, which sends a
 	 * string to the server (ListeningPost).
 	 */
+	@FXML
 	public void setOrderToNotPreparable() {
 		String orderNumber = Integer.toString(order.getOrderNum());
 		boolean isSeen = order.isSeen();
@@ -111,6 +121,7 @@ public class ChefsOrderUpdateFrameController {
 	 * Method triggered by preparedCheckBox. It calls SetOrderToPreparedStrategy via
 	 * the sendMessage method, which sends a string to the server (ListeningPost).
 	 */
+	@FXML
 	public void setOrderToPrepared() {
 		String orderNumber = Integer.toString(order.getOrderNum());
 		boolean isSeen = order.isSeen();

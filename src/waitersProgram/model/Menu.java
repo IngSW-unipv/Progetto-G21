@@ -192,11 +192,6 @@ public class Menu implements MenuInterface {
 	 */
 	@Override
 	public void removeMenuEntry(String dishEntry) {
-		try {
-			checkForEntryExistence(dishEntry);
-		} catch (EntryDoesNotExistException e) {
-			e.printStackTrace();
-		}
 		File inputFile = new File(menuFilePath);
 		File tempFile = new File("Files/tempMenuFile.txt");
 
@@ -315,24 +310,6 @@ public class Menu implements MenuInterface {
 	}
 
 	/**
-	 * Method used to check if a specified MenuEntry exists.
-	 * 
-	 * @param dishEntry specifies the stringed MenuEntry.
-	 * @throws EntryDoesNotExistsException.
-	 */
-	private void checkForEntryExistence(String dishEntry) throws EntryDoesNotExistException {
-		Collection<MenuEntry> entryCollection = this.getEntriesCollection();
-		Iterator<MenuEntry> iterator = entryCollection.iterator();
-		while (iterator.hasNext()) {
-			MenuEntry menuEntry = iterator.next();
-			if (menuEntry.toString().equals(dishEntry)) {
-				break;
-			} else
-				throw new EntryDoesNotExistException();
-		}
-	}
-
-	/**
 	 * Method used to check if a "stringed" MenuEntry follows the "dishName,
 	 * dishPrice" pattern.
 	 * 
@@ -340,7 +317,7 @@ public class Menu implements MenuInterface {
 	 * @throws WrongEntryFormatException.
 	 */
 	private void checkForEntryFormat(String dishEntry) throws WrongMenuEntryFormatException {
-		Pattern p = Pattern.compile("^[A-Za-z0-9אטלעשביםףתגךמפûדסץהכןצüÿ ]*, \\d{1,5}\\.{0,1}\\d{0,2}$");
+		Pattern p = Pattern.compile("^[A-Za-z0-9אטלעשביםףתגךמפûדסץהכןצüÿ'.?!:;, ]*, \\d{1,5}\\.{0,1}\\d{0,2}$");
 		Matcher m = p.matcher(dishEntry);
 		boolean b = m.matches();
 

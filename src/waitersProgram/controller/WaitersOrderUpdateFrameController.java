@@ -58,6 +58,7 @@ public class WaitersOrderUpdateFrameController {
 	}
 
 	/** Method triggered by removeOrderButton. */
+	@FXML
 	public void removeOrder() {
 		String orderNumber = Integer.toString(order.getOrderNum());
 		boolean isSeen = order.isSeen();
@@ -78,6 +79,7 @@ public class WaitersOrderUpdateFrameController {
 	}
 
 	/** Method triggered by deliveredCheckBox. */
+	@FXML
 	public void setOrderToDelivered() {
 		String orderNumber = Integer.toString(order.getOrderNum());
 		boolean isSeen = order.isSeen();

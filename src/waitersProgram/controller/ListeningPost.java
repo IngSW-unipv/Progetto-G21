@@ -1,4 +1,5 @@
 package waitersProgram.controller;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,7 +8,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 /**
  * The ListeningPost class. It's used to connect the backend to the GUI
@@ -113,6 +113,7 @@ public class ListeningPost extends Thread {
 		} else {
 			restaurant.strategyCall(strategyRequired, args);
 		}
+		System.out.println("LOCK LIBERO!");
 	}
 
 	/**
@@ -124,17 +125,14 @@ public class ListeningPost extends Thread {
 	public void run() {
 		try {
 			while (clientSocket != null && clientSocket.isConnected()) {
-				Pattern p = Pattern.compile("^([a-zA-Z0-9]+, )+[a-zA-Z0-9]+$");
 				String[] unpackedMessage;
 				String message;
 				while (!inputStream.hasNextLine())
 					;
 				message = inputStream.nextLine();
-				if (p.matcher(message).matches()) {
-					unpackedMessage = message.split(", ");
-					notifyMainController(unpackedMessage[0],
-							Arrays.copyOfRange(unpackedMessage, 1, unpackedMessage.length - 1));
-				}
+				unpackedMessage = message.split(", ");
+				notifyMainController(unpackedMessage[0],
+						Arrays.copyOfRange(unpackedMessage, 1, unpackedMessage.length));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -155,7 +153,6 @@ public class ListeningPost extends Thread {
 		if (clientSocket.isConnected()) {
 			outputStream.println(message);
 			outputStream.flush();
-			System.out.println(message);
-		}	
+		}
 	}
 }

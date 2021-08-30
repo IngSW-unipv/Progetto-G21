@@ -1,16 +1,12 @@
 package chefsProgram.controller;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Iterator;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 import chefsProgram.model.MenuEntry;
 import chefsProgram.model.Order;
@@ -60,10 +56,10 @@ public class ChefsControlPanelController extends Thread {
 		ordersTableView.setItems(ordersList);
 
 		// For test purposes
-		//ordersList.add(new Order(32, new MenuEntry("Pasta al pomodoro, 4")));
-		//Order order = new Order(32, new MenuEntry("Lasagne, 5"));
-		//ordersList.add(order);
-		//modifyOrderStatus(order.getOrderNum(), OrderStatus.NOT_PREPARABLE);
+		// ordersList.add(new Order(32, new MenuEntry("Pasta al pomodoro, 4")));
+		// Order order = new Order(32, new MenuEntry("Lasagne, 5"));
+		// ordersList.add(order);
+		// modifyOrderStatus(order.getOrderNum(), OrderStatus.NOT_PREPARABLE);
 
 		tableColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("tableNum"));
 		orderColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("orderedEntryStringed"));
@@ -126,7 +122,16 @@ public class ChefsControlPanelController extends Thread {
 	public void addOrderToTableView(int orderNum, int tableNum, MenuEntry entry) {
 		Order orderToAdd = new Order(tableNum, entry);
 		orderToAdd.setOrderNum(orderNum);
-		ordersList.add(new Order(tableNum, entry));
+		ordersList.add(orderToAdd);
+	}
+
+	/**
+	 * Simple method that adds an order to ordersList tableView.
+	 * 
+	 * @param order to be added.
+	 */
+	public void addOrderToTableView(Order order) {
+		ordersList.add(order);
 	}
 
 	/**
@@ -160,39 +165,46 @@ public class ChefsControlPanelController extends Thread {
 	 */
 	public void modifyOrderStatus(int orderNum, OrderStatus status) {
 		Iterator<Order> iterator = ordersList.iterator();
+		Order orderToBeModified = null;
 		while (iterator.hasNext()) {
-			Order order = iterator.next();
-			if (order.getOrderNum() == orderNum) {
-				switch (status) {
-				case SEEN:
-					order.setSeen(true);
-					order.setPreparable(true);
-					order.setPrepared(false);
-					order.setDelivered(false);
-					break;
-				case NOT_PREPARABLE:
-					order.setSeen(true);
-					order.setPreparable(false);
-					order.setPrepared(false);
-					order.setDelivered(false);
-					break;
-				case PREPARED:
-					order.setSeen(true);
-					order.setPreparable(true);
-					order.setPrepared(true);
-					order.setDelivered(false);
-					break;
-				case DELIVERED:
-					order.setSeen(true);
-					order.setPreparable(true);
-					order.setPrepared(true);
-					order.setDelivered(true);
-					break;
-				default:
-					break;
-				}
+			Order currentOrder = iterator.next();
+			if (currentOrder.getOrderNum() == orderNum) {
+				orderToBeModified = currentOrder;
 				break;
 			}
+		}
+
+		if (orderToBeModified != null) {
+			removeOrderFromTableView(orderToBeModified.getOrderNum());
+			switch (status) {
+			case SEEN:
+				orderToBeModified.setSeen(true);
+				orderToBeModified.setPreparable(true);
+				orderToBeModified.setPrepared(false);
+				orderToBeModified.setDelivered(false);
+				break;
+			case NOT_PREPARABLE:
+				orderToBeModified.setSeen(true);
+				orderToBeModified.setPreparable(false);
+				orderToBeModified.setPrepared(false);
+				orderToBeModified.setDelivered(false);
+				break;
+			case PREPARED:
+				orderToBeModified.setSeen(true);
+				orderToBeModified.setPreparable(true);
+				orderToBeModified.setPrepared(true);
+				orderToBeModified.setDelivered(false);
+				break;
+			case DELIVERED:
+				orderToBeModified.setSeen(true);
+				orderToBeModified.setPreparable(true);
+				orderToBeModified.setPrepared(true);
+				orderToBeModified.setDelivered(true);
+				break;
+			default:
+				break;
+			}
+			addOrderToTableView(orderToBeModified);
 		}
 	}
 
@@ -241,36 +253,34 @@ public class ChefsControlPanelController extends Thread {
 	@Override
 	public void run() {
 		try {
-			Pattern p = Pattern.compile("^([a-zA-Z0-9]+, )+[a-zA-Z0-9]+$");
 			while (clientSocket.isConnected()) {
 				String[] unpackedMessage;
 				String message;
-				System.out.println("ARRIVATO PRIMA DEL WHILE!");
 				while (!inputStream.hasNextLine())
 					;
 				message = inputStream.nextLine();
-				System.out.println("USCITO DAL WHILE!");
-				if (p.matcher(message).matches()) {
-					unpackedMessage = message.split(", ");
-					if (unpackedMessage[0].equals("ADD") == true) {
-						// ADD, orderNum, tableNum, entryName, entryPrice
-						int orderNum = Integer.parseInt(unpackedMessage[1].trim());
-						int tableNum = Integer.parseInt(unpackedMessage[2].trim());
-						String entryName = unpackedMessage[3].trim();
-						String entryPrice = unpackedMessage[4].trim();
-						addOrderToTableView(orderNum, tableNum, new MenuEntry(entryName + ", " + entryPrice));
-					} else if (unpackedMessage[0].equals("REMOVE") == true) {
-						// REMOVE, orderNum
-						int orderNum = Integer.parseInt(unpackedMessage[1].trim());
-						removeOrderFromTableView(orderNum);
-					} else if (unpackedMessage[0].equals("SET_DELIVERED") == true) {
-						// SET_DELIVERED, orderNum
-						int orderNum = Integer.parseInt(unpackedMessage[1].trim());
-						modifyOrderStatus(orderNum, OrderStatus.DELIVERED);
-						removeOrderFromTableView(orderNum);
-					}
+
+				unpackedMessage = message.split(", ");
+				if (unpackedMessage[0].equals("ADD") == true) {
+					System.out.println(unpackedMessage[1]);
+					// ADD, orderNum, tableNum, entryName, entryPrice IT WORKS
+					int orderNum = Integer.parseInt(unpackedMessage[1].trim());
+					int tableNum = Integer.parseInt(unpackedMessage[2].trim());
+					String entryName = unpackedMessage[3].trim();
+					String entryPrice = unpackedMessage[4].trim();
+					addOrderToTableView(orderNum, tableNum, new MenuEntry(entryName + ", " + entryPrice));
+				} else if (unpackedMessage[0].equals("REMOVE") == true) {
+					// REMOVE, orderNum
+					int orderNum = Integer.parseInt(unpackedMessage[1].trim());
+					removeOrderFromTableView(orderNum);
+				} else if (unpackedMessage[0].equals("SET_DELIVERED") == true) {
+					// SET_DELIVERED, orderNum
+					int orderNum = Integer.parseInt(unpackedMessage[1].trim());
+					modifyOrderStatus(orderNum, OrderStatus.DELIVERED);
+					removeOrderFromTableView(orderNum);
 				}
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
