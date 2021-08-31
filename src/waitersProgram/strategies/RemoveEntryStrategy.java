@@ -24,6 +24,5 @@ public class RemoveEntryStrategy extends StrategyAbstract {
 	public void execute(String[] args) {
 		Menu menuInstance = Restaurant.getInstance().getRestaurantMenu();
 		menuInstance.removeMenuEntry(args[0]);
-		System.out.println(args[0]);
 	}
 }

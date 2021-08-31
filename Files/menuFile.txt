@@ -1,7 +1,44 @@
-Involtini al pollo, 7
-Tagliata di manzo, 5
-Branzino al limone, 8
-Spada alla griglia, 12
-Pastiera napoletana, 2
-Tiramisu, 4
+Antipasto della casa, 5
+Pasta al pomodoro, 3
 Pasta al pesto, 3
+Pasta alla carbonara, 5
+Pasta alla norma, 5
+Risotto allo zafferano, 5
+Risotto alla salsiccia, 5
+Risotto ai frutti di mare, 8
+Tagliata di vitello, 10
+Svizzera di vitello, 8
+Cotoletta alla milanese, 7
+Scaloppine al limone, 7
+Vitello tonnato, 8
+Pollo alla griglia, 8
+Pollo al limone, 6
+Fritto misto, 10
+Branzino marinato, 10
+Orata al sale, 8
+Branzino in salsa verde, 10
+Polpo croccante con paprika, 8
+Insalata di mare, 10
+Totani fritti, 10
+Tiramisù, 5
+Gelato alla fragola, 5
+Gelato al limone, 5
+Gelato al cioccolato, 5
+Gelato alla crema, 5
+Gelato fiordilatte, 5
+Torta di mele, 5
+Torta di pere, 5
+Torta al cioccolato, 5
+Pastiera napoletana, 5
+Acqua minerale frizzante 1L, 3
+Acqua minerale naturale 1L, 3
+Acqua minerale frizzante 500ml, 1
+Acqua minerale naturale 500ml, 1
+Vino rosso della casa 250ml, 1
+Vino bianco della casa 250ml, 1
+Coca cola lattina, 2
+Sprite lattina, 2
+Fanta lattina, 2
+Birra moretti 500ml, 3
+Birra Heineken 500ml, 3
+Birra Ichnusa 500ml, 3

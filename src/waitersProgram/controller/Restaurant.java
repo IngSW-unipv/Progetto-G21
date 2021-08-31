@@ -53,8 +53,8 @@ public class Restaurant {
 	public static Restaurant getInstance() {
 		if (instance == null) {
 			instance = new Restaurant();
-			// instance.createStrategies();
-			instance.createStrategiesWithoutClassGraph();
+			instance.createStrategies();
+			// instance.createStrategiesWithoutClassGraph();
 		}
 		return instance;
 	}
@@ -85,7 +85,6 @@ public class Restaurant {
 	 */
 	private void createStrategies() {
 		try (ScanResult sr = new ClassGraph().acceptPackages("waitersProgram.strategies").enableClassInfo().scan()) {
-			System.out.println(sr);
 			ClassInfoList cil = sr.getSubclasses("waitersProgram.strategies.StrategyAbstract");
 			List<Class<?>> lt = cil.loadClasses();
 			for (Class<?> ct : lt) {
@@ -101,6 +100,7 @@ public class Restaurant {
 	/**
 	 * Method that fills strategies HashMap without classgraph.
 	 */
+	@SuppressWarnings("unused")
 	private void createStrategiesWithoutClassGraph() {
 		strategies.put("AddNewEntryStrategy", AddNewEntryStrategy.getInstance(this));
 		strategies.put("AddNewTableStrategy", AddNewTableStrategy.getInstance(this));

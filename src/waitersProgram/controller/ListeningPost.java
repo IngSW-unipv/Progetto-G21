@@ -44,13 +44,13 @@ public class ListeningPost extends Thread {
 		boolean isFailed = false;
 		try {
 			serverSocket = new ServerSocket(6789);
-			System.out.println("The program is running!");
+			System.out.println("The program is running! \n");
 			clientSocket = serverSocket.accept();
 			inputStream = new Scanner(new InputStreamReader(clientSocket.getInputStream()));
 			outputStream = new PrintWriter(new DataOutputStream(clientSocket.getOutputStream()));
 			System.out.println("Server running!\n");
-			System.out.println(serverSocket.getLocalSocketAddress());
-			System.out.println(serverSocket.getLocalPort());
+			System.out.println(serverSocket.getLocalSocketAddress() + "\n");
+			System.out.println(serverSocket.getLocalPort() + "\n");
 		} catch (Exception e) {
 			isFailed = true;
 			System.err.println(e.getMessage());
@@ -113,7 +113,6 @@ public class ListeningPost extends Thread {
 		} else {
 			restaurant.strategyCall(strategyRequired, args);
 		}
-		System.out.println("LOCK LIBERO!");
 	}
 
 	/**

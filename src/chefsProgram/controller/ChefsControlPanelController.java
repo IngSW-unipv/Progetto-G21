@@ -54,17 +54,9 @@ public class ChefsControlPanelController extends Thread {
 	@FXML
 	private void initialize() {
 		ordersTableView.setItems(ordersList);
-
-		// For test purposes
-		// ordersList.add(new Order(32, new MenuEntry("Pasta al pomodoro, 4")));
-		// Order order = new Order(32, new MenuEntry("Lasagne, 5"));
-		// ordersList.add(order);
-		// modifyOrderStatus(order.getOrderNum(), OrderStatus.NOT_PREPARABLE);
-
 		tableColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("tableNum"));
 		orderColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("orderedEntryStringed"));
 		statusColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("orderStatusStringed"));
-
 		connect();
 	}
 
@@ -90,7 +82,6 @@ public class ChefsControlPanelController extends Thread {
 				updateFrameController.setOrder(row);
 				updateFrameController.setMainController(this);
 				stage.show();
-				System.out.println(row);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -205,6 +196,7 @@ public class ChefsControlPanelController extends Thread {
 				break;
 			}
 			addOrderToTableView(orderToBeModified);
+			ordersTableView.refresh();
 		}
 	}
 
@@ -262,7 +254,6 @@ public class ChefsControlPanelController extends Thread {
 
 				unpackedMessage = message.split(", ");
 				if (unpackedMessage[0].equals("ADD") == true) {
-					System.out.println(unpackedMessage[1]);
 					// ADD, orderNum, tableNum, entryName, entryPrice IT WORKS
 					int orderNum = Integer.parseInt(unpackedMessage[1].trim());
 					int tableNum = Integer.parseInt(unpackedMessage[2].trim());

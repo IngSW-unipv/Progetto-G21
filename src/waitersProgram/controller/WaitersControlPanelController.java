@@ -76,22 +76,15 @@ public class WaitersControlPanelController {
 		setInstance();
 		fillTablesList();
 		fillMenuEntriesList();
-
 		newOrderTableComboBox.setItems(tablesList);
 		removeTableComboBox.setItems(tablesList);
 		newBillTableComboBox.setItems(tablesList);
 		newOrderEntryComboBox.setItems(entriesList);
 		removeEntryComboBox.setItems(entriesList);
 		ordersTableView.setItems(ordersList);
-
-		// For test purposes
-		// ordersList.add(new Order(32, new MenuEntry("Pasta al pomodoro, 4")));
-		// ordersList.add(new Order(32, new MenuEntry("Lasagne, 5")));
-
 		tableColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("tableNum"));
 		orderColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("orderedEntryStringed"));
 		statusColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("orderStatusStringed"));
-
 		post = ListeningPost.getInstance();
 	}
 
@@ -116,7 +109,6 @@ public class WaitersControlPanelController {
 				WaitersOrderUpdateFrameController updateFrameController = fxmlLoader.getController();
 				updateFrameController.setOrder(row);
 				updateFrameController.setMainController(this);
-				System.out.println(row.toString());
 				stage.show();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -198,7 +190,7 @@ public class WaitersControlPanelController {
 	 * @return boolean variable.
 	 */
 	private boolean checkForEntryNameFormat(String entryNameField) {
-		Pattern p = Pattern.compile("^[A-Za-z0-9אטלעשביםףתגךמפûדסץהכןצüÿ ]+$");
+		Pattern p = Pattern.compile("^[A-Za-z0-9אטלעשביםףתגךמפûדסץהכןצüÿ+:.;,'?!&^ ]+$");
 		Matcher m = p.matcher(entryNameField.trim());
 		return m.matches();
 	}
@@ -406,6 +398,7 @@ public class WaitersControlPanelController {
 				break;
 			}
 			addOrderToTableView(orderToBeModified);
+			ordersTableView.refresh();
 		}
 
 	}
