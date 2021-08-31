@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"waitersProgram.view","c":"SimpleWaitersControlPanelMain","l":"main(String[])","url":"main(java.lang.String[])"},{"p":"waitersProgram.view","c":"SimpleWaitersControlPanelMain","l":"SimpleWaitersControlPanelMain()","url":"%3Cinit%3E()"},{"p":"waitersProgram.view","c":"SimpleWaitersControlPanelMain","l":"start(Stage)","url":"start(javafx.stage.Stage)"}]
