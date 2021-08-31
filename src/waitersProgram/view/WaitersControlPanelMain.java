@@ -27,7 +27,8 @@ public class WaitersControlPanelMain extends Application {
 				splashStage.hide();
 				Stage mainStage = new Stage();
 				mainStage.setScene(createMainScene());
-				mainStage.setTitle("Chefs control panel");
+				mainStage.setTitle("Waiter's control panel");
+				mainStage.setOnCloseRequest(new CloseButtonEventHandler());
 				mainStage.show();
 			});
 			pause.play();

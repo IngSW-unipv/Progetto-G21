@@ -28,6 +28,7 @@ public class ChefsControlPanelMain extends Application {
 				Stage mainStage = new Stage();
 				mainStage.setScene(createMainScene());
 				mainStage.setTitle("Chefs control panel");
+				mainStage.setOnCloseRequest(new CloseButtonEventHandler());
 				mainStage.show();
 			});
 			pause.play();
