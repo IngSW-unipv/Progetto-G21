@@ -2,55 +2,65 @@
 <class-diagram version="1.2.4" icons="true" automaticImage="JPEG" always-add-relationships="false" 
   generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true" 
   router="FAN">  
-  <package id="1" language="java" name="chefsProgram.model" project="Progetto-G21" 
-    file="/Progetto-G21/src/chefsProgram/model" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="587" width="770" x="-11" y="-1"/>    
-    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
-  </package>  
+  <class id="1" language="java" name="chefsProgram.model.MenuEntry" project="Progetto-G21" 
+    file="/Progetto-G21/src/chefsProgram/model/MenuEntry.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="369" y="257"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
   <class id="2" language="java" name="chefsProgram.model.Order" project="Progetto-G21" 
     file="/Progetto-G21/src/chefsProgram/model/Order.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="546" y="311"/>    
+    <position height="-1" width="-1" x="691" y="258"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="chefsProgram.model.MenuEntry" project="Progetto-G21" 
-    file="/Progetto-G21/src/chefsProgram/model/MenuEntry.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="227" y="312"/>    
+  <class id="3" language="java" name="chefsProgram.controller.ChefsControlPanelController" project="Progetto-G21" 
+    file="/Progetto-G21/src/chefsProgram/controller/ChefsControlPanelController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="689" y="901"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <package id="4" language="java" name="chefsProgram.controller" project="Progetto-G21" 
-    file="/Progetto-G21/src/chefsProgram/controller" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="727" width="779" x="-11" y="606"/>    
-    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
-  </package>  
-  <class id="5" language="java" name="chefsProgram.controller.ButtonClickEventHandler" project="Progetto-G21" 
-    file="/Progetto-G21/src/chefsProgram/controller/ButtonClickEventHandler.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="221" y="743"/>    
+  <class id="4" language="java" name="chefsProgram.controller.ChefsOrderUpdateFrameController" project="Progetto-G21" 
+    file="/Progetto-G21/src/chefsProgram/controller/ChefsOrderUpdateFrameController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1091" y="900"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="6" language="java" name="chefsProgram.controller.OrderStatus" project="Progetto-G21" 
+  <enumeration id="5" language="java" name="chefsProgram.controller.OrderStatus" project="Progetto-G21" 
     file="/Progetto-G21/src/chefsProgram/controller/OrderStatus.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="226" y="912"/>    
+    <position height="-1" width="-1" x="356" y="798"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="7" language="java" name="chefsProgram.controller.ChefsController" project="Progetto-G21" 
-    file="/Progetto-G21/src/chefsProgram/controller/ChefsController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="545" y="987"/>    
+  <class id="6" language="java" name="chefsProgram.view.ChefsControlPanelMain" project="Progetto-G21" 
+    file="/Progetto-G21/src/chefsProgram/view/ChefsControlPanelMain.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1057" y="326"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="chefsProgram.view.CloseButtonEventHandler" project="Progetto-G21" 
+    file="/Progetto-G21/src/chefsProgram/view/CloseButtonEventHandler.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1060" y="485"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -58,35 +68,35 @@
     </display>  
   </class>  
   <association id="8">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="9" name="ordersList">        
-        <position height="18" width="57" x="484" y="553"/>      
-      </attribute>      
-      <multiplicity id="10" minimum="0" maximum="2147483647">        
-        <position height="16" width="21" x="556" y="553"/>      
-      </multiplicity>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="9" name="order"/>      
+      <multiplicity id="10" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="11">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="12" name="orderedEntry">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="13" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="12" name="mainController"/>      
+      <multiplicity id="13" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="14">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="15" name="instance"/>      
-      <multiplicity id="16" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="15" name="ordersList"/>      
+      <multiplicity id="16" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="17">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="18" name="orderedEntry"/>      
+      <multiplicity id="19" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
