@@ -28,7 +28,7 @@ Maggiori informazioni sono reperibili al link: https://openjfx.io/openjfx-docs/ 
 Occorre inoltre importare la libreria "ControlsFX", maggiori informazioni sono reperibili al link: https://github.com/controlsfx/controlsfx <br />
 
 Configurato l'IDE, mandare prima in esecuzione il file "WaitersControlPanelMain.java", poi "ChefsControlPanelMain.java". <br />
-Il "waiter's control panel" e lo "chef's control panel" appariranno sullo schermo e sarà possibile utilizzare tutte le funzionalità del programma.
+Il "Waiter's control panel" e lo "Chef's control panel" appariranno sullo schermo e sarà possibile utilizzare tutte le funzionalità del programma.
 
 ***
 
@@ -59,4 +59,4 @@ More info in the following link: https://openjfx.io/openjfx-docs/ <br />
 It's also necessary to import ControlsFX library. More info in the following link: https://github.com/controlsfx/controlsfx <br />
 
 Once the IDE is properly configured, run "WaitersControlPanelMain.java", then "ChefsControlPanelMain.java". <br />
-"Waiter's control panel" and "chef's control panel" will appear on the screen and it will be possible to use every feature of the program.
+"Waiter's control panel" and "Chef's control panel" will appear on the screen and it will be possible to use every feature of the program.
