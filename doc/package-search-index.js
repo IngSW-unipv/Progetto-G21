@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"chefsProgram.controller"},{"l":"chefsProgram.model"},{"l":"chefsProgram.view"},{"l":"waitersProgram.controller"},{"l":"waitersProgram.model"},{"l":"waitersProgram.strategies"},{"l":"waitersProgram.testers.model"},{"l":"waitersProgram.view"}];updateSearchResults();
