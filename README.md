@@ -24,8 +24,8 @@ Importare il progetto in un IDE
 
 ### 4. Esecuzione del codice
 Le interfacce grafiche sono state realizzate tramite JavaFX, è necessario quindi installare la relativa SDK e configurare in modo opportuno l'IDE.
-Maggiori informazioni sono reperibili al link: https://openjfx.io/openjfx-docs/
-Occorre inoltre importare la libreria "ControlsFX", maggiori informazioni sono reperibili al link: https://github.com/controlsfx/controlsfx
+Maggiori informazioni sono reperibili al link: https://openjfx.io/openjfx-docs/.
+Occorre inoltre importare la libreria "ControlsFX", maggiori informazioni sono reperibili al link: https://github.com/controlsfx/controlsfx.
 
 Configurato l'IDE, mandare prima in esecuzione il file "WaitersControlPanelMain.java", poi "ChefsControlPanelMain.java". 
 Il "waiter's control panel" e lo "chef's control panel" appariranno sullo schermo e sarà possibile utilizzare tutte le funzionalità del programma.
@@ -55,8 +55,8 @@ Import projects into the IDE
 
 ### 4. Code execution
 The interfaces where developed with JavaFX, it's necessary to install it's SDK and to properly configure the IDE.
-More info in the following link: https://openjfx.io/openjfx-docs/
-It's also necessary to import ControlsFX library. More info in the following link: https://github.com/controlsfx/controlsfx
+More info in the following link: https://openjfx.io/openjfx-docs/.
+It's also necessary to import ControlsFX library. More info in the following link: https://github.com/controlsfx/controlsfx.
 
 Once the IDE is properly configured, run "WaitersControlPanelMain.java", then "ChefsControlPanelMain.java".
 "Waiter's control panel" and "chef's control panel" will appear on the screen and it will be possible to use every feature of the program.
