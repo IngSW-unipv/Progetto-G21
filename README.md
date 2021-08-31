@@ -1,3 +1,6 @@
+![ratatouilleChef](https://user-images.githubusercontent.com/80333382/131524931-c3568389-06af-4fc5-b0ba-8116288e7709.jpg)
+
+
 # Progetto-G21: Sistema di gestione degli ordini in un ristorante
 
 Il programma consente di raccogliere gli ordini richiesti dai diversi tavoli, inviarli alla cucina per la preparazione e 
