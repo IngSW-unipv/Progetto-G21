@@ -52,7 +52,7 @@ public class WaitersOrderUpdateFrameController {
 	/** Small method used to initialize the checkBoxes. */
 	public void setCheckBoxes() {
 		deliveredCheckBox.setSelected(order.isDelivered());
-		if (deliveredCheckBox.isSelected()) {
+		if (deliveredCheckBox.isSelected() || (!order.isPrepared())) {
 			deliveredCheckBox.setDisable(true);
 		}
 	}
