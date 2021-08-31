@@ -63,4 +63,4 @@ Once you made the previous steps, to make the program run it's necessary to:
 * Run the "WaitersControlPanelMain" 
 * Run the "ChefsControlPanelMain"
  
-"waiter's control panel" and "chef's control panel" will appear on the screen and it will be possible to use every feature of the program.
+"Waiter's control panel" and "chef's control panel" will appear on the screen and it will be possible to use every feature of the program.
