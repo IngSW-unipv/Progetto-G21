@@ -15,7 +15,11 @@ public class PrintNewBillStrategy extends StrategyAbstract {
 	private static PrintNewBillStrategy instance = null;
 	private static Bill billToPrint;
 
-	/** Class constructor. */
+	/**
+	 * Class constructor.
+	 * 
+	 * @param restaurant (facade controller).
+	 */
 	public PrintNewBillStrategy(Restaurant restaurant) {
 		super(restaurant);
 	}
@@ -25,6 +29,7 @@ public class PrintNewBillStrategy extends StrategyAbstract {
 	 * Singleton pattern.
 	 * 
 	 * @return PrintNewBillStrategy instance.
+	 * @param restaurant (facade controller).
 	 */
 	public static PrintNewBillStrategy getInstance(Restaurant restaurant) {
 		if (instance == null) {
@@ -49,6 +54,7 @@ public class PrintNewBillStrategy extends StrategyAbstract {
 		billToPrint = new Bill(Integer.parseInt(args[0]));
 	}
 
+	/** @return billToPrint. */
 	public static Bill getBill() {
 		return billToPrint;
 	}

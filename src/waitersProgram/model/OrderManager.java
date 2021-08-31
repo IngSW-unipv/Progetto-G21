@@ -208,6 +208,7 @@ public class OrderManager implements OrderManegerInterface {
 	 * Method used to obtain all orders of a specified table.
 	 * 
 	 * @return specified table's orders (ArrayList).
+	 * @param tableNum.
 	 */
 	public ArrayList<Order> getTableAllOrders(int tableNum) {
 

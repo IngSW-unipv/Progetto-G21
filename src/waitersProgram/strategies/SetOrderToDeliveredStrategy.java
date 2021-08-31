@@ -24,6 +24,7 @@ public class SetOrderToDeliveredStrategy extends StrategyAbstract {
 	 * follow Singleton pattern.
 	 * 
 	 * @return SetOrderToDeliveredStrategy instance.
+	 * @param restaurant (facade controller).
 	 */
 	public static SetOrderToDeliveredStrategy getInstance(Restaurant restaurant) {
 		if (instance == null) {

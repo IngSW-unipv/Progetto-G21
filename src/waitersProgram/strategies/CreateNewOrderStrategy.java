@@ -22,6 +22,7 @@ public class CreateNewOrderStrategy extends StrategyAbstract {
 	 * follow Singleton pattern.
 	 * 
 	 * @return CreateNewOrderStrategy instance.
+	 * @param restaurant (facade controller).
 	 */
 	public static CreateNewOrderStrategy getInstance(Restaurant restaurant) {
 		if (instance == null) {
@@ -45,6 +46,11 @@ public class CreateNewOrderStrategy extends StrategyAbstract {
 				+ currentOrder.getOrderedEntry().getDishPrice());
 	}
 
+	/**
+	 * return orderToDisplay.
+	 * 
+	 * @return orderToDisplay.
+	 */
 	public static Order getOrder() {
 		return orderToDisplay;
 	}

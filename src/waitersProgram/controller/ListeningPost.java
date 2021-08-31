@@ -92,7 +92,7 @@ public class ListeningPost extends Thread {
 	 * This method can be invoked when needed to change the bound backend
 	 * controller.
 	 * 
-	 * @param controller specifies the involved controller.
+	 * @param restaurant specifies the involved controller.
 	 */
 	public void bindController(Restaurant restaurant) {
 		this.restaurant = restaurant;

@@ -5,6 +5,10 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import waitersProgram.model.Order;
 
+/**
+ * The WaitersOrderUpdateFrameController class. Used to control the waiter's
+ * update frame GUI.
+ */
 public class WaitersOrderUpdateFrameController {
 	private WaitersControlPanelController mainController = null;
 	private Order order;
@@ -24,7 +28,7 @@ public class WaitersOrderUpdateFrameController {
 	}
 
 	/**
-	 * @param WaitersControlPanelController.
+	 * @param mainController.
 	 */
 	public void setMainController(WaitersControlPanelController mainController) {
 		this.mainController = mainController;

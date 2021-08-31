@@ -10,7 +10,11 @@ import waitersProgram.controller.Restaurant;
 public abstract class StrategyAbstract implements StrategyInterface {
 	private Restaurant restaurant;
 
-	/** Class constructor. */
+	/**
+	 * Class constructor.
+	 * 
+	 * @param restaurant (facade controller).
+	 */
 	public StrategyAbstract(Restaurant restaurant) {
 		this.restaurant = restaurant;
 	}

@@ -353,8 +353,8 @@ public class WaitersControlPanelController {
 	 * Method called in setOrderToDelivered() and in strategies in order to change
 	 * the order status.
 	 * 
-	 * @param order's tableNum.
-	 * @param new     order's status.
+	 * @param orderNum specifies tableNum.
+	 * @param status   specifies order's status.
 	 */
 	public void modifyOrderStatus(int orderNum, OrderStatus status) {
 		Iterator<Order> iterator = ordersList.iterator();

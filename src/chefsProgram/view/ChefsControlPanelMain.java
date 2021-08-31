@@ -39,13 +39,19 @@ public class ChefsControlPanelMain extends Application {
 		}
 	}
 
-	/** Main method (chef's control panel splash and main scene entry point). */
+	/**
+	 * Main method (chef's control panel splash and main scene entry point).
+	 * 
+	 * @param args.
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}
 
 	/**
 	 * Method called by start in order to create main scene (chef's control panel).
+	 * 
+	 * @return chef's control panel scene.
 	 */
 	public Scene createMainScene() {
 		Parent rootProgram = null;

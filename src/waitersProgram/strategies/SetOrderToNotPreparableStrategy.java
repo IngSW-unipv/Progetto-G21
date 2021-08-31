@@ -26,6 +26,7 @@ public class SetOrderToNotPreparableStrategy extends StrategyAbstract {
 	 * order to follow Singleton pattern.
 	 * 
 	 * @return SetOrderToNotPreparableStrategy instance.
+	 * @param restaurant (facade controller).
 	 */
 	public static SetOrderToNotPreparableStrategy getInstance(Restaurant restaurant) {
 		if (instance == null) {

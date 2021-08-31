@@ -12,7 +12,11 @@ import waitersProgram.model.OrderManager;
 public class RemoveOrderStrategy extends StrategyAbstract {
 	private static RemoveOrderStrategy instance = null;
 
-	/** Class constructor. */
+	/**
+	 * Class constructor.
+	 * 
+	 * @param restaurant (facade controller).
+	 */
 	public RemoveOrderStrategy(Restaurant restaurant) {
 		super(restaurant);
 	}
@@ -22,6 +26,7 @@ public class RemoveOrderStrategy extends StrategyAbstract {
 	 * Singleton pattern.
 	 * 
 	 * @return RemoveOrderStrategy instance.
+	 * @param restaurant (facade controller).
 	 */
 	public static RemoveOrderStrategy getInstance(Restaurant restaurant) {
 		if (instance == null) {

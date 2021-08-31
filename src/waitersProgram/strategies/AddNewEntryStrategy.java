@@ -18,6 +18,7 @@ public class AddNewEntryStrategy extends StrategyAbstract {
 	 * Singleton pattern.
 	 * 
 	 * @return AddNewEntryStrategy instance.
+	 * @param restaurant (facade controller).
 	 */
 	public static AddNewEntryStrategy getInstance(Restaurant restaurant) {
 		if (instance == null) {

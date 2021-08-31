@@ -18,6 +18,7 @@ public class RemoveTableStrategy extends StrategyAbstract {
 	 * Singleton pattern.
 	 * 
 	 * @return RemoveTableStrategy instance.
+	 * @param restaurant (facade controller).
 	 */
 	public static RemoveTableStrategy getInstance(Restaurant restaurant) {
 		if (instance == null) {

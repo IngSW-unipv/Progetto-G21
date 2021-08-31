@@ -5,6 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 
+/**
+ * The ChefsOrderUpdateFrameController class. Used to control the chef's update
+ * frame GUI.
+ */
 public class ChefsOrderUpdateFrameController {
 	private ChefsControlPanelController mainController = null;
 	private Order order;
@@ -24,7 +28,7 @@ public class ChefsOrderUpdateFrameController {
 	}
 
 	/**
-	 * @param ChefsControlPanelController.
+	 * @param mainController.
 	 */
 	public void setMainController(ChefsControlPanelController mainController) {
 		this.mainController = mainController;

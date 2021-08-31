@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/** The TableManager class. Used to manage all restaurant's tables. */
 public class TableManager {
 
 	private static TableManager instance = null;
@@ -113,7 +114,7 @@ public class TableManager {
 	 * Method that allows the removal of a table in the tables' HashSet and from
 	 * tablesFile.txt.
 	 * 
-	 * @param specifies the involved table.
+	 * @param tableNum specifies the involved table.
 	 */
 	public void removeTable(int tableNum) {
 		try {

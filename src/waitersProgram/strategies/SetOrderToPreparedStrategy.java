@@ -25,6 +25,7 @@ public class SetOrderToPreparedStrategy extends StrategyAbstract {
 	 * follow Singleton pattern.
 	 * 
 	 * @return SetOrderToPreparedStrategy instance.
+	 * @param restaurant (facade controller).
 	 */
 	public static SetOrderToPreparedStrategy getInstance(Restaurant restaurant) {
 		if (instance == null) {

@@ -9,7 +9,11 @@ import javafx.stage.Stage;
 /** Class that launches the chef's control panel without splash screen. */
 public class SimpleChefsControlPanelMain extends Application {
 
-	/** Main method (chef's control panel main scene entry point). */
+	/**
+	 * Main method (chef's control panel main scene entry point).
+	 * 
+	 * @param args.
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

@@ -26,6 +26,7 @@ public class SetOrderToSeenStrategy extends StrategyAbstract {
 	 * follow Singleton pattern.
 	 * 
 	 * @return SetOrderToSeenStrategy instance.
+	 * @param restaurant (facade controller).
 	 */
 	public static SetOrderToSeenStrategy getInstance(Restaurant restaurant) {
 		if (instance == null) {

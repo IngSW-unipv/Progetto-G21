@@ -55,7 +55,6 @@ public class Menu implements MenuInterface {
 	 * Static method that returns a Menu instance in order to observe the Singleton
 	 * pattern. It calls the class constructor only if this has not happened before.
 	 * 
-	 * @param path is needed in order to call the constructor.
 	 * @return menu instance.
 	 */
 	public static Menu getInstance() {
