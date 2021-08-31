@@ -12,7 +12,7 @@ Di seguito sono riportate le istruzioni per il corretto utilizzo del sistema:
 Scaricare e configurare Git tramite le istruzioni riportate al seguente link:                                                                                                       
 https://git-scm.com/book/en/v2/Getting-Started-Installing-Git.
 
-### 2. Clone del Github repository:
+### 2. Clone del repository GitHub:
 Operazioni preliminari per poter scaricare il repository git sul proprio computer:
 * aprire GitHub e accedere al seguente repository: https://github.com/IngSW-unipv/Progetto-G21
 * selezionare “Code” e copiare l'URL fornito (https://github.com/IngSW-unipv/Progetto-G21.git)
@@ -25,11 +25,10 @@ Importare il progetto in un IDE
 ### 4. Esecuzione del codice
 Le interfacce grafiche sono state realizzate tramite JavaFX, è necessario quindi installare la relativa SDK e configurare in modo opportuno l'IDE.
 Maggiori informazioni sono reperibili al link: https://openjfx.io/openjfx-docs/
+Occorre inoltre importare la libreria "ControlsFX", maggiori informazioni sono reperibili al link: https://github.com/controlsfx/controlsfx
 
-Effettuato il passaggio precedente per avviare il programma è necessario:
-* Mandare prima in esecuzione il file "WaitersControlPanelMain.java", poi "ChefsControlPanelMain.java" 
-
-Il "waiter's control panel" e il "chef's control panel" appariranno sullo schermo e sarà possibile utilizzare tutte le funzionalità del programma.
+Configurato l'IDE, mandare prima in esecuzione il file "WaitersControlPanelMain.java", poi "ChefsControlPanelMain.java". 
+Il "waiter's control panel" e lo "chef's control panel" appariranno sullo schermo e sarà possibile utilizzare tutte le funzionalità del programma.
 
 ***
 
@@ -48,7 +47,7 @@ https://git-scm.com/book/en/v2/Getting-Started-Installing-Git.
 Preliminary steps to achieve the download on a PC: 
 * open GitHub and go to the GitHub repository: https://github.com/IngSW-unipv/Progetto-G21
 * click “Code” and copy the given URL (https://github.com/IngSW-unipv/Progetto-G21.git)
-* open “Git Bash” and change the current working directory to the location where you want the cloned directory to be added
+* open “Git Bash”, a terminal or cmd and change the current working directory to the one in which you want to clone the project
 * type **git clone** in the terminal, paste the URL copied earlier, and press “enter” to create your local clone
 
 ### 3. Project import
@@ -57,9 +56,7 @@ Import projects into the IDE
 ### 4. Code execution
 The interfaces where developed with JavaFX, it's necessary to install it's SDK and to properly configure the IDE.
 More info in the following link: https://openjfx.io/openjfx-docs/
+It's also necessary to import ControlsFX library. More info in the following link: https://github.com/controlsfx/controlsfx
 
-Once you made the previous steps, to make the program run it's necessary to:
-* Run the "WaitersControlPanelMain" 
-* Run the "ChefsControlPanelMain"
- 
+Once the IDE is properly configured, run "WaitersControlPanelMain.java", then "ChefsControlPanelMain.java".
 "Waiter's control panel" and "chef's control panel" will appear on the screen and it will be possible to use every feature of the program.
