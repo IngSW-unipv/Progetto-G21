@@ -12,8 +12,8 @@ Di seguito sono riportate le istruzioni per il corretto utilizzo del sistema svi
 Scaricare e configurare Git tramite le istruzioni riportate al seguente link:                                                                                                       
 https://git-scm.com/book/en/v2/Getting-Started-Installing-Git.
 
-### 2. Clone del repository:
-Al fine di scaricare il repository git localmente sul tuo computer è necessario:
+### 2. Clone del Github repository:
+Passaggi preliminari per poter scaricare il repository git localmente sul proprio computer:
 * aprire GitHub e scegliere il seguente repository: https://github.com/IngSW-unipv/Progetto-G21
 * selezionare “Code” e copiare l'URL fornito (https://github.com/IngSW-unipv/Progetto-G21.git)
 * aprire “Git Bash” e spostarsi dalla directory corrente al luogo in cui si vuole che il repository venga clonato
@@ -22,52 +22,45 @@ Al fine di scaricare il repository git localmente sul tuo computer è necessario
 ### 3. Importazione del progetto
 Importare il progetto nell'IDE
 
-### 4. Esecuzione del progetto
+### 4. Esecuzione del codice
+Le interfacce sono state realizzate tramite JavaFX, è necessario quindi installare la relativa SDK e configurare in modo opportuno l'IDE.
+Maggiori informazioni sono reperibili al link: https://openjfx.io/openjfx-docs/
 
-Siccome le interfacce sono state realizzate tramite JavaFX è necessario installare la JavaFX SDK e configurare 
-in modo opportuno l'IDE utilizzato --> https://openjfx.io/openjfx-docs/
+Effettuato il passaggio precedente per avviare il programma è necessario:
+* Mandare in esecuzione il "WaitersControlPanelMain.java" 
+* Eseguire il file "ChefsControlPanelMain.java"
 
-Dopodichè si può procedere nel seguente modo:
-* Mandare in esecuzione il "WaitersControlPanelMain" 
-* Sulla console apparirà la stringa The string "The program is running"
-* Mandare in esecuzione il "ChefsControlPanelMain"
-* Il waiter's control panel e il chef's control panel appariranno sullo schermo
-
-Finalmente è possibile sperimentare tutte le funzionalità del programma!!!
+Il "waiter's control panel" e il "chef's control panel" appariranno sullo schermo e sarà possibile utilizzare tutte le funzionalità del programma.
 
 ***
 
 # Project-G21: Restaurant Ordering System 
 
-
-The software gives the opportunity to take the orders of the different tables, send them to the kitchen for their preparation 
+The software allows you to take orders from different tables, send them to the kitchen for their preparation 
 and generate the bill. 
 
 Below you can find the instructions for the proper use of the system.
 
 ### 1. Git download:
-Dowload and configure Git by following the instructions indicated at this link:                                                                                                     
+Dowload and configure Git by following the instructions in the link below:                                                                                                     
 https://git-scm.com/book/en/v2/Getting-Started-Installing-Git.
 
 ### 2. Cloning the Github Repository:
-In order to download the git repository to your local computer it is necessary to: 
+Preliminary steps to achieve the download on a PC: 
 * open GitHub and go to the GitHub repository: https://github.com/IngSW-unipv/Progetto-G21
 * click “Code” and copy the given URL (https://github.com/IngSW-unipv/Progetto-G21.git)
 * open “Git Bash” and change the current working directory to the location where you want the cloned directory to be added
-* type **git clone** in the terminal, paste the URL you copied earlier, and press “enter” to create your local clone
+* type **git clone** in the terminal, paste the URL copied earlier, and press “enter” to create your local clone
 
 ### 3. Project import
 Import projects into the IDE
 
-### 4. Project execution
+### 4. Code execution
+The interfaces where developed with JavaFX, it's necessary to install it's SDK and to properly configure the IDE.
+More info in the following link: https://openjfx.io/openjfx-docs/
 
-Since the interfaces have been developed with JavaFX it's necessary to install the JavaFX SDK and to properly configure 
-the IDE --> https://openjfx.io/openjfx-docs/
-
-Then it is possible to proceed in the following way:
+Once you made the previous steps, to make the program run it's necessary to:
 * Run the "WaitersControlPanelMain" 
-* The string "The program is running" will appear on the console 
 * Run the "ChefsControlPanelMain"
-* The waiter's control panel and the chef's control panel will appear on the screen
-
-Finally it is possible to try out all the program's features!!!
+ 
+"Waiter's control panel" and "chef's control panel" will appear on the screen and it will be possible to use every feature of the program.
