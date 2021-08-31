@@ -23,6 +23,11 @@ Al fine di scaricare il repository git localmente sul tuo computer è necessario
 Importare il progetto nell'IDE
 
 ### 4. Esecuzione del progetto
+
+Siccome le interfacce sono state realizzate tramite JavaFX è necessario installare la JavaFX SDK e configurare 
+in modo opportuno l'IDE utilizzato --> https://openjfx.io/openjfx-docs/
+
+Dopodichè si può procedere nel seguente modo:
 * Mandare in esecuzione il "WaitersControlPanelMain" 
 * Sulla console apparirà la stringa The string "The program is running"
 * Mandare in esecuzione il "ChefsControlPanelMain"
@@ -55,6 +60,11 @@ In order to download the git repository to your local computer it is necessary t
 Import projects into the IDE
 
 ### 4. Project execution
+
+Since the interfaces have been developed with JavaFX it's necessary to install the JavaFX SDK and to properly configure 
+the IDE --> https://openjfx.io/openjfx-docs/
+
+Then it is possible to proceed in the following way:
 * Run the "WaitersControlPanelMain" 
 * The string "The program is running" will appear on the console 
 * Run the "ChefsControlPanelMain"
