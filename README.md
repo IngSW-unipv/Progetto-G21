@@ -1,16 +1,20 @@
-# Progetto-G21:
-# Sistema per la gestione delle ordinazioni in un ristorante
+# Project-G21:
+# Restaurant Ordering System 
 
 
-Il programma consente di raccogliere gli ordini richiesti dai diversi tavoli, inviarli alla cucina per la preparazione e 
-generare poi il conto finale. 
+The software gives the opportunity to take the orders of the different tables, send them to the kitchen for their preparation 
+and generate the bill. 
 
-Di seguito sono riportate le istruzioni per il corretto utilizzo del sistema sviluppato: 
+Below you can find the instructions for the proper use of the system.
 
-### 1. Download di Git:
-Scaricare e configurare Git tramite le istruzioni riportate al seguente link: 
+### 1. Git download:
+Dowload and configure Git by following the instructions indicated at this link:
 https://git-scm.com/book/en/v2/Getting-Started-Installing-Git.
 
-### 2. Clone del repository:
-Clonare il repository lanciando da terminale il seguente comando: 
+### 2. Cloning the Github Repository:
+In order to download the git repository to your local computer it is necessary to: 
+open GitHub and go to the GitHub repository: https://github.com/IngSW-unipv/Progetto-G21
+click “Code” and copy the given URL
+Open “Git Bash” and change the current working directory to the location where you want the cloned directory to be added.
+Type git clone in the terminal, paste the URL you copied earlier, and press “enter” to create your local clone
 
