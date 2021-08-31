@@ -16,10 +16,17 @@ import waitersProgram.model.OrderManager;
 public class SetOrderToNotPreparableStrategy extends StrategyAbstract {
 	private static SetOrderToNotPreparableStrategy instance = null;
 
+	/** Class constructor. */
 	private SetOrderToNotPreparableStrategy(Restaurant restaurant) {
 		super(restaurant);
 	}
 
+	/**
+	 * Static method that returns a SetOrderToNotPreparableStrategy instance in
+	 * order to follow Singleton pattern.
+	 * 
+	 * @return SetOrderToNotPreparableStrategy instance.
+	 */
 	public static SetOrderToNotPreparableStrategy getInstance(Restaurant restaurant) {
 		if (instance == null) {
 			instance = new SetOrderToNotPreparableStrategy(restaurant);

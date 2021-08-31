@@ -7,12 +7,13 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /** The WaitersControlPanelMain class. Used to start waiter's application. */
 public class WaitersControlPanelMain extends Application {
+
+	/** Method called by main method. (it launches the entire program). */
 	@Override
 	public void start(Stage splashStage) {
 		Parent rootSplash;
@@ -38,10 +39,15 @@ public class WaitersControlPanelMain extends Application {
 		}
 	}
 
+	/** Main method (waiter's control panel splash and main scene entry point). */
 	public static void main(String[] args) {
 		launch(args);
 	}
 
+	/**
+	 * Method called by start in order to create main scene (waiter's control
+	 * panel).
+	 */
 	public Scene createMainScene() {
 		Parent rootProgram = null;
 		try {

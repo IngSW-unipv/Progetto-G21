@@ -12,10 +12,17 @@ public class CreateNewOrderStrategy extends StrategyAbstract {
 	private static CreateNewOrderStrategy instance = null;
 	private static Order orderToDisplay;
 
+	/** Class constructor. */
 	private CreateNewOrderStrategy(Restaurant restaurant) {
 		super(restaurant);
 	}
 
+	/**
+	 * Static method that returns a CreateNewOrderStrategy instance in order to
+	 * follow Singleton pattern.
+	 * 
+	 * @return CreateNewOrderStrategy instance.
+	 */
 	public static CreateNewOrderStrategy getInstance(Restaurant restaurant) {
 		if (instance == null) {
 			instance = new CreateNewOrderStrategy(restaurant);

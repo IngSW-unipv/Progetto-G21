@@ -44,7 +44,7 @@ public class Restaurant {
 	}
 
 	/**
-	 * Method that auto-instantiate strategies using classgraph.
+	 * Method that auto-instantiate strategies using ClassGraph.
 	 */
 	private void createStrategies() {
 		try (ScanResult sr = new ClassGraph().acceptPackages("waitersProgram.strategies").enableClassInfo().scan()) {
@@ -54,14 +54,14 @@ public class Restaurant {
 				strategies.put(ct.getSimpleName(), ((StrategyAbstract) ct.getMethod("getInstance", Restaurant.class)
 						.invoke(ct, Restaurant.getInstance())));
 			}
-	
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * Method that fills strategies HashMap without classgraph.
+	 * Method that fills strategies HashMap without ClassGraph.
 	 */
 	@SuppressWarnings("unused")
 	private void createStrategiesWithoutClassGraph() {

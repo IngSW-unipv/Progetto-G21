@@ -353,6 +353,7 @@ public class Menu implements MenuInterface {
 		}
 	}
 
+	/** @return tablesFile fileLinesCounter. */
 	public int getFileLinesCounter() {
 		return fileLinesCounter;
 	}

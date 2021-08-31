@@ -11,7 +11,6 @@ import java.util.Iterator;
  * according to its status. The class provides some methods that move orders
  * from a stack to another and change their status.
  */
-
 public class OrderManager implements OrderManegerInterface {
 
 	private ArrayList<Order> notSeen;
@@ -205,6 +204,11 @@ public class OrderManager implements OrderManegerInterface {
 		}
 	}
 
+	/**
+	 * Method used to obtain all orders of a specified table.
+	 * 
+	 * @return specified table's orders (ArrayList).
+	 */
 	public ArrayList<Order> getTableAllOrders(int tableNum) {
 
 		Iterator<Order> i1 = new ArrayList<>(notSeen).iterator();

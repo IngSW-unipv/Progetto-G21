@@ -8,10 +8,17 @@ import waitersProgram.model.Menu;
 public class RemoveEntryStrategy extends StrategyAbstract {
 	private static RemoveEntryStrategy instance = null;
 
+	/** Class constructor. */
 	private RemoveEntryStrategy(Restaurant restaurant) {
 		super(restaurant);
 	}
 
+	/**
+	 * Static method that returns a RemoveEntryStrategy instance in order to follow
+	 * Singleton pattern.
+	 * 
+	 * @return RemoveEntryStrategy instance.
+	 */
 	public static RemoveEntryStrategy getInstance(Restaurant restaurant) {
 		if (instance == null) {
 			instance = new RemoveEntryStrategy(restaurant);

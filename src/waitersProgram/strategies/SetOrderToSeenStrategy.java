@@ -16,10 +16,17 @@ import waitersProgram.model.OrderManager;
 public class SetOrderToSeenStrategy extends StrategyAbstract {
 	private static SetOrderToSeenStrategy instance = null;
 
+	/** Class constructor. */
 	private SetOrderToSeenStrategy(Restaurant restaurant) {
 		super(restaurant);
 	}
 
+	/**
+	 * Static method that returns a SetOrderToSeenStrategy instance in order to
+	 * follow Singleton pattern.
+	 * 
+	 * @return SetOrderToSeenStrategy instance.
+	 */
 	public static SetOrderToSeenStrategy getInstance(Restaurant restaurant) {
 		if (instance == null) {
 			instance = new SetOrderToSeenStrategy(restaurant);

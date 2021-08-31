@@ -8,10 +8,17 @@ import waitersProgram.model.TableManager;
 public class AddNewTableStrategy extends StrategyAbstract {
 	private static AddNewTableStrategy instance = null;
 
+	/** Class constructor. */
 	private AddNewTableStrategy(Restaurant restaurant) {
 		super(restaurant);
 	}
 
+	/**
+	 * Static method that returns an AddNewTableStrategy instance in order to follow
+	 * Singleton pattern.
+	 * 
+	 * @return AddNewTableStrategy instance.
+	 */
 	public static AddNewTableStrategy getInstance(Restaurant restaurant) {
 		if (instance == null) {
 			instance = new AddNewTableStrategy(restaurant);

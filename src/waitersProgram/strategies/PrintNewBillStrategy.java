@@ -15,10 +15,17 @@ public class PrintNewBillStrategy extends StrategyAbstract {
 	private static PrintNewBillStrategy instance = null;
 	private static Bill billToPrint;
 
+	/** Class constructor. */
 	public PrintNewBillStrategy(Restaurant restaurant) {
 		super(restaurant);
 	}
 
+	/**
+	 * Static method that returns a PrintNewBillStrategy instance in order to follow
+	 * Singleton pattern.
+	 * 
+	 * @return PrintNewBillStrategy instance.
+	 */
 	public static PrintNewBillStrategy getInstance(Restaurant restaurant) {
 		if (instance == null) {
 			instance = new PrintNewBillStrategy(restaurant);

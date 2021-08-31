@@ -10,18 +10,22 @@ import waitersProgram.controller.Restaurant;
 public abstract class StrategyAbstract implements StrategyInterface {
 	private Restaurant restaurant;
 
+	/** Class constructor. */
 	public StrategyAbstract(Restaurant restaurant) {
 		this.restaurant = restaurant;
 	}
 
+	/** @return strategy name. */
 	public String getStrategyName() {
 		return this.getClass().getSimpleName();
 	}
 
+	/** @return Restaurant instance (facade controller). */
 	public Restaurant getController() {
 		return restaurant;
 	}
 
+	/** Abstract method used to launch the strategy. */
 	@Override
 	public abstract void execute(String[] args);
 }
