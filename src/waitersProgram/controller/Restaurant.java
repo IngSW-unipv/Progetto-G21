@@ -44,6 +44,41 @@ public class Restaurant {
 	}
 
 	/**
+	 * Method that auto-instantiate strategies using classgraph.
+	 */
+	private void createStrategies() {
+		try (ScanResult sr = new ClassGraph().acceptPackages("waitersProgram.strategies").enableClassInfo().scan()) {
+			ClassInfoList cil = sr.getSubclasses("waitersProgram.strategies.StrategyAbstract");
+			List<Class<?>> lt = cil.loadClasses();
+			for (Class<?> ct : lt) {
+				strategies.put(ct.getSimpleName(), ((StrategyAbstract) ct.getMethod("getInstance", Restaurant.class)
+						.invoke(ct, Restaurant.getInstance())));
+			}
+	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Method that fills strategies HashMap without classgraph.
+	 */
+	@SuppressWarnings("unused")
+	private void createStrategiesWithoutClassGraph() {
+		strategies.put("AddNewEntryStrategy", AddNewEntryStrategy.getInstance(this));
+		strategies.put("AddNewTableStrategy", AddNewTableStrategy.getInstance(this));
+		strategies.put("CreateNewOrderStrategy", CreateNewOrderStrategy.getInstance(this));
+		strategies.put("PrintNewBillStrategy", PrintNewBillStrategy.getInstance(this));
+		strategies.put("RemoveEntryStrategy", RemoveEntryStrategy.getInstance(this));
+		strategies.put("RemoveOrderStrategy", RemoveOrderStrategy.getInstance(this));
+		strategies.put("RemoveTableStrategy", RemoveTableStrategy.getInstance(this));
+		strategies.put("SetOrderToDeliveredStrategy", SetOrderToDeliveredStrategy.getInstance(this));
+		strategies.put("SetOrderToNotPreparableStrategy", SetOrderToNotPreparableStrategy.getInstance(this));
+		strategies.put("SetOrderToPreparedStrategy", SetOrderToPreparedStrategy.getInstance(this));
+		strategies.put("SetOrderToSeenStrategy", SetOrderToSeenStrategy.getInstance(this));
+	}
+
+	/**
 	 * Static method that returns a Restaurant instance in order to observe
 	 * Singleton pattern. It calls the class constructor only if this has not
 	 * happened before.
@@ -78,41 +113,6 @@ public class Restaurant {
 	 */
 	public TableManager getTableManager() {
 		return tableManager;
-	}
-
-	/**
-	 * Method that auto-instantiate strategies using classgraph.
-	 */
-	private void createStrategies() {
-		try (ScanResult sr = new ClassGraph().acceptPackages("waitersProgram.strategies").enableClassInfo().scan()) {
-			ClassInfoList cil = sr.getSubclasses("waitersProgram.strategies.StrategyAbstract");
-			List<Class<?>> lt = cil.loadClasses();
-			for (Class<?> ct : lt) {
-				strategies.put(ct.getSimpleName(), ((StrategyAbstract) ct.getMethod("getInstance", Restaurant.class)
-						.invoke(ct, Restaurant.getInstance())));
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Method that fills strategies HashMap without classgraph.
-	 */
-	@SuppressWarnings("unused")
-	private void createStrategiesWithoutClassGraph() {
-		strategies.put("AddNewEntryStrategy", AddNewEntryStrategy.getInstance(this));
-		strategies.put("AddNewTableStrategy", AddNewTableStrategy.getInstance(this));
-		strategies.put("CreateNewOrderStrategy", CreateNewOrderStrategy.getInstance(this));
-		strategies.put("PrintNewBillStrategy", PrintNewBillStrategy.getInstance(this));
-		strategies.put("RemoveEntryStrategy", RemoveEntryStrategy.getInstance(this));
-		strategies.put("RemoveOrderStrategy", RemoveOrderStrategy.getInstance(this));
-		strategies.put("RemoveTableStrategy", RemoveTableStrategy.getInstance(this));
-		strategies.put("SetOrderToDeliveredStrategy", SetOrderToDeliveredStrategy.getInstance(this));
-		strategies.put("SetOrderToNotPreparableStrategy", SetOrderToNotPreparableStrategy.getInstance(this));
-		strategies.put("SetOrderToPreparedStrategy", SetOrderToPreparedStrategy.getInstance(this));
-		strategies.put("SetOrderToSeenStrategy", SetOrderToSeenStrategy.getInstance(this));
 	}
 
 	/**
