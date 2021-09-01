@@ -8,11 +8,11 @@ generare il conto finale.
 
 Di seguito sono riportate le istruzioni per il corretto utilizzo del sistema: 
 
-### 1. Download di Git:
+### 1. Download di Git
 Scaricare e configurare Git tramite le istruzioni riportate al seguente link: <br />                                                                                               
 https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 
-### 2. Clone del repository GitHub:
+### 2. Clone del repository GitHub
 Operazioni preliminari per poter scaricare il repository git sul proprio computer:
 * aprire GitHub e accedere al seguente repository: https://github.com/IngSW-unipv/Progetto-G21
 * selezionare “Code” e copiare l'URL fornito (https://github.com/IngSW-unipv/Progetto-G21.git)
@@ -39,11 +39,11 @@ and generate the bill.
 
 Below you can find the instructions for the proper use of the system.
 
-### 1. Git download:
+### 1. Git download
 Dowload and configure Git by following the instructions in the link below:                                                                                                     
 https://git-scm.com/book/en/v2/Getting-Started-Installing-Git.
 
-### 2. Cloning the Github Repository:
+### 2. Cloning the Github Repository
 Preliminary steps to achieve the download on a PC: 
 * open GitHub and go to the GitHub repository: https://github.com/IngSW-unipv/Progetto-G21
 * click “Code” and copy the given URL (https://github.com/IngSW-unipv/Progetto-G21.git)
@@ -54,7 +54,7 @@ Preliminary steps to achieve the download on a PC:
 Import projects into the IDE.
 
 ### 4. Code execution
-The interfaces where developed with JavaFX, it's necessary to install it's SDK and to properly configure the IDE. <br />
+The interfaces were developed with JavaFX, it's necessary to install its SDK and to properly configure the IDE. <br />
 More info in the following link: https://openjfx.io/openjfx-docs/ <br />
 It's also necessary to import ControlsFX library. More info in the following link: https://github.com/controlsfx/controlsfx <br />
 
